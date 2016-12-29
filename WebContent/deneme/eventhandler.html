@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script type="text/javascript">
+	function doBorderTick() {
+		document.getElementById("imagess").border = 20;
+	}
+
+	function doBorderTickness() {
+		document.getElementById("imagess").border = 0;
+	}
+	
+	function pasif(metin){
+		
+		document.getElementById("userId").value=metin;
+	}
+	
+	function yaz(){
+		document.getElementById("userId").value="";
+	}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title>insert title here</title>
+</head>
+<body>
+
+	<img  id="imagess" alt="" name="resim" src="../Images/Banner.jpg" border="0"
+		onmouseover="doBorderTick()" onmouseout="doBorderTickness()">
+
+<input type="text"  id ="userId" name="userId2" onfocus="yaz()" onblur="pasif('Kullanıcı Adı Giriniz')"  > 
+
+<form action="" >
+<input type="text"  id ="userId4" name="userId2" onfocus="yaz()" onblur="pasif('Kullanıcı Adı Giriniz')"  > 
+
+</form>
+
+<div id="bilgi" ></div>
+</body>
+</html>

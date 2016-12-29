@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://java.sun.com/xml/ns/javaee" 
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+id="WebApp_ID" version="2.5">
+  <display-name>FDD_MUHTAK</display-name>
+ 
+  <servlet>
+    <servlet-name>action</servlet-name>
+    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+    
+    <init-param>
+      <param-name>config</param-name>
+      <param-value>/WEB-INF/struts-config.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>2</param-value>
+    </init-param>
+    <init-param>
+      <param-name>detail</param-name>
+      <param-value>2</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>action</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/login.jsp</form-login-page>
+      <form-error-page>/login.jsp?error=Kullanıcı Bulunamadı</form-error-page>
+    </form-login-config>
+  </login-config>
+
+  <listener>
+    <listener-class>tr.com.fdd.listeners.MyRequestListener</listener-class>
+  </listener>
+  <filter>
+    <display-name>MyResponseFilter</display-name>
+    <filter-name>MyResponseFilter</filter-name>
+    <filter-class>tr.com.fdd.filters.MyResponseFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>MyResponseFilter</filter-name>
+	<servlet-name>action</servlet-name>	
+  </filter-mapping>
+  
+   <welcome-file-list>
+    <welcome-file>login4.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
+

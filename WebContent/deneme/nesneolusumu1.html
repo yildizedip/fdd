@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function konus(cumle) {
+		document.write(cumle + "<br />");
+	}
+
+	// Kurucu metot burda Insani nesne yapan this ifadesisir.
+	// this ifadesi nesnenin field lerini olusturur.  bu field metod veya instance variable olabilir.
+	// ayrica konus metodunu da this olarak algilayabilmektedir.
+	function Insan(yas, ad) {
+		this.yas = yas;
+		this.ad = ad;
+		this.konus = konus;
+	}
+	
+	// aile arrayi olusturulur icine aile bireyleri eklenir.
+	 aile = new Array();
+	  aile["baba"] = new Insan(40,"Ibrahim");
+	  aile["anne"] = new Insan(34,"Ayşe");
+	  aile["ogul1"] = new Insan(4,"Edip");
+	  aile["ogul2"] = new Insan(3,"Mahmut");
+
+	  // anne konusuyor.
+	  document.write(aile["anne"].ad + ": ");
+	  aile["anne"].konus("Yemek hazir");
+
+	  // baba konusuyor
+	  document.write(aile["baba"].ad + ": ");
+	  aile["baba"].konus("Oglen yemegi mi?"); 
+	  
+	  document.write(aile["ogul1"].ad + ": ");
+	  aile["ogul1"].konus("Ben Cola icerbilir miyim?");
+
+	  document.write(aile["baba"].ad + ": ");
+	  aile["baba"].konus("Sen kac yasindasin?");
+	  
+	  document.write(aile["baba1"].ad + ": ");
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

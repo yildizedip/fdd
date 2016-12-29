@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TIslemSafahatDTO" table="t_islem_safahat" >
+		<id name="id" column="id" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		
+		<property name="hastaId" column="hasta_id" type="int" />
+	    <property name="doktorId" column="doktor_id" type="int" />
+		<property name="islemTipi" column="islem_tipi" type="int" />
+		<property name="islemTarihi" column="islem_tarihi" type="java.util.Date" />
+		<property name="durumu" column="durum" type="java.lang.String" />		
+		<property name="aciklama" column="aciklama" type="java.lang.String" />
+		<property name="eklenmeTarihi" column="eklenme_tarihi" type="java.util.Date" />
+	     <property name="islemBitisTarihi" column="islem_bitis_tarihi" type="java.util.Date" />
+	     <property name="miktar" column="ucret" type="double" />
+	      <property name="guncellenmeTarihi" column="guncellenme_tarihi" type="java.util.Date" />
+	     
+	</class>
+</hibernate-mapping>

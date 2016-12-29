@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title></title>
+<script type="text/javascript">
+	function resimYukle() {
+		document.forms[0].elements[0].value = "Form1 Öylesine bir yazı";
+		document.forms[1].elements[1].value = "Form2 Öylesine bir yazı";
+		
+		document.getElementsByName("form1")[0].elements[0].value = "Öylesine bir yazı";
+		document.getElementsByName("form1")[1].elements[1].value = "Öylesine bir yazı 2";
+		document.getElementsByName("form1")[0].elements[1].value = "Sil";
+		document.getElementsByName("form1")[0].elements[2].type = "text";
+		document.getElementsByName("form1")[0].elements[2].width = "1000px";
+		document.getElementById("par1").innerHTML = "Ahmet";
+		document.getElementById("div1").innerHTML="dxfsdfsd";
+		document.getElementById("txt1").value="sfsd";;
+		document.getElementsByTagName("form")[1].elements[0].value="hhhhhh";
+		
+		document.getElementsByTagName("h1")[1].innerHTML = "Resim degisti";
+	//	window.document.images[0].src = "../Images/Banner.jpg";
+		document.imaj.src="../Images/Banner.jpg";
+
+	}
+</script>
+</head>
+<body>
+	<h1 id="par1">edip</h1>
+	<form name="form1">
+		<input id="txt1" type="text" > 
+		<input type="submit"> 
+		<input type="submit" width="100px" value="ddd">
+	</form>
+	
+	<form name="form2">
+		<input id="txt2" type="text" > 
+		<input type="submit"> 
+		<input type="submit" width="100px" value="ddd">
+	</form>
+	<form name="form1">
+		<input id="txt1" type="text" > 
+		<input type="submit"> 
+		<input type="submit" width="100px" value="ddd">
+	</form>
+	
+	<h1 id="par2">yildiz</h1>
+	<img src="../Images/dicleFirat.jpg" width="400" >
+	<img name="imaj" src="../Images/Banner.jpg" width="400" onclick="resimYukle()">
+	<div id="div1"> selamlar</div>
+</body>
+</html>

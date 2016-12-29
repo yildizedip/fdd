@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TLabrotuvarDTO" table="t_labratuvar">
+		<id name="id" column="id" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+
+		<property name="labIslemTipId" column="lab_islem_tip_id" type="int" />
+		<property name="islemId" column="islem_id" type="int" />
+		<property name="klinikCikisTar" column="klinik_cikis_tar" type="java.util.Date" />
+		<property name="labCikisTar" column="lab_cikis_tar" type="java.util.Date" />
+		<property name="bitimTarStr" column="bitim_tar" type="java.util.Date" />
+		<property name="durum" column="durum" type="java.lang.String" />
+		<property name="gonderenKisi" column="gonderen_kisi" type="int" />
+		<property name="alanKisi" column="alan_kisi" type="int" />
+		<property name="puan" column="puan" type="java.lang.String" />
+		<property name="gondermeTar" column="gonderme_tar" type="java.util.Date" />
+		<property name="aciklama" column="aciklama" type="java.lang.String" />
+		<property name="labAciklama" column="lab_aciklama" type="java.lang.String" />
+		<property name="labGondermeTar" column="lab_gonderme_tar" type="java.util.Date" />
+		<property name="klinikDegerlendirmeTar" column="klinik_degerlendirme_tar" type="java.util.Date" />
+	</class>
+</hibernate-mapping>

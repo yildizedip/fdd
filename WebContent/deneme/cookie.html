@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function GetCookie(name) {
+		var arg = name + "=";
+		var alen = arg.length;
+		var clen = document.cookie.length;
+		var i = 0;
+		while (i < clen) {
+
+			var j = i + alen;
+			if (document.cookie.substring(i, j) == arg)
+				return getCookieVal(j);
+			i = document.cookie.indexOf(" ", i) + 1;
+			if (i == 0)
+				break;
+		}
+		return null;
+
+	}
+
+	function SetCookie(name, value, expires, path, domain, secure) {
+		document.cookie = name + "=" + escape(value)
+				+ ((expires) ? "; expires=" + expires.toGMTString() : "")
+				+ ((path) ? "; path=" + path : "")
+				+ ((domain) ? "; domain=" + domain : "")
+				+ ((secure) ? "; secure" : "");
+	}
+	
+	
+	function getCookieVal(offset) {
+		var endstr = document.cookie.indexOf(";", offset);
+		if (endstr == -1)
+			endstr = document.cookie.length;
+		return unescape(document.cookie.substring(offset, endstr));
+	}
+	
+	 function cookieYaz() {
+		  gecerliTarih = new Date(2010, 6, 12, 1, 0, 0);
+		  document.cookie = SetCookie(
+		   "user", document.mF.txtAd.value, gecerliTarih);
+		  document.cookie = SetCookie(
+		   "pw", document.mF.pw.value, gecerliTarih);
+		 }
+	 
+	 function cookieOku() {
+		  deger = GetCookie("user");
+		 // document.write(deger);
+		  if(deger != null)
+		   document.mF.txtAd.value=deger;
+		  deger = GetCookie("pw");
+		  if(deger != null)
+		   document.mF.pw.value=deger;
+		 }
+
+
+	
+</script>
+</head>
+<body onload="cookieOku()" >
+
+<form name="mF" action="" onsubmit="cookieYaz()">
+
+<table>
+<tr> <td>Ku Adı</td> <td> <input type="text" name="txtAd"> </td>  </tr>
+<tr> <td>Parola</td> <td> <input type="password" name="pw">  </td>  </tr>
+<tr> <td> <input type="submit" value="ok">  </td> <td> <input type="reset" value="reset"> </td>  </tr>
+</table>
+
+</form>
+</body>
+</html>

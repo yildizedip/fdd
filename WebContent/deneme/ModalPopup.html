@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title>Insert title here</title>
+<script language="javascript">
+			function OpenPopup()
+			{
+				if (window.showModalDialog) {
+			            window.showModalDialog("popup.html","mywindow",
+			            "dialogWidth:1024px;dialogHeight:768px");
+			        } else {
+			            mywindow= window.open ("popup.html", "mywindow","menubar=0,toolbar=0,location=0,resizable=1,status=1,scrollbars=1,width=1024px,height=768px");
+			            mywindow.moveTo(300,300);
+			            if (window.focus)
+			                mywindow.focus();
+				}  
+
+			}
+		</script>
+</head>
+<body>
+<a href="#" onclick="OpenPopup()">click</a>
+</body>
+</html>

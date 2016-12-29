@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+
+h1,h4
+	{
+
+background: pink;
+}
+
+
+h1.a{
+background: purple;
+font-size: 42px;
+}
+
+
+.b{
+font-size: 90px;
+visibility: visible;
+background: orange;
+}
+
+#b
+	{
+	
+	background:aqua; 
+	
+	}
+
+.a{
+background: blue;
+}
+
+* {
+background: yellow;
+
+}
+
+a:hover{
+background: green;
+}
+
+a{
+color: olive;
+font-size: 23px;
+text-decoration: inherit;
+}
+
+
+

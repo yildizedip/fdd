@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title></title>
+<script type="text/javascript">
+		var mPencere;
+		function yeniPencere() {
+			mPencere = open("", "Boş Pencere")
+		}
+
+		function kapatPencere() {
+			Pencere.close();
+		}
+		function bosKapatPencere() {
+			if (mPencere.closed != true) {
+				mPencere.close();
+			}
+		}
+		
+		function init()
+		{
+			
+			mPencere= open("","bospencere");
+			mPencere.close();
+		}
+	</script>
+</head>
+<body onload="init()">
+PENCERE OALYLARI
+<form action="">
+
+	<table border="4">
+	<tr>
+		<td>Metin</td>   
+		<td> <input type="button" value="OK" onclick='window.open("metin.txt", "MetinPencere")'> </td>	
+	</tr>
+	<tr>
+		<td>Grafik</td>   
+		<td> <input type="button" value="OK" onclick='self.open("../Images/Banner.jpg", "MetinPencere")'> </td>
+	</tr>
+	<tr>
+		<td>Yeni Bir HTML Sayfasi</td>     
+		<td> <input type="button" value="OK" onclick='self.open("Den3.html", "MetinPencere")'> </td>
+	</tr>
+	<tr>
+		<td>Aynı dosya aynı pencere</td>   
+		<td> <input type="button" value="OK" onclick='self.open("metin.txt", "MetinPencere")'> </td>
+	</tr>
+	<tr>
+		<td>Boş Pencere aç</td>   
+		<td> <input type="button" value="OK" onclick='yeniPencere()'>  </td>
+	</tr>
+	<tr>
+		<td> <input type="button" value="Bos pencere kapat" onclick='bosKapatPencere()'> </td>   
+		<td> <input type="button" value="Ana Pencere Kapat" onclick='self.close()'> </td>
+	</tr>
+	
+	</table>
+</form>
+</body>
+</html>

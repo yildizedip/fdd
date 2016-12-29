@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TRolMenuDTO" table="t_rol_menu">
+	
+	<id name="id" column="id" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		<property name="menuId" column="menu_id" type="int" />
+		<property name="rolId" column="rol_id" type="int" />
+		<property name="durum" column="durum" type="java.lang.String" />
+		
+
+	</class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,76 @@
+BODY {
+	SCROLLBAR-FACE-COLOR: #3d5882; SCROLLBAR-HIGHLIGHT-COLOR: #f3f3f3; SCROLLBAR-SHADOW-COLOR: #f3f3f3; SCROLLBAR-ARROW-COLOR: #d3d8e1; SCROLLBAR-BASE-COLOR: #6d8693; BGCOLOR: #5D6F93; scrollbar-dark-shadow-color: #ffffff; scrollbar-3d-light-color: #D3D8E1
+}
+.inputButton {
+	BORDER-RIGHT: #354d73 1px solid;
+	BORDER-TOP: #354d73 1px solid;
+	FONT-SIZE: 10px;
+	BORDER-LEFT: #354d73 1px solid;
+	CURSOR: hand;
+	COLOR: #354d73;
+	BORDER-BOTTOM: #354d73 1px solid;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	TEXT-ALIGN: center;
+	TEXT-DECORATION: none;
+	WIDTH: 40px;
+	background-color: #FFFFFF;
+
+}
+.inputCheckbox {
+	BORDER-RIGHT: #354d73 1px solid; BORDER-TOP: #354d73 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #354d73 1px solid; CURSOR: hand; COLOR: #354d73; BORDER-BOTTOM: #354d73 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #c2c9d5; TEXT-DECORATION: none
+}
+.inputTextfield {
+	BORDER-RIGHT: #354d73 1px solid; BORDER-TOP: #354d73 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #354d73 1px solid; CURSOR: hand; COLOR: #354d73; BORDER-BOTTOM: #354d73 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #e7eef7; TEXT-DECORATION: none
+}
+.combobox {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; FONT-SIZE: 9px; BORDER-LEFT: 1px solid; WIDTH: 75px; COLOR: #333333; BORDER-BOTTOM: 1px solid; FONT-FAMILY: Verdana; BACKGROUND-COLOR: #d0dded
+}
+.baslik {
+	FONT-SIZE: 7pt; COLOR: #ffffff; FONT-FAMILY: verdana, Lucida Sans Unicode; TEXT-DECORATION: none
+}
+.sayfaAdi {
+	FONT-SIZE: 7pt; COLOR: #ffffff; FONT-FAMILY: verdana, Lucida Sans Unicode; TEXT-DECORATION: none
+}
+.aciklama {
+	FONT-WEIGHT: lighter; FONT-SIZE: 7pt; COLOR: #003253; FONT-FAMILY: verdana, "Lucida Sans Unicode"; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+.sayisal {
+	FONT-SIZE: 8pt; COLOR: #003253; FONT-FAMILY: Lucida Sans Unicode,verdana; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+A.metin:link {
+	FONT-SIZE: 7pt; COLOR: #003253; FONT-FAMILY: verdana, Lucida Sans Unicode; TEXT-DECORATION: none
+}
+A.metin:visited {
+	FONT-SIZE: 7pt; COLOR: #003253; FONT-FAMILY: verdana, Lucida Sans Unicode; TEXT-DECORATION: none
+}
+A.metin:hover {
+	FONT-SIZE: 7pt; COLOR: #003253; FONT-FAMILY: verdana, Lucida Sans Unicode; TEXT-DECORATION: underline
+}
+A.metin:active {
+	FONT-SIZE: 7pt; COLOR: #003253; FONT-FAMILY: verdana, Lucida Sans Unicode; TEXT-DECORATION: none
+}
+.katman {
+	BORDER-RIGHT: black 1px solid;
+	BORDER-TOP: black 1px solid; 
+	SCROLLBAR-FACE-COLOR: #3d5882; 
+	SCROLLBAR-HIGHLIGHT-COLOR: #f3f3f3; 
+	OVERFLOW: scroll; 
+	BORDER-LEFT: black 1px solid; 
+	WIDTH: 500px; S
+	SCROLLBAR-SHADOW-COLOR: #f3f3f3; 
+	COLOR: #000000; 
+	SCROLLBAR-3DLIGHT-COLOR: #D3D8E1; 
+	SCROLLBAR-ARROW-COLOR: #d3d8e1; 
+	SCROLLBAR-TRACK-COLOR: #E7EEF7; 
+	BORDER-BOTTOM: black 1px solid; 
+	scrollbar-dark-shadow-color: #ffffff; 
+	SCROLLBAR-BASE-COLOR: #6d8693;
+	HEIGHT: 280px; 
+	BGCOLOR: #5D6F93; 
+	 
+}
+
+
+CAPTION {
+	BORDER-RIGHT: white 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: white 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: white 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: white 1px solid; TEXT-ALIGN: left
+}

@@ -1,0 +1,815 @@
+<?xml version="1.0"?>
+<!DOCTYPE struts-config 
+PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="loginForm" type="tr.com.fdd.struts.form.LoginForm"></form-bean>
+		<form-bean name="gelirGiderForm" type="tr.com.fdd.struts.form.GelirGiderForm"></form-bean>
+		<form-bean name="hastaForm" type="tr.com.fdd.struts.form.HastaForm"></form-bean>
+		<form-bean name="hastaRandevuForm" type="tr.com.fdd.struts.form.HastaRandevuForm"></form-bean>
+		<form-bean name="hastaOdemeForm" type="tr.com.fdd.struts.form.HastaOdemeForm"></form-bean>
+		<form-bean name="islemForm" type="tr.com.fdd.struts.form.IslemForm"></form-bean>
+		<form-bean name="SubeForm" type="tr.com.fdd.struts.form.SubeForm"></form-bean>
+		<form-bean name="DoktorForm" type="tr.com.fdd.struts.form.DoktorForm"></form-bean>
+		<form-bean name="LabrotuvarForm" type="tr.com.fdd.struts.form.LabrotuvarForm"></form-bean>
+		<form-bean name="aramaForm" type="tr.com.fdd.struts.form.TAramaForm"></form-bean>
+		<form-bean name="anketForm" type="tr.com.fdd.struts.form.AnketForm"></form-bean>
+		<form-bean name="siparisUrunForm" type="tr.com.fdd.struts.form.DepoSiparisUrunForm"></form-bean>
+		<form-bean name="borcOdemeTakipForm" type="tr.com.fdd.struts.form.IslemBorcOdemeTakipForm"></form-bean>
+	</form-beans>
+
+	<action-mappings>
+	
+		<action path="/randevu" scope="request" name="randevuForm"
+			input="/randevu.jsp" type="tr.com.fdd.struts.actions.RandevuAction"
+			validate="true">
+
+			<forward name="success" path="/randevu.jsp"></forward>
+			<forward name="noContent" path="/randevu.jsp"></forward>
+			<forward name="exception" path="/randevu.jsp"></forward>
+		</action>
+			
+
+		<action path="/getGelirGiderTur" scope="request" name="gelirGiderForm"
+			input="/addGider.jsp" type="tr.com.fdd.struts.actions.GetGiderGelirTurleriAction"
+			validate="true">
+
+			<forward name="success" path="/addGider.jsp"></forward>
+			<forward name="noContent" path="/addGider.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/login" scope="request" name="loginForm" input="/login4.jsp"
+			type="tr.com.fdd.struts.actions.GetUserLoginInfAction" validate="true">
+			<forward name="success" path="/SubeSecim.jsp"></forward>
+			<forward name="gotoAdminPage" path="/Admin.jsp"></forward>
+			<forward name="gotoLabTeknisyenPage" path="/LabIslemMain.jsp"></forward>
+			<forward name="failure" path="/login4.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		
+		<action path="/LoginSystemAction" scope="request" name="loginForm" input="/SubeSecim.jsp"
+			type="tr.com.fdd.struts.actions.LoginSystemAction" validate="true">
+			
+			<forward name="success" path="/redirect_div.jsp"></forward>
+			<forward name="failure" path="/login4.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		
+
+		<action path="/getGelirSorgulama" scope="request" name="gelirGiderForm"
+			input="/GelirSorgulama.jsp" type="tr.com.fdd.struts.actions.GetGelirSorgulamaAction"
+			validate="true">
+
+			<forward name="success" path="/GelirSorgulama.jsp"></forward>
+			<forward name="noContent" path="/GelirSorgulama.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+
+		<action path="/getGiderSorgulama" scope="request" name="gelirGiderForm"
+			input="/GiderSorgulama.jsp" type="tr.com.fdd.struts.actions.GetGiderSorgulamaAction"
+			validate="true">
+
+			<forward name="success" path="/GiderSorgulamaForDoctor.jsp"></forward>
+			<forward name="noContent" path="/GiderSorgulamaForDoctor.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+
+		<action path="/addGelir" scope="request" name="gelirGiderForm"
+			input="/GelirEkle.jsp" type="tr.com.fdd.struts.actions.AddGelirAction"
+			validate="true">
+
+			<forward name="success" path="/GelirEkle.jsp"></forward>
+			<forward name="failure" path="/GelirEkle.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/addGider" scope="request" name="gelirGiderForm"
+			input="/GiderEkle.jsp" type="tr.com.fdd.struts.actions.AddGiderAction"
+			validate="true">
+			<forward name="success" path="/GiderEkle.jsp"></forward>
+			<forward name="failure" path="/GiderEkle.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/SilGelir" scope="request" name="gelirGiderForm"
+			input="/GelirSorgulama.jsp" type="tr.com.fdd.struts.actions.SilGelirAction"
+			validate="true">
+			<forward name="success" path="/GelirSorgulama.jsp"></forward>
+			<forward name="failure" path="/GelirSorgulama.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/SilGider" scope="request" name="gelirGiderForm"
+			input="/GiderSorgulama.jsp" type="tr.com.fdd.struts.actions.SilGiderAction"
+			validate="true">
+			<forward name="success" path="/Success.jsp"></forward>
+			<forward name="failure" path="/Success.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+
+
+		<action path="/getPageGunlukDurum" scope="request" name="gelirGiderForm"
+			input="/GunlukDurum.jsp" type="tr.com.fdd.struts.actions.GetPageGunlukDurumAction"
+			validate="true">
+			<forward name="success" path="/GunlukDurum.jsp"></forward>
+			<forward name="failure" path="/GunlukDurum.jsp"></forward>
+			<forward name="noContent" path="/GunlukDurum.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		<action path="/getGelirGiderDurumu" scope="request" name="gelirGiderForm"
+			input="/GunlukDurum.jsp" type="tr.com.fdd.struts.actions.GetGelirGiderDurumuAction"
+			validate="true">
+			<forward name="goGunSonuRaporu" path="/GunlukDurum.jsp"></forward>
+			<forward name="goGelirRaporu" path="/GelirRaporu.jsp"></forward>
+			<forward name="goGiderRaporu" path="/GiderRaporu.jsp"></forward>
+			<forward name="goGelirRaporuImplant" path="/GelirRaporuForImplant.jsp"></forward>
+			<forward name="success" path="/GunlukDurum.jsp"></forward>
+			<forward name="failure" path="/GunlukDurum.jsp"></forward>
+			<forward name="noContent" path="/GunlukDurum.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+
+		<action path="/SilGiderTuru" scope="request" name="gelirGiderForm"
+			input="/GiderTuruEkle.jsp" type="tr.com.fdd.struts.actions.SilGiderTuruAction"
+			validate="true">
+			<forward name="success" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="failure" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/addFile" scope="request" name="gelirGiderForm"
+			input="/fileUpload.jsp" type="tr.com.fdd.struts.actions.addFileAction"
+			validate="true">
+
+			<forward name="success" path="/fileUpload.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+
+		</action>
+
+		<action path="/hastaSorgula" scope="request" name="hastaForm"
+			input="/HastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaSorgulamaAction"
+			validate="true">
+
+			<forward name="success" path="/HastaSorgula.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="noContent" path="/HastaSorgula.jsp"></forward>
+
+
+		</action>
+		
+		<action path="/hastaSorgulaForHastaAnket" scope="request" name="hastaForm"
+			input="/HastaAnketKaydiHastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaSorgulamaForAnketAction"
+			validate="true">
+
+			<forward name="success" path="/HastaAnketKaydiHastaSorgula.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="noContent" path="/HastaAnketKaydiHastaSorgula.jsp"></forward>
+
+
+		</action>
+		
+		
+		<action path="/hastaSorgulaForRandevu" scope="request" name="hastaForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaSorgulamaAction"
+			validate="true">
+
+
+			<forward name="guncelle" path="/HastaIslemleri.jsp?islem=3"></forward>
+			<forward name="randevuEkle" path="/HastaIslemleri.jsp?islem=1"></forward>
+			<forward name="gelirEkle" path="/HastaIslemleri.jsp?islem=2"></forward>
+			<forward name="operasyonEkle" path="/HastaIslemleri.jsp?islem=4"></forward>
+			<forward name="operasyonListesi" path="/HastaIslemleri.jsp?islem=5"></forward>
+			<forward name="gelirGoruntule" path="/HastaIslemleri.jsp?islem=6"></forward>
+			<forward name="operasyonBitir" path="/HastaIslemleri.jsp?islem=7"></forward>
+			<forward name="labrotuvarEkle" path="/HastaIslemleri.jsp?islem=8"></forward>
+			
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
+
+		</action>
+		<action path="/hastaEkle" scope="request" name="hastaForm"
+			input="/HastaEkle.jsp" type="tr.com.fdd.struts.actions.HastaEkleAction"
+			validate="true">
+
+			<forward name="success" path="/HastaOperasyonEkle.jsp"></forward>
+			<forward name="failure" path="/HastaEkle.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+
+		</action>
+
+		<action path="/HastaSil" scope="request" name="hastaForm"
+			input="/HastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaSilAction"
+			validate="true">
+
+			<forward name="success" path="/HastaSorgula.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+
+		</action>
+
+		<action path="/HastaGetir" scope="request" name="hastaForm"
+			input="/HastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaGetirAction"
+			validate="true">
+
+			<forward name="guncelle" path="/HastaGuncelle.jsp"></forward>
+			<forward name="randevuEkle" path="/HastaRandevuEkle.jsp"></forward>
+			<forward name="gelirEkle" path="/GelirEkle.jsp"></forward>
+			<forward name="gelirGoruntule" path="/GelirEkle.jsp?tip=3"></forward>
+			<forward name="operasyonEkle" path="/HastaOperasyonEkle.jsp"></forward>
+			<forward name="operasyonListesi" path="/HastaOperasyonListesi.jsp"></forward>
+			<forward name="success" path="/HastaSorgula.jsp"></forward>
+			<forward name="operasyonYok" path="/GelirEkle.jsp"></forward>
+			<forward name="operasyonBitir" path="/HastaOperasyonBitir.jsp"></forward>
+			<forward name="labrotuvarIslem" path="/HastaOperasyonBitir.jsp"></forward>
+			
+			
+			<forward name="failureForOperasyonEkle" path="/HastaIslemleri.jsp?islem=4"></forward>
+
+		</action>
+
+		<action path="/HastaGuncelle" scope="request" name="hastaForm"
+			input="/HastaGuncelle.jsp" type="tr.com.fdd.struts.actions.HastaGuncelleAction"
+			validate="true">
+
+			<forward name="success" path="/HastaSorgula.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+
+		</action>
+
+
+		<action path="/HastaRandevuEkle" scope="request" name="hastaRandevuForm"
+			input="/HastaRandevuEkle.jsp" type="tr.com.fdd.struts.actions.HastaRandevuEkleAction"
+			validate="true">
+
+			<forward name="success" path="/HastaRandevuEkle.jsp"></forward>
+
+			<forward name="failure" path="/exception.jsp"></forward>
+
+		</action>
+
+		<action path="/hastaRandevuSorgula" scope="request" name="hastaRandevuForm"
+			input="/HastaRandevuSorgulama.jsp" type="tr.com.fdd.struts.actions.HastaRandevuSorgulamaAction"
+			validate="true">
+
+			<forward name="success" path="/HastaRandevuSorgulama.jsp"></forward>
+			<forward name="noContent" path="/HastaRandevuSorgulama.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+
+		</action>
+
+		<action path="/hastaOdemeEkle" scope="request" name="hastaOdemeForm"
+			input="/GelirEkle.jsp" type="tr.com.fdd.struts.actions.HastaOdemeEkleAction"
+			validate="true">
+			<forward name="success" path="/HastaOperasyonListesi.jsp?islem=2"></forward>
+			<forward name="noContent" path="/GelirEkle.jsp?islem=2"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/HastaOdemeListesiGetir" scope="request" name="hastaOdemeForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaOdemeListesiGetirAction"
+			validate="true">
+			<forward name="success" path="/HastaOdemeListesi.jsp"></forward>
+			<forward name="gotoOdemeEkle" path="/GelirEkle.jsp"></forward>
+			<forward name="noContent" path="/HastaOdemeListesi.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/HastaLabrotuvaraGonderPageOpen" scope="request" name="hastaOdemeForm"
+			input="/HastaOdemeListesi.jsp" type="tr.com.fdd.struts.actions.HastaLabrotuvaraGonderPageOpenAction"
+			validate="true">
+			<forward name="success" path="/HastaLabrotuvaraGonder.jsp"></forward>
+			<forward name="noContent" path="/HastaOdemeListesi.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/HastaOperasyonEkle" scope="request" name="islemForm"
+			input="/HastaOperasyonEkle.jsp" type="tr.com.fdd.struts.actions.HastaOperasyonEkleAction"
+			validate="true">
+			<forward name="success" path="/HastaOperasyonEkle.jsp"></forward>
+			<forward name="successKesinlesmedi" path="/HastaOperasyonEkle.jsp"></forward>
+			<forward name="noContent" path="/HastaOperasyonEkle.jsp"></forward>
+			<forward name="gotoImplantUstuProtezPage" path="/HastaOperasyonEkle.jsp"></forward>			
+			<forward name="failure" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/HastaOperasyonListesiGetir" scope="request"
+			name="islemForm" input="/HastaIslemleri.jsp"
+			type="tr.com.fdd.struts.actions.HastaOperasyonListesiGetirAction"
+			validate="true">
+			<forward name="success" path="/HastaOperasyonListesi.jsp"></forward>
+			<forward name="noContent" path="/HastaOperasyonListesi.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="operasyonListForOdeme" path="/HastaOperasyonListesi.jsp?islem=6"></forward>
+			<forward name="operasyonListForOdemeEkle" path="/HastaOperasyonListesi.jsp?islem=2"></forward>
+			<forward name="labrotuvarIslem" path="/HastaOperasyonListesi.jsp?islem=8"></forward>
+			
+
+		</action>
+
+		<action path="/OperasyonGetir" scope="request" name="islemForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaOperasyonGetirAction"
+			validate="true">
+			<forward name="success" path="/HastaIslemleri.jsp?islem=5"></forward>
+
+			<forward name="gotoOperasyonGuncelle" path="/HastaOperasyonGuncelle.jsp?"></forward>
+			<forward name="noContent" path="/HastaOperasyonListesi.jsp?islem=5"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		<action path="/OperasyonSil" scope="request" name="islemForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaOperasyonSilAction"
+			validate="true">
+			<forward name="success" path="/HastaIslemleri.jsp?islem=5"></forward>
+			<forward name="noContent" path="/HastaOperasyonListesi.jsp?islem=5"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/OperasyonGuncelle" scope="request" name="islemForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaOperasyonGuncelleAction"
+			validate="true">
+			<forward name="success" path="/HastaOperasyonListesi.jsp"></forward>
+			<forward name="noContent" path="/HastaOperasyonListesi.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/OperasyonBitir" scope="request" name="islemForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaOperasyonBitirAction"
+			validate="true">
+			<forward name="success" path="/HastaOperasyonListesi.jsp?islem=5"></forward>
+			<forward name="noContent" path="/HastaOperasyonBitir.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/OdemeSil" scope="request" name="hastaOdemeForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.OdemeSilAction"
+			validate="true">
+			<forward name="success" path="/HastaIslemleri.jsp?islem=6"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp?islem=6"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/OdemeGetir" scope="request" name="hastaOdemeForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaOdemeGetirAction"
+			validate="true">
+			<forward name="success" path="/HastaOdemeGuncelle.jsp"></forward>
+			<forward name="noContent" path="/HastaOdemeGuncelle.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/OdemeGuncelle" scope="request" name="hastaOdemeForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.OdemeGuncelleAction"
+			validate="true">
+			<forward name="success" path="/HastaIslemleri.jsp?islem=6"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp?islem=6"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/getDoktorOperasyonListesi" scope="request"
+			name="hastaOdemeForm" input="/HastaIslemleri.jsp"
+			type="tr.com.fdd.struts.actions.GetDoktorOperasyonListesiAction"
+			validate="true">
+			<forward name="success" path="/OperasyonListForDoktor.jsp"></forward>
+			<forward name="gotoDoktorImplantPage" path="/GelirRaporuForImplant.jsp"></forward>
+			<forward name="noContent" path="/OperasyonListForDoktor.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/hastaBazliToplamOdemeListesi" scope="request"
+			name="hastaForm" input="/HastaIslemleri.jsp"
+			type="tr.com.fdd.struts.actions.HastaBazliToplamOdemeListesiAction"
+			validate="true">
+			<forward name="success" path="/HastaBazliToplamOdemeListesi.jsp"></forward>			
+			<forward name="noContent" path="/HastaBazliToplamOdemeListesi.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+
+<!--
+
+		<action path="/hastaBazliToplamOdemeListesi" scope="request"
+			name="hastaOdemeForm" input="/HastaIslemleri.jsp"
+			type="tr.com.fdd.struts.actions.HastaBazliToplamOdemeListesiAction"
+			validate="true">
+			<forward name="hastaBazliToplamOdemeListesi" path="/HastaBazliToplamOdemeListesi.jsp"></forward>
+			<forward name="odemesiBitmisHastaListesi" path="/OdemesiBitmisHastaListesi.jsp"></forward>
+			<forward name="operasyonuBitmisHastaListesi" path="/OperasyonuBitmisHastaListesi.jsp"></forward>
+			<forward name="operasyonuBitmisOdemesiDevamEdenHastaListesi"
+				path="/OperasyonuBitmisOdemesiDevamEdenHastaListesi.jsp"></forward>
+			<forward name="operasyonuBitmisOdemesiBitmisHastaListesi"
+				path="/OperasyonuBitmisOdemesiBitmisHastaListesi.jsp"></forward>
+			<forward name="operasyonuDevamEdenOdemesiBitmisHastaListesi"
+				path="/OperasyonuDevamEdenOdemesiBitmisHastaListesi.jsp"></forward>
+			<forward name="noContent" path="/HastaBazliToplamOdemeListesi.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+
+  -->
+		<action path="/operasyonuKesinlesmemisHastaListesi" scope="request"
+			name="hastaForm" input="/OperasyonuKesinlesmemisHastaListesi.jsp"
+			type="tr.com.fdd.struts.actions.OperasyonuKesinlesmemisHastaListesiAction"
+			validate="true">
+			<forward name="success" path="/OperasyonuKesinlesmemisHastaListesi.jsp"></forward>
+			<forward name="noContent" path="/OperasyonuKesinlesmemisHastaListesi.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/OperasyonuKesinlestir" scope="request" name="islemForm"
+			input="/OperasyonuKesinlestir.jsp"
+			type="tr.com.fdd.struts.actions.OperasyonuKesinlestirAction"
+			validate="true">
+			<forward name="success" path="/Success.jsp"></forward>
+			<forward name="noContent" path="/Success.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/SubeGetir" scope="request" name="SubeForm"
+			input="/SubeEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.SubeGetirAction"
+			validate="true">
+			<forward name="success" path="/SubeEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/SubeEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/SubeEkle" scope="request" name="SubeForm"
+			input="/SubeEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.SubeEkleAction"
+			validate="true">
+			<forward name="success" path="/SubeEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/SubeEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/SubeGuncelle" scope="request" name="SubeForm"
+			input="/SubeEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.SubeGuncelleAction"
+			validate="true">
+			<forward name="success" path="/SubeEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/SubeEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+
+		<action path="/SubeSil" scope="request" name="SubeForm"
+			input="/SubeEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.SubeSilAction"
+			validate="true">
+			<forward name="success" path="/SubeEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/SubeEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/KullaniciEkle" scope="request" name="loginForm"
+			input="/KullaniciEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.KullaniciEkleAction"
+			validate="true">
+			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="//KullaniciEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		<action path="/KullaniciGetir" scope="request" name="loginForm"
+			input="/KullaniciEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.KullaniciGetirAction"
+			validate="true">
+			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		<action path="/KullaniciSil" scope="request" name="loginForm"
+			input="/KullaniciEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.KullaniciSilAction"
+			validate="true">
+			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		<action path="/KullaniciGuncelle" scope="request" name="loginForm"
+			input="/KullaniciEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.KullaniciGuncelleAction"
+			validate="true">
+			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="goToLogoutPage" path="/logout.jsp"></forward>
+		</action>
+		
+		<action path="/KullaniciSubeGetir" scope="request" name="loginForm"
+			input="/KullaniciEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.KullaniciSubeGetirAction"
+			validate="true">
+			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		<action path="/KullaniciSubeGetirForEkle" scope="request" name="loginForm"
+			input="/KullaniciEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.KullaniciSubeGetirForEkleAction"
+			validate="true">
+			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		
+		<action path="/KullaniciSubeSil" scope="request" name="SubeForm"
+			input="/KullaniciEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.KullaniciSubeSilAction"
+			validate="true">
+			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		<action path="/KullaniciSubeEkle" scope="request" name="SubeForm"
+			input="/KullaniciEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.KullaniciSubeEkleAction"
+			validate="true">
+			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		<action path="/GiderTuruEkle" scope="request" name="SubeForm"
+			input="/GiderTuruEkle.jsp"
+			type="tr.com.fdd.struts.actions.GiderTuruEkleAction"
+			validate="true">
+			<forward name="success" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="noContent" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="exception" path="/GiderTuruEkle.jsp"></forward>
+		</action>
+		
+		<action path="/GiderTuruGetir" scope="request" name="SubeForm"
+			input="/GiderTuruEkle.jsp"
+			type="tr.com.fdd.struts.actions.GiderTuruGetirAction"
+			validate="true">
+			<forward name="success" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="noContent" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="exception" path="/GiderTuruEkle.jsp"></forward>
+		</action>
+		
+		<action path="/GiderTuruGuncelle" scope="request" name="SubeForm"
+			input="/GiderTuruEkle.jsp"
+			type="tr.com.fdd.struts.actions.GiderTuruGuncelleAction"
+			validate="true">
+			<forward name="success" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="noContent" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="exception" path="/GiderTuruEkle.jsp"></forward>
+		</action>
+		
+		<action path="/GiderTuruSubeGetir" scope="request" name="SubeForm"
+			input="/GiderTuruEkle.jsp"
+			type="tr.com.fdd.struts.actions.GiderTuruSubeGetirAction"
+			validate="true">
+			<forward name="success" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="noContent" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="exception" path="/GiderTuruEkle.jsp"></forward>
+		</action>
+		
+		<action path="/GiderTuruSubeEkle" scope="request" name="SubeForm"
+			input="/GiderTuruEkle.jsp"
+			type="tr.com.fdd.struts.actions.GiderTuruSubeEkleAction"
+			validate="true">
+			<forward name="success" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="noContent" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="exception" path="/GiderTuruEkle.jsp"></forward>
+		</action>
+		
+		<action path="/GiderTuruSubeSil" scope="request" name="SubeForm"
+			input="/GiderTuruEkle.jsp"
+			type="tr.com.fdd.struts.actions.GiderTuruSubeSilAction"
+			validate="true">
+			<forward name="success" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="noContent" path="/GiderTuruEkle.jsp"></forward>
+			<forward name="exception" path="/GiderTuruEkle.jsp"></forward>
+		</action>
+		
+		<action path="/DoktorListesiGetir" scope="request" name="DoktorForm"
+			input="/DoktorEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.DoktorListesiGetirAction"
+			validate="true">
+			<forward name="success" path="/DoktorEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/DoktorEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/DoktorEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		<action path="/DoktorSubeGetir" scope="request" name="DoktorForm"
+			input="/DoktorEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.DoktorSubeGetirAction"
+			validate="true">
+			<forward name="success" path="/DoktorEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/DoktorEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/DoktorEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		<action path="/DoktorSubeSil" scope="request" name="SubeForm"
+			input="/DoktorEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.DoktorSubeSilAction"
+			validate="true">
+			<forward name="success" path="/DoktorEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/DoktorEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/DoktorEkleGuncelleSil.jsp"></forward>
+		</action>
+		
+		<action path="/DoktorSubeEkle" scope="request" name="SubeForm"
+			input="/DoktorEkleGuncelleSil.jsp"
+			type="tr.com.fdd.struts.actions.DoktorSubeEkleAction"
+			validate="true">
+			<forward name="success" path="/DoktorEkleGuncelleSil.jsp"></forward>
+			<forward name="noContent" path="/DoktorEkleGuncelleSil.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/SifremiGuncelle" scope="request" name="SubeForm"
+			input="/redirect_div.jsp"
+			type="tr.com.fdd.struts.actions.SifremiGuncelleAction"
+			validate="true">
+			<forward name="success" path="/logout.jsp"></forward>
+			<forward name="noContent" path="/redirect_div.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>	
+		
+		<action path="/LabrotuvaraGonder" scope="request" name="LabrotuvarForm"
+			input="/HastaLabrotuvaraGonder.jsp"
+			type="tr.com.fdd.struts.actions.LabrotuvaraGonderAction"
+			validate="true">
+			<forward name="success" path="/HastaIslemleri.jsp?islem=8"></forward>
+			<forward name="noContent" path="/redirect_div.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/LaboratuvarRandevuVerPageOpen" scope="request" name="LabrotuvarForm"
+			input="/LabIslemSorgula.jsp"
+			type="tr.com.fdd.struts.actions.LaboratuvarRandevuVerPageOpenAction"
+			validate="true">
+			<forward name="success" path="/LabIslemRandevuVer.jsp"></forward>
+			<forward name="noContent" path="/redirect_div.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		<action path="/LaboratuvarRandevuVer" scope="request" name="LabrotuvarForm"
+			input="/LabIslemSorgula.jsp"
+			type="tr.com.fdd.struts.actions.LaboratuvarRandevuVerAction"
+			validate="true">
+			<forward name="success" path="/LabIslemSorgula.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/HastaLabrotuvarIslemleri" scope="request" name="LabrotuvarForm"
+			input="/HastaOperasyonlistesi.jsp"
+			type="tr.com.fdd.struts.actions.HastaLabrotuvarIslemleriAction"
+			validate="true">
+			<forward name="gotoLabOnayRedPage" path="/HastaLabrotuvarIslemOnaylaRed.jsp"></forward> 
+			<forward name="gotoLabIslemDetayGosterPage" path="/HastaLabrotuvarIslemDetayGoster.jsp"></forward> 
+			<forward name="success" path="/HastaLabrotuvarIslemOnaylaRed.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		
+		<action path="/LaboratuvarIslemOnaylaRed" scope="request" name="LabrotuvarForm"
+			input="/HastaLabrotuvarIslemOnaylaRed.jsp"
+			type="tr.com.fdd.struts.actions.HastaLabrotuvarOnaylaRedAction"
+			validate="true">
+			<forward name="success" path="/HastaOperasyonListesi.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/labIslemSorgula" scope="request" name="LabrotuvarForm"
+			input="/LabIslemSorgula.jsp"
+			type="tr.com.fdd.struts.actions.LabIslemSorgulaAction"
+			validate="true">
+			<forward name="gotoLabPage" path="/LabIslemSorgula.jsp"></forward>
+			<forward name="gotoKlinikPage" path="/HastaLabIslemSorgula.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/aramaKaydiEkle" scope="request" name="aramaForm"
+			input="/OperasyonKesinlesmemisAramaKaydiGir.jsp"
+			type="tr.com.fdd.struts.actions.AramaKaydiEkleAction"
+			validate="true">
+			<forward name="success" path="/OperasyonuKesinlesmemisHastaListesi.jsp?tip=3"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+			
+		<action path="/hastaAramaKaydiListGetir" scope="request" name="hastaForm"
+			input="/HastaAramaKayitListesi.jsp"
+			type="tr.com.fdd.struts.actions.HastaAramaListGetirAction"
+			validate="true">
+			<forward name="success" path="/HastaAramaKayitListesi.jsp"></forward>
+			<forward name="noContent" path="/HastaAramaKayitListesi.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/AramaKaydiSil" scope="request" name="aramaForm"
+			input="/HastaAramaKayitListesi.jsp"
+			type="tr.com.fdd.struts.actions.HastaAramaKaydiSilAction"
+			validate="true">
+			<forward name="success" path="/HastaAramaKayitListesi.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/getHastaOperasyonListForAramaKaydi" scope="request" name="aramaForm"
+			input="/HastaAramaKaydiEkle.jsp"
+			type="tr.com.fdd.struts.actions.GetHastaOperasyonListForAramaKaydiAction"
+			validate="true">
+			<forward name="success" path="/HastaAramaKaydiEkle.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/anketEkle" scope="request" name="anketForm"
+			input="/HastaAnketKaydiGir.jsp"
+			type="tr.com.fdd.struts.actions.AnketEkleAction"
+			validate="true">
+			<forward name="success" path="/HastaAnketKaydiHastaSorgula.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		<action path="/hastaAnketList" scope="request" name="hastaForm"
+			input="/HastaAnketListesi.jsp"
+			type="tr.com.fdd.struts.actions.HastaAnketListAction"
+			validate="true">
+			<forward name="success" path="/HastaAnketListesi.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		<action path="/hastaAnketSil" scope="request" name="hastaForm"
+			input="/HastaAnketListesi.jsp"
+			type="tr.com.fdd.struts.actions.HastaAnketKaydiSilAction"
+			validate="true">
+			<forward name="success" path="/HastaAnketListesi.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		<action path="/siparisEkle" scope="request" name="siparisUrunForm"
+			input="/DepoSiparis.jsp"
+			type="tr.com.fdd.struts.actions.DepoSiparisEkleAction"
+			validate="true">
+			<forward name="success" path="/DepoSiparis.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/siparisUrunEkle" scope="request" name="siparisUrunForm"
+			input="/DepoSiparis.jsp"
+			type="tr.com.fdd.struts.actions.DepoSiparisUrunEkleAction"
+			validate="true">
+			<forward name="success" path="/DepoSiparis.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/borcOdemeTarihEkle" scope="request" name="borcOdemeTakipForm"
+			input="/HastaBazliToplamOdemeListesi.jsp"
+			type="tr.com.fdd.struts.actions.BorcOdemeTarihEkleAction"
+			validate="true">
+			<forward name="success" path="/HastaBorcTarihleriListesi.jsp"></forward>
+			<forward name="noContent" path="/HastaBazliToplamOdemeListesi.jsp?tip=13"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/borcOdemeListesi" scope="request" name="borcOdemeTakipForm"
+			input="/HastaBorcTarihleriListesi.jsp"
+			type="tr.com.fdd.struts.actions.BorcOdemeListesiAction"
+			validate="true">
+			<forward name="success" path="/HastaBorcTarihleriListesi.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/borcTarihBilgisiSil" scope="request" name="hastaForm"
+			input="/HastaBorcTarihleriListesi.jsp"
+			type="tr.com.fdd.struts.actions.BorcTarihSilAction"
+			validate="true">
+			<forward name="success" path="/HastaBorcTarihleriListesi.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+	</action-mappings>
+
+
+	<plug-in className="tr.com.fdd.struts.plugin.StartUpPlugin"></plug-in>
+</struts-config>

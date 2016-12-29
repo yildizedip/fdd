@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TKullaniciBilgiDTO" table="t_kullanici_bilgi">
+		<id name="kuId" column="KU_ID" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>	
+		<property name="kuLoginId" column="KU_LOGIN_ID" type="int" />
+		<property name="kuAd" column="AD" type="java.lang.String" />
+		<property name="kuSoyad" column="SOYAD" type="java.lang.String" />
+		<property name="kuTel" column="TELEFON" type="java.lang.String" />
+		<property name="kuAdres" column="ADRES" type="java.lang.String" />
+		<property name="giderKodu" column="GIDER_KODU" type="int" />
+		
+
+	</class>
+</hibernate-mapping>

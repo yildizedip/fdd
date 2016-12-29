@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TDepoSiparisDTO" table="t_depo_siparis">	
+	<id name="id" column="id" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		<property name="siparisNo" column="siparis_no" type="java.lang.String" />
+		<property name="eklemeTar" column="ekleme_tar" type="java.util.Date" />
+		<property name="ekleyenKisi" column="ekleyen_kisi" type="int" />
+		<property name="durum" column="durum" type="int" />
+		<property name="subeId" column="sube_id" type="int" />
+
+	</class>
+</hibernate-mapping>

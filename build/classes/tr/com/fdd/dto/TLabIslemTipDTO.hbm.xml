@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TLabIslemTipDTO" table="t_labratuvar_islem_tip">
+	
+	<id name="id" column="id" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		<property name="ad" column="ad" type="java.lang.String" />
+		
+
+	</class>
+</hibernate-mapping>

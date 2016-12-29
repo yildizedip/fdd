@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TTurKodDTO" table="t_tur_kod">
+	
+	<id name="turId" column="TUR_ID" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		<property name="turAd" column="TUR_AD" type="java.lang.String" />
+		<property name="turKod" column="TUR_KOD" type="int" />
+		<property name="turTip" column="TUR_TIP" type="int" />
+		<property name="turDurum" column="TUR_DURUM" type="java.lang.String" />
+
+	</class>
+</hibernate-mapping>

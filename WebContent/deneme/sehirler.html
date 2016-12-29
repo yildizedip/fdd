@@ -1,0 +1,51 @@
+<html>
+<script language="Javascript">
+	var resNesne;
+	if (navigator.appName.search("Microsoft") > -1) {
+		resNesne = new ActiveXObject("MSXML2.XMLHTTP");
+	} else {
+		resNesne = new XMLHttpRequest();
+	}
+	function yolla() {
+		//alert("merhaba");
+		for (i = 1; i <= 16; i++) {
+			if (this.document.f.sehir.options[i - 1].selected) {
+				resNesne.open('get', 'sehir.jsp?nerede=' + i, true);
+				resNesne.onreadystatechange = handleResponse;
+				resNesne.send(null);
+				break;
+			}
+		}
+	}
+	function handleResponse() {
+		if (resNesne.readyState == 4) {
+			document.getElementById("sc").innerHTML = resNesne.responseText;
+		}
+	}
+</script>
+<body>
+	<br>
+	<form name="f">
+		<select name="sehir" size="1" onclick="yolla()">
+			<option>Adana</option>
+			<option>Balikesir</option>
+			<option>Bursa</option>
+			<option>Edirne</option>
+			<option>Giresun</option>
+			<option>Hatay</option>
+			<option>Kayseri</option>
+			<option>Konya</option>
+			<option>Manisa</option>
+			<option>Nigde</option>
+			<option>Ordu</option>
+			<option>Rize</option>
+			<option>Sivas</option>
+			<option>Urfa</option>
+			<option>Yozgat</option>
+			<option>Zonguldak</option>
+		</select>
+	</form>
+	<br>
+	<div id="sc"></div>
+</body>
+</html>

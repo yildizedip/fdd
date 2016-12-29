@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title>Insert title here</title>
+<script type="text/javascript" language="javascript" src="../lib/jquery-1.7.js"></script>
+
+<script type="text/javascript" language="javascript" src="../lib/s3Slider.js"></script>
+<style>
+#s3slider {
+	width: 600px; /* important to be same as image width */
+	height: 400px; /* important to be same as image height */
+	position: relative; /* important */
+	overflow: hidden; /* important */
+	float: left;
+}
+#news {
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+	padding: 10px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #666;
+}
+ 
+#s3sliderContent {
+    width: 600px; /* important to be same as image width or wider */
+    position: absolute; /* important */
+    top: 0; /* important */
+    margin-left: 0; /* important */
+}
+ 
+.s3sliderImage {
+    float: left; /* important */
+    position: relative; /* important */
+    display: none; /* important */
+}
+ 
+.s3sliderImage span {
+    position: absolute; /* important */
+    left: 0;
+    font: 10px/15px Arial, Helvetica, sans-serif;
+    padding: 10px 13px;
+    width: 600px;
+    background-color: #000;
+    filter: alpha(opacity=70); /* here you can set the opacity of box with text */
+    -moz-opacity: 0.7; /* here you can set the opacity of box with text */
+    -khtml-opacity: 0.7; /* here you can set the opacity of box with text */
+    opacity: 0.7; /* here you can set the opacity of box with text */
+    color: #fff;
+    display: none; /* important */
+    top: 0; /*
+        if you put top: 0;  -> the box with text will be shown 
+                                at the top of the image
+        if you put bottom: 0;  -> the box with text will be shown 
+                                at the bottom of the image
+    */
+}
+ 
+.clear {
+    clear: both;
+}
+
+</style>
+
+<script type="text/javascript">
+
+$(document).ready(function() { 
+    $('#s3slider').s3Slider({
+        timeOut: 4000
+    });
+});
+</script>
+
+</head>
+<body>
+<div id="s3slider" >
+  <ul id="s3sliderContent">
+    <li class="s3sliderImage"> <img src="../Images/3.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/4.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/5.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/6.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/7.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/8.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/9.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/10.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/11.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/13.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/14.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/15.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+    <li class="s3sliderImage"> <img src="../Images/16.jpg"> <span>Polikliniklerimizden görüntüler</span> </li>
+  
+   
+  </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TDepoDTO" table="t_depo">	
+	<id name="id" column="id" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		<property name="depoAd" column="depo_ad" type="java.lang.String" />
+		<property name="adres" column="adres" type="java.lang.String" />
+		<property name="durum" column="durum" type="int" />
+		
+
+	</class>
+</hibernate-mapping>

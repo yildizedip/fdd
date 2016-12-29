@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TGelirGiderDTO" table="t_gelir_gider" >
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		
+		<property name="tip" column="TIP" type="int" />
+		<property name="miktar" column="MIKTAR" type="double" />
+		<property name="aciklama" column="ACIKLAMA" type="java.lang.String" />
+		<property name="tarih" column="TARIH" type="java.util.Date" />
+		<property name="girenKisi" column="GIREN_KISI" type="int" />
+		<property name="giderTuru" column="TUR" type="java.lang.String" />
+		<property name="doktor" column="DOKTOR" type="int" />
+		<property name="odemeSekli" column="ODEME_SEKLI" type="int" />
+		<property name="paraBirimi" column="PARA_BIRIMI" type="java.lang.String" />
+		<property name="durum" column="DURUM" type="java.lang.String" />
+		<property name="subeId" column="SUBE_ID" type="int" />
+	
+	
+	
+	</class>
+</hibernate-mapping>

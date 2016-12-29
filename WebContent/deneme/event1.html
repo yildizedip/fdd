@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title></title>
+<script type="text/javascript">
+window.onkeypress=mesaj2;
+	function mesaj() {
+		alert("Dugmeye tiklandi");
+	}
+	
+	function mesaj2()
+	{
+		alert(" keyborda tıklandı");
+	}
+</script>
+</head>
+<body>
+<form action="" name="f1" >
+<input type="button" name="b1" value="OK">
+
+
+</form>
+
+<script type="text/javascript">
+
+document.f1.b1.onclick=mesaj;
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title>Insert title here</title>
+
+
+<style>
+* {
+	background-color: green;
+	color: yellow;
+}
+
+#cevap {
+	
+	background-color: red;
+	color: yellow;
+}
+</style>
+
+<script type="text/javascript">
+	function pozisyon(ev) {
+		var text = " event nesnesinin degiskenleri tanimlanıyor: <br>";
+		text += "Pencereye koordinatlar (pageX, pageY): " + ev.pageX + ", "
+				+ ev.pageY + ".<br />";
+		text += "Ekrana gore koordinatlar (screenX, screenY): " + ev.screenX
+				+ ", " + ev.screenY + ".<br />";
+		text += "Klavye ve fare kodu (which): " + ev.which + ".<br />";
+		text += "Olay tipi (type): " + ev.type + ".<br />";
+		
+		document.getElementById("cevap").style.width = 450;
+		document.getElementById("cevap").style.left = ev.pageX;
+		document.getElementById("cevap").style.top = ev.pageY;
+		document.getElementById("cevap").innerHTML = text;
+	}
+	document.onmouseup = pozisyon;
+</script>
+</head>
+<body>
+<h1>Lutfen tiklayin</h1> 
+<div id="cevap"></div>
+
+</body>
+</html>
