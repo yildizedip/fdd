@@ -14,6 +14,8 @@ public class TMenuDTO implements Serializable{
 	private String menuAd;
 	private String menuPage;
 	private String menuPath;
+	private String dataToggle;
+	private String dataTarget;
 	private String durum;
 	private List<TMenuDTO> subMenu;
 	
@@ -64,5 +66,17 @@ public class TMenuDTO implements Serializable{
 	public String toString() {
 		
 		return this.getMenuAd();
+	}
+	public String getDataToggle() {
+		return dataToggle;
+	}
+	public void setDataToggle(String dataToggle) {
+		this.dataToggle = dataToggle;
+	}
+	public String getDataTarget() {
+		return dataTarget;
+	}
+	public void setDataTarget(String dataTarget) {
+		this.dataTarget = dataTarget;
 	}
 }

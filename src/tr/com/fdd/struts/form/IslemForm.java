@@ -8,9 +8,7 @@ import org.apache.struts.action.ActionForm;
 
 public class IslemForm extends ActionForm {
 	
-		/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 		private int hastaId;
@@ -37,6 +35,8 @@ public class IslemForm extends ActionForm {
 		private int implantCerrahId;
 		private int implantBaglayanDoktorId;
 		private int disAdet;
+		
+		private String disNo;
 		
 		public String getAciklama() {
 			return aciklama;
@@ -177,6 +177,12 @@ public class IslemForm extends ActionForm {
 		}
 		public Date getIslemTarihiImpl() {
 			return islemTarihiImpl;
+		}
+		public String getDisNo() {
+			return disNo;
+		}
+		public void setDisNo(String disNo) {
+			this.disNo = disNo;
 		}
 	
 	

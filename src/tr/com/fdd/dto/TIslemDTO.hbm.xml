@@ -20,6 +20,7 @@
 	    <property name="guncellenmeTarihi" column="guncellenme_tarihi" type="java.util.Date" />
 	    <property name="iliskiliIslemId" column="iliskili_islem_id" type="int" /> 
 	 	 <property name="disAdet" column="dis_say" type="int" /> 
+	 	 <property name="disNo" column="dis_no" type="java.lang.String" /> 
 	<!-- 
 	
 	    <property name="implantUcret" column="impl_ucret" type="double" />
@@ -27,6 +28,6 @@
 	    <property name="implantCerrahId" column="impl_cerrah_id" type="int" />
 	    <property name="implantAdet" column="impl_adet" type="int" />
 	 -->
-	    
+	   
 	</class>
 </hibernate-mapping>

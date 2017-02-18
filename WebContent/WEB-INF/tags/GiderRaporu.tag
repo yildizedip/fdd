@@ -1,31 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
-"http://www.w3.org/TR/html4/loose.dtd">
+<%@ tag body-content="scriptless"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ attribute name="silAktif" required="false" rtexprvalue="true" %>
 <%@tag import="tr.com.fdd.dto.TOdemeSekliDTO"%>
 <%@tag import="tr.com.fdd.dto.TTurKodDTO"%>
 <%@tag import="java.util.List"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
-<title>odemeSekli</title>
-
-<%@ tag body-content="scriptless"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ attribute name="silAktif" required="false" rtexprvalue="true" %>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<link rel="stylesheet" href="css/edip.css" type="text/css" />
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/epoch_classes.js"></script>
+<script src="/script/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet"	href="/styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="/styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="/styles/main.css">
+<link rel="stylesheet" href="/css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="/css/edip.css" type="text/css" />
 </head>
 <body>
 	<c:if test="${not empty giderList}">
-	<label class="fonte">   <jsp:doBody /> tarihleri arasinda ; <br> </label>
 		
-		<table width="700" class="sofT">
-		<tr> <td class="helpHed" colspan="8" > Gider Listesi </td> </tr> 
+		<table  class="table table-bordered">
+		<tr> <td class="bg-warning" colspan="8" align="center"  > Gider Listesi </td> </tr> 
 			<tr>
 				<td class="helpHed"></td>
 				<td class="helpHed">Tarih</td>
-				<td class="helpHed">Gider Türü</td>
+				<td class="helpHed">Gider Turu</td>
 				<td class="helpHed">Odeme Sekli</td>
 				<td class="helpHed">Miktar</td>
 				<td class="helpHed">Aciklama</td>
@@ -49,7 +59,7 @@
 						<c:if test="${sessionScope.sessionMember[0].kuTur eq '4' }">
 						<td class="helpBod"><html:link action="/SilGider?id=${gider.id}"> Sil </html:link>
 						</td>
-						<td class="helpBod"><html:link action="/GiderGuncelle?id=${gider.id}"> Güncelle </html:link>
+						<td class="helpBod"><html:link action="/GiderGuncelle?id=${gider.id}"> GÃ¼ncelle </html:link>
 						</td>
 						</c:if>
 					</c:if>

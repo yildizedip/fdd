@@ -10,6 +10,7 @@ public class TAramaKaydiDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private int islemId;
+	private int hastaId;
 	private Date aramaTarih;
 	private Date kayitTarih;
 	private String aramaSaat;
@@ -17,6 +18,7 @@ public class TAramaKaydiDTO implements Serializable {
 	private int arayanKisi;
 	private String durum;
 	private TIslemDTO islem;
+	private THastaDTO hasta;
 	
 	public int getId() {
 		return id;
@@ -71,6 +73,18 @@ public class TAramaKaydiDTO implements Serializable {
 	}
 	public void setIslem(TIslemDTO islem) {
 		this.islem = islem;
+	}
+	public int getHastaId() {
+		return hastaId;
+	}
+	public void setHastaId(int hastaId) {
+		this.hastaId = hastaId;
+	}
+	public THastaDTO getHasta() {
+		return hasta;
+	}
+	public void setHasta(THastaDTO hasta) {
+		this.hasta = hasta;
 	}
 	
 

@@ -16,22 +16,23 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
 import tr.com.fdd.struts.form.HastaForm;
 import tr.com.fdd.utils.Commons;
+import tr.com.fdd.utils.GUIMessages;
 import tr.com.fdd.utils.GenelDegiskenler;
 
-public class HastaBazliToplamOdemeListesiAction extends Action {
+public class HastaBazliToplamOdemeListesiAction extends GenericAction {
 
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		Connection conn = null;
-		HttpSession httpSession = null;
+	public ActionForward  executeCode(Session session, Connection connection,
+			ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, Transaction trans){
+			HttpSession httpSession = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();
 			httpSession = request.getSession();
 			String tip = request.getParameter("tip");
 			String basTar = request.getParameter("basTar");
@@ -57,7 +58,7 @@ public class HastaBazliToplamOdemeListesiAction extends Action {
 			Integer subeId = (Integer) request.getSession().getAttribute(
 					"subeId");
 			hastaBazliToplamOdemeListesi = sqlUtils
-					.hastaBazliToplamOdemeListesi(conn, "A", doktorId,
+					.hastaBazliToplamOdemeListesi(connection, "A", doktorId,
 							subeId.intValue(), basTar, bitTar, frm.getAd(),
 							frm.getSoyad(), frm.getProtokolNo());
 
@@ -75,7 +76,7 @@ public class HastaBazliToplamOdemeListesiAction extends Action {
 						new HastaOdemeComparator());
 
 			if (hastaBazliToplamOdemeListesi.size() == 0) {
-				request.setAttribute("noContent", "Kay�t Bulunamad�");
+				request.setAttribute("noContent", GUIMessages.VERI_BULUNAMADI);
 				return mapping.findForward("noContent");
 
 			} else {
@@ -222,9 +223,10 @@ public class HastaBazliToplamOdemeListesiAction extends Action {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			try {
-				conn.rollback();
-				conn.close();
+				connection.rollback();
+				connection.close();
 				e.printStackTrace();
 				request.setAttribute("exception", e);
 			} catch (SQLException e1) {
@@ -236,7 +238,7 @@ public class HastaBazliToplamOdemeListesiAction extends Action {
 			return mapping.findForward("exception");
 		} finally {
 			try {
-				conn.close();
+				connection.close();
 			} catch (SQLException e) {
 
 				e.printStackTrace();

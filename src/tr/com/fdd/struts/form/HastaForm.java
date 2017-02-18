@@ -20,10 +20,6 @@ public class HastaForm extends ActionForm {
 	
 	private static Logger logger = LoggerFactory.getLogger(HastaForm.class);
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String protokolNo;
 	private String ad;
@@ -72,6 +68,7 @@ public class HastaForm extends ActionForm {
 		||"/hastaAramaKaydiListGetir".equals(path)	
 		||"/hastaSorgulaForHastaAnket".equals(path)	
 		||"/hastaAnketList".equals(path)		
+		||"/hastaBasicSorgula".equals(path)		
 		)
 		{
 			return errors;
@@ -84,25 +81,25 @@ public class HastaForm extends ActionForm {
 		if( protokolNo!=null && (protokolNo.equals("") || kontrol.karakterVarmi(protokolNo)) )
 		{
 				
-			request.setAttribute("warn", "Lütfen protokol no deðerini kontrol ediniz.");
+			request.setAttribute("warn", "Lutfen protokol no  kontrol ediniz.");
 			ActionMessages messages= new ActionMessages();
-			messages.add("message", new ActionMessage("Hata Oluþtu."));	
+			messages.add("message", new ActionMessage("Hata Olustu."));	
 			errors.add(messages);
 		}
 		else if( ad!=null && (ad.equals("")) )
 		{
 			
-			request.setAttribute("warn", "Lütfen ad deðerini kontrol ediniz.");
+			request.setAttribute("warn", "Lutfen adÄ± kontrol ediniz.");
 			ActionMessages messages= new ActionMessages();
-			messages.add("message", new ActionMessage("Hata Oluþtu."));	
+			messages.add("message", new ActionMessage("Hata Olustu."));	
 			errors.add(messages);
 		}
 		else if( soyad!=null && (soyad.equals("")) )
 		{
 			
-			request.setAttribute("warn", "Lütfen soyad deðerini kontrol ediniz.");
+			request.setAttribute("warn", "Lutfen soyadÄ± kontrol ediniz.");
 			ActionMessages messages= new ActionMessages();
-			messages.add("message", new ActionMessage("Hata Oluþtu."));	
+			messages.add("message", new ActionMessage("Hata Olustu."));	
 			errors.add(messages);
 		}
 		else return null;

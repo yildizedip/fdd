@@ -366,15 +366,17 @@ function openLabOnaylaDialog(param) {
 									<c:otherwise>
 
 
-										<td class="helpBod"><html:link
-											action="/OperasyonSil?id=${operasyon.id}"> Sil </html:link></td>
-										<td class="helpBod"><html:link
+										<td class="helpBod">  <html:link
+											action="/OperasyonSil?id=${operasyon.id}"> Sil </html:link>  </td>
+										<td class="helpBod"> <html:link
 											action="/OperasyonGetir?operasyonId=${operasyon.id}&&hastaId=${requestScope.hasta.id}&&islem=7"> Guncelle </html:link>
 										</td>
 										
 										<c:if test="${operasyon.durumu ne 'B'}">
 											<td class="helpBod">
-											<a href="#dialogOperasyonuBitir" name="modal" onclick="go_to(${operasyon.id})"> Operasyonu Bitir </a></td>
+											<a href="#dialogOperasyonuBitir" name="modal" onclick="go_to(${operasyon.id})"> Operasyonu Bitir </a>
+											
+											</td>
 										</c:if>
 
 									</c:otherwise>

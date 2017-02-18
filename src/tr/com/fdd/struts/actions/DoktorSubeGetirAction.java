@@ -33,7 +33,7 @@ public class DoktorSubeGetirAction extends Action {
 			
 			request.setAttribute("doktorList", doktorList);
 
-			TDoktorDTO dto = sqlUtil.getDoktor(frm.getDmemberId(), connection);
+			TDoktorDTO dto = sqlUtil.getDoktor(frm.getDmemberId(),-1, connection,false,-1);
 
 			request.setAttribute("doktor", dto);
 			return mapping.findForward("success");

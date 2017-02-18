@@ -20,7 +20,6 @@
 		<mapping resource="/tr/com/fdd/dto/TOdemeSekliDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/THastaDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/TIslemTipDTO.hbm.xml" />
-		<mapping resource="/tr/com/fdd/dto/THastaRandevuDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/THastaOdemeDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/TIslemDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/TIslemSafahatDTO.hbm.xml" />
@@ -40,6 +39,7 @@
 		<mapping resource="/tr/com/fdd/dto/TDepoSiparisDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/TDepoUrunTipDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/THastaIslemBorcTakipDTO.hbm.xml" />
+		<mapping resource="/tr/com/fdd/dto/THastaRandevuDTO.hbm.xml" />
 	
 	</session-factory>
 </hibernate-configuration>

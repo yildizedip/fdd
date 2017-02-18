@@ -4,12 +4,10 @@ package tr.com.fdd.struts.actions;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
 
 
 
@@ -29,9 +27,14 @@ public class RandevuAction extends Action {
 		    String contentType = request.getContentType();
 		    String boundary = "";
 		    final int BOUNDARY_WORD_SIZE = "boundary=".length();
+		    
+		   
+		    
+		    request.setAttribute("events", "deneme");
 		   
 		  return mapping.findForward("success");
 		}catch (Exception e) {
+			e.printStackTrace();
 			 return mapping.findForward("failure");
 		}
 		

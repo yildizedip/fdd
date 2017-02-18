@@ -1,5 +1,6 @@
 package tr.com.fdd.struts.actions;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -90,7 +91,7 @@ public class HastaLabrotuvarOnaylaRedAction extends Action {
 
 	}
 
-	private void insertLabIslemForRPT(LabrotuvarForm labForm, Session session,TLabrotuvarDTO result, HttpServletRequest request) throws HibernateException {
+	private void insertLabIslemForRPT(LabrotuvarForm labForm, Session session,TLabrotuvarDTO result, HttpServletRequest request) throws HibernateException, ParseException {
 		
 		TLabrotuvarDTO labrotuvarDTO = new TLabrotuvarDTO();
 		

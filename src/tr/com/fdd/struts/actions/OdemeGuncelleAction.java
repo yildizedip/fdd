@@ -1,34 +1,33 @@
 package tr.com.fdd.struts.actions;
 
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.hibernate.HibernateException;
-import net.sf.hibernate.Query;
-import net.sf.hibernate.Session;
-import net.sf.hibernate.Transaction;
-
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Query;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.struts.form.HastaOdemeForm;
+import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
 
-public class OdemeGuncelleAction extends Action {
+public class OdemeGuncelleAction extends GenericAction {
 
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward executeCode(Session sess, Connection connection,
+			ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, Transaction trans)  {
 
-		Session sess = null;
 		Transaction tran = null;
 		try {
 
@@ -47,13 +46,11 @@ public class OdemeGuncelleAction extends Action {
 				odemeForm.setOdemeTarihi(convertedDate);
 			}
 
-			sess = GenericAction.getHibernateSession();
 			THastaOdemeDTO dto = new THastaOdemeDTO();
 			BeanUtils.copyProperties(dto, odemeForm);
 			tran = sess.beginTransaction();
 
-			Query query = sess
-					.createQuery("from tr.com.fdd.dto.THastaOdemeDTO  p where p.id = :var");
+			Query query = sess.createQuery("from tr.com.fdd.dto.THastaOdemeDTO  p where p.id = :var");
 			query.setInteger("var", id);
 			THastaOdemeDTO result = (THastaOdemeDTO) query.uniqueResult();
 
@@ -64,6 +61,7 @@ public class OdemeGuncelleAction extends Action {
 			result.setOdemeTarihi(dto.getOdemeTarihi());
 			tran.commit();
 
+			Commons.refreshSelectedHasta(request, connection, result.getHastaId());
 			request.setAttribute("warn", GUIMessages.KAYIT_GUNCELLEME_BASARILI);
 
 			return mapping.findForward("success");
@@ -76,7 +74,7 @@ public class OdemeGuncelleAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+			request.setAttribute("warn", "Kayï¿½t Silme ï¿½ï¿½leminde Hata Oluï¿½tu.");
 			return mapping.findForward("exception");
 		} finally {
 			if (sess != null && sess.isOpen())

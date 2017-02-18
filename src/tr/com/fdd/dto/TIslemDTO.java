@@ -43,11 +43,17 @@ public class TIslemDTO implements Serializable {
 //	private double implantProtezUcret;
 //	private int implantCerrahId;
 	private int disAdet;
+	private String disNo;
 //  private TDoktorDTO implantDoktor;
 	
 	private List<THastaOdemeDTO> odemeList;
+	private List<TAramaKaydiDTO> aramaKayitListesi;
 	private List<String> odemeListStr;
 	private List<String> odemeTarihListStr;
+	private TDoktorDTO implantCerrahDoktor;
+	private TDoktorDTO implantDestekDoktor;
+	
+	
 	
 	
 	public List<String> getOdemeListStr() {
@@ -247,5 +253,36 @@ public class TIslemDTO implements Serializable {
 	public void setToplamOdenenMiktar(double toplamOdenenMiktar) {
 		this.toplamOdenenMiktar = toplamOdenenMiktar;
 	}
+	public TDoktorDTO getImplantCerrahDoktor() {
+		return implantCerrahDoktor;
+	}
+	public void setImplantCerrahDoktor(TDoktorDTO implantCerrahDoktor) {
+		this.implantCerrahDoktor = implantCerrahDoktor;
+	}
+	public TDoktorDTO getImplantDestekDoktor() {
+		return implantDestekDoktor;
+	}
+	public void setImplantDestekDoktor(TDoktorDTO implantDestekDoktor) {
+		this.implantDestekDoktor = implantDestekDoktor;
+	}
+	public String getDisNo() {
+		return disNo;
+	}
+	public void setDisNo(String disNo) {
+		this.disNo = disNo;
+	}
+	public List<TAramaKaydiDTO> getAramaKayitListesi() {
+		return aramaKayitListesi;
+	}
+	public void setAramaKayitListesi(List<TAramaKaydiDTO> aramaKayitListesi) {
+		this.aramaKayitListesi = aramaKayitListesi;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return islemTip.getAd();
+	}
+	
 		
 }

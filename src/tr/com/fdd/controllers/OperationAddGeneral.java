@@ -56,7 +56,7 @@ public class OperationAddGeneral implements IOperationAddController {
 			hastaOdemeDTO.setKalanMiktar(tIslemDto.getMiktar());
 			hastaOdemeDTO.setEklenmeTarihi(tIslemDto.getEklenmeTarihi());
 			hastaOdemeDTO.setDurumu("A");
-			hastaOdemeDTO.setAciklama("Toplam Ücret");
+			hastaOdemeDTO.setAciklama("Toplam Ucret");
 
 			Integer hastaGelirId = (Integer) session.save(hastaOdemeDTO);
 			logger.info("hasta gelir id=" + hastaGelirId);
@@ -64,8 +64,8 @@ public class OperationAddGeneral implements IOperationAddController {
 			tran.commit();
 			request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);
 
-			logger.info("operasyon Ýd=" + islemId);
-			logger.info("odeme Ýd=" + hastaGelirId);
+			logger.info("operasyon id=" + islemId);
+			logger.info("odeme id=" + hastaGelirId);
 
 			Connection conn = SQLUtils.getMySqlConneciton();
 			SQLUtils sqlUtils = new SQLUtils();
@@ -85,7 +85,7 @@ public class OperationAddGeneral implements IOperationAddController {
 			
 			/**
 			 * islem tipi kesinlesmedi ise kesinlemedi ekranina gider.. islem
-			 * tipi implant ise implant ustu protez islemi cin ekran acar...
+			 * tipi implant ise implant ustu protez islemi icin ekran acar...
 			 */
 
 			if ("K".equals(tIslemDto.getDurumu()))

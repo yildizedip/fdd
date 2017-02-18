@@ -5,13 +5,25 @@
 <%@page import="java.util.Date"%>
 <%@ page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-9" 	pageEncoding="ISO-8859-9"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script src="script/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
 <link rel="stylesheet" href="css/edip.css" type="text/css" />
 <link rel="stylesheet" href="css/demo_page.css" type="text/css" />
 <link rel="stylesheet" href="css/demo_table.css" type="text/css" />
@@ -28,7 +40,7 @@
 
 <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/i18n/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/i18n/jquery-ui-i18n.min.js"></script>
 
 
 <title></title>
@@ -91,7 +103,6 @@
 												"sEmptyTable" : "Veri Bulunamadı"
 
 											}
-
 										});
 
 					});
@@ -120,7 +131,7 @@
 		});
 
 		$('.gunGir').click(function(){
-	        var row = $(this).parents('tr');
+	         var row = $(this).parents('tr');
 	      
 	    	 var sira=   $(row.children().get(0)).text();
 	    	 var protokol=   $(row.children().get(1)).text();
@@ -182,85 +193,111 @@
 
 
 </head>
-<body id="dt_example">
-
-<div id="container">
-		<table>
-			<tr>
-				<td>
-					<h1>
-						<c:choose>
-							<c:when test="${param.tip eq '10' }"> Hastaların Toplam Ödeme Durumu</c:when>
-							<c:when test="${param.tip eq '11' }"> Ödemesi Bitmiş Hasta Listesi </c:when>
-							<c:when test="${param.tip eq '12' }"> Operasyonu Bitmiş Hasta Listesi </c:when>
-							<c:when test="${param.tip eq '13' }"> Operasyonu Bitmiş Ödemesi Devam Eden Hasta Listesi </c:when>
-							<c:when test="${param.tip eq '14' }"> Operasyonu ve Ödemesi Bitmiş Hasta Listesi </c:when>
-							<c:when test="${param.tip eq '15' }"> Operasyonu Devam Eden Ödemesi Bitmiş Hasta Listesi </c:when>
-							<c:when test="${param.tip eq '16' }"> Operasyonu Devam Eden Hasta Listesi </c:when>
-							<c:when test="${param.tip eq '17' }"> Ödemesi Devam Eden Hasta Listesi </c:when>
-
-						</c:choose>
-					</h1>
-				</td>
-				<td style="width: 51px;"><input type="button"
-					style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
-					onclick="window.print()"></td>
-			</tr>
-		</table>
+<body style="background-color: white; color: black;">
 
 
-		<form
-			<c:choose>
-		<c:when test="${param.tip eq '10' }"> action="hastaBazliToplamOdemeListesi.do?tip=10"</c:when>
-		<c:when test="${param.tip eq '11' }"> action="hastaBazliToplamOdemeListesi.do?tip=11" </c:when>
-		<c:when test="${param.tip eq '12' }"> action="hastaBazliToplamOdemeListesi.do?tip=12"</c:when>
-		<c:when test="${param.tip eq '13' }"> action="hastaBazliToplamOdemeListesi.do?tip=13" </c:when>
-		<c:when test="${param.tip eq '14' }"> action="hastaBazliToplamOdemeListesi.do?tip=14" </c:when>
-		<c:when test="${param.tip eq '15' }"> action="hastaBazliToplamOdemeListesi.do?tip=15" </c:when>
-		<c:when test="${param.tip eq '16' }"> action="hastaBazliToplamOdemeListesi.do?tip=16" </c:when>
-		<c:when test="${param.tip eq '17' }"> action="hastaBazliToplamOdemeListesi.do?tip=17" </c:when>
-		
-		</c:choose>
-			method="post">
-			<table class="sorgulama">
-				<tr>
-					<td colspan="7" style="text-align: center;">HASTA SORGULA</td>
-				</tr>
-				<tr>
-					<td>Protokol No</td>
-					<td><input class="inputTextfield" name="protokolNo"
-						id="hstProtokol" /></td>
-					<td>Ad</td>
-					<td><input class="inputTextfield" name="ad" id="hstProtokol" /></td>
-					<td>Soyad</td>
-					<td><input class="inputTextfield" name="soyad"
-						id="hstProtokol" /></td>
-				</tr>
-				<tr>
-					<td style="width: 56px;">Ödeme Tarihi :</td>
-					<td style="width: 164px;"><input class=inputTextfield
-						name="basTar" id="basTar"></td>
-					<td>/</td>
-					<td colspan="4"><input class=inputTextfield name="bitTar"
-						id="bitTar">  Ödeme tarihine göre arama yapıldığında sadece o tarihler arasında ki ödemeler görünür!  </td>
-				</tr>
+		<form action="hastaBazliToplamOdemeListesi.do"	method="post">
+			
+			<div class="col-lg-6"> 
 
-				<tr>
-					<td colspan="7" style="text-align: center;"><input
-						type="submit" value="Sorgula" name="bnt_gonder" /></td>
-				</tr>
-				<tr>
-					<td colspan="7" style="text-align: center; color: red; text-shadow:aqua;">  ${warn}  </td>
-				</tr>
-			</table>
+<div class="panel panel-blue" >
+                                            <div class="panel-heading">
+                                                Sorgulama</div>
+                                            <div class="panel-body pan">
+                                                <div class="form-body pal">
+                                                
+                                                 <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label for="inputName" class="control-label">
+                                                                    Rapor Tipi </label>
+                                                                   
+                                                                    
+                                                                    <select size="1" name="tip" class="form-control">
+																			<option label="Hastaların Toplam Ödeme Durumu" value="10"></option>
+																			<option label="Tedavisi Bitmiş Hasta Listesi" value="12"></option>
+																			<option label="Tedavisi Devam Eden Hasta Listesi" value="16"></option>
+																			<option label="Ödemesi Bitmiş Hasta Listesi" value="11"></option>
+																			<option label="Ödemesi Devam Eden Hasta Listesi" value="17"></option>
+																			<option label="Tedavisi Bitmiş Ödemesi Devam Eden Hasta Listesi" value="13"></option>
+																			<option label="Tedavisi ve Ödemesi Bitmiş Hasta Listesi" value="14"></option>
+																			<option label="Tedavsi Devam Eden Ödemesi Bitmiş Hasta Listesi" value="15"></option>
+												
+																	</select>
+                                                                   
+                                                                    
+                                                            </div>
+                                                        </div>
+                                                      
+                                                    </div>
+                                                
+                                                
+                                                
+                                                 <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="inputName" class="control-label">
+                                                                    Ödeme Başlangıç Tarihi </label>
+                                                                <div class="input-icon right">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                   <input class="form-control"	name="basTar" id="basTar">
+                                                                    
+                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="inputEmail" class="control-label">
+                                                                    Ödeme Bitiş Tarihi</label>
+                                                                <div class="input-icon right">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <input  class="form-control" name="bitTar" id="bitTar"> 
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                
+                                                 
+                                                </div>
+                                                <div class="form-actions text-right pal">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Sorgula</button>
+                                                </div>
+                                            </div>
+                                        </div>
+ </div>
 
 		</form>
+		
+		<div class="clearfix"></div>
+		<h4>
+		
+		
+		
+		 </h4>
 
-		<div id="demo">
-
-			<table class="sofT" id="example" cellpadding="0" cellspacing="0"	border="0">
+			<table class="table table-bordered" id="example" >
 				<thead>
-					<tr>
+				<tr class="bg-warning" >
+				<td colspan="13" align="center">
+					<c:choose>
+							<c:when test="${requestScope.raporIslemTipi eq '10' }"> Hastaların Toplam Ödeme Durumu</c:when>
+							<c:when test="${requestScope.raporIslemTipi eq '11' }"> Ödemesi Bitmiş Hasta Listesi </c:when>
+							<c:when test="${requestScope.raporIslemTipi eq '12' }"> Tedavisi Bitmiş Hasta Listesi </c:when>
+							<c:when test="${requestScope.raporIslemTipi eq '13' }"> Tedavisi Bitmiş Ödemesi Devam Eden Hasta Listesi </c:when>
+							<c:when test="${requestScope.raporIslemTipi eq '14' }"> Tedavisi ve Ödemesi Bitmiş Hasta Listesi </c:when>
+							<c:when test="${requestScope.raporIslemTipi eq '15' }"> Tedavisi Devam Eden Ödemesi Bitmiş Hasta Listesi </c:when>
+							<c:when test="${requestScope.raporIslemTipi eq '16' }"> Tedavisi Devam Eden Hasta Listesi </c:when>
+							<c:when test="${requestScope.raporIslemTipi eq '17' }"> Ödemesi Devam Eden Hasta Listesi </c:when>
+
+						</c:choose>
+					
+				
+				 </td>
+				</tr>
+				
+					<tr  >
 						<th class="helpHed"></th>
 						<th class="helpHed">Prt. No</th>
 						<th class="helpHed">Hasta</th>
@@ -277,8 +314,8 @@
 
 						<th width="70px" class="helpHed">Kal. Mik.</th>
 					
-						<th width="70px" class="helpHed">Ödeme Gün Ekle</th>
-							<th width="1px"class="helpHed" ></th>
+						<th width="70px" class="helpHed"></th>
+						<th width="0px" style="border-color: white;" ></th>
 						<!-- 
 			<th width="70px" class="helpHed">Doktor Hes.</th>	
 			
@@ -289,8 +326,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${hastaBazliToplamOdemeListesi}" var="odeme"
-						varStatus="count">
+					<c:forEach items="${hastaBazliToplamOdemeListesi}" var="odeme"			varStatus="count">
 
 						<tr>
 							<td class="helpBod">${count.count}</td>
@@ -324,28 +360,19 @@
 
 
 							<td class="helpBod">${odeme.kalanMiktar}</td>
-							
-
 
 							<!--  
-		<td style=" font-size: 9px " class="helpBod">${odeme.doktorHesap} </td>
-			
-			<td style=" font-size: 9px " class="helpBod">${odeme.sirketHesap} </td>
-		-->
+								<td style=" font-size: 9px " class="helpBod">${odeme.doktorHesap} </td>
+								<td style=" font-size: 9px " class="helpBod">${odeme.sirketHesap} </td>
+							-->
 
-
-
-				<td class="helpBod">  <a id="opener" class="gunGir"> Gün Gir</a>  </td>
+						<td class="helpBod">  <a id="opener" class="gunGir"> Gün Gir</a>  </td>
 				
-				<td class="helpBod" width="1px"  style="font-size:1px; visibility: hidden; ">${odeme.islem.id}</td>
+						<td width="1px"  style="font-size:1px; visibility: hidden; border-color: white;">${odeme.islem.id}</td>
 				
 						</tr>
 
-
 					</c:forEach>
-
-
-
 				</tbody>
 
 				<tfoot>
@@ -366,7 +393,7 @@
 						<th style="font-size: 10px; color: Blue">
 							${toplamKalanMiktar}</th>
 							<th></th>
-							<th></th>
+							<th style="border-color: white;"></th>
 
 
 					</tr>
@@ -374,9 +401,7 @@
 				</tfoot>
 
 			</table>
-		</div>
 
-	</div>
 
 
 <div id="dialog" title="Hasta Borç Tarihi Ekleme">

@@ -101,7 +101,6 @@ public class OperationAddForImplant implements IOperationAddController {
 			implantDTO.setHastaId(islemForm.getHastaId());
 			implantDTO.setIslemTipi(GenelDegiskenler.OperasyonTipleri.IMPLANT_CERRAH);
 			implantDTO.setEklenmeTarihi(islemForm.getEklenmeTarihi());
-			implantDTO.setDurumu(islemForm.getDurumu());
 			implantDTO.setDisAdet(islemForm.getDisAdet());
 			implantDTO.setIliskiliIslemId(islemAnaId);
 			
@@ -140,7 +139,7 @@ public class OperationAddForImplant implements IOperationAddController {
 			hastaOdemeAnaDTO.setKalanMiktar(implantDTO.getMiktar());
 			hastaOdemeAnaDTO.setEklenmeTarihi(implantDTO.getEklenmeTarihi());
 			hastaOdemeAnaDTO.setDurumu("A");
-			hastaOdemeAnaDTO.setAciklama("Toplam Ücret");
+			hastaOdemeAnaDTO.setAciklama("Toplam ï¿½cret");
 			Integer hastaGelirAnaId = (Integer) session.save(hastaOdemeAnaDTO);
 			
 			
@@ -155,7 +154,7 @@ public class OperationAddForImplant implements IOperationAddController {
 			hastaOdemeDTO.setKalanMiktar(implantDTO.getMiktar());
 			hastaOdemeDTO.setEklenmeTarihi(implantDTO.getEklenmeTarihi());
 			hastaOdemeDTO.setDurumu("A");
-			hastaOdemeDTO.setAciklama("Toplam Ücret");
+			hastaOdemeDTO.setAciklama("Toplam ï¿½cret");
 			Integer hastaGelirId = (Integer) session.save(hastaOdemeDTO);			
 			
 			
@@ -172,7 +171,7 @@ public class OperationAddForImplant implements IOperationAddController {
 			hastaOdemeBaglayanDTO.setKalanMiktar(implantBaglayanDTO.getMiktar());
 			hastaOdemeBaglayanDTO.setEklenmeTarihi(implantBaglayanDTO.getEklenmeTarihi());
 			hastaOdemeBaglayanDTO.setDurumu("A");
-			hastaOdemeBaglayanDTO.setAciklama("Toplam Ücret");
+			hastaOdemeBaglayanDTO.setAciklama("Toplam ï¿½cret");
 			Integer hastaGelirImplantBaglayanId = (Integer) session.save(hastaOdemeBaglayanDTO );
 			
 			tran.commit();

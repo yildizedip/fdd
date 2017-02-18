@@ -8,6 +8,7 @@
 			<generator class="increment" />
 		</id>
 		<property name="islemId" column="islem_id" type="int" />
+		<property name="hastaId" column="hasta_id" type="int" />
 		<property name="aramaTarih" column="arama_tarih" type="java.util.Date" />
 		<property name="aramaSaat" column="arama_saat" type="java.lang.String" />
 		<property name="aciklama" column="aciklama" type="java.lang.String" />

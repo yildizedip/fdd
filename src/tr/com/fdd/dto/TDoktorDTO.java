@@ -16,7 +16,9 @@ public class TDoktorDTO implements Serializable {
 	private String dSoyad;
 	private int dId;
 	private String dDurum;
+	private String dAktif;
 	private List<SubeForm> doktorSubeList;
+	private List<THastaRandevuDTO> doktorRandevuList;
 
 	public int getdMemberId() {
 		return dMemberId;
@@ -72,5 +74,21 @@ public class TDoktorDTO implements Serializable {
 
 	public List<SubeForm> getDoktorSubeList() {
 		return doktorSubeList;
+	}
+
+	public String getdAktif() {
+		return dAktif;
+	}
+
+	public void setdAktif(String dAktif) {
+		this.dAktif = dAktif;
+	}
+
+	public List<THastaRandevuDTO> getDoktorRandevuList() {
+		return doktorRandevuList;
+	}
+
+	public void setDoktorRandevuList(List<THastaRandevuDTO> doktorRandevuList) {
+		this.doktorRandevuList = doktorRandevuList;
 	}
 }

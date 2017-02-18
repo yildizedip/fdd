@@ -2,6 +2,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC
    "-//Hibernate/Hibernate Mapping DTD//EN"
    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+   
+   
 <hibernate-mapping package="tr.com.fdd.dto">
 	<class name="THastaRandevuDTO" table="t_hasta_randevu" >
 		<id name="id" column="ID" type="int" unsaved-value="null">
@@ -9,16 +11,15 @@
 		</id>
 		
 		<property name="hastaId" column="hasta_id" type="int" />
-		<property name="randevuTarihi" column="randevu_tarihi" type="java.util.Date" />
-		<property name="randevuSaat" column="randevu_saat" type="int" />
-		<property name="randevuDak" column="randevu_dak" type="int" />
-		<property name="islem" column="islem" type="int" />
+		<property name="randevuTarihiBaslangic" column="randevu_tarihi_baslangic" type="java.lang.String" />
+		<property name="randevuTarihiBitis" column="randevu_tarihi_bitis" type="java.lang.String" />
+		<property name="islemId" column="islem_id" type="int" />
 		<property name="doktorId" column="doktor_id" type="int" />
 		<property name="aciklama" column="aciklama" type="java.lang.String" />
 		<property name="durum" column="durum" type="java.lang.String" />
 		<property name="eklenmeTarihi" column="eklenme_tarihi" type="java.util.Date" />
 		<property name="ekleyenKisi" column="ekleyen_kisi_id" type="int" />
-	
+		<property name="randevuyaGelinmedi" column="randevu_gelmedi" type="java.lang.String" />
 	
 	</class>
 </hibernate-mapping>

@@ -12,11 +12,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import tr.com.fdd.dto.TAnketDTO;
 import tr.com.fdd.dto.THastaIslemBorcTakipDTO;
 import tr.com.fdd.mysql.MysqlUtil;
-import tr.com.fdd.struts.form.HastaForm;
 import tr.com.fdd.struts.form.IslemBorcOdemeTakipForm;
+import tr.com.fdd.utils.GUIMessages;
 
 public class BorcOdemeListesiAction extends Action {
 
@@ -33,11 +32,10 @@ public class BorcOdemeListesiAction extends Action {
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 			SQLUtils sqlUtils = new SQLUtils();
 			
-			List<THastaIslemBorcTakipDTO> borcListesi = sqlUtils
-					.hastaBorcOdemeListesiGetir(conn,borcForm);
+			List<THastaIslemBorcTakipDTO> borcListesi = sqlUtils.hastaBorcOdemeListesiGetir(conn,borcForm);
 
 			if (borcListesi.size() == 0) {
-				request.setAttribute("warn", "Kayýt Bulunamadý");
+				request.setAttribute("warn", GUIMessages.KULLANICI_BULUNAMADI);
 				return mapping.findForward("noContent");
 			} else {
 				request.setAttribute("borcListesi",	borcListesi);

@@ -8,22 +8,27 @@ public class THastaRandevuDTO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private int hastaId;
 	private THastaDTO hasta;	
+	private TDoktorDTO doktor;	
+	private TIslemTipDTO islemTipDto;	
+	private TIslemDTO islemDto;	
 	private Date randevuTarihi;
-	private String randevuTarihiStr;
-	private int randevuSaat;
-	private int randevuDak;
-	private int islem;	
+	private int islemId;	
 	private int doktorId;
-	private String doktorAd;
-	private String doktorSoyad;
-	private String islemAd;
 	private String aciklama;
 	private String durum;
 	private Date eklenmeTarihi;
 	private int ekleyenKisi;
+	private String randevuTarihiBaslangic;
+	private String randevuTarihiBitis;
+	private String hastaAdSoyad;
+	private String telefon;
+	private String randevuyaGelinmedi;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -36,30 +41,26 @@ public class THastaRandevuDTO implements Serializable {
 	public void setHastaId(int hastaId) {
 		this.hastaId = hastaId;
 	}
+	public THastaDTO getHasta() {
+		return hasta;
+	}
+	public void setHasta(THastaDTO hasta) {
+		this.hasta = hasta;
+	}
+	public TDoktorDTO getDoktor() {
+		return doktor;
+	}
+	public void setDoktor(TDoktorDTO doktor) {
+		this.doktor = doktor;
+	}
+	
 	public Date getRandevuTarihi() {
 		return randevuTarihi;
 	}
 	public void setRandevuTarihi(Date randevuTarihi) {
 		this.randevuTarihi = randevuTarihi;
 	}
-	public int getRandevuSaat() {
-		return randevuSaat;
-	}
-	public void setRandevuSaat(int randevuSaat) {
-		this.randevuSaat = randevuSaat;
-	}
-	public int getRandevuDak() {
-		return randevuDak;
-	}
-	public void setRandevuDak(int randevuDak) {
-		this.randevuDak = randevuDak;
-	}
-	public int getIslem() {
-		return islem;
-	}
-	public void setIslem(int islem) {
-		this.islem = islem;
-	}
+	
 	public int getDoktorId() {
 		return doktorId;
 	}
@@ -90,34 +91,57 @@ public class THastaRandevuDTO implements Serializable {
 	public void setEkleyenKisi(int ekleyenKisi) {
 		this.ekleyenKisi = ekleyenKisi;
 	}
-	public void setRandevuTarihiStr(String randevuTarihiStr) {
-		this.randevuTarihiStr = randevuTarihiStr;
+	public String getRandevuTarihiBaslangic() {
+		return randevuTarihiBaslangic;
 	}
-	public String getRandevuTarihiStr() {
-		return randevuTarihiStr;
+	public void setRandevuTarihiBaslangic(String randevuTarihiBaslangic) {
+		this.randevuTarihiBaslangic = randevuTarihiBaslangic;
 	}
-	public void setHasta(THastaDTO hasta) {
-		this.hasta = hasta;
+	public String getRandevuTarihiBitis() {
+		return randevuTarihiBitis;
 	}
-	public THastaDTO getHasta() {
-		return hasta;
+	public void setRandevuTarihiBitis(String randevuTarihiBitis) {
+		this.randevuTarihiBitis = randevuTarihiBitis;
 	}
-	public String getDoktorAd() {
-		return doktorAd;
+	public String getHastaAdSoyad() {
+		return hastaAdSoyad;
 	}
-	public void setDoktorAd(String doktorAd) {
-		this.doktorAd = doktorAd;
+	public void setHastaAdSoyad(String hastaAdSoyad) {
+		this.hastaAdSoyad = hastaAdSoyad;
 	}
-	public String getDoktorSoyad() {
-		return doktorSoyad;
+	public String getTelefon() {
+		return telefon;
 	}
-	public void setDoktorSoyad(String doktorSoyad) {
-		this.doktorSoyad = doktorSoyad;
+	public void setTelefon(String telefon) {
+		this.telefon = telefon;
 	}
-	public String getIslemAd() {
-		return islemAd;
+	public TIslemTipDTO getIslemTipDto() {
+		return islemTipDto;
 	}
-	public void setIslemAd(String islemAd) {
-		this.islemAd = islemAd;
+	public void setIslemTipDto(TIslemTipDTO islemTipDto) {
+		this.islemTipDto = islemTipDto;
 	}
+	public String getRandevuyaGelinmedi() {
+		return randevuyaGelinmedi;
+	}
+	public void setRandevuyaGelinmedi(String randevuyaGelinmedi) {
+		this.randevuyaGelinmedi = randevuyaGelinmedi;
+	}
+	public int getIslemId() {
+		return islemId;
+	}
+	public void setIslemId(int islemId) {
+		this.islemId = islemId;
+	}
+	public TIslemDTO getIslemDto() {
+		return islemDto;
+	}
+	public void setIslemDto(TIslemDTO islemDto) {
+		this.islemDto = islemDto;
+	}
+	
+	
+	
+	
+
 }

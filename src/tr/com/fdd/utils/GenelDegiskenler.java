@@ -21,6 +21,8 @@ public class GenelDegiskenler {
 	public static String GET_GELIR_TURU_FOR_IMPLANT = "13";
 	public static String LAB_ISLEM_ONAYLA_RED = "14";
 	public static String LAB_ISLEM_DETAY_GOSTER = "15";
+	public static String RANDEVU_GETIR = "randevu-getir";
+	public static String RANDEVU_GETIR_HASTA_ISLEMLERI = "randevu-getir-hasta-islemleri";
 
 	public static String OP_KESINLESMEMIS = "1";
 	public static String OP_KESINLESMIS = "2";
@@ -32,13 +34,15 @@ public class GenelDegiskenler {
 		public static String SEKRETER = "4";
 		public static String MUDUR = "2";
 		public static String LABTEKNISYENI = "5";
+		public static String DIS_HEKIMI = "Diş Hekimi";
+		
 
 	}
 
 	public static String CONNECTIONSTRING_TEST = "jdbc:mysql://127.0.0.1:3306/dfdiscom_db?"
 			+ "autoReconnect=true&useUnicode=true&characterEncoding=latin5";
 	public static String USERNAME_TEST = "root";
-	public static String PASSWORD_TEST = "1";
+	public static String PASSWORD_TEST = "danger";
 
 	public static String CONNECTIONSTRING_GERCEK = "jdbc:mysql://176.9.128.172:3306/dfdiscom_db?"
 			+ "autoReconnect=true&useUnicode=true&characterEncoding=latin5";
@@ -77,32 +81,32 @@ public class GenelDegiskenler {
 		if (ifade == "")
 			return true;
 		if (ifade.contains("A") || ifade.contains("B") || ifade.contains("C")
-				|| ifade.contains("�") || ifade.contains("D")
+				|| ifade.contains("Ç") || ifade.contains("D")
 				|| ifade.contains("E") || ifade.contains("F")
-				|| ifade.contains("G") || ifade.contains("�")
+				|| ifade.contains("G") || ifade.contains("Ğ")
 				|| ifade.contains("H") || ifade.contains("I")
-				|| ifade.contains("�") || ifade.contains("J")
+				|| ifade.contains("İ") || ifade.contains("J")
 				|| ifade.contains("K") || ifade.contains("L")
 				|| ifade.contains("M") || ifade.contains("N")
-				|| ifade.contains("O") || ifade.contains("�")
+				|| ifade.contains("O") || ifade.contains("Ö")
 				|| ifade.contains("P") || ifade.contains("R")
-				|| ifade.contains("S") || ifade.contains("�")
+				|| ifade.contains("S") || ifade.contains("Ş")
 				|| ifade.contains("T") || ifade.contains("U")
-				|| ifade.contains("�") || ifade.contains("V")
+				|| ifade.contains("Ü") || ifade.contains("V")
 				|| ifade.contains("Y") || ifade.contains("Z")
 				|| ifade.contains("a") || ifade.contains("b")
-				|| ifade.contains("c") || ifade.contains("�")
+				|| ifade.contains("c") || ifade.contains("ç")
 				|| ifade.contains("d") || ifade.contains("e")
 				|| ifade.contains("f") || ifade.contains("g")
-				|| ifade.contains("�") || ifade.contains("h")
-				|| ifade.contains("�") || ifade.contains("i")
+				|| ifade.contains("ğ") || ifade.contains("h")
+				|| ifade.contains("ı") || ifade.contains("i")
 				|| ifade.contains("j") || ifade.contains("k")
 				|| ifade.contains("l") || ifade.contains("m")
 				|| ifade.contains("n") || ifade.contains("o")
-				|| ifade.contains("�") || ifade.contains("p")
+				|| ifade.contains("ö") || ifade.contains("p")
 				|| ifade.contains("r") || ifade.contains("s")
-				|| ifade.contains("�") || ifade.contains("t")
-				|| ifade.contains("u") || ifade.contains("�")
+				|| ifade.contains("ş") || ifade.contains("t")
+				|| ifade.contains("u") || ifade.contains("ü")
 				|| ifade.contains("v") || ifade.contains("y")
 				|| ifade.contains("z")) {
 			return true;
@@ -136,10 +140,22 @@ public class GenelDegiskenler {
 	public static class ReturnTypes {
 
 		public static String FAILURE = "failure";
+		public static String WARN = "warn";
 		public static String SUCCESS = "success";
 		public static String SUCCESS_KESINLESMEDI = "successKesinlesmedi";
 		public static String GO_TO_IMPLANT_USTU_PROTEZ_PAGE = "gotoImplantUstuProtezPage";
 
+	}
+	public static class FormMessages {
+		
+		public static String ERROR = "Hata Oluştu.";
+		public static String CHECK_RANDEVU_DATE = "Lütfen  randevu tarihini kontrol ediniz.";
+		public static String SUCCESS = "İşlem Başarı ile Gerçekleştirildi. !!";
+		public static String SUCCESS_KESINLESMEDI = "successKesinlesmedi";
+		public static String GO_TO_IMPLANT_USTU_PROTEZ_PAGE = "gotoImplantUstuProtezPage";
+		public static String SUCCESS_SADECE_HASTA = "Hasta Ekleme işlemi gerçekleştirildi. Tedavi bilgileri girilmediğinden ya da eksik olduğundan dolayı eklenmedi.";
+		public static String SUCCESS_HASTA_GIR = "Hasta Bilgilerinde Eksiklik bulunmaktadır.";
+		
 	}
 
 	public static class ImplantliOperasyon {

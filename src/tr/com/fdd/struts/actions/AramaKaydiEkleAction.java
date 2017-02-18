@@ -1,33 +1,31 @@
 package tr.com.fdd.struts.actions;
 
 
+import java.sql.Connection;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.hibernate.HibernateException;
-import net.sf.hibernate.Session;
-import net.sf.hibernate.Transaction;
-
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
 import tr.com.fdd.dto.TAramaKaydiDTO;
 import tr.com.fdd.struts.form.TAramaForm;
 import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
 
-public class AramaKaydiEkleAction extends Action {
+public class AramaKaydiEkleAction extends GenericAction {
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward  executeCode(Session session, Connection connection,
+			ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, Transaction trans) {
 		Transaction tran = null;
-		Session session=null;
 		try {
 			TAramaKaydiDTO aramaKaydiDTO= new TAramaKaydiDTO();
 			
@@ -49,11 +47,12 @@ public class AramaKaydiEkleAction extends Action {
 		
 			BeanUtils.copyProperties(aramaKaydiDTO, aramaForm );					
 			
-			session=GenericAction.getHibernateSession();
 			tran = session.beginTransaction();
 			session.save(aramaKaydiDTO);
 			tran.commit();
-			request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);			
+			request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);
+			
+			Commons.refreshSelectedHasta(request, connection, aramaKaydiDTO.getHastaId());
 			
 			
 			return mapping.findForward("success");

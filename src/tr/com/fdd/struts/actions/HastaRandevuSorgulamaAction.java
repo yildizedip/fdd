@@ -2,14 +2,16 @@ package tr.com.fdd.struts.actions;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import tr.com.fdd.dto.THastaRandevuDTO;
+
+import tr.com.fdd.dto.TDoktorDTO;
 
 public class HastaRandevuSorgulamaAction extends Action {
 
@@ -18,27 +20,24 @@ public class HastaRandevuSorgulamaAction extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		String basTar = request.getParameter("randevuTarihiStr");
-		String bitTar = request.getParameter("randevuTarihiStr");
-
 		Connection conn = SQLUtils.getMySqlConneciton();
+		
+		
 		try {
-
+			String doktorId= request.getParameter("doktor");
 			SQLUtils sqlUtils = new SQLUtils();
-			Integer subeId = (Integer) request.getSession().getAttribute(
-					"subeId");
+			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
+			
+			TDoktorDTO doktorDTO=sqlUtils.getDoktor(-1,Integer.parseInt(doktorId), conn, true,subeId);
 
-			List<THastaRandevuDTO> randevuListesi = sqlUtils.getRandevuListesi(
-					basTar, bitTar, conn, subeId.intValue());
-
-			if (randevuListesi.size() == 0) {
-				request.setAttribute("noContent", "Kayýt Bulunamadý");
-				return mapping.findForward("noContent");
-
-			} else {
-				request.setAttribute("randevuList", randevuListesi);
+//			List<THastaRandevuDTO> randevuListesi = sqlUtils.getRandevuListesi(
+//					conn, subeId.intValue(), Integer.parseInt(doktorId)); // no doktor 
+//
+//		
+//				request.setAttribute("randevuList", randevuListesi);
+				request.setAttribute("selectedDoctor", doktorDTO);
+				
 				return mapping.findForward("success");
-			}
 
 		} catch (SQLException e) {
 			try {

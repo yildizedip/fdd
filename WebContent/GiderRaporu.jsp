@@ -8,14 +8,27 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="myTagFiles"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script src="script/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
 <link rel="stylesheet" href="css/edip.css" type="text/css" />
-<script type="text/javascript" src="js/epoch_classes.js"></script>
+
+
 <script type="text/javascript"> 
 		 var basTarihi;
   window.onload = function() {
@@ -35,52 +48,49 @@
 		}
 </script>
 
-<title></title>
 </head>
-<body>
+<body style="background-color: white; color: black;">
 
-<hr>
-<div align="left" >
-		<table>
-		<tr> <td style="width: 1434px; " align="left"> 
- <font style="font-size: 12px; font-family: monospace; color: graytext; ">
-		..: Gider Raporu
-		</font> </td> 
-		<td style="width: 51px; ">
-		
-		  <form>
-				       <input type="button"  style="background-image:url('Images/printIcon2.jpg'); height: 24px; width: 32px" onclick="window.print()" >
-		</form>
-		</td> </tr>
-		</table>
+<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+		<div class="page-header ">
+			<div class="page-title" style="font-size: 20px;">GİDER
+				RAPORU</div>
 
-<hr>
-</div>
-<table style="width: 780px; ">
-	<tr>
-		<td align="left" valign="top" bgcolor="white">
+			<button class="btn pull-right"
+				style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
+				onclick="window.print()"></button>
 
-		<form action="getGelirGiderDurumu.do" method="post">
-		<input type="hidden" value="12" name="islem" > <font color="Red"> ${warn} </font>
-		<table class="sorgulama">
+		</div>
+		<div class="bg-success">${requestScope.warn}</div>
+
+		<div class="clearfix"></div>
+	</div>
+
+<br>
+<div class="col-lg-6"> 
+
+
+<form action="getGelirGiderDurumu.do" method="post">
+		<input type="hidden" value="12" name="islem" > 
+		<table class="table table-bordered">
 			<tr>
 				<td colspan="4"
-					style="text-align: center; font: bold; font-size: 12px">Sorgula
+					style="text-align: center; font: bold; font-size: 20px;" class="bg-blue" >Sorgula
 				</td>
 			</tr>
 			<tr>
-				<td style="width: 56px;">Tarih :</td>
-				<td style="width: 164px;"><input class=inputTextfield
-					name="bas_tar" id="bas_tar"></td>
-				<td>/</td>
-				<td><input class=inputTextfield name="bit_tar" id="bit_tar"></td>
+				<td >Tarih :</td>
+				<td >
+				
+				<input 	name="bas_tar" id="bas_tar"> / <input name="bit_tar" id="bit_tar"> </td>
+				
 			</tr>
-			<tr> <td style="width: 73px; ">Gider Türü</td> <td colspan="3">
-			 <select size="1" name="giderTuru" class="giderTuru">
+			<tr> <td >Gider Türü</td> <td colspan="3">
+			 <select size="1" name="giderTuru" >
 
-				<option label="Gider Türü Seçiniz.." value="-1"/>
+				<option label="Gider Türü Seçiniz.." value="-1">Gider Türü Seçiniz..</option>
 										<c:forEach items="${sessionScope.giderTurKodlari}" var="turKodDTO">
-											<option label="${turKodDTO.turAd }" value="${turKodDTO.turKod }"/>
+											<option label="${turKodDTO.turAd }" value="${turKodDTO.turKod }"> ${turKodDTO.turAd } </option>
 										</c:forEach>
 			</select> </td> </tr>
 		
@@ -96,38 +106,24 @@
 		</table>
 		</form>
 		
-		 <%
-			Date bugun = new Date();
-			SimpleDateFormat sdff = new SimpleDateFormat("yyyy.MM.dd");
-			String gunlukTarih = sdff.format(bugun);
-			request.setAttribute("bugun", gunlukTarih);
-		%><br> 
+</div>
+	<div class="clearfix"></div>
+		<div  class="col-lg-8">
 
-		<myTagFiles:GiderRaporu silAktif="1">
-			<c:if test="${param.bas_tar ==null}">
-									${bugun} - ${bugun}
-									
-									</c:if>
+			<myTagFiles:GiderRaporu silAktif="1">
+				<c:if test="${param.bas_tar ==null}">	${bugun} - ${bugun}		</c:if>
 					${param.bas_tar} - ${param.bit_tar}
-		</myTagFiles:GiderRaporu>
+			</myTagFiles:GiderRaporu>
 		
-		<br>
-		<myTagFiles:GiderOdemeSeklineGoreRApor>
+		</div>
 		
+				
+		<div  class="col-lg-4">
+				<myTagFiles:GiderGiderTuruRapor>
+				</myTagFiles:GiderGiderTuruRapor>
 		
-		</myTagFiles:GiderOdemeSeklineGoreRApor>
+		</div>
 		
-		<br>
-
-		<myTagFiles:GiderGiderTuruRapor>
-		
-		</myTagFiles:GiderGiderTuruRapor>
-		</td>
-		
-		
-	</tr>
-	
-</table>
 
 </body>
 </html>

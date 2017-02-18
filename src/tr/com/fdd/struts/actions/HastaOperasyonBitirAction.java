@@ -24,21 +24,26 @@ import tr.com.fdd.struts.form.IslemForm;
 import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
 
-public class HastaOperasyonBitirAction extends Action {
+public class HastaOperasyonBitirAction extends GenericAction {
 
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward  executeCode(Session sess, Connection connection,
+			ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, Transaction trans) {
 		
-		Session sess= null;
 		Transaction tran=null;		
 	
 		try{
 			String islemId=	request.getParameter("id");
 			String hastaId=	request.getParameter("hastaId");
 			String opBitTarihi= request.getParameter("tarihStr");
-			Date date=  Commons.convertStringToDate(opBitTarihi);
+			
+			Date date= null;
+			
+			if(opBitTarihi==null)
+				date= new Date();
+			else
+				date=  Commons.convertStringToDate(opBitTarihi);
 			
 			
 			int id=Integer.parseInt(islemId);	
@@ -49,7 +54,6 @@ public class HastaOperasyonBitirAction extends Action {
 			
 			BeanUtils.copyProperties(islemDto, islemForm );	
 			
-			sess=GenericAction.getHibernateSession();
 			tran = sess.beginTransaction();
 			Query query = sess.createQuery("from tr.com.fdd.dto.TIslemDTO  " +
 					"p where p.id = :var");
@@ -62,23 +66,23 @@ public class HastaOperasyonBitirAction extends Action {
 	            
 	        request.setAttribute("warn", GUIMessages.OPERASYON_BITIRILDI);
 	        
+	        Commons.refreshSelectedHasta(request, connection, result.getHastaId());
+	        
 	       
-	        /**
-	         * operasyon bitirildiginde tekrar sayfada verilerin goruntulenmesi icin eklendi
-	         */
-	        SQLUtils sqlUtils=  new SQLUtils();
-			
-	        Connection conn= SQLUtils.getMySqlConneciton();
-			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
-			THastaDTO hasta = sqlUtils.getHasta(
-					new Integer(hastaId), conn, subeId.intValue());
-			
-			request.setAttribute("hasta", hasta);
-			
-			List<TIslemDTO> hastaOperasyonListesi = sqlUtils
-					.getHastaOperasyonOdemeListesi(hasta.getId(), conn);
-			request.setAttribute("hastaOperasyonListesi",
-					hastaOperasyonListesi);
+//	        /**
+//	         * operasyon bitirildiginde tekrar sayfada verilerin goruntulenmesi icin eklendi
+//	         */
+//	        SQLUtils sqlUtils=  new SQLUtils();
+//			
+//	        Connection conn= SQLUtils.getMySqlConneciton();
+//			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
+//			THastaDTO hasta = sqlUtils.getHasta(new Integer(hastaId), conn, subeId.intValue());
+//			
+//			request.setAttribute("hasta", hasta);
+//			
+//			List<TIslemDTO> hastaOperasyonListesi = sqlUtils
+//					.getHastaOperasyonOdemeListesi(hasta.getId(), conn);
+//			request.setAttribute("hastaOperasyonListesi",		hastaOperasyonListesi);
 	        
 	        return mapping.findForward("success");
 			

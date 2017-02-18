@@ -1,5 +1,6 @@
 package tr.com.fdd.struts.actions;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -98,7 +99,7 @@ public class LaboratuvarRandevuVerAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+			request.setAttribute("warn", "Kayï¿½t Silme ï¿½ï¿½leminde Hata Oluï¿½tu.");
 			return mapping.findForward("exception");
 		} finally {
 			if (sess != null && sess.isOpen())
@@ -113,7 +114,7 @@ public class LaboratuvarRandevuVerAction extends Action {
 	}
 
 	private void updateProvaDate(Session sess, String  dateStr,
-			int id, int provaTip) throws HibernateException {
+			int id, int provaTip) throws HibernateException, ParseException {
 		Query queryProva=sess.createQuery(" from  tr.com.fdd.dto.TLabrotuvarProvaDTO as a where a.labIslemId = :p_lab_islem_id and a.provaTip = :p_prova_tip ");
 		queryProva.setInteger("p_lab_islem_id", id);
 		queryProva.setInteger("p_prova_tip",provaTip);

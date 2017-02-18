@@ -12,6 +12,8 @@
 		<property name="menuAd" column="menu_ad" type="java.lang.String" />
 		<property name="menuPage" column="menu_page" type="java.lang.String" />		
 		<property name="durum" column="durum" type="java.lang.String" />
+		<property name="dataToggle" column="data_toggle" type="java.lang.String" />
+		<property name="dataTarget" column="data_target" type="java.lang.String" />
 		
 
 	</class>

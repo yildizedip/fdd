@@ -149,7 +149,11 @@ request.setAttribute("hasta",hasta);
 						</c:forEach>
 						
 					</select>
-					<input type="hidden" name="islemId" value="${operasyon.id}"><input class="inputTextfield" name="islemTarihi" disabled="disabled" id="islemTarihi" value="${operasyon.islemTarihiStr}">
+					<input type="hidden" name="islemId" value="${operasyon.id}">
+					
+					
+					
+					<input class="inputTextfield" name="islemTarihi" disabled="disabled" id="islemTarihi" value="${operasyon.islemTarihiStr}">
 				</td> 
 
 			</tr>

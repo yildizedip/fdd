@@ -1,5 +1,7 @@
 package tr.com.fdd.struts.actions;
 
+import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,19 +16,20 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.THastaOdemeDTO;
+import tr.com.fdd.utils.Commons;
+import tr.com.fdd.utils.GUIMessages;
 
-public class OdemeSilAction extends Action {
+public class OdemeSilAction extends GenericAction {
 
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward executeCode(Session sess, Connection connection,
+			ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, Transaction trans){
+		
 		String odemeId=	request.getParameter("id");
 		int id= Integer.parseInt(odemeId);
-		Session sess= null;
 		Transaction tran=null;
 		try{
-			sess=GenericAction.getHibernateSession();
 			tran = sess.beginTransaction();
 					
 			
@@ -36,8 +39,9 @@ public class OdemeSilAction extends Action {
 			result.setDurumu("P");
 	        
 			tran.commit();	    
-	            
-	        request.setAttribute("warn", id+ "nolu kayit  silinmistir.");
+	          Commons.refreshSelectedHasta(request, connection, result.getHastaId());
+			
+	        request.setAttribute("warn", GUIMessages.ISLEM_BASARILI);
 	        
 	        return mapping.findForward("success");
 			
@@ -50,7 +54,7 @@ public class OdemeSilAction extends Action {
 					
 					e1.printStackTrace();
 				}
-				request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+				request.setAttribute("warn", "Kayï¿½t Silme ï¿½ï¿½leminde Hata Oluï¿½tu.");
 				return mapping.findForward("exception");
 		} finally {
 			if (sess != null && sess.isOpen())

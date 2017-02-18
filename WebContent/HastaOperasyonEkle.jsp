@@ -267,7 +267,10 @@ window.onload = function() {
 	
 		<tr>
 					<td> Diþ Hekimi :</td>
-					<td colspan="2"> <select size="1" name="doktorId" class="giderTuru">
+					<td colspan="2"> 
+					
+					
+					<select size="1" name="doktorId" class="giderTuru">
 						<option label="Diþ Hekimi Seçiniz.." value="-1"></option>
 
 						<c:forEach items="${doktorList}" var="doktorDTO">
@@ -277,10 +280,13 @@ window.onload = function() {
 								selected="selected"
 								</c:if>  
 								>
-								
+								${doktorDTO.dAd } ${doktorDTO.dSoyad }
 								</option>
 						</c:forEach>
-					</select> <input type="hidden" name="hastaId" value="${hasta.id }">
+					</select> 
+					
+					
+					<input type="hidden" name="hastaId" value="${hasta.id }">
 					<input type="hidden" name="iliskiliIslemId" value="${iliskiliIslemId}">
 
 					</td>
@@ -288,7 +294,7 @@ window.onload = function() {
 				</tr>
 <tr>
 					<td>Operasyon Tarihi:</td>
-					<td colspan="2"><input class="inputTextfield" name="islemTarihiStr" id="islemTarihiStr" readonly="readonly" <c:if test="${operasyonEklemeTarihi ne null}">
+					<td colspan="2"><input class="inputTextfield" name="islemTarihiStr" id="islemTarihiStr" readonly="readonly" <c:if test="${operasyonEklemeTarihi ne null}" >
 								
 							value="${operasyonEklemeTarihi}"
 								
@@ -303,7 +309,7 @@ window.onload = function() {
 						<option label="Operasyon Seçiniz.." value="-1"></option>
 
 						<c:forEach items="${islemTurList}" var="islem">
-							<option label="${islem.ad}" value="${islem.id}" <c:if test="${iliskiliIslemId ne null && islem.id==43}"> selected="selected"   </c:if>=""></option>
+							<option label="${islem.ad}" value="${islem.id}" <c:if test="${iliskiliIslemId ne null && islem.id==43}"> selected="selected"   </c:if>=""> ${islem.ad}</option>
 						</c:forEach>
 					</select></td>
 
@@ -314,10 +320,10 @@ window.onload = function() {
 					<td style="width: 530px;">
 					
 					<select size="1" name="disAdet" id="disAdet" class="giderTuru">
-						<option label="Adet Seçiniz.." value="-1"></option>
+						<option label="Adet Seçiniz.." value="-1"> Adet Seçiniz.. </option>
 
 						<c:forEach items="${disSayisiList}" var="dis">
-							<option label="${dis}" value="${dis}"></option>
+							<option label="${dis}" value="${dis}" > ${dis} </option>
 						</c:forEach>
 					</select>   </td>
 
@@ -357,7 +363,9 @@ window.onload = function() {
 
 		<div id="implantOperasyonEkleForImplant"
 			class="implantOperasyonEkleForImplant"><a
-			href="javascript: history.go(-1)">Geri</a> <c:if
+			href="javascript: history.go(-1)">Geri</a> 
+			
+			<c:if
 			test="${hasta.id ne null }">
 			<form name="operasyonEkleImplantForm" action="HastaOperasyonEkle.do"
 				method="post" onsubmit="return validateFormImplant()">
@@ -374,7 +382,7 @@ window.onload = function() {
 						<c:forEach items="${islemTurList}" var="islem">
 
 							<option label="${islem.ad}" value="${islem.id}"
-								<c:if test="${islem.ad eq 'ÝMPLANT'}"> selected="selected"   </c:if> />
+								<c:if test="${islem.ad eq 'ÝMPLANT'}"> selected="selected"   </c:if> > ${islem.ad}  </option>
 
 						</c:forEach>
 					</select> <input type="hidden" name="hastaId" value="${hasta.id }">
@@ -383,12 +391,7 @@ window.onload = function() {
 
 				</tr>
 
-
-
-
-				
-
-	<tr>
+			<tr>
 					<td>Adet</td>
 					<td colspan="2">
 					<select size="1" name="disAdet"
@@ -396,7 +399,7 @@ window.onload = function() {
 						<option label="Adet Seçiniz.." value="-1" />
 
 						<c:forEach items="${disSayisiList}" var="dis">
-							<option label="${dis}" value="${dis}" />
+							<option label="${dis}" value="${dis}"> ${dis}</option>
 						</c:forEach>
 					</select> 
 					</td>
@@ -404,23 +407,30 @@ window.onload = function() {
 				</tr>
 				<tr>
 					<td>Doktor Cerrahi</td>
-					<td><select size="1" name="implantCerrahId" class="giderTuru">
+					<td>
+					
+					<select size="1" name="implantCerrahId" class="giderTuru">
 						<option label="Doktor Seçiniz.." value="-1"></option>
 
 						<c:forEach items="${doktorList}" var="doktorDTO">
 							<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } "
-								value="${doktorDTO.dId }"></option>
+								value="${doktorDTO.dId }"> ${doktorDTO.dAd } ${doktorDTO.dSoyad }   </option>
 						</c:forEach>
-					</select></td>
+					</select>
+					
+					
+					</td>
 				</tr>
 				<tr>
 					<td>Doktor Protez</td>
-					<td><select size="1" name="implantBaglayanDoktorId" class="giderTuru">
+					<td>
+					
+					<select size="1" name="implantBaglayanDoktorId" class="giderTuru">
 						<option label="Doktor Seçiniz.." value="-1"></option>
 
 						<c:forEach items="${doktorList}" var="doktorDTO">
 							<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } "
-								value="${doktorDTO.dId }"></option>
+								value="${doktorDTO.dId }">  ${doktorDTO.dAd } ${doktorDTO.dSoyad } </option>
 						</c:forEach>
 					</select></td>
 				</tr>

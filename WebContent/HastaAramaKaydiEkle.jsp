@@ -80,9 +80,6 @@ var basTarihi;
 										});
 
 					});
-					
-					
-					
 </script>
 
 </head>
@@ -184,11 +181,8 @@ var basTarihi;
 					<td class="helpBod" style="font-size: 9px " width="80px">${islem.islemTarihi}</td>
 					
 					<td class="helpBod">					
-					<html:link href="OperasyonKesinlesmemisAramaKaydiGir.jsp?islemId=${islem.id}&hastaId=${islem.hastaId}&subeId=${subeId}"> Arama Kaydý Gir </html:link>  
+						<html:link href="OperasyonKesinlesmemisAramaKaydiGir.jsp?islemId=${islem.id}&hastaId=${islem.hastaId}&subeId=${subeId}"> Arama Kaydý Gir </html:link>  
 					</td>
-					
-					
-					
 				</tr>
 
 			</c:forEach>

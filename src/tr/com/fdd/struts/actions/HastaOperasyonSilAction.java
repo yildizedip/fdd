@@ -1,5 +1,7 @@
 package tr.com.fdd.struts.actions;
 
+import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,19 +16,20 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.utils.Commons;
+import tr.com.fdd.utils.GUIMessages;
+import tr.com.fdd.utils.GenelDegiskenler;
 
-public class HastaOperasyonSilAction extends Action {
+public class HastaOperasyonSilAction extends GenericAction {
+
 
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	protected ActionForward executeCode(Session sess, Connection connection, ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, Transaction tran) {
 		
-		Session sess = null;
-		Transaction tran = null;
+		//Transaction tran = null;
 		try {
 			
-			sess = GenericAction.getHibernateSession();
 			tran = sess.beginTransaction();
 
 			String operasyonId = request.getParameter("id");
@@ -38,8 +41,10 @@ public class HastaOperasyonSilAction extends Action {
 			result.setDurumu("P");
 
 			tran.commit();
+			
+			Commons.refreshSelectedHasta(request, connection, result.getHastaId());
 
-			request.setAttribute("warn", id + "nolu kayit  silinmistir.");
+			request.setAttribute("warn", GUIMessages.ISLEM_BASARILI);
 
 			return mapping.findForward("success");
 
@@ -51,7 +56,7 @@ public class HastaOperasyonSilAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+			request.setAttribute("warn", GenelDegiskenler.FormMessages.ERROR);
 			return mapping.findForward("exception");
 		} finally {
 			if (sess != null && sess.isOpen())

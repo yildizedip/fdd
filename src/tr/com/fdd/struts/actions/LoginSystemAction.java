@@ -66,14 +66,18 @@ public class LoginSystemAction extends Action {
 			session.beginTransaction();
 
 			/**
+			 * 
 			 * sistemde kullanilacak genel bilgiler aliniyor.
+			 * 
 			 */
 
 			List<TTurKodDTO> odemeSekliList = getOdemeSekli(session);
-			List<TDoktorDTO> doktorList = sqlUtils.getDoktorList(connection,Integer.parseInt(sube_Id));
+			List<TDoktorDTO> doktorList = sqlUtils.getDoktorList(connection,Integer.parseInt(sube_Id), false);
+			
 			List<?> giderTurKodList = sqlUtils.getGiderTurList(connection,Integer.parseInt(sube_Id));
 			List<?> gelirTurKodList = gelirTurListesi(session);
 			List<?> islemTurList = islemTurList(session);
+			List<?> hastaList = sqlUtils.getHastaList(connection, Integer.parseInt(sube_Id),null);
 
 			GenelDegiskenler deg = new GenelDegiskenler();
 
@@ -91,9 +95,11 @@ public class LoginSystemAction extends Action {
 			sessionInf.setAttribute("islemTurList", islemTurList);
 			sessionInf.setAttribute("saatler", deg.getHours());
 			sessionInf.setAttribute("dakikalar", deg.getDakikalar(5));
+			sessionInf.setAttribute("hastaList", hastaList);
 
 			/**
 			 * gunluk tarih sessiona ekleniyor.
+			 * 
 			 */
 			Date bugun = new Date();
 			SimpleDateFormat sdff = new SimpleDateFormat("yyyy.MM.dd");
@@ -124,6 +130,17 @@ public class LoginSystemAction extends Action {
 			sessionInf.setAttribute("adetList", getAdetSayisiList());
 		//	sessionInf.setAttribute("depoList", getDepoList(session));
 		//	sessionInf.setAttribute("depoUrunTipList", getDepoUrunTipList(session));
+			
+//			List<TDoktorDTO> doktorList4Randevu = sqlUtils.getDoktorList(connection, subeId, true);
+//			
+//			if (doktorList4Randevu.size() == 0) {
+//				request.setAttribute("noContent", "Kayıt Bulunamadı");
+//
+//			} else {
+//				request.setAttribute("doktorList4Randevu", doktorList4Randevu);
+//			}
+//			
+//			
 
 			return mapping.findForward("success");
 			// }

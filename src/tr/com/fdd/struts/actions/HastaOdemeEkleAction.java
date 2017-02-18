@@ -26,14 +26,15 @@ import tr.com.fdd.struts.form.HastaOdemeForm;
 import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
 
-public class HastaOdemeEkleAction extends Action {
+public class HastaOdemeEkleAction extends GenericAction {
+	
+	
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward executeCode(Session session, Connection conn,
+			ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, Transaction trans)
+		 {
 		Transaction tran = null;
-		Session session = null;
-		Connection conn = null;
 	
 		try {
 		
@@ -54,23 +55,24 @@ public class HastaOdemeEkleAction extends Action {
 			BeanUtils.copyProperties(tHastaOdemeDto, hastaOdemeForm);
 			if(tHastaOdemeDto.getDoktorId()!=0 && tHastaOdemeDto.getHastaId()!=0)
 			{
-			session = GenericAction.getHibernateSession();
-			tran = session.beginTransaction();
-			
-			session.save(tHastaOdemeDto);
-			tran.commit();
-			request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);
+					tran = session.beginTransaction();
+					
+					session.save(tHastaOdemeDto);
+					tran.commit();
+					request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);
+				
+				//	List<TIslemDTO> hastaOperasyonListesi = sqlUtils.getHastaOperasyonListesi(tHastaOdemeDto.getHastaId(),0, conn);
 		
-		//	List<TIslemDTO> hastaOperasyonListesi = sqlUtils.getHastaOperasyonListesi(tHastaOdemeDto.getHastaId(),0, conn);
-
-		//	request.setAttribute("hastaOperasyonListesi", hastaOperasyonListesi);
-			
-			/**
-			 * odeme eklnedikten sonra tekrar odeme ekleme sayfasina yonlendiriliyor..
-			 */
-			setHastaOperasyonBilgileri(request, hastaOdemeForm,conn);	
-			
-			return mapping.findForward("success");
+				//	request.setAttribute("hastaOperasyonListesi", hastaOperasyonListesi);
+					
+					/**
+					 * odeme eklnedikten sonra tekrar odeme ekleme sayfasina yonlendiriliyor..
+					 */
+				//	setHastaOperasyonBilgileri(request, hastaOdemeForm,conn);	
+					
+					Commons.refreshSelectedHasta(request, conn, tHastaOdemeDto.getHastaId());
+					
+					return mapping.findForward("success");
 			}
 			else 
 			{
@@ -96,7 +98,7 @@ public class HastaOdemeEkleAction extends Action {
 					request.setAttribute("exception", e);
 					return mapping.findForward("exception");
 				}
-			request.setAttribute("warn", "Kayýt hatalý");
+			request.setAttribute("warn", "Kayï¿½t hatalï¿½");
 			return mapping.findForward("failure");
 		} finally {
 			try {

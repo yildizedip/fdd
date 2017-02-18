@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+GERÇEKLEÞTÝRÝLEN ÝÞLEMDE HATA OLUÞTU !!
 GELEN HATA :
 <br>
 ${exception}

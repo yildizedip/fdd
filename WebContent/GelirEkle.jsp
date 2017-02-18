@@ -214,7 +214,7 @@ value="${hastaOperasyonListesi['0'].islemTip.ad }"/></td>
 
 
 
-				<form name="odemeEkleForm" action="hastaOdemeEkle.do" method="post"
+			<form name="odemeEkleForm" action="hastaOdemeEkle.do" method="post"
 					onsubmit="return validateForm()">
 				<table class="sorgulama">
 					<tr>
@@ -227,10 +227,18 @@ value="${hastaOperasyonListesi['0'].islemTip.ad }"/></td>
 							id="odemeTarihiStr" 
 							<%if (request.getSession().getAttribute("tarihStr") == null) {%>
 							value="${param.tarihStr}" <%} else {%>
-							value="${tarihStr}" <%}%>><input
+							value="${tarihStr}" <%}%>>
+							
+							
+							
+							<input
 							type="hidden" name="islemId"
 							value="${hastaOperasyonListesi['0'].id}"> <input
-							type="hidden" name="hastaId" value="${hasta.id }" /> <input
+							type="hidden" name="hastaId" value="${hasta.id }" /> 
+							
+							
+							
+							<input
 							type="hidden" name="doktorId"
 							value="${hastaOperasyonListesi['0'].doktorId}" />
 							

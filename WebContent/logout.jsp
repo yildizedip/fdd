@@ -1,18 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-9"
+    pageEncoding="ISO-8859-9"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
 <title>Insert title here</title>
 </head>
 <body>
-
 <%
 session.isNew();	
 session.invalidate();
-	
 %>
-<jsp:forward page="login4.jsp"></jsp:forward> 
+<h3> Oturumunuz Sona Ermiþtir.. Lütfen Tekrar Giriþ Yapýnýz..</h3> 
+
+
+
+
+
 </body>
 </html>

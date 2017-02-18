@@ -13,6 +13,7 @@
 		<property name="dBrans" column="d_brans" type="java.lang.String" />
 		<property name="dMemberId" column="d_member_id" type="int" />
 		<property name="dDurum" column="d_durum" type="java.lang.String" />
+		<property name="dAktif" column="d_aktif" type="java.lang.String" />
 
 	</class>
 </hibernate-mapping>

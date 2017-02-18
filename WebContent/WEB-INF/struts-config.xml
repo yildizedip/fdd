@@ -18,19 +18,12 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 		<form-bean name="anketForm" type="tr.com.fdd.struts.form.AnketForm"></form-bean>
 		<form-bean name="siparisUrunForm" type="tr.com.fdd.struts.form.DepoSiparisUrunForm"></form-bean>
 		<form-bean name="borcOdemeTakipForm" type="tr.com.fdd.struts.form.IslemBorcOdemeTakipForm"></form-bean>
+		<form-bean name="hastaKartiForm" type="tr.com.fdd.struts.form.HastaKartiForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
 	
-		<action path="/randevu" scope="request" name="randevuForm"
-			input="/randevu.jsp" type="tr.com.fdd.struts.actions.RandevuAction"
-			validate="true">
-
-			<forward name="success" path="/randevu.jsp"></forward>
-			<forward name="noContent" path="/randevu.jsp"></forward>
-			<forward name="exception" path="/randevu.jsp"></forward>
-		</action>
-			
+		
 
 		<action path="/getGelirGiderTur" scope="request" name="gelirGiderForm"
 			input="/addGider.jsp" type="tr.com.fdd.struts.actions.GetGiderGelirTurleriAction"
@@ -168,6 +161,16 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 
 		</action>
 		
+		<action path="/hastaBasicSorgula" scope="request" name="hastaForm"
+			input="/HastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaBasicSorgulamaAction"
+			validate="true">
+
+			<forward name="success" path="/randevu.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="noContent" path="/randevu.jsp"></forward>
+
+		</action>
+		
 		<action path="/hastaSorgulaForHastaAnket" scope="request" name="hastaForm"
 			input="/HastaAnketKaydiHastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaSorgulamaForAnketAction"
 			validate="true">
@@ -175,34 +178,13 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			<forward name="success" path="/HastaAnketKaydiHastaSorgula.jsp"></forward>
 			<forward name="failure" path="/exception.jsp"></forward>
 			<forward name="noContent" path="/HastaAnketKaydiHastaSorgula.jsp"></forward>
-
-
 		</action>
 		
-		
-		<action path="/hastaSorgulaForRandevu" scope="request" name="hastaForm"
-			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaSorgulamaAction"
-			validate="true">
-
-
-			<forward name="guncelle" path="/HastaIslemleri.jsp?islem=3"></forward>
-			<forward name="randevuEkle" path="/HastaIslemleri.jsp?islem=1"></forward>
-			<forward name="gelirEkle" path="/HastaIslemleri.jsp?islem=2"></forward>
-			<forward name="operasyonEkle" path="/HastaIslemleri.jsp?islem=4"></forward>
-			<forward name="operasyonListesi" path="/HastaIslemleri.jsp?islem=5"></forward>
-			<forward name="gelirGoruntule" path="/HastaIslemleri.jsp?islem=6"></forward>
-			<forward name="operasyonBitir" path="/HastaIslemleri.jsp?islem=7"></forward>
-			<forward name="labrotuvarEkle" path="/HastaIslemleri.jsp?islem=8"></forward>
-			
-			<forward name="failure" path="/exception.jsp"></forward>
-			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
-
-		</action>
-		<action path="/hastaEkle" scope="request" name="hastaForm"
+		<action path="/hastaEkle" scope="request" name="hastaKartiForm"
 			input="/HastaEkle.jsp" type="tr.com.fdd.struts.actions.HastaEkleAction"
 			validate="true">
 
-			<forward name="success" path="/HastaOperasyonEkle.jsp"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
 			<forward name="failure" path="/HastaEkle.jsp"></forward>
 			<forward name="exception" path="/exception.jsp"></forward>
 
@@ -212,7 +194,7 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			input="/HastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaSilAction"
 			validate="true">
 
-			<forward name="success" path="/HastaSorgula.jsp"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
 			<forward name="failure" path="/exception.jsp"></forward>
 
 		</action>
@@ -241,28 +223,7 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			input="/HastaGuncelle.jsp" type="tr.com.fdd.struts.actions.HastaGuncelleAction"
 			validate="true">
 
-			<forward name="success" path="/HastaSorgula.jsp"></forward>
-			<forward name="failure" path="/exception.jsp"></forward>
-
-		</action>
-
-
-		<action path="/HastaRandevuEkle" scope="request" name="hastaRandevuForm"
-			input="/HastaRandevuEkle.jsp" type="tr.com.fdd.struts.actions.HastaRandevuEkleAction"
-			validate="true">
-
-			<forward name="success" path="/HastaRandevuEkle.jsp"></forward>
-
-			<forward name="failure" path="/exception.jsp"></forward>
-
-		</action>
-
-		<action path="/hastaRandevuSorgula" scope="request" name="hastaRandevuForm"
-			input="/HastaRandevuSorgulama.jsp" type="tr.com.fdd.struts.actions.HastaRandevuSorgulamaAction"
-			validate="true">
-
-			<forward name="success" path="/HastaRandevuSorgulama.jsp"></forward>
-			<forward name="noContent" path="/HastaRandevuSorgulama.jsp"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
 			<forward name="failure" path="/exception.jsp"></forward>
 
 		</action>
@@ -270,8 +231,8 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 		<action path="/hastaOdemeEkle" scope="request" name="hastaOdemeForm"
 			input="/GelirEkle.jsp" type="tr.com.fdd.struts.actions.HastaOdemeEkleAction"
 			validate="true">
-			<forward name="success" path="/HastaOperasyonListesi.jsp?islem=2"></forward>
-			<forward name="noContent" path="/GelirEkle.jsp?islem=2"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
 			<forward name="failure" path="/exception.jsp"></forward>
 		</action>
 
@@ -292,13 +253,13 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			<forward name="failure" path="/exception.jsp"></forward>
 		</action>
 
-		<action path="/HastaOperasyonEkle" scope="request" name="islemForm"
+		<action path="/HastaOperasyonEkle" scope="request" name="hastaKartiForm"
 			input="/HastaOperasyonEkle.jsp" type="tr.com.fdd.struts.actions.HastaOperasyonEkleAction"
 			validate="true">
-			<forward name="success" path="/HastaOperasyonEkle.jsp"></forward>
-			<forward name="successKesinlesmedi" path="/HastaOperasyonEkle.jsp"></forward>
-			<forward name="noContent" path="/HastaOperasyonEkle.jsp"></forward>
-			<forward name="gotoImplantUstuProtezPage" path="/HastaOperasyonEkle.jsp"></forward>			
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="successKesinlesmedi" path="/HastaIslemleri.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
+			<forward name="gotoImplantUstuProtezPage" path="/HastaIslemleri.jsp"></forward>			
 			<forward name="failure" path="/exception.jsp"></forward>
 		</action>
 
@@ -329,8 +290,8 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 		<action path="/OperasyonSil" scope="request" name="islemForm"
 			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaOperasyonSilAction"
 			validate="true">
-			<forward name="success" path="/HastaIslemleri.jsp?islem=5"></forward>
-			<forward name="noContent" path="/HastaOperasyonListesi.jsp?islem=5"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
 			<forward name="failure" path="/exception.jsp"></forward>
 			
 			<forward name="exception" path="/exception.jsp"></forward>
@@ -339,8 +300,8 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 		<action path="/OperasyonGuncelle" scope="request" name="islemForm"
 			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaOperasyonGuncelleAction"
 			validate="true">
-			<forward name="success" path="/HastaOperasyonListesi.jsp"></forward>
-			<forward name="noContent" path="/HastaOperasyonListesi.jsp"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
 			<forward name="failure" path="/exception.jsp"></forward>
 			
 			<forward name="exception" path="/exception.jsp"></forward>
@@ -349,8 +310,8 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 		<action path="/OperasyonBitir" scope="request" name="islemForm"
 			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaOperasyonBitirAction"
 			validate="true">
-			<forward name="success" path="/HastaOperasyonListesi.jsp?islem=5"></forward>
-			<forward name="noContent" path="/HastaOperasyonBitir.jsp"></forward>
+			<forward name="success" path="//HastaIslemleri.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"> </forward>
 			<forward name="exception" path="/exception.jsp"></forward>
 		</action>
 
@@ -432,8 +393,8 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			input="/OperasyonuKesinlestir.jsp"
 			type="tr.com.fdd.struts.actions.OperasyonuKesinlestirAction"
 			validate="true">
-			<forward name="success" path="/Success.jsp"></forward>
-			<forward name="noContent" path="/Success.jsp"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="noContent" path="//HastaIslemleri.jsp"></forward>
 			<forward name="exception" path="/exception.jsp"></forward>
 		</action>
 		
@@ -507,7 +468,7 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
 			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
 			<forward name="exception" path="/KullaniciEkleGuncelleSil.jsp"></forward>
-			<forward name="goToLogoutPage" path="/logout.jsp"></forward>
+			<forward name="goToLogoutPage" path="/redirect_div.jsp"></forward>
 		</action>
 		
 		<action path="/KullaniciSubeGetir" scope="request" name="loginForm"
@@ -704,11 +665,11 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 		</action>
 		
 		<action path="/aramaKaydiEkle" scope="request" name="aramaForm"
-			input="/OperasyonKesinlesmemisAramaKaydiGir.jsp"
+			input="/HastaIslemleri.jsp"
 			type="tr.com.fdd.struts.actions.AramaKaydiEkleAction"
 			validate="true">
-			<forward name="success" path="/OperasyonuKesinlesmemisHastaListesi.jsp?tip=3"></forward>
-			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
 			<forward name="exception" path="/exception.jsp"></forward>
 		</action>
 			
@@ -740,11 +701,11 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 		</action>
 		
 		<action path="/anketEkle" scope="request" name="anketForm"
-			input="/HastaAnketKaydiGir.jsp"
+			input="/HastaIslemleri.jsp"
 			type="tr.com.fdd.struts.actions.AnketEkleAction"
 			validate="true">
-			<forward name="success" path="/HastaAnketKaydiHastaSorgula.jsp"></forward>
-			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
 			<forward name="exception" path="/exception.jsp"></forward>
 		</action>
 		<action path="/hastaAnketList" scope="request" name="hastaForm"
@@ -785,8 +746,8 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			input="/HastaBazliToplamOdemeListesi.jsp"
 			type="tr.com.fdd.struts.actions.BorcOdemeTarihEkleAction"
 			validate="true">
-			<forward name="success" path="/HastaBorcTarihleriListesi.jsp"></forward>
-			<forward name="noContent" path="/HastaBazliToplamOdemeListesi.jsp?tip=13"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
 			<forward name="exception" path="/exception.jsp"></forward>
 		</action>
 		
@@ -808,8 +769,79 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			<forward name="exception" path="/exception.jsp"></forward>
 		</action>
 		
+		<action path="/HastaRandevuEkle" scope="request" name="hastaRandevuForm"
+			input="/randevu.jsp" type="tr.com.fdd.struts.actions.HastaRandevuEkleAction"
+			validate="true">
+
+			<forward name="success" path="/randevu.jsp"></forward>
+			<forward name="failure" path="/randevu.jsp"></forward>
+
+		</action>
+
+		<action path="/hastaRandevuSorgula" scope="request" name="hastaRandevuForm"
+			input="/HastaRandevuSorgulama.jsp" type="tr.com.fdd.struts.actions.HastaRandevuSorgulamaAction"
+			validate="true">
+
+			<forward name="success" path="/randevu.jsp"></forward>
+			<forward name="noContent" path="/randevu.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+
+		</action>
+		
+		
+		<action path="/hastaGunlukRandevuSorgula" scope="request" name="hastaRandevuForm"
+			input="/randevuGunluk.jsp" type="tr.com.fdd.struts.actions.HastaRandevuSorgulamaGunlukAction"
+			validate="true">
+
+			<forward name="success" path="/randevuGunluk.jsp"></forward>
+			<forward name="noContent" path="/randevuGunluk.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+
+		</action>
+		
+		<action path="/randevu" scope="request" name="hastaRandevuForm"
+			input="/randevu.jsp" type="tr.com.fdd.struts.actions.RandevuAction"
+			validate="true">
+
+			<forward name="success" path="/randevu.jsp"></forward>
+			<forward name="noContent" path="/randevu.jsp"></forward>
+			<forward name="exception" path="/randevu.jsp"></forward>
+		</action>
+		
+		<action path="/hastaSorgulaForRandevu" scope="request" name="hastaForm"
+			input="/HastaIslemleri.jsp" type="tr.com.fdd.struts.actions.HastaSorgulamaAction"
+			validate="true">
+
+			<forward name="guncelle" path="/HastaIslemleri.jsp?islem=3"></forward>
+			<forward name="randevuEkle" path="/HastaIslemleri.jsp?islem=1"></forward>
+			<forward name="randevu" path="/randevu.jsp"></forward>
+			<forward name="gelirEkle" path="/HastaIslemleri.jsp?islem=2"></forward>
+			<forward name="operasyonEkle" path="/HastaIslemleri.jsp?islem=4"></forward>
+			<forward name="operasyonListesi" path="/HastaIslemleri.jsp?islem=5"></forward>
+			<forward name="gelirGoruntule" path="/HastaIslemleri.jsp?islem=6"></forward>
+			<forward name="operasyonBitir" path="/HastaIslemleri.jsp?islem=7"></forward>
+			<forward name="labrotuvarEkle" path="/HastaIslemleri.jsp?islem=8"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+
+		</action>
+		
+		<action path="/hastaRandevuGuncelle" scope="request" name="hastaRandevuForm"
+			input="/randevu.jsp"
+			type="tr.com.fdd.struts.actions.HastaRandevuGuncelleSilAction"
+			validate="true">
+			<forward name="success" path="/randevu.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
 	</action-mappings>
 
 
 	<plug-in className="tr.com.fdd.struts.plugin.StartUpPlugin"></plug-in>
+	
+	<plug-in className="org.apache.struts.tiles.TilesPlugin" >
+		<set-property property="definitions-config"	value="/WEB-INF/tiles.xml"/>
+	</plug-in>
 </struts-config>

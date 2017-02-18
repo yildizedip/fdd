@@ -1,68 +1,82 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
-"http://www.w3.org/TR/html4/loose.dtd">
 <%@tag import="tr.com.fdd.dto.TOdemeSekliDTO"%>
 <%@tag import="tr.com.fdd.dto.TTurKodDTO"%>
 <%@tag import="java.util.List"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
-<title>odemeSekli</title>
-<link rel="stylesheet" href="css/edip.css" type="text/css" />
 <%@ tag body-content="scriptless"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="silAktif" required="false" rtexprvalue="true"%>
 <%@ attribute name="implantSayfasimi" required="false" rtexprvalue="true"%>
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/epoch_classes.js"></script>
+<script src="/script/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet"	href="/styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="/styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="/styles/main.css">
+<link rel="stylesheet" href="/css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="/css/edip.css" type="text/css" />
+
 </head>
 <body>
 <c:if test="${not empty gelirList}">
-	<label class="fonte"> <jsp:doBody /> tarihleri arasinda ; <br>
-	</label>
 	
-	<table class="sofT" >
-	<tr> <td class="helpHed" colspan="10" > Gelir Listesi </td> </tr> 
+	<table class="table table-bordered" >
+	<tr> <td colspan="11" align="center" class="bg-warning" > Gelir Listesi </td> </tr> 
 		<tr>
-			<td class="helpHed"></td>
-			<td class="helpHed">Tarih</td>
-			<td class="helpHed">Ptk. No</td>
-			<td class="helpHed">Ad Soyad</td>
-			<td class="helpHed">Operasyon</td>
-			<td class="helpHed">Adet</td>
-			<td class="helpHed">Doktor</td>			
-			<td class="helpHed">Ödeme</td>
+			<td></td>
+			<td >Tarih</td>
+			<td >Ptk. No</td>
+			<td >Ad Soyad</td>
+			<td >Tedavi</td>
+			<td >Adet</td>
+			<td >Dis No</td>
+			<td >Doktor</td>			
+			<td >Ödeme</td>
 				<c:if test="${implantSayfasimi ne 'evet' }">
 				
-				<td class="helpHed">Miktar</td>
+				<td >Miktar</td>
 				
 				</c:if>
 			
 			
 
-			<td class="helpHed">Aciklama</td>
+			<td >Aciklama</td>
 			<c:if test="${silAktif ne '0' }">
-				<td class="helpHed"></td>
+				<td ></td>
 			</c:if>
 			
 			<c:if test="${implantSayfasimi eq 'evet' }">
 				
-				<td class="helpHed"></td>
+				<td ></td>
 				
 				</c:if>
 
 		</tr>
 		<c:forEach items="${gelirList}" var="gelir" varStatus="count">
 			<tr>
-				<td class="helpBodSmall">${count.count}</td>
-				<td class="helpBodSmall" style="width: 96px; ">${gelir.odemeTarihiStr}</td>
-				<td class="helpBodSmall">${gelir.hasta.protokolNo}</td>
-				<td class="helpBodSmall">${gelir.hasta.ad} ${gelir.hasta.soyad}</td>
+				<td>${count.count}</td>
+				<td>${gelir.odemeTarihiStr}</td>
+				<td>${gelir.hasta.protokolNo}</td>
+				<td>${gelir.hasta.ad} ${gelir.hasta.soyad}</td>
 				
-				<td class="helpBodSmall"> ${gelir.islemTip.ad}  </td>
-				<td class="helpBodSmall"> ${gelir.islem.disAdet}  </td>
-				<td class="helpBodSmall">${gelir.doktor.dAd}   ${gelir.doktor.dSoyad}  </td>
+				<td> ${gelir.islemTip.ad}  </td>
+				<td> ${gelir.islem.disAdet}  </td>
+				<td> ${gelir.islem.disNo}  </td>
+				<td>${gelir.doktor.dAd}   ${gelir.doktor.dSoyad}  </td>
 			
-				<td class="helpBodSmall">
+				<td>
 				
 				<c:choose>
 					<c:when test="${gelir.odemeTuru eq 2}">
@@ -75,13 +89,13 @@
 				
 				<c:if test="${implantSayfasimi ne 'evet' }">
 				
-				<td class="helpBodSmall">${gelir.miktar}</td>
+				<td>${gelir.miktar}</td>
 				
 				</c:if>
-				<td class="helpBodSmall">${gelir.aciklama}</td>
+				<td >${gelir.aciklama}</td>
 				<c:if test="${silAktif ne '0' }">
 					<c:if test="${sessionScope.sessionMember[0].kuTur ne '3' }">
-						<td class="helpBod"><html:link
+						<td ><html:link
 							action="/SilGelir?id=${gelir.id}"> Sil </html:link></td>
 					</c:if>
 
@@ -89,7 +103,7 @@
 				
 				<c:if test="${implantSayfasimi eq 'evet' }">
 				
-				<td class="helpBodSmall"></td>
+				<td ></td>
 				
 				</c:if>
 			</tr>
@@ -98,9 +112,9 @@
 		
 			<c:if test="${implantSayfasimi ne 'evet' }">
 				
-				<tr> <td colspan="8" class="helpBod" style="font-size: 13px; color: blue; " >
+				<tr> <td colspan="8"  style="font-size: 13px; color: blue; " >
 	
-		 TOPLAM MIKTAR </td> <td class="helpBod" style="font-size: 13px; color: blue; " > ${toplamGelir} </td> <td class="helpBod"></td> </tr>
+		 TOPLAM MIKTAR </td> <td  style="font-size: 13px; color: blue; " > ${toplamGelir} </td> <td ></td> </tr>
 
 				
 				</c:if>

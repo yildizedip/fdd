@@ -2,6 +2,7 @@ package tr.com.fdd.struts.actions;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,17 +22,17 @@ import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.struts.form.HastaForm;
+import tr.com.fdd.utils.Commons;
+import tr.com.fdd.utils.GUIMessages;
+import tr.com.fdd.utils.GenelDegiskenler;
 
-public class HastaGuncelleAction extends Action {
+public class HastaGuncelleAction extends GenericAction {
 
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward executeCode(Session session, Connection connection, ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, Transaction tran) {
 
-		Session sess = null;
-		Transaction tran = null;
-		Connection conn = null;
+		//Transaction tran = null;
 		try {
 			String hastaId = request.getParameter("id");
 			int id = new Integer(hastaId).intValue();
@@ -43,10 +44,8 @@ public class HastaGuncelleAction extends Action {
 
 			BeanUtils.copyProperties(hastaDto, hastaForm);
 
-			sess = GenericAction.getHibernateSession();
-			tran = sess.beginTransaction();
-			Query query = sess
-					.createQuery("from tr.com.fdd.dto.THastaDTO  p where p.id = :var");
+			tran = session.beginTransaction();
+			Query query = session.createQuery("from tr.com.fdd.dto.THastaDTO  p where p.id = :var");
 			query.setInteger("var", new Integer(id).intValue());
 			THastaDTO result = (THastaDTO) query.uniqueResult();
 			result.setAd(hastaDto.getAd());
@@ -58,23 +57,16 @@ public class HastaGuncelleAction extends Action {
 
 			tran.commit();
 
-			request.setAttribute("warn", id + "nolu kayit guncellenmiþtir.");
-
-			Integer subeId = (Integer) request.getSession().getAttribute(
-					"subeId");
-			conn = SQLUtils.getMySqlConneciton();
-			SQLUtils sqlUtils = new SQLUtils();
-
-			List<THastaDTO> hastaListesi = sqlUtils.getHastaListesi(null, null,
-					null, conn, subeId.intValue(), null, null, null);
-
-			// request.setAttribute("hastaListesi", hastaListesi);
-			request.setAttribute("hastaListesi", hastaListesi);
+			request.setAttribute("warn", GUIMessages.KAYIT_GUNCELLEME_BASARILI);
+			
+			Commons.refreshSelectedHasta(request, connection, Integer.parseInt(hastaId));
+			Commons.updateHastaFromHastaList(result, request);
 
 			return mapping.findForward("success");
 
 		} catch (Exception e) {
 
+			e.printStackTrace();
 			if (tran != null)
 				try {
 					tran.rollback();
@@ -83,27 +75,27 @@ public class HastaGuncelleAction extends Action {
 					e1.printStackTrace();
 				}
 			try {
-				conn.rollback();
-				conn.close();
+				connection.rollback();
+				connection.close();
 				request.setAttribute("exception", e);
 			} catch (SQLException e1) {
 				request.setAttribute("exception", e);
 				return mapping.findForward("exception");
 			}
-			request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+			request.setAttribute("warn", GUIMessages.KAYIT_GUNCELLEME_BASARISIZ);
 			return mapping.findForward("exception");
 		} finally {
 			try {
-				conn.close();
+				connection.close();
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 				request.setAttribute("exception", e);
 				return mapping.findForward("exception");
 			}
-			if (sess != null && sess.isOpen())
+			if (session != null && session.isOpen())
 				try {
-					sess.close();
+					session.close();
 				} catch (HibernateException e) {
 
 					e.printStackTrace();

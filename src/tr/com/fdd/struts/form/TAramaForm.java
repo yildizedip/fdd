@@ -13,6 +13,7 @@ public class TAramaForm extends ActionForm {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private int islemId;
+	private int hastaId;
 	private Date aramaTarih;
 	private String aramaTarihStr;
 	private Date kayitTarih;
@@ -88,6 +89,12 @@ public class TAramaForm extends ActionForm {
 	}
 	public void setDakika(String dakika) {
 		this.dakika = dakika;
+	}
+	public int getHastaId() {
+		return hastaId;
+	}
+	public void setHastaId(int hastaId) {
+		this.hastaId = hastaId;
 	}
 
 }

@@ -25,7 +25,9 @@ public class THastaDTO implements Serializable {
 	private Date guncellenmeTarihi;
 	private int subeId;
 	private List<TIslemDTO> hastaOperasyonList;
+	private List<TIslemDTO> hastaSelectedDoktorOperasyonList; //sadece belli bir doktorun yaptigi operasyonlar- randevu icin
 	private List<TAnketDTO> hastaAnketList;
+	private List<TAramaKaydiDTO> hastaAramaKaydiList;
 	private int hastaAnketSayisi;
 	
 	
@@ -116,6 +118,18 @@ public class THastaDTO implements Serializable {
 	}
 	public void setProtokolNo(String protokolNo) {
 		this.protokolNo = protokolNo;
+	}
+	public List<TAramaKaydiDTO> getHastaAramaKaydiList() {
+		return hastaAramaKaydiList;
+	}
+	public void setHastaAramaKaydiList(List<TAramaKaydiDTO> hastaAramaKaydiList) {
+		this.hastaAramaKaydiList = hastaAramaKaydiList;
+	}
+	public List<TIslemDTO> getHastaSelectedDoktorOperasyonList() {
+		return hastaSelectedDoktorOperasyonList;
+	}
+	public void setHastaSelectedDoktorOperasyonList(List<TIslemDTO> hastaSelectedDoktorOperasyonList) {
+		this.hastaSelectedDoktorOperasyonList = hastaSelectedDoktorOperasyonList;
 	}
 
 }

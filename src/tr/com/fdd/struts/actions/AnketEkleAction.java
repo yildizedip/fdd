@@ -1,6 +1,7 @@
 package tr.com.fdd.struts.actions;
 
 
+import java.sql.Connection;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,13 +22,12 @@ import tr.com.fdd.struts.form.AnketForm;
 import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
 
-public class AnketEkleAction extends Action {
+public class AnketEkleAction extends GenericAction {
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward executeCode(Session session, Connection connection,
+			ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, Transaction trans){
 		Transaction tran = null;
-		Session session=null;
 		try {
 			TAnketDTO anketDTO= new TAnketDTO();
 			
@@ -49,11 +49,12 @@ public class AnketEkleAction extends Action {
 		
 			BeanUtils.copyProperties(anketDTO, anketForm );					
 			
-			session=GenericAction.getHibernateSession();
 			tran = session.beginTransaction();
 			session.save(anketDTO);
 			tran.commit();
-			request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);			
+			request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);	
+			
+			Commons.refreshSelectedHasta(request, connection, anketForm.getHastaId());
 			
 			
 			return mapping.findForward("success");

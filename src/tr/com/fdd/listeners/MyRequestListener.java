@@ -35,7 +35,7 @@ public class MyRequestListener implements ServletRequestListener {
      // System.out.println("request listener starting...Context path= "+req.getContextPath()+"method = "+req.getMethod()+"uri = "+req.getRequestURI());
 
       try {
-		req.setCharacterEncoding("ISO-8859-9");
+		req.setCharacterEncoding("UTF-8");
 	
 	} catch (UnsupportedEncodingException e) {
 		

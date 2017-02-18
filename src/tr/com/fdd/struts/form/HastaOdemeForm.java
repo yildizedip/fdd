@@ -1,6 +1,5 @@
 package tr.com.fdd.struts.form;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +17,10 @@ public class HastaOdemeForm extends ActionForm {
 		private int hastaId;
 		private Date odemeTarihi;
 		private int odemeTuru;
-		private BigDecimal miktar;
-		private BigDecimal odenenMiktar;
-		private BigDecimal toplamMiktar;		
-		private BigDecimal kalanMiktar;
+		private double miktar;
+		private double odenenMiktar;
+		private double toplamMiktar;		
+		private double kalanMiktar;
 		private String aciklama;
 		private String durumu;
 		private Date eklenmeTarihi;
@@ -41,12 +40,7 @@ public class HastaOdemeForm extends ActionForm {
 			this.odemeTuru = odemeTuru;
 		}
 	
-		public BigDecimal getKalanMiktar() {
-			return kalanMiktar;
-		}
-		public void setKalanMiktar(BigDecimal kalanMiktar) {
-			this.kalanMiktar = kalanMiktar;
-		}
+		
 		public String getAciklama() {
 			return aciklama;
 		}
@@ -77,12 +71,7 @@ public class HastaOdemeForm extends ActionForm {
 		public String getOdemeTarihiStr() {
 			return odemeTarihiStr;
 		}
-		public void setMiktar(BigDecimal miktar) {
-			this.miktar = miktar;
-		}
-		public BigDecimal getMiktar() {
-			return miktar;
-		}
+		
 		public int getIslemId() {
 			return islemId;
 		}
@@ -104,35 +93,47 @@ public class HastaOdemeForm extends ActionForm {
 
 		ActionErrors errors= null;		
 		errors= new ActionErrors();		
-		if( kalanMiktar!=null && kalanMiktar.doubleValue() < 0 )
+		if( kalanMiktar < 0 )
 		{
 				
 			request.setAttribute("warn", "Kalan miktar negatif olamaz.");
 			ActionMessages messages= new ActionMessages();
-			messages.add("message", new ActionMessage("Hata Oluþtu."));	
+			messages.add("message", new ActionMessage("Hata OluÅŸtu."));	
 			errors.add(messages);
 		}
-		if( toplamMiktar!=null && odenenMiktar!=null &&  toplamMiktar.doubleValue()==odenenMiktar.doubleValue() )
-		{
-				
-			request.setAttribute("warn", "Tüm ödemeler gerçekleþmiþtir.");
-			ActionMessages messages= new ActionMessages();
-			messages.add("message", new ActionMessage("Hata Oluþtu."));	
-			errors.add(messages);
-		}
+//		if(  toplamMiktar==odenenMiktar)
+//		{
+//				
+//			request.setAttribute("warn", "Tï¿½m ï¿½demeler gerï¿½ekleï¿½miï¿½tir.");
+//			ActionMessages messages= new ActionMessages();
+//			messages.add("message", new ActionMessage("Hata Oluï¿½tu."));	
+//			errors.add(messages);
+//		}
 	return errors;
 	}
-	public BigDecimal getOdenenMiktar() {
+	public double getMiktar() {
+		return miktar;
+	}
+	public void setMiktar(double miktar) {
+		this.miktar = miktar;
+	}
+	public double getOdenenMiktar() {
 		return odenenMiktar;
 	}
-	public void setOdenenMiktar(BigDecimal odenenMiktar) {
+	public void setOdenenMiktar(double odenenMiktar) {
 		this.odenenMiktar = odenenMiktar;
 	}
-	public BigDecimal getToplamMiktar() {
+	public double getToplamMiktar() {
 		return toplamMiktar;
 	}
-	public void setToplamMiktar(BigDecimal toplamMiktar) {
+	public void setToplamMiktar(double toplamMiktar) {
 		this.toplamMiktar = toplamMiktar;
+	}
+	public double getKalanMiktar() {
+		return kalanMiktar;
+	}
+	public void setKalanMiktar(double kalanMiktar) {
+		this.kalanMiktar = kalanMiktar;
 	}
 	
 }

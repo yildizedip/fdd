@@ -21,6 +21,7 @@ import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.TKullaniciBilgiDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
 import tr.com.fdd.struts.form.LoginForm;
+import tr.com.fdd.utils.GUIMessages;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 public class KullaniciGuncelleAction extends Action {
@@ -30,8 +31,7 @@ public class KullaniciGuncelleAction extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		// tip degiskeni guncellemenin user tarafindan yapildigi durumlarda
-		// aktif dir.
+		// tip degiskeni guncellemenin user tarafindan yapildigi durumlarda aktif dir.
 		String tip = request.getParameter("tip");
 
 		LoginForm frm = (LoginForm) form;
@@ -100,12 +100,12 @@ public class KullaniciGuncelleAction extends Action {
 				if (frm.getSoyad() != null && !frm.getSoyad().equals("0"))
 					resultDoktor.setdSoyad(frm.getSoyad());
 
-				resultDoktor.setdBrans("Diþ Hekimi");
+				resultDoktor.setdBrans(GenelDegiskenler.KullaniciTurleri.DIS_HEKIMI);
 
 			}
 
 			tran.commit();
-			request.setAttribute("warn", "kayit guncellenmiþtir.");
+			request.setAttribute("warn", GUIMessages.ISLEM_BASARILI);
 
 			if (tip!=null && tip.equals("kisiselBilgileriGuncelle")) {
 				return mapping.findForward("goToLogoutPage");
@@ -118,6 +118,7 @@ public class KullaniciGuncelleAction extends Action {
 			return mapping.findForward("success");
 
 		} catch (HibernateException e) {
+			e.printStackTrace();
 			if (tran != null)
 				try {
 					tran.rollback();
@@ -125,9 +126,10 @@ public class KullaniciGuncelleAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+			request.setAttribute("warn", GUIMessages.ISLEM_BASARISIZ);
 			return mapping.findForward("exception");
 		} catch (Exception e) {
+			e.printStackTrace();
 			if (tran != null)
 				try {
 					tran.rollback();
@@ -135,10 +137,11 @@ public class KullaniciGuncelleAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+			request.setAttribute("warn",  GUIMessages.ISLEM_BASARISIZ);
 			return mapping.findForward("exception");
 		} finally {
-			conn.close();
+			if(conn!=null)
+				conn.close();
 			if (sess != null && sess.isOpen())
 				try {
 					sess.close();

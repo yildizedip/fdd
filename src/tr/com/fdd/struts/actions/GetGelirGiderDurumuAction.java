@@ -87,7 +87,7 @@ public class GetGelirGiderDurumuAction extends Action {
 			if (kuTur.equals(GenelDegiskenler.KullaniciTurleri.DOKTOR)) {
 				doktorAd = kullaniciBilgiDTO.getKuAd();
 				doktorId = ((TDoktorDTO) sqlUtils.getDoktor(
-						kullaniciLoginDTO.getKuId(), conn)).getdId();
+						kullaniciLoginDTO.getKuId(), -1, conn, false, -1)).getdId();
 			}
 
 			boolean implantGeliriGoster=false;

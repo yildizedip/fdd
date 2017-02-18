@@ -73,7 +73,6 @@
 		</table>
 		
 		<hr>
-	
 		
 		<form action="OperasyonGuncelle.do" method="post">
 		<table class="sorgulama">
