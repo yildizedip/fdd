@@ -33,7 +33,7 @@ import tr.com.fdd.utils.enums.LaboratuvarIslemDurum;
  * @author User
  * 
  */
-public class GetUserLoginInfAction extends GenericAction {
+public class LoginAction extends GenericAction {
 
 	/**
 	 * mapping objesi ile dogru yonlendirmeler saglanir. (struts -config. xml
@@ -53,6 +53,7 @@ public class GetUserLoginInfAction extends GenericAction {
 //        	  request.setAttribute("failure",	GUIMessages.YANLIS_KOD_GIRILDI);
 //				return mapping.findForward("failure");
 //          } 
+		
 		
 		LoginForm loginForm =null;
 		SQLUtils sqlUtils=new SQLUtils();

@@ -35,7 +35,7 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 		</action>
 
 		<action path="/login" scope="request" name="loginForm" input="/login4.jsp"
-			type="tr.com.fdd.struts.actions.GetUserLoginInfAction" validate="true">
+			type="tr.com.fdd.struts.actions.LoginAction" validate="true">
 			<forward name="success" path="/SubeSecim.jsp"></forward>
 			<forward name="gotoAdminPage" path="/Admin.jsp"></forward>
 			<forward name="gotoLabTeknisyenPage" path="/LabIslemMain.jsp"></forward>

@@ -21,7 +21,7 @@ public class GUIMessages {
 
 	public static String OPERASYON_YOK="Hastaya ait operasyon bulunmamaktadır.";
 	public static String HATA="Hata oluştu.";
-	public static String KULLANICI_BULUNAMADI="Kullanıcı Bulunamadır";
+	public static String KULLANICI_BULUNAMADI="Kullanıcı Bulunamadı";
 	public static String VERI_BULUNAMADI="Veri Bulunamadı.";
 	public static String KAYIT_VAR="KAYIT MEVCUT";
 	public static String KAYIT_BASARILI="Islem Basarılı";
