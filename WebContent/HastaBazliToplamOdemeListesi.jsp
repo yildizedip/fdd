@@ -277,7 +277,7 @@
 		
 		 </h4>
 
-			<table class="table table-bordered" id="example" >
+			<table class="table table-bordered" id="example" style="font-size: 15px;" >
 				<thead>
 				<tr class="bg-warning" >
 				<td colspan="13" align="center">
@@ -298,28 +298,28 @@
 				</tr>
 				
 					<tr  >
-						<th class="helpHed"></th>
-						<th class="helpHed">Prt. No</th>
-						<th class="helpHed">Hasta</th>
-						<th class="helpHed">Ýþlem</th>
-						<th class="helpHed">Adet</th>
-						<th class="helpHed">Doktor</th>
-						<th width="77px" class="helpHed">Ýþlem T.</th>
+						<th class=""></th>
+						<th class="">Prt. No</th>
+						<th class="">Hasta</th>
+						<th class="">Ýþlem</th>
+						<th class="">Adet</th>
+						<th class="">Doktor</th>
+						<th width="77px" class="">Ýþlem T.</th>
 
 
-						<th width="20px" class="helpHed">Öd. Miktarlarý</th>
-						<th width="107px" class="helpHed">Öd. Trhleri</th>
-						<th width="70px" class="helpHed">Ücret</th>
-						<th width="70px" class="helpHed">Öd. Mik.</th>
+						<th width="20px" class="">Öd. Miktarlarý</th>
+						<th width="107px" class="">Öd. Trhleri</th>
+						<th width="70px" class="">Ücret</th>
+						<th width="70px" class="">Öd. Mik.</th>
 
-						<th width="70px" class="helpHed">Kal. Mik.</th>
+						<th width="70px" class="">Kal. Mik.</th>
 					
-						<th width="70px" class="helpHed"></th>
+						<th width="70px" class=""></th>
 						<th width="0px" style="border-color: white;" ></th>
 						<!-- 
-			<th width="70px" class="helpHed">Doktor Hes.</th>	
+			<th width="70px" class="">Doktor Hes.</th>	
 			
-			<th width="70px" class="helpHed">Sirket Hes.</th>	
+			<th width="70px" class="">Sirket Hes.</th>	
 			 -->
 
 
@@ -329,44 +329,44 @@
 					<c:forEach items="${hastaBazliToplamOdemeListesi}" var="odeme"			varStatus="count">
 
 						<tr>
-							<td class="helpBod">${count.count}</td>
-							<td class="helpBod">${odeme.hasta.protokolNo}</td>
+							<td class="">${count.count}</td>
+							<td class="">${odeme.hasta.protokolNo}</td>
 
-							<td class="helpBod">${odeme.hasta.ad}
+							<td class="">${odeme.hasta.ad}
 								${odeme.hasta.soyad} - ${odeme.hasta.tel}</td>
-							<td class="helpBod">${odeme.islemTip.ad}</td>
-							<td class="helpBod">${odeme.islem.disAdet}</td>
-							<td class="helpBod">${odeme.doktor.dAd}
+							<td class="">${odeme.islemTip.ad}</td>
+							<td class="">${odeme.islem.disAdet}</td>
+							<td class="">${odeme.doktor.dAd}
 								${odeme.doktor.dSoyad}</td>
-							<td class="helpBod">${odeme.islem.islemTarihiStr}
+							<td class="">${odeme.islem.islemTarihiStr}
 								${odeme.islem.islemBitisTarihiStr}</td>
-							<td class="helpBod"><c:forEach
+							<td class=""><c:forEach
 									items="${odeme.islem.odemeListStr}" var="odemeler">
 											${odemeler}<br>
 								</c:forEach></td>
 
-							<td class="helpBod"><c:forEach
+							<td class=""><c:forEach
 									items="${odeme.islem.odemeTarihListStr}" var="odemeler">
 									${odemeler}<br>
 
 
 								</c:forEach></td>
 
-							<td class="helpBod">${odeme.ucret}</td>
+							<td class="">${odeme.ucret}</td>
 
 
 
-							<td class="helpBod">${odeme.miktar}</td>
+							<td class="">${odeme.miktar}</td>
 
 
-							<td class="helpBod">${odeme.kalanMiktar}</td>
+							<td class="">${odeme.kalanMiktar}</td>
 
 							<!--  
-								<td style=" font-size: 9px " class="helpBod">${odeme.doktorHesap} </td>
-								<td style=" font-size: 9px " class="helpBod">${odeme.sirketHesap} </td>
+								<td style=" font-size: 9px " class="">${odeme.doktorHesap} </td>
+								<td style=" font-size: 9px " class="">${odeme.sirketHesap} </td>
 							-->
 
-						<td class="helpBod">  <a id="opener" class="gunGir"> Gün Gir</a>  </td>
+						<td class="">  <a id="opener" class="gunGir"> Gün Gir</a>  </td>
 				
 						<td width="1px"  style="font-size:1px; visibility: hidden; border-color: white;">${odeme.islem.id}</td>
 				

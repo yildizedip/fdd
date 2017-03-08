@@ -5,23 +5,39 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page import="java.util.Enumeration"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-<link rel="stylesheet" href="css/edip.css" type="text/css" />
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/epoch_classes.js"></script>
+<script src="script/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
 
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/edip.css" type="text/css" />
 <link rel="stylesheet" href="css/demo_page.css" type="text/css" />
 <link rel="stylesheet" href="css/demo_table.css" type="text/css" />
-<script type="text/javascript" language="javascript"
-	src="lib/jquery-1.7.js"></script>
-<script type="text/javascript" language="javascript"
-	src="lib/jquery.dataTables.js"></script>
-<title></title>
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" />
+
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script type="text/javascript" src="js/edip.js"></script>
+<script type="text/javascript" src="js/jquery.ui.datepicker-tr.js"></script>
+
 <script>
 var basTarihi;
   window.onload = function() {
@@ -80,19 +96,28 @@ var basTarihi;
 </script>
 
 </head>
-<body>
+<body style="color:black ; background-color: white;">
 
-	<hr>
-	<font style="font-size: 12px; font-family: monospace; color: graytext;">
+<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+		<div class="page-header ">
+			<div class="page-title" style="font-size: 20px;">HASTA BORÇ LİSTESİ</div>
 
+			<button class="btn pull-right"
+				style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
+				onclick="window.print()"></button>
 
-		..: BORÇ TARİHİ LİSTESİ </font>
-	<hr>
+		</div>
+		<div class="bg-success">${requestScope.warn}</div>
+
+		<div class="clearfix"></div>
+	</div>
+	
+	<div class="col-lg-6">  
 
 	<form action="borcOdemeListesi.do" method="post">
-		<table class="sorgulama">
+		<table class="table table-bordered">
 			<tr>
-				<td colspan="7" style="text-align: center;">SORGULA</td>
+				<td colspan="7" style="text-align: center;" class="bg-blue">SORGULA</td>
 			</tr>
 			<tr>
 				<td>Protokol No</td>
@@ -126,34 +151,38 @@ var basTarihi;
 			</tr>
 		</table>
 	</form>
+	
+	</div>
+	<div class="clearfix"></div>
 
 	<hr>
 	
-	<a href="HastaBazliToplamOdemeListesi.jsp?tip=13">Borç Tarihi Ekle</a>
+	<a href="HastaBazliToplamOdemeListesi.jsp?tip=13" class="btn btn-info">Borç Tarihi Ekle</a>
+	
 	<br>
-	<table class="sofT" id="example">
+	<table class="table table-bordered" id="example">
 		<thead>
-			<tr>
-				<th class="helpHed" colspan="12">Hasta Borç Tarihleri Listesi</th>
+			<tr >
+				<th class="bg-success" colspan="12" > <h4 align="center"> Hasta Borç Tarihleri Listesi </h4> </th>
 			</tr>
 			<tr>
-				<th class="helpHed"></th>
-				<th class="helpHed">Protokol No</th>
-				<th class="helpHed">Ad-Soyad</th>
-				<th class="helpHed">Tel</th>
-				<th class="helpHed">Operasyon</th>
-				<th class="helpHed">Toplam Ücret</th>
-				<th class="helpHed">Toplam Ödenen</th>
-				<th class="helpHed">Kalan Miktar</th>
-				<th class="helpHed">Borcun Ödeme Tarihi</th>
-				<th class="helpHed">Ödenecek Miktar</th>
-				<th class="helpHed">Açıklama</th>
+				<th class="bg-success"></th>
+				<th class="bg-success">Protokol No</th>
+				<th class="bg-success">Ad-Soyad</th>
+				<th class="bg-success">Tel</th>
+				<th class="bg-success">Operasyon</th>
+				<th class="bg-success">Toplam Ücret</th>
+				<th class="bg-success">Toplam Ödenen</th>
+				<th class="bg-success">Kalan Miktar</th>
+				<th class="bg-success">Borcun Ödeme Tarihi</th>
+				<th class="bg-success">Ödenecek Miktar</th>
+				<th class="bg-success">Açıklama</th>
 				
 
 
 				<c:if test="${sessionScope.sessionMember[0].kuTur ne '3'
 				   }">
-					<th class="helpHed"></th>
+					<th class="bg-success"></th>
 
 				</c:if>
 			</tr>
@@ -162,26 +191,22 @@ var basTarihi;
 		<tbody>
 			<c:forEach items="${borcListesi}" var="borc" varStatus="count">
 				<tr>
-					<td class="helpBod" >${count.count}</td>
-					<td class="helpBod" >${borc.islemDTO.hasta.protokolNo}</td>
-					<td class="helpBod" >${borc.islemDTO.hasta.ad}	${borc.islemDTO.hasta.soyad}</td>
-					<td class="helpBod" >${borc.islemDTO.hasta.tel}</td>
-					<td class="helpBod" >${borc.islemDTO.islemTip.ad}</td>
-					<td class="helpBod" >${borc.islemDTO.miktar}</td>
-
-					<td class="helpBod" >${borc.islemDTO.toplamOdenenMiktar}</td>
-										<td class="helpBod" >${borc.islemDTO.kalanMiktar}</td>
-					<td class="helpBod"  width="77px">${borc.borcOdemeTarihi}</td>
-					
-					<td class="helpBod" >${borc.miktar}</td>
-					<td class="helpBod"  width="77px">${borc.aciklama}</td>
-
-
+					<td class="" >${count.count}</td>
+					<td class="" >${borc.islemDTO.hasta.protokolNo}</td>
+					<td class="" >${borc.islemDTO.hasta.ad}	${borc.islemDTO.hasta.soyad}</td>
+					<td class="" >${borc.islemDTO.hasta.tel}</td>
+					<td class="" >${borc.islemDTO.islemTip.ad}</td>
+					<td class="" >${borc.islemDTO.miktar}</td>
+					<td class="" >${borc.islemDTO.toplamOdenenMiktar}</td>
+					<td class="" >${borc.islemDTO.kalanMiktar}</td>
+					<td class=""  width="140px">${borc.borcOdemeTarihi}</td>
+					<td class="" >${borc.miktar}</td>
+					<td class=""  width="277px">${borc.aciklama}</td>
 
 					<c:if test="${sessionScope.sessionMember[0].kuTur ne '3'  }">
 
-						<td class="helpBod"><html:link
-								action="/borcTarihBilgisiSil?id=${borc.id}"> Sil </html:link></td>
+					<td class="">
+					<html:link	action="/borcTarihBilgisiSil?id=${borc.id}"> Sil </html:link></td>
 						
 
 					</c:if>

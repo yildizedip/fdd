@@ -31,7 +31,7 @@ public class AddGiderAction extends GenericAction {
 				
 			GelirGiderForm gelirGiderForm=(GelirGiderForm) form;
 			gelirGiderForm.setDurum("A");
-			gelirGiderForm.setOdemeSekli("1");
+		//	gelirGiderForm.setOdemeSekli("1");
 			gelirGiderForm.setGirenKisi(Commons.getActiveSession(request).getKuId());
 			
 			if(gelirGiderForm.getTarihStr()==null)

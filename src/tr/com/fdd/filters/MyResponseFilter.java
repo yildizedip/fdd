@@ -26,6 +26,9 @@ public class MyResponseFilter implements Filter {
 
 	private static Logger logger = LoggerFactory.getLogger(MyResponseFilter.class);
 
+	FilterConfig filterConfig = null;
+	
+	
 	/**
 	 * Default constructor.
 	 */
@@ -114,8 +117,6 @@ public class MyResponseFilter implements Filter {
 
 		response.setContentType("ISO-8859-9");
 	}
-
-	FilterConfig filterConfig = null;
 
 	/**
 	 * @see Filter#init(FilterConfig)

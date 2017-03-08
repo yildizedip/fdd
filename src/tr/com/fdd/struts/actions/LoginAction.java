@@ -96,6 +96,10 @@ public class LoginAction extends GenericAction {
 				if (kullaniciLoginDTO.getKuTur().equals(GenelDegiskenler.KullaniciTurleri.ADMIN)) {
 					
 					List<?> subelerList = subelerList(session);
+					//List<?> islemTurList = islemTurList(session);
+					
+					List<?>  islemTurList=   sqlUtils.getOperasyonTurList(connection,-1);
+					sessionInf.setAttribute("islemTurList", islemTurList);
 
 					request.getSession().setAttribute("subelerList", subelerList);
 					
@@ -230,6 +234,8 @@ public class LoginAction extends GenericAction {
 		List<?> result = que.list();
 		return result;
 	}
+	
+	
 	private List<?> labIslemTipList(Session sess) throws HibernateException,
 	ClassNotFoundException, SQLException {
 		
@@ -246,5 +252,14 @@ public class LoginAction extends GenericAction {
 
 		return labDurumList;
 
+	}
+	
+	private List<?> islemTurList(Session sess) throws HibernateException, ClassNotFoundException, SQLException {
+		if (sess == null)
+			sess = GenericAction.getHibernateSession();
+		String sql = " from TIslemTipDTO order by ad  ";
+		Query que = sess.createQuery(sql);
+		List<?> result = que.list();
+		return result;
 	}
 }

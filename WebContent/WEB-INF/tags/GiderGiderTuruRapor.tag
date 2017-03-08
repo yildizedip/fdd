@@ -44,15 +44,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="helpHed">Gider Turu</td>
+				<td>Gider Turu</td>
 
-				<td class="helpHed">Toplam Tutar</td>
+				<td >Toplam Tutar</td>
 			</tr>
 			<c:forEach items="${giderIstatistikler[0]}" var="dto">
 				<tr>
-					<td class="helpBod">${dto.giderTuru }</td>
+					<td >${dto.giderTuru }</td>
 
-					<td class="helpBod">${dto.miktar}${dto.paraBirimi}</td>
+					<td >${dto.miktar}${dto.paraBirimi}</td>
 				</tr>
 			</c:forEach>
 		</table>

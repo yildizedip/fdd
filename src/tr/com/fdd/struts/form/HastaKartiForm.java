@@ -33,6 +33,7 @@ public class HastaKartiForm  extends ActionForm{
 	private String operasyonDurum;
 	private String operasyonAciklama;
 	private String odemeTarihiStr;
+	private String odemeTuru;
 	private double odemeMiktar;
 	private double odenenMiktar;
 	private double toplamMiktar;		
@@ -190,6 +191,12 @@ public class HastaKartiForm  extends ActionForm{
 	}
 	public void setDisNo(String disNo) {
 		this.disNo = disNo;
+	}
+	public String getOdemeTuru() {
+		return odemeTuru;
+	}
+	public void setOdemeTuru(String odemeTuru) {
+		this.odemeTuru = odemeTuru;
 	}
 
 }

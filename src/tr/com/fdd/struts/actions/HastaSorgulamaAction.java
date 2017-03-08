@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -14,8 +16,6 @@ import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.TIslemDTO;
-import tr.com.fdd.struts.form.HastaForm;
-import tr.com.fdd.utils.GUIMessages;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 public class HastaSorgulamaAction extends Action {
@@ -33,10 +33,6 @@ public class HastaSorgulamaAction extends Action {
 			String hastaId = request.getParameter("hastaId");
 			String doktorId = request.getParameter("doktorId");
 			String islemId = request.getParameter("islemId");
-			
-			
-			
-			
 			
 			
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");

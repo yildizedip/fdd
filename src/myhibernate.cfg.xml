@@ -40,6 +40,9 @@
 		<mapping resource="/tr/com/fdd/dto/TDepoUrunTipDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/THastaIslemBorcTakipDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/THastaRandevuDTO.hbm.xml" />
+		<mapping resource="/tr/com/fdd/dto/TIslemTipSubeDTO.hbm.xml" />
+		
+		
 	
 	</session-factory>
 </hibernate-configuration>

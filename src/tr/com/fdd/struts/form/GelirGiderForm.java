@@ -43,9 +43,9 @@ public class GelirGiderForm extends ActionForm {
 		if( miktar!=null && (miktar.equals("") ||   kontrol.karakterVarmi(miktar)) )
 		{
 			ActionMessages messages= new ActionMessages();
-			messages.add("addGider", new ActionMessage("Miktar alanını kontrol ediniz."));
-			request.setAttribute("addGelirMesaj", "Lütfen Miktar alanını kontrol ediniz.");
-			request.setAttribute("warn", "Lütfen Miktar alanını kontrol ediniz.");
+			messages.add("addGider", new ActionMessage("Miktar alanÄ±nÄ± kontrol ediniz."));
+			request.setAttribute("addGelirMesaj", "LÃ¼tfen Miktar alanÄ±nÄ± kontrol ediniz.");
+			request.setAttribute("warn", "LÃ¼tfen Miktar alanÄ±nÄ± kontrol ediniz.");
 			errors.add(messages);
 		}	
 		

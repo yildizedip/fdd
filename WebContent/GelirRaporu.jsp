@@ -160,6 +160,14 @@
 					<myTagFiles:GelirOperasyonTuruneGoreRapor></myTagFiles:GelirOperasyonTuruneGoreRapor>
 					</div>
 					
+					
+					<div class="col-lg-4">
+					
+					<myTagFiles:GelirOdemeSeklineGoreRapor>
+					</myTagFiles:GelirOdemeSeklineGoreRapor>
+					
+					</div>
+					
 					</div>
 	
 </body>

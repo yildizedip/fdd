@@ -5,22 +5,48 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page import="java.util.Enumeration"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script src="script/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/edip.css" type="text/css" />
+<link rel="stylesheet" href="css/demo_page.css" type="text/css" />
+<link rel="stylesheet" href="css/demo_table.css" type="text/css" />
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" />
+
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script type="text/javascript" src="js/edip.js"></script>
+<script type="text/javascript" src="js/jquery.ui.datepicker-tr.js"></script>
+
+
 <link rel="stylesheet" href="css/edip.css" type="text/css" />
 <script type="text/javascript" src="js/epoch_classes.js"></script>
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
 
 <link rel="stylesheet" href="css/demo_page.css" type="text/css" />
 <link rel="stylesheet" href="css/demo_table.css" type="text/css" />
-<script type="text/javascript" language="javascript"
-	src="lib/jquery-1.7.js"></script>
-<script type="text/javascript" language="javascript"
-	src="lib/jquery.dataTables.js"></script>
+
+<script type="text/javascript" src="lib/jquery.dataTables.js"></script>
 <title></title>
 <script>
 var basTarihi;
@@ -80,19 +106,35 @@ var basTarihi;
 </script>
 
 </head>
-<body>
-
-	<hr>
-	<font style="font-size: 12px; font-family: monospace; color: graytext;">
+<body style="color:black ; background-color: white;">
 
 
-		..: Hasta Anket Kaydı  Listesi </font>
-	<hr>
 
-	<form action="hastaAnketList.do" method="post">
-		<table class="sorgulama">
+	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+		<div class="page-header ">
+		
+				<div class="page-title" style="font-size: 20px;">
+					Hasta Anket Kaydı  Listesi 
+				</div>
+
+				<button class="btn pull-right"
+					style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
+					onclick="window.print()">
+				</button>
+
+		</div>
+		<div class="bg-success">${requestScope.warn}</div>
+
+		<div class="clearfix"></div>
+	</div>
+<br>
+
+<div class="col-lg-6">
+
+<form action="hastaAnketList.do" method="post">
+		<table class="table table-bordered">
 			<tr>
-				<td colspan="7" style="text-align: center;">ANKET KAYDI SORGULA</td>
+				<td colspan="7" style="text-align: center;" class="bg-info">ANKET KAYDI SORGULA</td>
 			</tr>
 			<tr>
 				<td>Protokol No</td>
@@ -126,28 +168,35 @@ var basTarihi;
 		</table>
 	</form>
 
+
+</div>
+	
+
 	<hr>
 	
+	<!-- 
 	<a href="HastaAnketKaydiHastaSorgula.jsp?">Anket  Ekle</a>
+	 -->
+	
 	<br>
-	<table class="sofT" id="example">
+	<table class="table table-bordered" id="example">
 		<thead>
 			<tr>
-				<th class="helpHed" colspan="13">Anket   Listesi</th>
+				<th class="bg-success" colspan="13"  > <h4 align="center"> Anket   Listesi  </h4></th>
 			</tr>
 			<tr>
-				<th class="helpHed"></th>
-				<th class="helpHed">Protokol No</th>
-				<th class="helpHed">Ad-Soyad</th>
-				<th class="helpHed">Tel</th>
-				<th class="helpHed">Anket Tarihi</th>
-				<th class="helpHed">Anket Saat</th>
-				<th class="helpHed">Mem. Derecesi</th>
-				<th class="helpHed">Açıklama</th>
+				<th class=""></th>
+				<th class="">Protokol No</th>
+				<th class="">Ad-Soyad</th>
+				<th class="">Tel</th>
+				<th class="">Anket Tarihi</th>
+				<th class="">Anket Saat</th>
+				<th class="">Mem. Derecesi</th>
+				<th class="">Açıklama</th>
 
 
 				<c:if test="${sessionScope.sessionMember[0].kuTur ne '3'  }">
-					<th class="helpHed"></th>
+					<th class=""></th>
 				</c:if>
 			</tr>
 
@@ -155,18 +204,18 @@ var basTarihi;
 		<tbody>
 			<c:forEach items="${anketListesi}" var="anket" varStatus="count">
 				<tr>
-					<td class="helpBod" style="font-size: 9px">${count.count}</td>
-					<td class="helpBod" style="font-size: 9px">${anket.hasta.protokolNo}</td>
-					<td class="helpBod" style="font-size: 9px">${anket.hasta.ad}	${anket.hasta.soyad}</td>
-					<td class="helpBod" style="font-size: 9px">${anket.hasta.tel}</td>
-					<td class="helpBod" style="font-size: 9px"  width="77px">${anket.tarih}</td>
-					<td class="helpBod" style="font-size: 9px">${anket.saat}</td>
-					<td class="helpBod" style="font-size: 9px">${anket.memnuniyetDerecesi}</td>
-					<td class="helpBod" style="font-size: 9px">${anket.aciklama}</td>
+					<td class="" >${count.count}</td>
+					<td class="" >${anket.hasta.protokolNo}</td>
+					<td class="" >${anket.hasta.ad}	${anket.hasta.soyad}</td>
+					<td class="" >${anket.hasta.tel}</td>
+					<td class=""   width="97px">${anket.tarih}</td>
+					<td class="" >${anket.saat}</td>
+					<td class="" >${anket.memnuniyetDerecesi}</td>
+					<td class="" >${anket.aciklama}</td>
 
 					<c:if test="${sessionScope.sessionMember[0].kuTur eq '4'  }">
 
-						<td class="helpBod"><html:link
+						<td class=""><html:link
 								action="//hastaAnketSil?id=${anket.id}"> Sil </html:link></td>
 											</c:if>
 				</tr>

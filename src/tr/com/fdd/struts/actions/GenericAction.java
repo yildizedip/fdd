@@ -27,28 +27,28 @@ public abstract class GenericAction extends Action {
 	private static Session session=null;	
 	private static Connection mySqlConn=null;
 	
-	static{
-		
-		cfg= new Configuration();		
-		try {
-			cfg.configure("/myhibernate.cfg.xml");
-			sessions= cfg.buildSessionFactory();
-			
-			mySqlConn= MysqlUtil.instance.getConnection();
-			session=sessions.openSession(mySqlConn);
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
+//	static{
+//		
+//		cfg= new Configuration();		
+//		try {
+//			cfg.configure("/myhibernate.cfg.xml");
+//			sessions= cfg.buildSessionFactory();
+//			
+//			mySqlConn= MysqlUtil.instance.getConnection();
+//			session=sessions.openSession(mySqlConn);
+//		} catch (HibernateException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		
+//	}
 	
 	
 	public Session getHibernateSessionStatic(){

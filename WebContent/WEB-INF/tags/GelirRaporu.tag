@@ -5,7 +5,8 @@
 <%@ tag body-content="scriptless"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="silAktif" required="false" rtexprvalue="true"%>
-<%@ attribute name="implantSayfasimi" required="false" rtexprvalue="true"%>
+<%@ attribute name="implantSayfasimi" required="false"
+	rtexprvalue="true"%>
 
 
 <!DOCTYPE html>
@@ -22,7 +23,8 @@
 <script src="/script/bootstrap.min.js"></script>
 
 
-<link type="text/css" rel="stylesheet"	href="/styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet"
+	href="/styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="/styles/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/css/epoch_styles.css" type="text/css" />
@@ -30,97 +32,99 @@
 
 </head>
 <body>
-<c:if test="${not empty gelirList}">
-	
-	<table class="table table-bordered" >
-	<tr> <td colspan="11" align="center" class="bg-warning" > Gelir Listesi </td> </tr> 
-		<tr>
-			<td></td>
-			<td >Tarih</td>
-			<td >Ptk. No</td>
-			<td >Ad Soyad</td>
-			<td >Tedavi</td>
-			<td >Adet</td>
-			<td >Dis No</td>
-			<td >Doktor</td>			
-			<td >Ödeme</td>
-				<c:if test="${implantSayfasimi ne 'evet' }">
-				
-				<td >Miktar</td>
-				
-				</c:if>
-			
-			
+	<c:if test="${not empty gelirList}">
 
-			<td >Aciklama</td>
-			<c:if test="${silAktif ne '0' }">
-				<td ></td>
-			</c:if>
-			
-			<c:if test="${implantSayfasimi eq 'evet' }">
-				
-				<td ></td>
-				
-				</c:if>
-
-		</tr>
-		<c:forEach items="${gelirList}" var="gelir" varStatus="count">
+		<table class="table table-bordered">
 			<tr>
-				<td>${count.count}</td>
-				<td>${gelir.odemeTarihiStr}</td>
-				<td>${gelir.hasta.protokolNo}</td>
-				<td>${gelir.hasta.ad} ${gelir.hasta.soyad}</td>
-				
-				<td> ${gelir.islemTip.ad}  </td>
-				<td> ${gelir.islem.disAdet}  </td>
-				<td> ${gelir.islem.disNo}  </td>
-				<td>${gelir.doktor.dAd}   ${gelir.doktor.dSoyad}  </td>
-			
-				<td>
-				
-				<c:choose>
-					<c:when test="${gelir.odemeTuru eq 2}">
+				<td colspan="11" align="center" class="bg-warning">Gelir
+					Listesi</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Tarih</td>
+				<td>Ptk. No</td>
+				<td>Ad Soyad</td>
+				<td>Tedavi</td>
+				<td>Adet</td>
+				<td>Doktor</td>
+				<td>Ödeme</td>
+				<c:if test="${implantSayfasimi ne 'evet' }">
+
+					<td>Miktar</td>
+
+				</c:if>
+
+				<td>Aciklama</td>
+				<c:if test="${silAktif ne '0' }">
+					<td></td>
+				</c:if>
+
+				<c:if test="${implantSayfasimi eq 'evet' }">
+
+					<td></td>
+
+				</c:if>
+
+			</tr>
+			<c:forEach items="${gelirList}" var="gelir" varStatus="count">
+				<tr>
+					<td>${count.count}</td>
+					<td>${gelir.odemeTarihiStr}</td>
+					<td>${gelir.hasta.protokolNo}</td>
+					<td>${gelir.hasta.ad}${gelir.hasta.soyad}</td>
+
+					<td>${gelir.islemTip.ad}</td>
+					<td>${gelir.islem.disAdet}</td>
+					<td>${gelir.doktor.dAd}${gelir.doktor.dSoyad}</td>
+
+					<td><c:choose>
+							<c:when test="${gelir.odemeTuru eq 2}">
 			Pesin
 			</c:when>
-					<c:when test="${gelir.odemeTuru eq 3}">
+							<c:when test="${gelir.odemeTuru eq 3}">
 			Taksit
 			</c:when>
-				</c:choose></td>
-				
-				<c:if test="${implantSayfasimi ne 'evet' }">
-				
-				<td>${gelir.miktar}</td>
-				
-				</c:if>
-				<td >${gelir.aciklama}</td>
-				<c:if test="${silAktif ne '0' }">
-					<c:if test="${sessionScope.sessionMember[0].kuTur ne '3' }">
-						<td ><html:link
-							action="/SilGelir?id=${gelir.id}"> Sil </html:link></td>
+						</c:choose></td>
+
+					<c:if test="${implantSayfasimi ne 'evet' }">
+
+						<td>${gelir.miktar}</td>
+
+					</c:if>
+					<td>${gelir.aciklama}</td>
+					<c:if test="${silAktif ne '0' }">
+						<c:if test="${sessionScope.sessionMember[0].kuTur ne '3' }">
+							<td><html:link action="/SilGelir?id=${gelir.id}"> Sil </html:link></td>
+						</c:if>
+
 					</c:if>
 
-				</c:if>
-				
-				<c:if test="${implantSayfasimi eq 'evet' }">
-				
-				<td ></td>
-				
-				</c:if>
-			</tr>
+					<c:if test="${implantSayfasimi eq 'evet' }">
 
-		</c:forEach>
-		
+						<td></td>
+
+					</c:if>
+				</tr>
+
+			</c:forEach>
+
 			<c:if test="${implantSayfasimi ne 'evet' }">
-				
-				<tr> <td colspan="8"  style="font-size: 13px; color: blue; " >
-	
-		 TOPLAM MIKTAR </td> <td  style="font-size: 13px; color: blue; " > ${toplamGelir} </td> <td ></td> </tr>
 
-				
-				</c:if>
-		
-		
-	</table>
-</c:if>
+				<tr>
+					<td colspan="8" style="font-size: 13px; color: blue;">TOPLAM
+						MIKTAR</td>
+					<td style="font-size: 13px; color: blue;">${toplamGelir}</td>
+					<td></td>
+				</tr>
+
+
+			</c:if>
+
+
+		</table>
+	</c:if>
+
+
+
 </body>
 </html>

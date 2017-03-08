@@ -22,8 +22,6 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 	</form-beans>
 
 	<action-mappings>
-	
-		
 
 		<action path="/getGelirGiderTur" scope="request" name="gelirGiderForm"
 			input="/addGider.jsp" type="tr.com.fdd.struts.actions.GetGiderGelirTurleriAction"
@@ -102,12 +100,23 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 		</action>
 
 		<action path="/SilGider" scope="request" name="gelirGiderForm"
-			input="/GiderSorgulama.jsp" type="tr.com.fdd.struts.actions.SilGiderAction"
+			input="/GiderRaporu.jsp" type="tr.com.fdd.struts.actions.SilGiderAction"
 			validate="true">
-			<forward name="success" path="/Success.jsp"></forward>
-			<forward name="failure" path="/Success.jsp"></forward>
+			<forward name="success" path="/GiderRaporu.jsp"></forward>
+			<forward name="failure" path="/GiderRaporu.jsp"></forward>
 			<forward name="exception" path="/exception.jsp"></forward>
 		</action>
+		
+		
+		<action path="/GiderGuncelle" scope="request" name="gelirGiderForm"
+			input="/GiderRaporu.jsp" type="tr.com.fdd.struts.actions.GuncelleGiderAction"
+			validate="true">
+			<forward name="success" path="/GiderRaporu.jsp"></forward>
+			<forward name="failure" path="/GiderRaporu.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		
 
 
 
@@ -165,9 +174,10 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			input="/HastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaBasicSorgulamaAction"
 			validate="true">
 
-			<forward name="success" path="/randevu.jsp"></forward>
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
 			<forward name="failure" path="/exception.jsp"></forward>
-			<forward name="noContent" path="/randevu.jsp"></forward>
+			<forward name="randevu" path="/randevu.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
 
 		</action>
 		
@@ -834,6 +844,25 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			<forward name="success" path="/randevu.jsp"></forward>
 			<forward name="noContent" path="/exception.jsp"></forward>
 			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/SubeTedaviFiyatGuncelle" scope="request" name="hastaRandevuForm"
+			input="/randevu.jsp"
+			type="tr.com.fdd.struts.actions.SubeTedaviFiyatGuncelleAction" 
+			validate="true">
+			<forward name="success" path="/SubeOperasyonFiyatEslestir.jsp"></forward>
+			<forward name="noContent" path="/SubeOperasyonFiyatEslestir.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		
+		<action path="/getOperasyonTur" scope="request" name="hastaRandevuForm"
+			input="/randevu.jsp"
+			type="tr.com.fdd.struts.actions.SubeOperasyonFiyatEslestir"
+			validate="true">
+			<forward name="success" path="/SubeOperasyonFiyatEslestir.jsp"></forward>
+			<forward name="noContent" path="/SubeOperasyonFiyatEslestir.jsp"></forward>
+			<forward name="exception" path="/SubeOperasyonFiyatEslestir.jsp"></forward>
 		</action>
 		
 	</action-mappings>

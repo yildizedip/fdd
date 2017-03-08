@@ -39,9 +39,10 @@ var bas_tar = new Epoch('epoch_popup','popup', document.getElementById("tarihStr
 }
 
 function validateForm(){
+	
 	 var miktar= document.forms["form"]["miktar"].value;
 	 var giderTuru = document.forms["form"]["giderTuru"].value;
-	var odemeSekli = document.forms["form"]["odemeSekli"].value;
+	 var odemeSekli = document.forms["form"]["odemeSekli"].value;
 	 
 	 var regexNum = /\d/;
 		var regexLetter = /[a-zA-z]/;
@@ -57,6 +58,8 @@ function validateForm(){
 			alert("Yalnýzca rakam girilebilir.");
 			return false;
 		}
+
+	
 	if(giderTuru==0 || giderTuru==''){
 	
 		alert("Lütfen Gider Turu Seçiniz..");
@@ -71,26 +74,7 @@ function validateForm(){
 <body style="color:black;">
 
 
-	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-		<div class="page-header ">
-			<div class="page-title" style="font-size: 20px;">
-				GÝDER EKLE
-			</div>
-			
-			<button  class="btn pull-right"
-							style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
-							onclick="window.print()"> </button>
-							
-		</div>
-		<div class="bg-success"> ${requestScope.warn} </div>
-		
-		<div class="clearfix"></div>
-	</div>
-
-
-
-
-
+<div class="bg-success"> ${requestScope.warn} </div>
 <div class="col-lg-6">  
 
 	<form name="form" action="addGider.do" method="post"	onsubmit="return validateForm()">
@@ -127,8 +111,25 @@ function validateForm(){
 			</tr>
 			
 			<tr>
+				<td> Ödeme Þekli </td>
+				<td>
+				
+				<select size="1" name="odemeSekli" id="odemeSekli">
+
+							<option label="Peþin" value="1">Peþin</option>
+							<option label="Kredi Kartý" value="2">Kredi Kartý</option>
+						
+				</select>
+				
+				</td>
+			</tr>
+			
+			<tr>
 				<td>Açýklama</td>
-				<td><textarea rows="4" cols="50" name="aciklama">	</textarea></td>
+				<td>
+				<textarea class="form-control" rows="4" cols="50" name="aciklama"></textarea>
+				
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;">

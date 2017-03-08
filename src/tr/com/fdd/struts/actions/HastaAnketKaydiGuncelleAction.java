@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TAnketDTO;
 import tr.com.fdd.dto.TAramaKaydiDTO;
+import tr.com.fdd.utils.GUIMessages;
 
 public class HastaAnketKaydiGuncelleAction extends Action {
 
@@ -40,7 +41,7 @@ public class HastaAnketKaydiGuncelleAction extends Action {
 
 			tran.commit();
 
-			request.setAttribute("warn",  " Kayýt baþarý ile silinmistir.");
+			request.setAttribute("warn",  GUIMessages.ISLEM_BASARILI);
 
 			return mapping.findForward("success");
 
@@ -52,7 +53,7 @@ public class HastaAnketKaydiGuncelleAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+			request.setAttribute("warn", GUIMessages.ISLEM_BASARISIZ);
 			return mapping.findForward("exception");
 		} finally {
 			if (sess != null && sess.isOpen())

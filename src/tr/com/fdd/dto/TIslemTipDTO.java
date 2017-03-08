@@ -11,6 +11,8 @@ public class TIslemTipDTO implements Serializable {
 	private String ad;
 	private String kod;
 	private String durum;
+	
+	private TIslemTipSubeDTO subeTip;
 
 	public int getId() {
 		return id;
@@ -42,5 +44,13 @@ public class TIslemTipDTO implements Serializable {
 
 	public void setDurum(String durum) {
 		this.durum = durum;
+	}
+
+	public TIslemTipSubeDTO getSubeTip() {
+		return subeTip;
+	}
+
+	public void setSubeTip(TIslemTipSubeDTO subeTip) {
+		this.subeTip = subeTip;
 	}
 }

@@ -31,9 +31,14 @@
 </head>
 <body>
 <c:if test="${not empty opersyonTuruneGoreGelirList}">
-	<h4>Operasyon Turune Gore Gelir Durumu :</h4>
 
 	<table class="table table-bordered" >
+	
+	<tr>  
+		<td colspan="2"		 class="bg-warning" align="center" > Operasyon Turune Gore Gelir Durumu
+				</td>
+	</tr>
+	
 		<tr>
 			<td class="helpHed" >Operasyon Turu</td>
 			<td class="helpHed" >Toplam Tutar</td>

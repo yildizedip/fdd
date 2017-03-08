@@ -9,14 +9,35 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="myTagFiles"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script src="script/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
 <link rel="stylesheet" href="css/edip.css" type="text/css" />
+<link rel="stylesheet" href="css/demo_page.css" type="text/css" />
+<link rel="stylesheet" href="css/demo_table.css" type="text/css" />
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" />
+
 <script type="text/javascript" src="js/epoch_classes.js"></script>
+<script type="text/javascript" src="js/edip.js"></script>
+<script type="text/javascript" src="js/jquery.ui.datepicker-tr.js"></script>
 
 <script type="text/javascript"> 
 		 var basTarihi;
@@ -40,40 +61,45 @@
 
 <title></title>
 </head>
-<body>
+<body style="color:black ; background-color: white;">
 
-<div align="center">
-<div align="left" >
-<hr>
- <font style="font-size: 12px; font-family: monospace; color: graytext; ">
-		..: Hastalarım
-		</font>
+		<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+			<div class="page-header ">
+			<div class="page-title" style="font-size: 20px;">
+			
+				HASTA LİSTESİ
+			
+			</div>
 
-<hr>
-</div>
-<table>
-	<tr>
-		<td align="left" valign="top" bgcolor="white">
+			<button class="btn pull-right"
+				style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
+				onclick="window.print()"></button>
+
+		</div>
+		<div class="bg-success">${requestScope.warn}</div>
+
+		<div class="clearfix"></div>
+	</div>
+
+<div class="col-lg-6">
 
 		<form action="getDoktorOperasyonListesi.do" method="post">
 
-		<table class="sorgulama">
+		<table class="table table-bordered">
 			<tr>
-				<td colspan="4"
-					style="text-align: center; font: bold; font-size: 12px">Sorgula
-				</td>
+				<td colspan="4" class="bg-info"  >SORGULA</td>
 			</tr>
 			<tr>
 				<td style="width: 115px;">Hasta Ad- Soyad</td>
 				<td style="width: 164px;"><input class=inputTextfield
 					name="hastaAd" id="hastaAd"></td>
 				<td>/</td>
-				<td><input class=inputTextfield name="hastaSoyad" id="hastaSoyad"></td>
+				<td><input  name="hastaSoyad" id="hastaSoyad"></td>
 			</tr>
 			<tr>
 			<td> Durum</td>
 			<td colspan="3">
-			<select size="1" name="durum" class="giderTuru">
+			<select size="1" name="durum" class="">
 			<option label="Durum Seçiniz.." value="-1"/>
 			<option  label="Devam Ediyor" value="A" >
 			<option  label="Bitmiş"  value="B">
@@ -85,8 +111,8 @@
 			<td>İşlem</td>
 			<td colspan="3">
 			
-			<select size="1" name="islemTip" class="giderTuru">
-						<option label="Operasyon Seçiniz.." value="-1"/>
+			<select size="1" name="islemTip" class="">
+						<option label="Tedavi Seçiniz.." value="-1"/>
 
 						<c:forEach items="${islemTurList}" var="islem">
 							<option label="${islem.ad}" value="${islem.id }"/>
@@ -112,41 +138,43 @@
 		
 		<font color="Red"> ${resquestScope.warn} </font> 
 		 <br>
+		 
+		 </div>
 
-<table class="sofT">
+<table class="table table-bordered">
 			<tr>
-				<td colspan="10" class="helpHed">OPERASYON LİSTESİ</td>
+				<th class="bg-success" colspan="11" > <h4 align="center"> Tedavi Listesi </h4> </th>
 			</tr>
 			<tr>			
-				<td class="helpHed"/>
-				<td class="helpHed">P. No</td>
-				<td class="helpHed">Ad Soyad</td>
-				<td class="helpHed">Operasyon</td>
-				<td class="helpHed">Tarihi</td>
-				<td class="helpHed">Adet</td>
-				<td class="helpHed">Açıklama</td>
-				<td class="helpHed">Ücret</td>
-				<td class="helpHed">Durum</td>
-				<td class="helpHed"></td>
+				<td class=""/>
+				<td class="">P. No</td>
+				<td class="">Ad Soyad</td>
+				<td class="">Tedavi</td>
+				<td class="">Tarihi</td>
+				<td class="">Adet</td>
+				<td class="">Açıklama</td>
+				<td class="">Ücret</td>
+				<td class="">Durum</td>
+				<td class=""></td>
 				
 			</tr>
 			<c:forEach items="${doktorOperasyonListesi}" var="operasyon" varStatus="count">
 				<tr>
-					<td class="helpBod">${count.count}</td>
-					<td class="helpBod">${operasyon.hasta.protokolNo}</td>
-					<td class="helpBod">${operasyon.hasta.ad} ${operasyon.hasta.soyad}</td>
-					<td class="helpBod">${operasyon.islemTip.ad}</td>					
-					<td class="helpBod">${operasyon.islemTarihiStr}</td>
-					<td class="helpBod">${operasyon.disAdet}</td>
-					<td class="helpBod">${operasyon.aciklama}</td>
-					<td class="helpBod">${operasyon.miktar}</td>
-					<td class="helpBod">
+					<td class="">${count.count}</td>
+					<td class="">${operasyon.hasta.protokolNo}</td>
+					<td class="">${operasyon.hasta.ad} ${operasyon.hasta.soyad}</td>
+					<td class="">${operasyon.islemTip.ad}</td>					
+					<td class="">${operasyon.islemTarihiStr}</td>
+					<td class="">${operasyon.disAdet}</td>
+					<td class="">${operasyon.aciklama}</td>
+					<td class="">${operasyon.miktar}</td>
+					<td class="">
 					<c:choose>					
 						<c:when test="${operasyon.durumu eq 'A'}">Dvm E.</c:when>
 						<c:when test="${operasyon.durumu eq 'B'}">Bitti</c:when>
 					</c:choose>
 					</td>
-					<td class="helpBod"> 						
+					<td class=""> 						
 						<html:link action="/HastaOdemeListesiGetir?islemId=${operasyon.id}
 						&hastaId=${operasyon.hastaId}&tip=6"> Ödeme Listesi Görüntüle</html:link>
 					</td>
@@ -156,13 +184,9 @@
 			</c:forEach>
 
 		</table>
-		</td>
-	</tr>
-	<tr>
-		<td width="308" bgcolor="#FFFFFF"></td>
-		<td width="657" bgcolor="#FFFFFF"></td>
-	</tr>
-</table>
-</div>
+
+
+
+
 </body>
 </html>

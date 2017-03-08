@@ -23,10 +23,9 @@ public class HastaRandevuSorgulamaGunlukAction extends Action {
 
 		Connection conn = SQLUtils.getMySqlConneciton();
 		try {
-
+			
 			SQLUtils sqlUtils = new SQLUtils();
-			Integer subeId = (Integer) request.getSession().getAttribute(
-					"subeId");
+			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 
 			List<TDoktorDTO> doktorList4Randevu = sqlUtils.getDoktorList(conn, subeId, true);
 			

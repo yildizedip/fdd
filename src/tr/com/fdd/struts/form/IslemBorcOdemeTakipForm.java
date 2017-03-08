@@ -8,6 +8,7 @@ public class IslemBorcOdemeTakipForm extends ActionForm {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private int islemId;
+	private int hastaId;
 	private Date borcOdemeTarihi;
 	private String borcOdemeTarihiStr;
 	private String borcOdemeTarihiBaslamaStr;
@@ -121,5 +122,11 @@ public class IslemBorcOdemeTakipForm extends ActionForm {
 	}
 	public void setKalan(String kalan) {
 		this.kalan = kalan;
+	}
+	public int getHastaId() {
+		return hastaId;
+	}
+	public void setHastaId(int hastaId) {
+		this.hastaId = hastaId;
 	}
 }

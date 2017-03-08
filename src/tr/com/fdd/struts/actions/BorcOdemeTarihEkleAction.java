@@ -54,7 +54,10 @@ public class BorcOdemeTarihEkleAction extends GenericAction {
 			tran = session.beginTransaction();
 			session.save(dto);
 			tran.commit();
-			request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);			
+			request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);	
+			
+			Commons.refreshSelectedHasta(request, connection, frm.getHastaId());
+			
 			return mapping.findForward("success");
 		} catch (Exception e) {
 			e.printStackTrace();

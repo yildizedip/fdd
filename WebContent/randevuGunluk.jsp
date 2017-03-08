@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-9" pageEncoding="ISO-8859-9"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -7,31 +6,46 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<link rel="stylesheet" type="text/css" href="css/fullcalendar.css" />
-<link rel="stylesheet" type="text/css"	href="css/fullcalendar.print.min.css" media="print" />
-<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-<link rel="stylesheet" type="text/css"	href="css/jquery-ui.structure.css" />
-<link rel="stylesheet" type="text/css"	href="css/jquery.dataTables.min.css" />
-<link rel="stylesheet" type="text/css"	href="http://arshaw.com/js/fullcalendar-1.6.1/demos/cupertino/theme.css" />
-
-
-
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/moment-with-locales.js"></script>
-<script src="js/fullcalendar.js"></script>
-<script src="js/fullcalendar.min.js"></script>
-<script src='js/locale-all.js'></script>
-<script src="script/bootstrap.min.js"></script>
-<script src="js/jquery.dataTables.min.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="styles/bootstrap.css">
 <link type="text/css" rel="stylesheet" href="styles/main.css">
 <link type="text/css" rel="stylesheet" href="styles/nestable.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css"	href="css/jquery-ui.structure.css" />
+<link rel="stylesheet" type="text/css"	href="css/jquery.dataTables.min.css" />
+
+<link rel="stylesheet" type="text/css" href="css/fullcalendar.css" />
+<link rel="stylesheet" type="text/css"	href="css/fullcalendar.print.min.css" media="print" />
+
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/moment-with-locales.js"></script>
+<script src="script/bootstrap.min.js"></script>
+
+<script src='js/locale-all.js'></script>
+
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/fullcalendar.js"></script>
+<script src="js/fullcalendar.min.js"></script>
+
+
+
+<style type="text/css">
+.fc h2 {
+   font-size: 12px;
+}
+
+</style>
+
 
 
 <script>
@@ -92,7 +106,7 @@
 							"end" : '${randevu.randevuTarihiBitis}',
 							"description": 'Hasta : ${randevu.hasta.ad} ${randevu.hasta.soyad}'
 								+ '<br>Tedavi: ${randevu.islemTipDto.ad}'
-								+ '<br> AÃ§Ä±klama: ${randevu.aciklama}'
+								+ '<br> Açýklama: ${randevu.aciklama}'
 						}
 
 						val.push(event);
@@ -103,18 +117,28 @@
 								{
 
 									header : {
-										left : '',
-										right : ''
+										left : 'prev,next today',
+										center : '',
+										right : 'title'
 									},
 									defaultView : 'agendaDay',
 									height : 600,
-									width : 50,
 									locale : 'tr',
-									selectable : false,
+									theme :false,
+									selectable : true,
 									minTime : "08:00:00",
 									maxTime : "22:00:00",
+									
+									fixedWeekCount:false,
+									weekNumbers : true,
+									navLinks : true, // can click day/week names to navigate views
+									businessHours : false,
+						
+									slotDuration : '00:30:00',
+									contentHeight : 600,
+									slotLabelFormat : 'H:mm',
+									
 									allDaySlot : false,
-									theme : false,
 									selectHelper : true,
 									editable : false,
 
@@ -133,8 +157,7 @@
 									},
 									events : val,
 									eventRender : function(event, element) {
-										element.attr('href',
-												'javascript:void(0);');
+										element.attr('href','javascript:void(0);');
 										
 										$(element).css('font-size', '15px');
 										element.click(function() {
@@ -188,6 +211,18 @@
 								$(this).closest('tr').remove();
 							});
 						});
+						
+						
+						
+						
+						$('#btnNextDay').bind('click',function() {
+							$('#randevuEkleForm').submit(); 
+							
+						});
+						$('#btnPrevDay').bind('click',function() {
+							
+							
+						});
 
 					});
 
@@ -214,8 +249,9 @@
 
 body {
 	padding: 0;
-	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
-	font-size: 12px;
+	font-size: 13px;
+	color:black; 
+	font-family: serif;
 }
 </style>
 
@@ -224,10 +260,15 @@ body {
 <body>
 
 	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-		<div class="page-header pull-left">
-			<div class="page-title" style="font-size: 20px;">
-				<span id="myDate"> </span> tarihli randevular
+		
+		<div class="page-header pull-right">
+			<div class="page-title" style="font-size: 24px;">
+				<span id="myDate"> </span> 
 			</div>
+			
+			<button class="btn pull-right"
+				style="background-image: url('Images/printIcon2.jpg'); height: 20px; width: 20px"
+				onclick="window.print()"></button>
 		</div>
 		<div class="clearfix"></div>
 	</div>
@@ -254,9 +295,10 @@ body {
 							<form action="hastaRandevuSorgula.do" method="post">
 								<input type="submit" value="RANDEVU VER" class="btn btn-default">
 								<input type="hidden" name="doktor" value="${randevu.dId}">
+								<div id="${randevu.dId}"></div>
 							</form> 
 
-							<div id="${randevu.dId}"></div>
+							
 						</td>
 
 					</c:forEach>
@@ -269,9 +311,9 @@ body {
 
 	<div id="eventContent" title="Event Details" style="display: none;">
 		<p id="eventInfo"></p>
-		BaÅŸlangÄ±Ã§ Tarihi: <span id="startTime"></span>
+		Baþlangýç Tarihi: <span id="startTime"></span>
 		<br> 
-		BitiÅŸ Tarihi: <span id="endTime"></span><br>
+		Bitiþ Tarihi: <span id="endTime"></span><br>
 		<br>
 	</div>
 

@@ -31,9 +31,13 @@
 </head>
 <body>
 <c:if test="${not empty doktoraGoreGelirList}">
-	<h4 >  Doktor Bazli  Gelir Durumu </h4>
 
 	<table class="table table-bordered" >
+	
+	<tr>  
+		<td colspan="2"		 class="bg-warning" align="center" >  Doktor Bazli  Gelir Durumu
+				</td>
+	</tr>
 		<tr>
 			<td class="helpHed" >Doktor Ad Soyad</td>
 			<td class="helpHed" >Toplam Tutar</td>

@@ -20,6 +20,7 @@ public class TGelirGiderDTO implements Serializable {
 	private int girenKisi;
 	private int doktor;
 	private String turAd ;
+	
 	private String gKisiAd;
 	private String gKisiSoyAd;
 	private String dAd;
@@ -34,6 +35,7 @@ public class TGelirGiderDTO implements Serializable {
 	private String durum;
 	private int subeId;
 	private THastaDTO hasta;
+	private TTurKodDTO turKodDTO;
 	
 	public int getTip() {
 		return tip;
@@ -176,6 +178,12 @@ public class TGelirGiderDTO implements Serializable {
 	}
 	public void setSubeId(int subeId) {
 		this.subeId = subeId;
+	}
+	public TTurKodDTO getTurKodDTO() {
+		return turKodDTO;
+	}
+	public void setTurKodDTO(TTurKodDTO turKodDTO) {
+		this.turKodDTO = turKodDTO;
 	}
 
 	

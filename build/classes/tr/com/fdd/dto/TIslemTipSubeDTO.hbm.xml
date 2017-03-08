@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TIslemTipSubeDTO" table="t_sube_islem_tip" >
+		<id name="id" column="id" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		
+		<property name="subeId" column="sube_id" type="int" />
+		<property name="islemId" column="islem_id" type="int" />
+		<property name="fiyat" column="fiyat" type="double" />
+		<property name="state" column="state" type="int" />
+	
+	
+	</class>
+</hibernate-mapping>

@@ -2,13 +2,40 @@
 <%@page import="tr.com.fdd.dto.TIslemDTO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="tr.com.fdd.struts.actions.SQLUtils"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-9"
-	pageEncoding="ISO-8859-9"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-9" pageEncoding="ISO-8859-9"%>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script src="script/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/edip.css" type="text/css" />
+<link rel="stylesheet" href="css/demo_page.css" type="text/css" />
+<link rel="stylesheet" href="css/demo_table.css" type="text/css" />
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" />
+
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script type="text/javascript" src="js/edip.js"></script>
+<script type="text/javascript" src="js/jquery.ui.datepicker-tr.js"></script>
+
 <link rel="stylesheet" href="css/edip.css" type="text/css" />
 
 <script type="text/javascript" src="js/epoch_classes.js"></script>
@@ -24,41 +51,49 @@
 </script>
 
 <%
-String islemId= request.getParameter("islemId");
-String hastaId= request.getParameter("hastaId");
-String subeId= request.getParameter("subeId");
-SQLUtils utils= new SQLUtils();
-Connection conn =SQLUtils.getMySqlConneciton();
-TIslemDTO islem=  utils.getOperasyonuKesinlesmemisHasta(Integer.parseInt(islemId),conn);
-System.out.print(subeId);
-THastaDTO hasta= utils.getHasta(Integer.parseInt(hastaId),conn,new Integer(subeId).intValue());
+	String islemId = request.getParameter("islemId");
+	String hastaId = request.getParameter("hastaId");
+	String subeId = request.getParameter("subeId");
+	SQLUtils utils = new SQLUtils();
+	Connection conn = SQLUtils.getMySqlConneciton();
+	TIslemDTO islem = utils.getOperasyonuKesinlesmemisHasta(Integer.parseInt(islemId), conn);
+	System.out.print(subeId);
+	THastaDTO hasta = utils.getHasta(Integer.parseInt(hastaId), conn, new Integer(subeId).intValue());
 
-request.setAttribute("operasyon",islem);
-request.setAttribute("hasta",hasta);
-
- %>
+	request.setAttribute("operasyon", islem);
+	request.setAttribute("hasta", hasta);
+%>
 </head>
-<body>
-<div>
-<table align="center">
-	<tr>
-		<td align="left" valign="top" style="width: 650px">
-			<hr>
-		<font
-			style="font-size: 12px; font-family: monospace; color: graytext;">
-		..: Hasta Operasyonu Kesinleştir </font>
-		<hr>
+<body style="color:black ; background-color: white;">
 
-		
-		<table class="sorgulama">
+	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+		<div class="page-header ">
+			<div class="page-title" style="font-size: 20px;">Hasta
+				Operasyonu Kesinleştir</div>
+
+			<button class="btn pull-right"
+				style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
+				onclick="window.print()"></button>
+
+		</div>
+		<div class="bg-success">${requestScope.warn}</div>
+
+		<div class="clearfix"></div>
+	</div>
+
+	<div>
+	
+	<div class="col-lg-6">  
+
+		<table class="table table-bordered">
 			<tr>
-				<td colspan="2" style="text-align: center;">HASTA BİLGİLERİ</td>
+				<td colspan="2" style="text-align: center;" class="bg-info">HASTA BİLGİLERİ</td>
 			</tr>
 			<tr>
 				<td>Protokol No</td>
 
-				<td><input class="inputTextfield" name="protokolNo" id="protokolNo"
-					value="${hasta.protokolNo }" /> </td>
+				<td><input class="inputTextfield" name="protokolNo"
+					id="protokolNo" value="${hasta.protokolNo }" /></td>
 			</tr>
 
 			<tr>
@@ -76,107 +111,100 @@ request.setAttribute("hasta",hasta);
 			</tr>
 
 
-		
+
 
 			<tr>
 				<td colspan="2" align="left"><label style="color: red;">
-				${requestScope.warn}</label></td>
+						${requestScope.warn}</label></td>
 
 			</tr>
 
 		</table>
 		
-		<hr>
-		<c:if test="${odemeListesi eq null}">
+		</div>
 		
-		<form action="OperasyonuKesinlestir.do" method="post">
-		<table class="sorgulama">
-			<tr>
-				<td colspan="3" style="text-align: center;">OPERASYON BİLGİLERİ</td>
-			</tr>
-			<tr>
-				<td>İşlem Tipi</td>
-				<td colspan="2">
-				<select size="1" name="islemTipi" class="giderTuru"   >
-						<option label="Operasyon Seçiniz.." value="-1" />
+		<div class="clearfix"></div>
 
-						<c:forEach items="${islemTurList}" var="islem">
-						<option label="${islem.ad}" value="${islem.id }" 
-						<c:if test="${operasyon.islemTipi eq islem.id }">
+	<div class="col-lg-6">
+
+		<c:if test="${odemeListesi eq null}">
+
+			<form action="OperasyonuKesinlestir.do" method="post">
+			
+				<table class="table table-bordered">
+					<tr>
+						<td colspan="3" style="text-align: center;" class="bg-info">OPERASYON
+							BİLGİLERİ</td>
+					</tr>
+					<tr>
+						<td>İşlem Tipi</td>
+						<td colspan="2"><select size="1" name="islemTipi"
+							class="">
+								<option label="Operasyon Seçiniz.." value="-1" />
+
+								<c:forEach items="${islemTurList}" var="islem">
+									<option label="${islem.ad}" value="${islem.id }"
+										<c:if test="${operasyon.islemTipi eq islem.id }">
 						
 						selected="selected"
-						</c:if>
-						
-						
-						/>
-						</c:forEach>
-						
-					</select>
-					<input type="hidden" name="islemId" value="${operasyon.id}">
-				</td> 
+						</c:if> />
+								</c:forEach>
 
-			</tr>
+						</select> <input type="hidden" name="islemId" value="${operasyon.id}">
+						</td>
 
-			<tr>
-				<td>Doktor</td>
-				<td>
-				<select size="1" name="doktorId" class="giderTuru">
-						<option label="Doktor Seçiniz.." value="-1"/>
+					</tr>
 
-						<c:forEach items="${doktorList}" var="doktorDTO">
-							<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } " value="${doktorDTO.dId }"
-								<c:if test="${operasyon.doktorId eq doktorDTO.dId }">
+					<tr>
+						<td>Doktor</td>
+						<td><select size="1" name="doktorId" >
+								<option label="Doktor Seçiniz.." value="-1" />
+
+								<c:forEach items="${doktorList}" var="doktorDTO">
+									<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } "
+										value="${doktorDTO.dId }"
+										<c:if test="${operasyon.doktorId eq doktorDTO.dId }">
 										
 										selected="selected"
-										</c:if>
-							
-							
-							/>
-						</c:forEach>
-					</select>
-				</td>
+										</c:if> />
+								</c:forEach>
+						</select></td>
 
 
-			</tr>
-			<tr>
-				<td>İşlem Tarihi</td>
-				<td>
-				
-				<input class="inputTextfield" name="islemTarihiStr" 
-				id="islemTarihiStr" value="${operasyon.islemTarihiStr}"/>
-				</td>
+					</tr>
+					<tr>
+						<td>İşlem Tarihi</td>
+						<td><input class="inputTextfield" name="islemTarihiStr"
+							id="islemTarihiStr" value="${operasyon.islemTarihiStr}" /></td>
 
 
-			</tr>
-				<tr>
-				<td>Ücret</td>
-				<td><input class="inputTextfield" style="width: 150px; " name="miktar" 
-				id="miktar" value="${operasyon.miktar }"/> TL</td>
+					</tr>
+					<tr>
+						<td>Ücret</td>
+						<td><input class="inputTextfield" style="width: 150px;"
+							name="miktar" id="miktar" value="${operasyon.miktar }" /> TL</td>
 
 
-			</tr>
-			<tr>
-				<td>Açıklama</td>
-				<td>
-				<textarea style="width: 394px;"  name="aciklama" id="aciklama">${operasyon.aciklama } </textarea>				 
-					</td>
- 
+					</tr>
+					<tr>
+						<td>Açıklama</td>
+						<td><textarea style="width: 394px;" name="aciklama"
+								id="aciklama">${operasyon.aciklama } </textarea></td>
 
-			</tr>
 
-			<tr>
-				<td colspan="3" style="text-align: center;">
-				<input type="submit" value="Operasyonu Kesinleştir" 
-				id="btn_gonder" name="bnt_gonder"/>
-				
-				</td>
-				
-			</tr>
-		</table>
-		</form>
+					</tr>
+
+					<tr>
+						<td colspan="3" style="text-align: center;"><input
+							type="submit" value="Operasyonu Kesinleştir" id="btn_gonder"
+							name="bnt_gonder" /></td>
+
+					</tr>
+				</table>
+			</form>
 		</c:if>
-		</td>
-</table>
 </div>
+
+	</div>
 </body>
 </html>

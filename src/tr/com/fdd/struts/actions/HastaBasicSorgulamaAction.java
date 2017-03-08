@@ -27,11 +27,13 @@ public class HastaBasicSorgulamaAction extends Action {
 			request.setCharacterEncoding("ISO-8859-9");
 			String islemTip = request.getParameter("islem");
 			HastaForm hastaForm = (HastaForm) form;
-			Integer subeId = (Integer) request.getSession().getAttribute(
-					"subeId");
+			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 
 			SQLUtils sqlUtils = new SQLUtils();
-			List<THastaDTO> hastaListesi = sqlUtils.getHastaList(conn, subeId, hastaForm.getAd());
+			List<THastaDTO> hastaListesi = sqlUtils.getHastaList(conn, subeId, 
+					hastaForm.getAd(),
+					hastaForm.getSoyad(), 
+					hastaForm.getProtokolNo());
 
 			if (hastaListesi.size() == 0) {
 				request.setAttribute("noContent", GUIMessages.VERI_BULUNAMADI);
@@ -39,7 +41,7 @@ public class HastaBasicSorgulamaAction extends Action {
 
 			}
 			response.setContentType("text/html");
-			request.setAttribute("hastaListesi", hastaListesi);
+			request.setAttribute("hastaList", hastaListesi);
 
 			if (GenelDegiskenler.RANDEVU_EKLE.equals(islemTip))
 				return mapping.findForward("randevuEkle");
@@ -57,6 +59,19 @@ public class HastaBasicSorgulamaAction extends Action {
 				return mapping.findForward("operasyonBitir");
 			else if (GenelDegiskenler.LABROTUVAR_ISLEM.equals(islemTip))
 				return mapping.findForward("labrotuvarEkle");
+			else if ("randevu".equals(islemTip)){
+				
+				
+				String doktorId = request.getParameter("doktorId");
+				String randevuBasTar = request.getParameter("randevuBasTar");
+				String randevuBitTar = request.getParameter("randevuBitTar");
+				
+				request.setAttribute("doktorId", doktorId);
+				request.setAttribute("randevuBitTar", randevuBitTar);
+				request.setAttribute("randevuBasTar", randevuBasTar);
+				
+				return mapping.findForward("randevu");
+				}
 			else
 				return mapping.findForward("success");
 		} catch (Exception e) {

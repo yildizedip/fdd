@@ -6,13 +6,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="silAktif" required="false" rtexprvalue="true"%>
 <%@ attribute name="implantSayfasimi" required="false" rtexprvalue="true"%>
-
+<%@tag pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1 ">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
@@ -31,19 +31,20 @@
 </head>
 <body>
 <c:if test="${not empty giderIstatistikler[2]}">
-	<h4">�deme Sekline G�re Gider Durumu :</h4>
+	
 
-	<br>
 	<table class="table table-bordered" >
+	
+	 <tr> <td colspan="2" class="bg-warning" align="center"> Ödeme Şekline Göre Gider Raporu </td> </tr> 
 		<tr>
-			<td class="helpHed" >Odeme Sekli</td>
-			<td class="helpHed" >Toplam Tutar</td>
+			<td class="" >Ödeme Sekli</td>
+			<td class="" >Toplam Tutar</td>
 		</tr>
 		<c:forEach items="${giderIstatistikler[2]}"
 			var="odemeSekliList">
 			<tr>
-				<td class="helpBod" >${odemeSekliList.odemeSekliStr }</td>
-				<td class="helpBod" >${odemeSekliList.miktar}  ${odemeSekliList.paraBirimi}</td>
+				<td class="" >${odemeSekliList.odemeSekliStr }</td>
+				<td class="" >${odemeSekliList.miktar}  ${odemeSekliList.paraBirimi}</td>
 			</tr>
 		</c:forEach>
 	</table>

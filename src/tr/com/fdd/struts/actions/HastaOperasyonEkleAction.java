@@ -3,9 +3,7 @@ package tr.com.fdd.struts.actions;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +15,6 @@ import org.apache.struts.action.ActionMapping;
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
-import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.TIslemDTO;
 import tr.com.fdd.struts.form.HastaKartiForm;
@@ -98,7 +95,7 @@ public class HastaOperasyonEkleAction extends GenericAction {
 				tHastaOdemeDto.setIslemId(islemId);
 				tHastaOdemeDto.setHastaId(hastaKartiForm.getHastaId());
 				tHastaOdemeDto.setDurumu("A");
-				tHastaOdemeDto.setOdemeTuru(2);
+				tHastaOdemeDto.setOdemeTuru(Integer.parseInt(hastaKartiForm.getOdemeTuru()));
 				tHastaOdemeDto.setEklenmeTarihi(new Date());
 				tHastaOdemeDto.setKalanMiktar(hastaKartiForm.getKalanMiktar());
 				tHastaOdemeDto.setMiktar(hastaKartiForm.getOdemeMiktar());
@@ -162,6 +159,8 @@ public class HastaOperasyonEkleAction extends GenericAction {
 				tHastaOdemeDtoForm.setDoktorId(implantAnaDto.getDoktorId());
 				tHastaOdemeDtoForm.setIslemId(islemAnaId);
 				tHastaOdemeDtoForm.setHastaId(hastaKartiForm.getHastaId());
+				tHastaOdemeDtoForm.setOdemeTuru(Integer.parseInt(hastaKartiForm.getOdemeTuru()));
+				
 				tHastaOdemeDtoForm.setDurumu("A");
 				tHastaOdemeDtoForm.setEklenmeTarihi(new Date());
 				tHastaOdemeDtoForm.setKalanMiktar(hastaKartiForm.getKalanMiktar());
@@ -180,8 +179,10 @@ public class HastaOperasyonEkleAction extends GenericAction {
 			
 			tran.commit();
 			
-			THastaDTO hastaDTO=Commons.getActiveHasta(request);
-			hastaDTO.getHastaOperasyonList().add(implantAnaDto);
+			Commons.refreshSelectedHasta(request, connection, hastaKartiForm.getHastaId());
+			
+//			THastaDTO hastaDTO=Commons.getActiveHasta(request);
+//			hastaDTO.getHastaOperasyonList().add(implantAnaDto);
 		}
 		
 		request.setAttribute("warn", GUIMessages.ISLEM_BASARILI);
@@ -301,6 +302,7 @@ public class HastaOperasyonEkleAction extends GenericAction {
 		implantAnaDTO.setHastaId(hasta_id);
 		implantAnaDTO.setEklenmeTarihi(new Date());
 		implantAnaDTO.setDisAdet(hastaKartiForm.getDisAdet());
+		implantAnaDTO.setDisNo(hastaKartiForm.getDisNo());
 		
 	}
 

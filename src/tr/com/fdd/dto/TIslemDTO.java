@@ -48,6 +48,7 @@ public class TIslemDTO implements Serializable {
 	
 	private List<THastaOdemeDTO> odemeList;
 	private List<TAramaKaydiDTO> aramaKayitListesi;
+	private List<THastaRandevuDTO> randevuList;
 	private List<String> odemeListStr;
 	private List<String> odemeTarihListStr;
 	private TDoktorDTO implantCerrahDoktor;
@@ -282,6 +283,12 @@ public class TIslemDTO implements Serializable {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return islemTip.getAd();
+	}
+	public List<THastaRandevuDTO> getRandevuList() {
+		return randevuList;
+	}
+	public void setRandevuList(List<THastaRandevuDTO> randevuList) {
+		this.randevuList = randevuList;
 	}
 	
 		

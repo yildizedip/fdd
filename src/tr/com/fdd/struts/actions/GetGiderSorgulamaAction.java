@@ -16,6 +16,7 @@ import tr.com.fdd.dto.TGelirGiderDTO;
 import tr.com.fdd.dto.TKullaniciBilgiDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
 import tr.com.fdd.mysql.MysqlUtil;
+import tr.com.fdd.utils.GUIMessages;
 
 public class GetGiderSorgulamaAction extends Action {
 
@@ -54,7 +55,7 @@ public class GetGiderSorgulamaAction extends Action {
 							kuTur, subeId.intValue());
 
 			if (giderListesi.size() == 0) {
-				request.setAttribute("noContent", "Kayýt Bulunamadý");
+				request.setAttribute("noContent", GUIMessages.VERI_BULUNAMADI);
 				return mapping.findForward("noContent");
 
 			} else {

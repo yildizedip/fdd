@@ -11,12 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.sf.hibernate.HibernateException;
-import net.sf.hibernate.Query;
-import net.sf.hibernate.Session;
-import net.sf.hibernate.SessionFactory;
-import net.sf.hibernate.cfg.Configuration;
-
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -24,6 +18,11 @@ import org.apache.struts.action.ActionMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Query;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.SessionFactory;
+import net.sf.hibernate.cfg.Configuration;
 import tr.com.fdd.dto.TDepoDTO;
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.TSubeDTO;
@@ -75,9 +74,14 @@ public class LoginSystemAction extends Action {
 			List<TDoktorDTO> doktorList = sqlUtils.getDoktorList(connection,Integer.parseInt(sube_Id), false);
 			
 			List<?> giderTurKodList = sqlUtils.getGiderTurList(connection,Integer.parseInt(sube_Id));
+			
+			
 			List<?> gelirTurKodList = gelirTurListesi(session);
-			List<?> islemTurList = islemTurList(session);
-			List<?> hastaList = sqlUtils.getHastaList(connection, Integer.parseInt(sube_Id),null);
+			
+			List<?>  islemTurList=   sqlUtils.getOperasyonTurList(connection,Integer.parseInt(sube_Id));
+			
+		//	List<?> islemTurList = islemTurList(session);
+		//	List<?> hastaList = sqlUtils.getHastaList(connection, Integer.parseInt(sube_Id),null);
 
 			GenelDegiskenler deg = new GenelDegiskenler();
 
@@ -95,7 +99,7 @@ public class LoginSystemAction extends Action {
 			sessionInf.setAttribute("islemTurList", islemTurList);
 			sessionInf.setAttribute("saatler", deg.getHours());
 			sessionInf.setAttribute("dakikalar", deg.getDakikalar(5));
-			sessionInf.setAttribute("hastaList", hastaList);
+		//	sessionInf.setAttribute("hastaList", hastaList);
 
 			/**
 			 * gunluk tarih sessiona ekleniyor.
@@ -121,8 +125,8 @@ public class LoginSystemAction extends Action {
 			List<Object[]> getTopOperations = sqlUtils.getTopOperations(connection, subeId);
 			List<Object[]> getDoktorIslemOperations = sqlUtils.getDoktorIslemSayisi(connection, subeId);
 			List<Object[]> getTopGider = sqlUtils.getTopGider(connection,subeId);
-		//	sessionInf.setAttribute("getHastaSayisi", getHastaSayisi);
-		//	sessionInf.setAttribute("getTopOperations", getTopOperations);
+			sessionInf.setAttribute("getHastaSayisi", getHastaSayisi);
+			sessionInf.setAttribute("getTopOperations", getTopOperations);
 		//	sessionInf.setAttribute("getDoktorIslemOperations",	getDoktorIslemOperations);
 		//	sessionInf.setAttribute("getTopGider", getTopGider);
 		//	sessionInf.setAttribute("getOperasyonuKesinlesmemisHastaSayisi",getOperasyonuKesinlesmemisHastaSayisi);
@@ -151,6 +155,7 @@ public class LoginSystemAction extends Action {
 			// return mapping.findForward("failure");
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			request.setAttribute("exception", e);
 			if(connection!=null){
 			connection.rollback();

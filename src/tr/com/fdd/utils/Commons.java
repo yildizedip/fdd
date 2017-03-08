@@ -97,7 +97,7 @@ public class Commons {
 	
 	public static void addHasta2HastaList(THastaDTO hastaDTO, HttpServletRequest request){
 		List<THastaDTO> hastaListesi = (List<THastaDTO>) request.getSession().getAttribute("hastaList");
-		
+		if(hastaListesi!=null)		
 		hastaListesi.add(hastaDTO);
 	}	
 	

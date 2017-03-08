@@ -29,9 +29,14 @@
 
 
 <c:if test="${not empty odemeSeklineGoreGelirList}">
-	<h4>Ödeme Sekline Göre Gelir Durumu</h4>
 
 	<table class="table" >
+	
+	<tr>  
+		<td colspan="2"		 class="bg-warning" align="center" > Ödeme Sekline Göre Gelir Durumu
+				</td>
+	</tr>
+	
 		<tr>
 			<td class="helpHed" >Odeme Sekli</td>
 			<td class="helpHed" >Toplam Tutar</td>
