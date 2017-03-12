@@ -41,7 +41,7 @@
 
 <style type="text/css">
 .fc h2 {
-   font-size: 12px;
+   font-size: 11px;
 }
 
 </style>
@@ -52,10 +52,19 @@
 	$(document)
 			.ready(
 					function() {
-
-						var dt_to = $.datepicker.formatDate('yy.mm.dd',	new Date());
-
-						$('#myDate').text(dt_to);
+						
+						
+						var tarih=new Date();
+						var gun=tarih.getDay();
+						var ay=tarih.getMonth();
+						var yil=tarih.getFullYear();
+						var gunler= ['Pazar', 'Pazartesi', 'Salý','Çarþamba','Perþembe','Cuma','Cumartesi'];
+						var aylar= ['Ocak', 'Þubat', 'Mart','Nisan','Mayýs','Haziran','Temmuz','Aðustos','Eylül','Ekim','Kasým','Aralýk'];
+						$('#myDate').text(tarih.getDate()+' '+aylar[ay]+' '+yil+' '+gunler[gun]);								
+						//var dt_to = $.datepicker.formatDate('dd M yy',	new Date());
+						
+									
+						//$('#myDate').text(dt_to);
 
 						$('#example').DataTable({
 							select : {
@@ -159,7 +168,7 @@
 									eventRender : function(event, element) {
 										element.attr('href','javascript:void(0);');
 										
-										$(element).css('font-size', '15px');
+										$(element).css('font-size', '11px');
 										element.click(function() {
 
 											$("#startTime").html(
@@ -249,7 +258,7 @@
 
 body {
 	padding: 0;
-	font-size: 13px;
+	font-size: 10px;
 	color:black; 
 	font-family: serif;
 }
@@ -259,26 +268,16 @@ body {
 </head>
 <body>
 
-	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-		
-		<div class="page-header pull-right">
-			<div class="page-title" style="font-size: 24px;">
-				<span id="myDate"> </span> 
-			</div>
+
+
+
 			
-			<button class="btn pull-right"
-				style="background-image: url('Images/printIcon2.jpg'); height: 20px; width: 20px"
-				onclick="window.print()"></button>
-		</div>
-		<div class="clearfix"></div>
-	</div>
-
-
-	<div class="row">
-
 		<div class="col-lg-12">
+		
+		<h4 id="myDate" align="center"> </h4>
 			<table class="table table-hover table-bordered">
 
+				
 				<tr>
 					<c:forEach items="${doktorList4Randevu}" var="randevu">
 
@@ -286,14 +285,14 @@ body {
 						
 							<div class="bg-info">
 							
-							<span  style="font-size: 16px;"> ${randevu.dAd}
+							<span  style="font-size: 12px;"> ${randevu.dAd}
 								${randevu.dSoyad} </span>
 								
 								</div>
 								
 								
 							<form action="hastaRandevuSorgula.do" method="post">
-								<input type="submit" value="RANDEVU VER" class="btn btn-default">
+								<input type="submit" value="Randevu Ver" class="btn btn-link" style="font-size: 12px;">
 								<input type="hidden" name="doktor" value="${randevu.dId}">
 								<div id="${randevu.dId}"></div>
 							</form> 
@@ -307,7 +306,6 @@ body {
 			</table>
 		</div>
 
-	</div>
 
 	<div id="eventContent" title="Event Details" style="display: none;">
 		<p id="eventInfo"></p>

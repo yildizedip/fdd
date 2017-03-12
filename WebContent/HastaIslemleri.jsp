@@ -66,6 +66,9 @@
 
 }
 
+th { font-size: 11px; }
+td { font-size: 11px; }
+
 </style>
 
 </head>
@@ -74,25 +77,24 @@
 
 	<br>
 
-	<div class="container col-lg-12 col-md-12">
+	<div class="container col-lg-12 col-md-12" style="font-size: 11px;">
 
 		<div class="row">
-
 
 			<div class="col-lg-5" id="hastaPanel" hidden="true">
 
 				<div class="panel">
 
-					<div class="panel-heading">${hastaListesi[0].ad}
+					<div class="panel-body" >${hastaListesi[0].ad}
 						${hastaListesi[0].soyad} (${hastaListesi[0].tel}) &nbsp;&nbsp;
 						Protokol No : ${hastaListesi[0].protokolNo}</div>
 
-					<div class="panel-footer">
+					<div class="panel-footer" style="font-size: 11px; size: 11px;">
 
 						<c:if test="${silAktif ne '0' }">
 							<c:if test="${sessionScope.sessionMember[0].kuTur ne '3' }">
 
-								<button type="button" class="btn btn-link" data-toggle="modal"
+								<button type="button" class="btn btn-link " data-toggle="modal"
 									data-target="#hastaGuncelleModal"
 									data-whatever="${hastaListesi[0].id}">Güncelle</button>
 								<button type="button" class="btn btn-link" data-toggle="modal"
@@ -130,7 +132,6 @@
 		</div>
 
 
-		<div></div>
 
 		<c:if test="${!empty hastaListesi}">
 
@@ -161,7 +162,7 @@
 																</c:choose>>
 
 
-										<div class="panel-heading" style="font-size: 16px;">
+										<div class="panel-heading" style="font-size: 12px;">
 											<div class="row">
 												<div>
 													Tedavi: ${operasyon.islemTip.ad} (${operasyon.disNo})
@@ -173,7 +174,10 @@
 														<c:when test="${operasyon.durumu eq 'B'}">Bitmiþ</c:when>
 														<c:when test="${operasyon.durumu eq 'K'}">Kesinleþmedi</c:when>
 													</c:choose>
-
+													  
+													  &nbsp; &nbsp; &nbsp; Tarih:${operasyon.islemTarihi}  &nbsp; &nbsp; &nbsp; Miktar: ${operasyon.miktar}
+													  
+														 &nbsp; &nbsp; &nbsp;  <c:if test="${operasyon.aciklama ne ''}"> Açýklama:${operasyon.aciklama}  </c:if>
 
 													<button type="button" class="btn btn-info pull-right"
 														data-toggle="collapse" data-target="#${operasyon.id}">
@@ -317,7 +321,9 @@
 																<tr>
 																	<td class="helpHed">Ödeme Tarih</td>
 																	<td class="helpHed">Ödenen Miktar</td>
-																	<td class="helpHed">Kalan Miktar</td>
+															
+																
+																	
 																	<td class="helpHed">Açýklama</td>
 
 																	<c:if test="${silAktif ne '0' }">
@@ -335,11 +341,9 @@
 																	<tr>
 																		<td class="helpBod">${odeme.odemeTarihi}</td>
 																		<td class="helpBod">${odeme.miktar}</td>
-																		<td class="helpBod">${operasyon.miktar - odeme.miktar}
-																			<c:set target="${operasyon}" property="miktar"
-																				value="${operasyon.miktar -odeme.miktar}"></c:set>
-
-																		</td>
+																		
+																		
+																	
 
 																		<td><c:choose>
 																				<c:when test="${odeme.odemeTuru eq 1}">
@@ -538,8 +542,6 @@
 								</div>
 							</div>
 
-
-
 							<div id="hasta-info-tab" class="tab-pane">
 								<div class="panel panel-white">
 
@@ -715,7 +717,7 @@
 		
 		-->
 
-	<div class="modal fade" id="hastaSecModal" style="color: black;">
+	<div class="modal fade" id="hastaSecModal" style="color: black; font-size: 11px;">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -1216,10 +1218,10 @@
 							<h4>Ücret Bilgileri</h4>
 							<!-- UCRET BILGILERI BASLA-->
 							<div class="row">
-								<div class="col-lg-12 col-md-12">
+								<div class="col-lg-6 ">
 									<div class="form-group">
 										<div class="hero-unit">
-											<input class="tarih " type="text" name="odemeTarihiStr"
+											<input type="text" name="odemeTarihiStr" class="tarih"
 												id="odemeTarihiStr" placeholder="Tarih Giriniz.">
 										</div>
 
@@ -1229,14 +1231,28 @@
 							</div>
 
 							<div class="row">
-								<div class="col-lg-12 col-md-12">
+							
+								<div class="col-lg-4">
 									<div class="form-group">
 
 										<input class="form-control"
 											placeholder="Ödeme Miktarý Giriniz (TL)" name="odemeMiktar"
-											id="odemeMiktar"> <input class="form-control"
+											id="odemeMiktar"> 
+											
+											
+											
+
+									</div>
+								</div>
+								
+								
+								<div class="col-lg-4">
+									<div class="form-group">
+
+									
+											 <input class="form-control"
 											placeholder="Kalan Miktar" name="kalanMiktar"
-											id="kalanMiktar">
+											id="kalanMiktar" readonly="readonly">
 
 									</div>
 								</div>
@@ -1472,6 +1488,11 @@
 
 							</tr>
 							<tr>
+								<td>Ücret :</td>
+								<td><input name="miktar" id="tedaviMiktar" /></td>
+
+							</tr>
+							<tr>
 								<td>Diþ No :</td>
 								<td><input name="disNo" id="disNo" /></td>
 
@@ -1529,8 +1550,8 @@
 						<table class="table">
 							<tr>
 								<td>Tarih</td>
-								<td><input type="text" name="odemeTarihiStr"
-									id="odemeTarihiStrModal" class="tarih" /></td>
+								<td><input type="text" name="odemeTarihiStr" class="tarih"
+									id="odemeTarihiStrModal"   /></td>
 							</tr>
 
 							<tr>
@@ -1980,6 +2001,9 @@
 			var doktorId = document.forms["operasyonEkleForm"]["doktorId"].value;
 
 			var tedaviId = document.forms["operasyonEkleForm"]["islemTipi"].value;
+			
+			
+			var kalanMiktar = document.forms["operasyonEkleForm"]["kalanMiktar"].value;
 
 			if (doktorId == null || doktorId == -1) {
 				alert("Lütfen Doktor Seçiniz..");
@@ -1989,6 +2013,12 @@
 				alert("Lütfen Tedavi Seçiniz..");
 				return false;
 			}
+			if (kalanMiktar <0) {
+				alert("Lütfen Ödeme Miktarýný Kontrol ediniz.");
+				return false;
+			}
+			
+			
 
 		}
 		function validateFormHastaSorgulama() {
@@ -2061,7 +2091,6 @@
 							$('#example')
 									.DataTable(
 											{
-
 												select : {
 													style : 'single',
 
@@ -2264,7 +2293,8 @@
 										var date = $.datepicker.formatDate(
 												'yy.mm.dd', new Date());
 
-										$("#islemTarihiStr").val(date)
+										$("#islemTarihiStr").val(date);
+										$("#odemeTarihiStr").val(date);
 									});
 
 							//OPERASYON GUNCELLE
@@ -2278,8 +2308,7 @@
 										var opbastar = button.data('opbastar')
 										var opbittar = button.data('opbittar')
 										var opucret = button.data('opmiktar')
-										var opaciklama = button
-												.data('opaciklama')
+										var opaciklama = button.data('opaciklama')
 										var opdisno = button.data('opdisno')
 										var opdurum = button.data('opdurum')
 										var opdoktor = button.data('opdoktor')
@@ -2308,7 +2337,7 @@
 												opbasTarFormat)
 										modal.find('#islemBitisTarihiStrModal')
 												.val(opbitTarFormat)
-										modal.find('#miktar').val(opucret)
+										modal.find('#tedaviMiktar').val(opucret)
 										modal.find('#disNo').val(opdisno)
 										modal.find('#doktorId').val(opdoktor)
 									});

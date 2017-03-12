@@ -34,7 +34,7 @@ public class HastaRandevuSorgulamaAction extends Action {
 //					conn, subeId.intValue(), Integer.parseInt(doktorId)); // no doktor 
 //
 //		
-//				request.setAttribute("randevuList", randevuListesi);
+//				request.setAttribute("randevuList", randevuListesi); 
 				request.setAttribute("selectedDoctor", doktorDTO);
 				
 				return mapping.findForward("success");

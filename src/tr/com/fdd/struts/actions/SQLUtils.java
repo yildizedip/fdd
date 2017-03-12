@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -991,25 +992,48 @@ public class SQLUtils {
 		
 	}
 
-	public List<THastaRandevuDTO> getRandevuListesi( Connection conn, int subeId, int doktorId)
+	public List<THastaRandevuDTO> getRandevuListesi( Connection conn, int subeId, int doktorId, boolean gunluKAktif)
 			throws SQLException {
+		
+		
+		
+		String sql = " SELECT * FROM  t_hasta_randevu as r left join" +
+	    " t_doktor as d   on " +
+	  " d.d_id = r.doktor_id   left join t_hasta as h "  +
+	   " on h.id =+  r.hasta_id  and  h.sube_id = ? " +
+	   " left join ( select t.*, tp.ad as tpad, tp.id as tpid from t_islem  t, t_islem_tip tp where tp.id = t.islem_tipi ) as islem " +
+	   " on   islem.id = r.islem_id "  +
+	  " WHERE  r.durum = 'A' " ;
+	        
+	        		
+	        		if(doktorId!=-1){
+						sql +=" AND d_id ="+ doktorId;
+					}
+	        		
+	        		
+	        		if(gunluKAktif){
+	        			sql +=" and r.randevu_tarihi_baslangic between  date_format('" + Commons.getToday()	+ "','%Y-%m-%d') and date_format('" + Commons.getTomorrow()+ "','%Y-%m-%d')";
+	        		}
+					
 
-		String sql = " SELECT r.*,h.*,d.*, t.* , tp.ad tpad, tp.id tpid "
-				+ " FROM t_hasta_randevu r, t_hasta h, t_doktor d, t_islem t , t_islem_tip tp "
-				+ " where r.hasta_id=h.id "
-				+ " and r.doktor_id= d.d_id "
-				+ " and t.id=r.islem_id "
-				+ " and tp.id=t.islem_tipi "
-				+ " and r.durum='A' ";
-		
-				if(doktorId!=-1){
-					sql +=" and d_id ="+ doktorId;
-				}
+//
+//		String sql = " SELECT r.*,h.*,d.*, t.* , tp.ad tpad, tp.id tpid "
+//				+ " FROM t_hasta_randevu r, t_hasta h, t_doktor d, t_islem t , t_islem_tip tp "
+//				+ " where r.hasta_id=h.id "
+//				+ " and r.doktor_id= d.d_id "
+//				+ " and t.id=r.islem_id "
+//				+ " and tp.id=t.islem_tipi "
+//				+ " and r.durum='A' ";
+//		
+//				if(doktorId!=-1){
+//					sql +=" and d_id ="+ doktorId;
+//				}
 				
-				sql += " and h.sube_id=?";
-		
+			//	sql += " and h.sube_id=?";
+	        	
+	       logger.info("randevuListesi=" + sql);
+
 		PreparedStatement stm = conn.prepareStatement(sql);
-		logger.info("randevuListesi=" + sql);
 
 		List<THastaRandevuDTO> list = new ArrayList<THastaRandevuDTO>();
 		stm.setInt(1, subeId);
@@ -1032,6 +1056,10 @@ public class SQLUtils {
 			dto.setRandevuTarihiBitis(rs.getString("randevu_tarihi_bitis"));
 			dto.setDoktorId(rs.getInt("doktor_id"));
 			dto.setAciklama(rs.getString("aciklama"));
+			
+			
+			
+			
 			dto.setDurum(rs.getString("durum"));
 			dto.setIslemId(rs.getInt("islem_id"));
 			dto.setRandevuyaGelinmedi(rs.getString("randevu_gelmedi"));
@@ -1043,6 +1071,10 @@ public class SQLUtils {
 			hasta.setTel(rs.getString("tel"));
 
 			dto.setHasta(hasta);
+			
+			if(dto.getHastaId()==0 && dto.getHasta().getAd()==null){
+				dto.getHasta().setAd("RESERVE");
+			}
 			
 			doktorDTO.setdAd(rs.getString("d_ad"));
 			doktorDTO.setdSoyad(rs.getString("d_soyad"));
@@ -1060,16 +1092,16 @@ public class SQLUtils {
 			dto.setDoktor(doktorDTO);
 			dto.setIslemTipDto(islemTipDTO);
 			
-			islemDTO.setId(rs.getInt("islem_id"));
+			//islemDTO.setId(rs.getInt("islem_id"));
 			islemDTO.setHastaId(rs.getInt("hasta_id"));
 			islemDTO.setMiktar(rs.getDouble("ucret"));
 			islemDTO.setAciklama(rs.getString("aciklama"));
-			islemDTO.setDoktorId(rs.getInt("doktor_id"));
+		//	islemDTO.setDoktorId(rs.getInt("doktor_id"));
 			islemDTO.setIslemTipi(rs.getInt("islem_tipi"));
 			islemDTO.setIslemTarihi(rs.getDate("islem_tarihi"));
 			islemDTO.setIslemBitisTarihi(rs.getDate("islem_bitis_tarihi"));
 			islemDTO.setEklenmeTarihi(rs.getDate("eklenme_tarihi"));
-			islemDTO.setDurumu(rs.getString("durum"));
+		//	islemDTO.setDurumu(rs.getString("durum"));
 			islemDTO.setDisAdet(rs.getInt("dis_say"));
 			islemDTO.setDisNo(rs.getString("dis_no"));
 			islemDTO.setIliskiliIslemId(rs.getInt("iliskili_islem_id"));
@@ -1147,13 +1179,64 @@ public class SQLUtils {
 	}
 	
 	
+	public List<THastaDTO> getDoktorHastaListesi( Connection conn, int subeId, int doktorId ,String ad, String soyad , String protokolNo)
+			throws SQLException {
+		
+		String sql = " select distinct(h.id) , d.d_id, d.d_ad, d.d_soyad, h.* "
+				+ " from t_doktor d, t_hasta h, t_islem t"
+				+ " where d.d_id= t.doktor_id"
+				+ "	and t.durum not in('P') "
+				+ " and h.id=t.hasta_id "
+				+ " and h.sube_id=?"
+				+ "	and h.durum ='A'"
+				+ "	and d.d_id=?";
+		
+		if (ad != null && ad != "") {
+
+			sql += " and h.ad like '" + ad + "%'";
+		}
+		if (soyad != null && soyad != "") {
+			
+			sql += " and h.soyad like '" + soyad + "%'";
+		}
+		if (protokolNo != null && protokolNo != "") {
+			
+			sql += " and h.protokol_no like '" + protokolNo + "%'";
+		}
+		
+		
+		PreparedStatement stm = conn.prepareStatement(sql);
+		logger.info("doktor Hasta listesi=" + sql);
+		
+		List<THastaDTO> list = new ArrayList<THastaDTO>();
+		stm.setInt(1, subeId);
+		stm.setInt(2, doktorId);
+		
+		
+		ResultSet rs = stm.executeQuery();
+		
+		while (rs.next()) {
+			THastaDTO hasta = new THastaDTO();
+			hasta.setAd(rs.getString("ad"));
+			hasta.setSoyad(rs.getString("soyad"));
+			hasta.setTckimlik(rs.getString("tckimlik"));
+			hasta.setProtokolNo(rs.getString("protokol_no"));
+			hasta.setTel(rs.getString("tel"));
+			hasta.setId(rs.getInt("id"));
+	
+			list.add(hasta);
+		}
+		return list;
+	}
+	
+	
 	public List<THastaRandevuDTO> getOperasyonRandevuListesi(int islemId,
 			Connection conn) throws SQLException {
 		
 		List<THastaRandevuDTO> list = new ArrayList<THastaRandevuDTO>();
 
-		String sql = "SELECT ra.*, i.dis_no FROM dfdiscom_db.t_hasta_randevu ra, t_islem i " +
-				"where ra.islem_id=i.id "+
+		String sql = " SELECT ra.*, i.dis_no FROM dfdiscom_db.t_hasta_randevu ra, t_islem i " +
+				" where ra.islem_id=i.id "+
 				" and ra.islem_id= ? ";
 		PreparedStatement stm = conn.prepareStatement(sql);
 		logger.info("getOperasyonRandevuListesi=" + sql);
@@ -1321,7 +1404,7 @@ public class SQLUtils {
 		}
 		return hasta;
 	}
-	public List<THastaDTO> getHastaList(Connection conn, int subeId, String ad, String soyad , String protokolNo  )
+	public List<THastaDTO> getHastaList(Connection conn, int subeId, String ad, String soyad , String protokolNo )
 			throws SQLException {
 		
 		String sql = "SELECT * FROM t_hasta  " + " where durum <> 'P' ";
@@ -1338,6 +1421,7 @@ public class SQLUtils {
 			
 			sql += " and protokol_no like '" + protokolNo + "%'";
 		}
+		
 		
 		sql += " and sube_id=?";	
 		
@@ -1810,7 +1894,7 @@ public class SQLUtils {
 			doktorDTO.setDoktorSubeList(getDoktorSubeList(conn,	doktorDTO.getdId()));
 			
 			if(randevuAktif)
-			doktorDTO.setDoktorRandevuList(getRandevuListesi(conn, subeId, doktorDTO.getdId()));
+			doktorDTO.setDoktorRandevuList(getRandevuListesi(conn, subeId, doktorDTO.getdId(),false));
 		}
 		return doktorDTO;
 	}
@@ -2415,7 +2499,7 @@ public class SQLUtils {
 			doktorDTO.setdAktif(rs.getString("d_aktif"));
 		
 			if(getRandevu){
-				doktorDTO.setDoktorRandevuList(getRandevuListesi(connection,subeId,doktorDTO.getdId()));
+				doktorDTO.setDoktorRandevuList(getRandevuListesi(connection,subeId,doktorDTO.getdId(),true));
 			}
 			
 			doktorList.add(doktorDTO);
@@ -3309,7 +3393,7 @@ public class SQLUtils {
 	}
 	
 	public List<THastaIslemBorcTakipDTO> hastaBorcOdemeListesiGetir(Connection conn,
-		  IslemBorcOdemeTakipForm form ) throws SQLException {
+		  IslemBorcOdemeTakipForm form,int subeId ) throws SQLException {
 		
 		String sql="SELECT brc.*, hasta.protokol_no, hasta.tel,  hasta.ad, hasta.soyad,  itip.ad islem_tip,  islem.ucret , sum(gel.miktar) toplam_odenen "+
 				" FROM "+
@@ -3323,6 +3407,7 @@ public class SQLUtils {
 				" and  gel.odeme_turu not in(1) "+
 				" and gel.durumu='A'"+
 				" and brc.durum='A'"+
+				" and hasta.sube_id="+subeId+
 				" and islem.islem_tipi=itip.id"+
 				" and islem.durum not in('P')";
 				

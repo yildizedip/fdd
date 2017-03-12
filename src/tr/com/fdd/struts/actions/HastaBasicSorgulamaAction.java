@@ -26,10 +26,14 @@ public class HastaBasicSorgulamaAction extends Action {
 			conn = SQLUtils.getMySqlConneciton();
 			request.setCharacterEncoding("ISO-8859-9");
 			String islemTip = request.getParameter("islem");
+			
+			
 			HastaForm hastaForm = (HastaForm) form;
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 
 			SQLUtils sqlUtils = new SQLUtils();
+			
+			
 			List<THastaDTO> hastaListesi = sqlUtils.getHastaList(conn, subeId, 
 					hastaForm.getAd(),
 					hastaForm.getSoyad(), 
@@ -66,6 +70,17 @@ public class HastaBasicSorgulamaAction extends Action {
 				String randevuBasTar = request.getParameter("randevuBasTar");
 				String randevuBitTar = request.getParameter("randevuBitTar");
 				
+				
+				List<THastaDTO> hastaListesiRandevu=sqlUtils.getDoktorHastaListesi(conn, subeId, Integer.parseInt(doktorId), hastaForm.getAd(),
+						hastaForm.getSoyad(), 
+						hastaForm.getProtokolNo());
+				
+//				if (hastaListesi.size() == 0) {
+//					request.setAttribute("noContent", GUIMessages.VERI_BULUNAMADI);
+//					return mapping.findForward("noContent");
+//
+//				}
+				request.setAttribute("hastaList", hastaListesiRandevu);
 				request.setAttribute("doktorId", doktorId);
 				request.setAttribute("randevuBitTar", randevuBitTar);
 				request.setAttribute("randevuBasTar", randevuBasTar);

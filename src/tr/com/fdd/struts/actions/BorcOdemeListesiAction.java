@@ -32,10 +32,10 @@ public class BorcOdemeListesiAction extends Action {
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 			SQLUtils sqlUtils = new SQLUtils();
 			
-			List<THastaIslemBorcTakipDTO> borcListesi = sqlUtils.hastaBorcOdemeListesiGetir(conn,borcForm);
+			List<THastaIslemBorcTakipDTO> borcListesi = sqlUtils.hastaBorcOdemeListesiGetir(conn,borcForm, subeId);
 
 			if (borcListesi.size() == 0) {
-				request.setAttribute("warn", GUIMessages.KULLANICI_BULUNAMADI);
+				request.setAttribute("warn", GUIMessages.VERI_BULUNAMADI);
 				return mapping.findForward("noContent");
 			} else {
 				request.setAttribute("borcListesi",	borcListesi);
@@ -44,6 +44,7 @@ public class BorcOdemeListesiAction extends Action {
 
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			try {
 				if(conn!=null){
 				conn.rollback();

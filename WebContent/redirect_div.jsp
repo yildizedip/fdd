@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>..Poliklinik..</title>
+<title>....</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="sitil/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +25,12 @@
 
 
 <style type="text/css">
-
+.nav a{
+    font-size: 0.8em !important;
+    }
+.nav li{
+    padding-right:1px;
+   }
 
 
 </style>
@@ -34,6 +39,8 @@
 <body>
 
 	<div class="wrapper">
+	
+	<div>   
 
 		<nav id="navbar-darkblue" class="navbar navbar-inverse">
 
@@ -117,9 +124,14 @@
 
 		</nav>
 
-		<iframe src="main.jsp" name="frame" width="100%" height="900"
+</div>
+<div>
+
+		<iframe src="main.jsp" name="frame" width="100%" height="720"
 			frameborder="0" scrolling="auto"></iframe>
 
+
+</div>
 	</div>
 
 

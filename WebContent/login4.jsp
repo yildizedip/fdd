@@ -17,7 +17,7 @@
     <!-- Custom Fonts -->
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-<title>Poliklinik</title>
+<title>..</title>
 
 <style type="text/css">
 

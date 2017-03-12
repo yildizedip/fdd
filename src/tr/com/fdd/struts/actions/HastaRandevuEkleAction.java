@@ -1,17 +1,11 @@
 package tr.com.fdd.struts.actions;
 
 import java.sql.Connection;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.hibernate.HibernateException;
-import net.sf.hibernate.Query;
-import net.sf.hibernate.Session;
-import net.sf.hibernate.Transaction;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.Action;
@@ -19,13 +13,16 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Query;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.THastaRandevuDTO;
 import tr.com.fdd.dto.TIslemDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
-import tr.com.fdd.struts.form.HastaKartiForm;
 import tr.com.fdd.struts.form.HastaRandevuForm;
 import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
@@ -41,8 +38,6 @@ public class HastaRandevuEkleAction extends Action {
 		Session session = null;
 
 		try {
-
-			
 			String tedavi=request.getParameter("islemTipi");
 			String implantAktif=request.getParameter("implantAktif");
 			String operasyonDurum=request.getParameter("operasyonDurum");
@@ -65,6 +60,7 @@ public class HastaRandevuEkleAction extends Action {
 			// if (hastaRandevuForm.getRandevuTarihiStr() == null)
 			// hastaRandevuForm.setRandevuTarihi(new Date());
 			// else {
+			
 			// String tarihStr = hastaRandevuForm.getRandevuTarihiStr();
 			//
 			//// SimpleDateFormat dateFormat = new
@@ -78,7 +74,9 @@ public class HastaRandevuEkleAction extends Action {
 
 			THastaDTO tHastaDto = null;
 			/// yeni girilen hasta icin ekleme
-			if (hastaRandevuForm.getHastaId() == 0) {
+			if (  hastaRandevuForm.getHastaId() == 0 
+					&& !hastaRandevuForm.getHastaAd().equals("") 
+					&& !hastaRandevuForm.getHastaSoyad().equals("")  && !hastaRandevuForm.getTelefon().equals("")   ) {
 
 				tHastaDto = new THastaDTO();
 				tHastaDto.setAd(hastaRandevuForm.getHastaAd());
@@ -293,6 +291,12 @@ public class HastaRandevuEkleAction extends Action {
 			}
 			
 			
+			if((hastaRandevuForm.getHastaId()!=0 && hastaRandevuForm.getIslemId()!=0) ||  hastaRandevuForm.getRandevuBosSaatAktif().equals("on") ){
+				
+				if(hastaRandevuForm.getRandevuBosSaatAktif()!=null && hastaRandevuForm.getRandevuBosSaatAktif().equals("on")){
+					hastaRandevuForm.setAciklama("REZERVE");
+				}
+			
 			Object[] kullaniciBilgileri = (Object[]) request.getSession().getAttribute("sessionMember");
 			TKullaniciLoginDTO kullanici = (TKullaniciLoginDTO) kullaniciBilgileri[0];
 			hastaRandevuForm.setEkleyenKisi(kullanici.getKuId());
@@ -312,7 +316,12 @@ public class HastaRandevuEkleAction extends Action {
 			request.setAttribute("selectedDoctor", doktorDTO);
 
 			return mapping.findForward("success");
+			}
+			else{
+				return  mapping.findForward("failure");
+			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			if (tran != null)
 				try {
 					tran.rollback();

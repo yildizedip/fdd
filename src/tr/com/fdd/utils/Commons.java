@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,29 @@ public class Commons {
 			convertedDate = dateFormat.parse(dateStr);
 		
 	    return convertedDate;
+	}
+	
+	
+	public static String getToday() 
+	{
+
+		Date today = Calendar.getInstance().getTime();        
+		String dt = dateFormat.format(today);
+		
+		return dt;
+	}
+	
+	public static String getTomorrow() 
+	{
+		
+		
+		Calendar cal = Calendar.getInstance();    
+		cal.setTime(new Date());    
+		cal.add( Calendar.DATE, 1 );
+		      
+		String dt = dateFormat.format(cal.getTime());
+		
+		return dt;
 	}
 	
 	
@@ -120,6 +144,7 @@ public class Commons {
 		}
 		return tHastaDTO;
 	}	
+	
 	
 	public static THastaDTO getActiveHasta( HttpServletRequest request){
 		List<THastaDTO> hastaListesi = (List<THastaDTO>) request.getSession().getAttribute("hastaList");

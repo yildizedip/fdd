@@ -47,8 +47,6 @@
 </style>
 
 <script>
-
-
 	var val = [];
 
 	<c:forEach items="${selectedDoctor.doktorRandevuList}" var="randevu">
@@ -159,6 +157,20 @@
 							} else {
 								$("#islemTipi").show();
 								$("#implantOk").hide();
+							}
+						});
+						$('#randevuBosSaat').bind('change', function() {
+
+							if ($(this).is(':checked')) {
+
+								$("#hastaBilgileri").hide();
+								$("#randevuBilgileri").hide();
+								$("#tedaviYok").hide();
+							} else {
+
+								$("#hastaBilgileri").show();
+								$("#randevuBilgileri").show();
+								$("#tedaviYok").show();
 							}
 						});
 						
@@ -387,7 +399,7 @@
 														'red');
 												$(this)
 														.css('font-size',
-																'16px');
+																'12px');
 
 												// $('#start').val(moment(calEvent.start).format('YYYY-MM-DD HH:mm'));
 												//	$('#end').val(moment(calEvent.end).format('YYYY-MM-DD HH:mm'));
@@ -527,7 +539,7 @@
 												element.attr('href',
 														'javascript:void(0);');
 												$(element).css('font-size',
-														'16px');
+														'12px');
 												if (event.geldimi == 'on')
 													$(element).css(
 															'background-color',
@@ -646,13 +658,6 @@
 							});
 						});
 
-
-						
-						
-					
-
-						
-
 						'<c:if test="${requestScope.actionTip eq 1}">' // hasta islemlerinden secilen hasta
 
 						$('#hastaInfo').html(
@@ -728,7 +733,29 @@
 											}
 
 											'</c:forEach>'
-										})
+										});
+
+						$('#islemTipiYeni').on('change', function () {
+							
+							var  value= this.value;
+							
+							'<c:forEach items="${islemTurList}" var="islem">'
+							
+
+							if(value == '${islem.id}')
+							{
+								
+								 var fiyat=	'${islem.subeTip.fiyat}';
+							 
+								 $('#tedaviUcretYeni').val(fiyat);
+							 
+							 
+							}
+
+							
+							'</c:forEach>'
+							
+						});
 
 						
 
@@ -741,7 +768,9 @@
 
 	function validate() {
 
-		var islemTipiYeni = $('#islemTipiYeni').val();
+		return true;
+
+		/* var islemTipiYeni = $('#islemTipiYeni').val();
 		var islemTipiVarolan = $('#islemTipi').val();
 
 		if (islemTipiYeni == -1 && ${empty hastaListesi[0].hastaSelectedDoktorOperasyonList} ) {
@@ -752,7 +781,7 @@
 		if (islemTipiVarolan == -1 && ${hastaListesi[0].hastaSelectedDoktorOperasyonList.size()>0} ) {
 			alert("Lütfen tedavi seçiniz.");
 			return false;
-		}
+		} */
 
 	}
 
@@ -789,20 +818,12 @@ body {
 </head>
 <body>
 
-	<form id="send" action="hastaSorgulaForRandevu.do" method="post">
-		<input type="hidden" name="hastaId" id="hasta_id"> <input
-			type="hidden" name="islem" id="pageAction"> <input
-			type="hidden" name="doktorId" value="${doktorId}"> <input
-			type="hidden" name="randevuBasTar" value="${randevuBasTar}">
-		<input type="hidden" name="randevuBitTar" value="${randevuBitTar}">
-		<input type="hidden" name="randevuAciklama" id="randevuAciklama">
-	</form>
 
 	<div id="title-breadcrumb-option-demo"
 		class="page-title-breadcrumb bg-success">
 
 		<div class="page-header pull-left">
-			<div class="page-title" style="font-size: 18px;">
+			<div class="page-title" style="font-size: 13px;">
 				<span id="myDate"> </span> Hekim : ${selectedDoctor.dAd}
 				${selectedDoctor.dSoyad}
 			</div>
@@ -835,13 +856,29 @@ body {
 					<form action="HastaRandevuEkle.do" method="post"
 						onsubmit="return validate()">
 						<div class="modal-body">
+						
+						<div class="col-lg-3 col-md-6">
+									<div class="form-group">
 
+										<div class="input-icon">
+											<div class="checkbox">
+												<label> <input type="checkbox" id="randevuBosSaat"
+													name="randevuBosSaatAktif" /> &nbsp; Randevuyu Reserve Et
+												</label>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								
+						
 							<input name="hastaId" id="hastaId" hidden="true"> <input
 								name="islemId" id="islemId" hidden="true"> <input
 								name="doktorId" id="doktorId" value="${selectedDoctor.dId}"
 								hidden="true">
 								
-								<div class="col-lg-6">
+								<div class="col-lg-6" id="hastaBilgileri">
 									<p>Hasta Bilgileri</p>
 									<div class="clearfix"></div>
 							
@@ -851,7 +888,7 @@ body {
 													<div class="input-icon">
 														<i class="fa fa-user" aria-hidden="true"></i> <input
 															class="form-control" name="hastaAd" placeholder="Hasta Ad"
-															id="hastaad" data-validation="required">
+															id="hastaad" >
 			
 													</div>
 			
@@ -864,7 +901,7 @@ body {
 														<i class="fa fa-user" aria-hidden="true"></i> <input
 															class="form-control" name="hastaSoyad"
 															placeholder="Hasta Soyad " id="hastasoyad"
-															data-validation="required" >
+															 >
 			
 													</div>
 												</div>
@@ -887,7 +924,7 @@ body {
 													<div class="input-icon">
 														<i class="fa fa-phone"></i> <input class="form-control"
 															name="telefon" placeholder="Telefon 05051119922"
-															id="telefon" data-validation="required" >
+															id="telefon" >
 			
 													</div>
 												</div>
@@ -914,7 +951,7 @@ body {
 							
 							
 							
-							<div class="col-lg-6">
+							<div class="col-lg-6" id="randevuBilgileri">
 								
 									<p>Randevu Bilgileri</p>
 									<div class="clearfix"></div>
@@ -1329,6 +1366,12 @@ body {
 							<form action="hastaBasicSorgula.do" method="post"
 								id="hastaSorgulaForm"
 								onsubmit="return validateFormHastaSorgulama()">
+								
+									<input type="hidden" class="form-control " name="randevuAktif" 
+										 />
+
+
+
 
 								<div class="form-group col-lg-3">
 									<input class="form-control " name="protokolNo" id="hstProtokol"
@@ -1345,6 +1388,7 @@ body {
 								<div class="form-group col-lg-4">
 									<input class="form-control " name="ad" id="hstAd"
 										placeholder="Ad" />
+								
 								</div>
 
 								<div class="form-group col-lg-3">
@@ -1364,7 +1408,7 @@ body {
 
 							<div id="hastaTable" hidden="true">
 
-								<table id="example" class="table" style="font-size: 13px;">
+								<table id="example" class="table" style="font-size: 12px;">
 									<thead>
 										<tr>
 											<th>Protokol No</th>
@@ -1503,6 +1547,16 @@ body {
 		</form>
 
 	</div>
+	
+	
+	<form id="send" action="hastaSorgulaForRandevu.do" method="post">
+		<input type="hidden" name="hastaId" id="hasta_id"> <input
+			type="hidden" name="islem" id="pageAction"> <input
+			type="hidden" name="doktorId" value="${doktorId}"> <input
+			type="hidden" name="randevuBasTar" value="${randevuBasTar}">
+		<input type="hidden" name="randevuBitTar" value="${randevuBitTar}">
+		<input type="hidden" name="randevuAciklama" id="randevuAciklama">
+	</form>
 
 
 </body>

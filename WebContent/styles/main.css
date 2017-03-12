@@ -2863,13 +2863,13 @@ ul.nav.nav-tabs li.active a {
   color: #ababab;
   display: block;
   margin-top: 5px;
-  font-size: 13px;
+  font-size: 12px;
 }
 #faq .panel-group .panel {
   margin-bottom: 10px;
 }
 #faq .panel-group .panel .panel-heading {
-  font-size: 14px;
+  font-size: 12px;
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -4233,14 +4233,14 @@ a.list-group-item.active > .badge,
     box-shadow: none !important;
 }
 .panel > .panel-heading {
-  font-size: 18px;
+  font-size: 12px;
   padding: 7px 15px;
   border-top-right-radius: 0 !important;
   border-top-left-radius: 0 !important;
   border-color: #e5e5e5 !important;
 }
 .panel > .panel-footer {
-  font-size: 18px;
+  font-size: 10px;
   padding: 7px 15px;
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;

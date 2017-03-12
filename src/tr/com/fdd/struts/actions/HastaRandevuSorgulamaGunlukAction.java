@@ -39,6 +39,8 @@ public class HastaRandevuSorgulamaGunlukAction extends Action {
 			}
 
 		} catch (SQLException e) {
+			
+			e.printStackTrace();
 			try {
 				conn.rollback();
 				conn.close();
