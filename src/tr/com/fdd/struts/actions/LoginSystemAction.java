@@ -65,9 +65,7 @@ public class LoginSystemAction extends Action {
 			session.beginTransaction();
 
 			/**
-			 * 
 			 * sistemde kullanilacak genel bilgiler aliniyor.
-			 * 
 			 */
 
 			List<TTurKodDTO> odemeSekliList = getOdemeSekli(session);
@@ -81,7 +79,7 @@ public class LoginSystemAction extends Action {
 			List<?>  islemTurList=   sqlUtils.getOperasyonTurList(connection,Integer.parseInt(sube_Id));
 			
 		//	List<?> islemTurList = islemTurList(session);
-		//	List<?> hastaList = sqlUtils.getHastaList(connection, Integer.parseInt(sube_Id),null);
+		//	List<?> hastaList = sqlUtils.getHastaList(connection, Integer.parseInt(sube_Id),null,null,null, true);
 
 			GenelDegiskenler deg = new GenelDegiskenler();
 
@@ -99,11 +97,10 @@ public class LoginSystemAction extends Action {
 			sessionInf.setAttribute("islemTurList", islemTurList);
 			sessionInf.setAttribute("saatler", deg.getHours());
 			sessionInf.setAttribute("dakikalar", deg.getDakikalar(5));
-		//	sessionInf.setAttribute("hastaList", hastaList);
+	//		sessionInf.setAttribute("hastaList", hastaList);
 
 			/**
 			 * gunluk tarih sessiona ekleniyor.
-			 * 
 			 */
 			Date bugun = new Date();
 			SimpleDateFormat sdff = new SimpleDateFormat("yyyy.MM.dd");
@@ -112,7 +109,6 @@ public class LoginSystemAction extends Action {
 
 			/**
 			 * acilacak ilk sayfada istatistikler hesaplaniyor.
-			 * 
 			 */
 
 			// sube seciliyor.

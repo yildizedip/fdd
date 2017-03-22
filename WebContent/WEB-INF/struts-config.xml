@@ -678,8 +678,8 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			input="/HastaIslemleri.jsp"
 			type="tr.com.fdd.struts.actions.AramaKaydiEkleAction"
 			validate="true">
-			<forward name="success" path="/HastaIslemleri.jsp"></forward>
-			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
+			<forward name="success" path="/HastaAramaKayitListesi.jsp"></forward>
+			<forward name="noContent" path="/HastaAramaKayitListesi.jsp"></forward>
 			<forward name="exception" path="/exception.jsp"></forward>
 		</action>
 			

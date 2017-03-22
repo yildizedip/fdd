@@ -60,7 +60,7 @@ public class HastaGuncelleAction extends GenericAction {
 			request.setAttribute("warn", GUIMessages.KAYIT_GUNCELLEME_BASARILI);
 			
 			Commons.refreshSelectedHasta(request, connection, Integer.parseInt(hastaId));
-			Commons.updateHastaFromHastaList(result, request);
+	//		Commons.updateHastaFromHastaList(result, request);
 
 			return mapping.findForward("success");
 

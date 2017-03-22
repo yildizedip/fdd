@@ -321,9 +321,7 @@ td { font-size: 11px; }
 																<tr>
 																	<td class="helpHed">Ödeme Tarih</td>
 																	<td class="helpHed">Ödenen Miktar</td>
-															
-																
-																	
+																	<td class="helpHed">Ödeme Türü</td>
 																	<td class="helpHed">Açýklama</td>
 
 																	<c:if test="${silAktif ne '0' }">
@@ -356,10 +354,13 @@ td { font-size: 11px; }
 																				<c:when test="${odeme.odemeTuru eq 3}">
 																								Taksit
 																								</c:when>
-
-																				<c:otherwise>
+																				<c:when test="${odeme.odemeTuru eq 4}">
 																								Kredi Kartý
-																								</c:otherwise>
+																								</c:when>
+																				<c:when test="${odeme.odemeTuru eq 5}">
+																								EFT / Havale
+																								</c:when>
+
 																			</c:choose></td>
 
 																		<td class="helpBod">${odeme.aciklama}</td>
@@ -413,6 +414,10 @@ td { font-size: 11px; }
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#randevuEkleModal" data-opid="${operasyon.id}"  data-opbastar="${operasyon.islemTarihi}" data-opbittar="${operasyon.islemBitisTarihi}" data-opislem="${operasyon.islemTipi}" data-opaciklama="${operasyon.aciklama}" data-opdisno="${operasyon.disNo}" data-opmiktar="${operasyon.miktar}"> Randevu Ekle</button>
 
 -->
+												
+												<c:if test="${silAktif ne '0' }">
+																			<c:if
+																				test="${sessionScope.sessionMember[0].kuTur ne '3' }">
 												<button type="button" class="btn btn-link"
 													data-toggle="modal" data-target="#operasyonGuncelleModal"
 													data-opid="${operasyon.id}"
@@ -466,7 +471,10 @@ td { font-size: 11px; }
 													data-opid="${operasyon.id}"
 													data-opad="${operasyon.islemTip.ad}">Sil</button>
 
+														</c:if>
+			
 
+												</c:if>
 											</div>
 
 
@@ -762,7 +770,7 @@ td { font-size: 11px; }
 
 					<div id="hastaTable" hidden="true">
 
-						<table id="example" class="table" style="font-size: 13px;">
+						<table id="example" class="table" style="font-size: 11px;">
 							<thead>
 								<tr>
 									<th>Protokol No</th>
@@ -1263,9 +1271,10 @@ td { font-size: 11px; }
 									<div class="form-group">
 
 										<select size="1" class="form-control" name="odemeTuru">
-											<option label="Peþinat" value="2" />
-											<option label="Taksit" value="3" />
-											<option label="Kredi Kartý" value="4" />
+											<option label="Peþinat" value="2" >Peþinat</option>
+											<option label="Taksit" value="3" >Taksit</option>
+											<option label="Kredi Kartý" value="4" >Kredi Kartý</option>
+											<option label="EFT / Havale" value="5" >EFT / Havale</option>
 
 										</select>
 
@@ -1579,19 +1588,18 @@ td { font-size: 11px; }
 							</tr>
 							<tr>
 								<td>Ödeme Türü</td>
-								<td><select size="1" class="form-control" name="odemeTuru">
-										<option label="Peþinat" value="2" />
-										<option label="Taksit" value="3" />
-										<option label="Kredi Kartý" value="4" />
-
-								</select></td>
+								<td>
+											<select size="1" class="form-control" name="odemeTuru">
+												<option label="Peþinat" value="2" >Peþinat</option>
+												<option label="Taksit" value="3" >Taksit</option>
+												<option label="Kredi Kartý" value="4" >Kredi Kartý</option>
+												<option label="EFT / Havale" value="5" >EFT / Havale</option>
+	
+											</select>
+										
+										</td>
 
 							</tr>
-
-
-
-
-
 
 
 
@@ -2095,6 +2103,8 @@ td { font-size: 11px; }
 													style : 'single',
 
 												},
+												 "iDisplayLength": 5,
+												 "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
 												order : [ [ 4, "desc" ] ],
 												language : {
 

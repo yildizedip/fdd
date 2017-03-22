@@ -57,6 +57,7 @@ public class HastaSorgulamaAction extends Action {
 			//request.setAttribute("hasta", hasta);
 			
 			if(GenelDegiskenler.RANDEVU_GETIR.equals(islemTip) || GenelDegiskenler.RANDEVU_GETIR_HASTA_ISLEMLERI.equals(islemTip) ){
+				
 				TDoktorDTO doktorDTO=sqlUtils.getDoktor(-1,Integer.parseInt(doktorId), conn, true,subeId);
 
 				TIslemDTO randevuTedavi= null;

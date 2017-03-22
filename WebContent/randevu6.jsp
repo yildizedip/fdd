@@ -44,18 +44,6 @@
 .fc-past {
 	background-color: #CECEF6;
 }
-
-
-.modal-header, .close {
-	background-color: #5cb85c;
-	color: white !important;
-	text-align: center;
-	font-size: 30px;
-}
-
-.modal-footer {
-	background-color: #f9f9f9;
-}
 </style>
 
 <script>
@@ -97,20 +85,20 @@
 						$('#tedaviYok').hide();
 
 
-					/* 	'<c:if test="${hastaListesi[0].hastaSelectedDoktorOperasyonList.size()>0}">'
+						'<c:if test="${hastaListesi[0].hastaSelectedDoktorOperasyonList.size()>0}">'
 							
 							$('#tedaviYok').hide();
 							$('#tedaviVar').show();
 						
 					
-						'</c:if>' */
+						'</c:if>'
 
 						
-				/* 		$('#yeniTedaviEkle').on('click', function(e) {
+						$('#yeniTedaviEkle').on('click', function(e) {
 
 							$('#tedaviYok').show();
 							$('#tedaviVar').hide();
-						}); */
+						});
 
 
 						var disno = [];
@@ -178,12 +166,12 @@
 
 								$("#hastaBilgileri").hide();
 								$("#randevuBilgileri").hide();
-						//		$("#tedaviYok").hide();
+								$("#tedaviYok").hide();
 							} else {
 
 								$("#hastaBilgileri").show();
 								$("#randevuBilgileri").show();
-						//		$("#tedaviYok").show();
+								$("#tedaviYok").show();
 							}
 						});
 						
@@ -243,15 +231,12 @@
 												style : 'single',
 
 											},
-											 "iDisplayLength": 5,
-											 "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
 											order : [ [ 4, "desc" ] ],
 											language : {
 
 												sSearch : "Ara:",
 												sLengthMenu : "Sayfada _MENU_ kayýt göster",
 												sInfo : "_TOTAL_ kayýttan _START_ - _END_ arasýndaki kayýtlar gösteriliyor",
-
 											}
 
 										});
@@ -700,11 +685,11 @@
 
 						' </c:if> '
 
-						 '<c:if test="${!empty hastaList}">' // randevu sayfasindan hasta sec ile gelen hasta
+						'<c:if test="${!empty hastaList}">' // randevu sayfasindan hasta sec ile gelen hasta
 
 						$('#exampleModal').modal('show');
 						$('#hastaTable').show();
-						'</c:if> ' 
+						'</c:if> '
 
 						'<c:if test="${requestScope.actionTip eq 2}">' // randevu sayfasindan hasta sec ile gelen hasta
 
@@ -1000,7 +985,7 @@ body {
 									<div class="form-group">
 
 										<textarea class="form-control" name="aciklama"
-											placeholder="Açýklama Giriniz" rows="1" id="title" cols="20" data-validation="required" data-validation-error-msg="Lütfen Açýklama Giriniz."></textarea>
+											placeholder="Açýklama Giriniz" rows="1" id="title" cols="20"></textarea>
 
 									</div>
 								</div>
@@ -1361,7 +1346,7 @@ body {
 		<!-- hasta sec modal -->
 
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel"  style="color: black; font-size: 11px;">
+			aria-labelledby="exampleModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -1369,6 +1354,8 @@ body {
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
+
+
 
 						<h4 class="modal-title" id="exampleModalLabel">HASTA LÝSTESÝ</h4>
 					</div>
@@ -1418,9 +1405,9 @@ body {
 
 							</form>
 
-							<div id="hastaTable">
+							<div id="hastaTable" hidden="true">
 
-								<table id="example" class="table" style="font-size: 11px;">
+								<table id="example" class="table" style="font-size: 12px;">
 									<thead>
 										<tr>
 											<th>Protokol No</th>

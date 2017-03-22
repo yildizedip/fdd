@@ -214,14 +214,14 @@
                                                                    
                                                                     
                                                                     <select size="1" name="tip" class="form-control">
-																			<option label="Hastalarýn Toplam Ödeme Durumu" value="10"></option>
-																			<option label="Tedavisi Bitmiþ Hasta Listesi" value="12"></option>
-																			<option label="Tedavisi Devam Eden Hasta Listesi" value="16"></option>
-																			<option label="Ödemesi Bitmiþ Hasta Listesi" value="11"></option>
-																			<option label="Ödemesi Devam Eden Hasta Listesi" value="17"></option>
-																			<option label="Tedavisi Bitmiþ Ödemesi Devam Eden Hasta Listesi" value="13"></option>
-																			<option label="Tedavisi ve Ödemesi Bitmiþ Hasta Listesi" value="14"></option>
-																			<option label="Tedavsi Devam Eden Ödemesi Bitmiþ Hasta Listesi" value="15"></option>
+																			<option label="Hastalarýn Toplam Ödeme Durumu" value="10">Hastalarýn Toplam Ödeme Durumu</option>
+																			<option label="Tedavisi Bitmiþ Hasta Listesi" value="12">Tedavisi Bitmiþ Hasta Listesi</option>
+																			<option label="Tedavisi Devam Eden Hasta Listesi" value="16">Tedavisi Devam Eden Hasta Listesi</option>
+																			<option label="Ödemesi Bitmiþ Hasta Listesi" value="11">Ödemesi Bitmiþ Hasta Listesi</option>
+																			<option label="Ödemesi Devam Eden Hasta Listesi" value="17">Ödemesi Devam Eden Hasta Listesi</option>
+																			<option label="Tedavisi Bitmiþ Ödemesi Devam Eden Hasta Listesi" value="13">Tedavisi Bitmiþ Ödemesi Devam Eden Hasta Listesi</option>
+																			<option label="Tedavisi ve Ödemesi Bitmiþ Hasta Listesi" value="14">Tedavisi ve Ödemesi Bitmiþ Hasta Listesi</option>
+																			<option label="Tedavsi Devam Eden Ödemesi Bitmiþ Hasta Listesi" value="15">Tedavsi Devam Eden Ödemesi Bitmiþ Hasta Listesi</option>
 												
 																	</select>
                                                                    

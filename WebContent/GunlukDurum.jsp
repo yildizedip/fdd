@@ -113,7 +113,7 @@
 				</select></td>
 				<td><select size="1" name="giderTuru" >
 
-						<option label="Gider Türü Seçiniz.." value="-1"></option>
+						<option label="Gider Türü Seçiniz.." value="-1">Gider Türü Seçiniz..</option>
 						<c:forEach items="${sessionScope.giderTurKodlari}" var="turKodDTO">
 							<option label="${turKodDTO.turAd }" value="${turKodDTO.turKod }">${turKodDTO.turAd }</option>
 						</c:forEach>

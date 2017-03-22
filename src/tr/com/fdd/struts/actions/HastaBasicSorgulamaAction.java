@@ -37,11 +37,11 @@ public class HastaBasicSorgulamaAction extends Action {
 			List<THastaDTO> hastaListesi = sqlUtils.getHastaList(conn, subeId, 
 					hastaForm.getAd(),
 					hastaForm.getSoyad(), 
-					hastaForm.getProtokolNo());
+					hastaForm.getProtokolNo(), false);
 
 			if (hastaListesi.size() == 0) {
 				request.setAttribute("noContent", GUIMessages.VERI_BULUNAMADI);
-				return mapping.findForward("noContent");
+				//return mapping.findForward("noContent");
 
 			}
 			response.setContentType("text/html");
@@ -71,16 +71,16 @@ public class HastaBasicSorgulamaAction extends Action {
 				String randevuBitTar = request.getParameter("randevuBitTar");
 				
 				
-				List<THastaDTO> hastaListesiRandevu=sqlUtils.getDoktorHastaListesi(conn, subeId, Integer.parseInt(doktorId), hastaForm.getAd(),
-						hastaForm.getSoyad(), 
-						hastaForm.getProtokolNo());
+//				List<THastaDTO> hastaListesiRandevu=sqlUtils.getDoktorHastaListesi(conn, subeId, Integer.parseInt(doktorId), hastaForm.getAd(),
+//						hastaForm.getSoyad(), 
+//						hastaForm.getProtokolNo());
 				
 //				if (hastaListesi.size() == 0) {
 //					request.setAttribute("noContent", GUIMessages.VERI_BULUNAMADI);
 //					return mapping.findForward("noContent");
 //
 //				}
-				request.setAttribute("hastaList", hastaListesiRandevu);
+		//		request.setAttribute("hastaList", hastaListesiRandevu); sadece secilen doktora iliskiin  hasta gelir
 				request.setAttribute("doktorId", doktorId);
 				request.setAttribute("randevuBitTar", randevuBitTar);
 				request.setAttribute("randevuBasTar", randevuBasTar);

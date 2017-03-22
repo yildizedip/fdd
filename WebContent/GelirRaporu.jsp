@@ -96,11 +96,11 @@
 				</c:if>	
 			
 			<tr> 
-			<td>Ýþlem</td>
+			<td>Tedavi</td>
 			<td colspan="3">
 			
 			<select size="1" name="islemTipi" >
-						<option label="Operasyon Seçiniz.." value="-1"/>
+						<option label="Tedavi Seçiniz.." value="-1" >Tedavi Seçiniz..</option>
 
 						<c:forEach items="${islemTurList}" var="islem">
 							<option label="${islem.ad}" value="${islem.id }"/>

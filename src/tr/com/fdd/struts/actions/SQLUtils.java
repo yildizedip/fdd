@@ -997,25 +997,23 @@ public class SQLUtils {
 		
 		
 		
-		String sql = " SELECT * FROM  t_hasta_randevu as r left join" +
+		String sql = " SELECT * FROM  t_hasta_randevu as r inner join" +
 	    " t_doktor as d   on " +
-	  " d.d_id = r.doktor_id   left join t_hasta as h "  +
-	   " on h.id =+  r.hasta_id  and  h.sube_id = ? " +
-	   " left join ( select t.*, tp.ad as tpad, tp.id as tpid from t_islem  t, t_islem_tip tp where tp.id = t.islem_tipi ) as islem " +
-	   " on   islem.id = r.islem_id "  +
+	  " d.d_id = r.doktor_id " ;
+	  if(doktorId!=-1){
+			sql +=" AND d.d_id ="+ doktorId;
+		}
+	  
+	 sql += " inner join (select * from t_hasta  where sube_id=? and durum='A' ) as h "  +
+	   " on h.id =  r.hasta_id " +
+//	   " left join ( select t.*, tp.ad as tpad, tp.id as tpid from t_islem  t, t_islem_tip tp where tp.id = t.islem_tipi ) as islem " +
+//	   " on   islem.id = r.islem_id "  +
 	  " WHERE  r.durum = 'A' " ;
-	        
-	        		
-	        		if(doktorId!=-1){
-						sql +=" AND d_id ="+ doktorId;
-					}
-	        		
 	        		
 	        		if(gunluKAktif){
 	        			sql +=" and r.randevu_tarihi_baslangic between  date_format('" + Commons.getToday()	+ "','%Y-%m-%d') and date_format('" + Commons.getTomorrow()+ "','%Y-%m-%d')";
 	        		}
 					
-
 //
 //		String sql = " SELECT r.*,h.*,d.*, t.* , tp.ad tpad, tp.id tpid "
 //				+ " FROM t_hasta_randevu r, t_hasta h, t_doktor d, t_islem t , t_islem_tip tp "
@@ -1046,9 +1044,9 @@ public class SQLUtils {
 			
 			TDoktorDTO doktorDTO= new TDoktorDTO();
 			
-			TIslemDTO islemDTO = new  TIslemDTO();
+	//		TIslemDTO islemDTO = new  TIslemDTO();
 			
-			TIslemTipDTO islemTipDTO= new TIslemTipDTO();
+		//	TIslemTipDTO islemTipDTO= new TIslemTipDTO();
 			
 			dto.setId(rs.getInt("id"));
 			dto.setHastaId(rs.getInt("hasta_id"));
@@ -1056,10 +1054,6 @@ public class SQLUtils {
 			dto.setRandevuTarihiBitis(rs.getString("randevu_tarihi_bitis"));
 			dto.setDoktorId(rs.getInt("doktor_id"));
 			dto.setAciklama(rs.getString("aciklama"));
-			
-			
-			
-			
 			dto.setDurum(rs.getString("durum"));
 			dto.setIslemId(rs.getInt("islem_id"));
 			dto.setRandevuyaGelinmedi(rs.getString("randevu_gelmedi"));
@@ -1085,29 +1079,29 @@ public class SQLUtils {
 			
 			//dto.setIslemAd(rs.getString("islemAd"));
 			
-			islemTipDTO.setAd(rs.getString("tpad"));
-			islemTipDTO.setId(rs.getInt("tpid"));
+		//	islemTipDTO.setAd(rs.getString("tpad"));
+		//	islemTipDTO.setId(rs.getInt("tpid"));
 			
 			
 			dto.setDoktor(doktorDTO);
-			dto.setIslemTipDto(islemTipDTO);
+	//		dto.setIslemTipDto(islemTipDTO);
 			
-			//islemDTO.setId(rs.getInt("islem_id"));
-			islemDTO.setHastaId(rs.getInt("hasta_id"));
-			islemDTO.setMiktar(rs.getDouble("ucret"));
-			islemDTO.setAciklama(rs.getString("aciklama"));
-		//	islemDTO.setDoktorId(rs.getInt("doktor_id"));
-			islemDTO.setIslemTipi(rs.getInt("islem_tipi"));
-			islemDTO.setIslemTarihi(rs.getDate("islem_tarihi"));
-			islemDTO.setIslemBitisTarihi(rs.getDate("islem_bitis_tarihi"));
-			islemDTO.setEklenmeTarihi(rs.getDate("eklenme_tarihi"));
-		//	islemDTO.setDurumu(rs.getString("durum"));
-			islemDTO.setDisAdet(rs.getInt("dis_say"));
-			islemDTO.setDisNo(rs.getString("dis_no"));
-			islemDTO.setIliskiliIslemId(rs.getInt("iliskili_islem_id"));
+//			//islemDTO.setId(rs.getInt("islem_id"));
+//			islemDTO.setHastaId(rs.getInt("hasta_id"));
+//			islemDTO.setMiktar(rs.getDouble("ucret"));
+//			islemDTO.setAciklama(rs.getString("aciklama"));
+//		//	islemDTO.setDoktorId(rs.getInt("doktor_id"));
+//			islemDTO.setIslemTipi(rs.getInt("islem_tipi"));
+//			islemDTO.setIslemTarihi(rs.getDate("islem_tarihi"));
+//			islemDTO.setIslemBitisTarihi(rs.getDate("islem_bitis_tarihi"));
+//			islemDTO.setEklenmeTarihi(rs.getDate("eklenme_tarihi"));
+//		//	islemDTO.setDurumu(rs.getString("durum"));
+//			islemDTO.setDisAdet(rs.getInt("dis_say"));
+//			islemDTO.setDisNo(rs.getString("dis_no"));
+//			islemDTO.setIliskiliIslemId(rs.getInt("iliskili_islem_id"));
 			
 			
-			dto.setIslemDto(islemDTO);
+	//		dto.setIslemDto(islemDTO);
 
 
 			list.add(dto);
@@ -1404,7 +1398,7 @@ public class SQLUtils {
 		}
 		return hasta;
 	}
-	public List<THastaDTO> getHastaList(Connection conn, int subeId, String ad, String soyad , String protokolNo )
+	public List<THastaDTO> getHastaList(Connection conn, int subeId, String ad, String soyad , String protokolNo , boolean lastFifthActive)
 			throws SQLException {
 		
 		String sql = "SELECT * FROM t_hasta  " + " where durum <> 'P' ";
@@ -1421,9 +1415,14 @@ public class SQLUtils {
 			
 			sql += " and protokol_no like '" + protokolNo + "%'";
 		}
+		sql += " and sube_id=?";
+		if (lastFifthActive) {
+			
+			sql += " order by id DESC LIMIT 50";
+		}
 		
 		
-		sql += " and sube_id=?";	
+		
 		
 		//sql += " and sube_id=? order by id LIMIT " +altlimit+ ","+ ustLimit;
 			
@@ -1449,6 +1448,44 @@ public class SQLUtils {
 			list.add(hasta);
 		}
 		return list;
+	}
+	public THastaDTO getHasta(Connection conn, String ad, int subeId)
+			throws SQLException {
+		
+		String sql = "SELECT * FROM t_hasta  " + " where durum <> 'P' ";
+		
+		if (ad != null && ad != "") {
+			
+			sql += " and ad = '" + ad + "'";
+		}
+		
+		sql += " and sube_id=? ";
+		
+		
+		
+		//sql += " and sube_id=? order by id LIMIT " +altlimit+ ","+ ustLimit;
+		
+		PreparedStatement stm = conn.prepareStatement(sql);
+		
+		stm.setInt(1, subeId);
+		logger.info("get hasta for randevu =" + sql);
+		
+		ResultSet rs = stm.executeQuery();
+		
+		
+		THastaDTO hasta = null;
+		while (rs.next()) {
+			
+			hasta=new THastaDTO();
+			
+			hasta.setAd(rs.getString("ad"));
+			hasta.setSoyad(rs.getString("soyad"));
+			hasta.setTckimlik(rs.getString("tckimlik"));
+			hasta.setProtokolNo(rs.getString("protokol_no"));
+			hasta.setTel(rs.getString("tel"));
+			hasta.setId(rs.getInt("id"));
+		}
+		return  hasta;
 	}
 
 	public List<TIslemDTO> getHastaOperasyonListesiGoruntuleForAnket(int hastaId,
@@ -2480,7 +2517,7 @@ public class SQLUtils {
 
 		List<TDoktorDTO> doktorList = new ArrayList<TDoktorDTO>();
 		String sql = " select * from t_doktor d , t_doktor_sube s"
-				+ " where s.sb_id=? and s.d_id=d.d_id and d.d_durum='A' and s.durum='A' and d.d_aktif='A'";
+				+ " where s.sb_id=? and s.d_id=d.d_id and d.d_durum='A' and s.durum='A' and d.d_aktif='A' order by d.d_ad ";
 
 		PreparedStatement stm;
 

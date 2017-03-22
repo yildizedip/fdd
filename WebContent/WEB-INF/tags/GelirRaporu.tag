@@ -71,11 +71,11 @@
 					<td>${count.count}</td>
 					<td>${gelir.odemeTarihiStr}</td>
 					<td>${gelir.hasta.protokolNo}</td>
-					<td>${gelir.hasta.ad}${gelir.hasta.soyad}</td>
+					<td>${gelir.hasta.ad} ${gelir.hasta.soyad}</td>
 
 					<td>${gelir.islemTip.ad}</td>
 					<td>${gelir.islem.disAdet}</td>
-					<td>${gelir.doktor.dAd}${gelir.doktor.dSoyad}</td>
+					<td>${gelir.doktor.dAd} ${gelir.doktor.dSoyad}</td>
 
 					<td><c:choose>
 							<c:when test="${gelir.odemeTuru eq 2}">
@@ -84,6 +84,13 @@
 							<c:when test="${gelir.odemeTuru eq 3}">
 			Taksit
 			</c:when>
+			
+			<c:when test="${gelir.odemeTuru eq 4}">
+																								Kredi Karti
+																								</c:when>
+																				<c:when test="${gelir.odemeTuru eq 5}">
+																								EFT / Havale
+																								</c:when>
 						</c:choose></td>
 
 					<c:if test="${implantSayfasimi ne 'evet' }">

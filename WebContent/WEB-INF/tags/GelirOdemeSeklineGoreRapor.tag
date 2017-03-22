@@ -50,6 +50,7 @@
 				<c:when test="${odemeSekliList.odemeTuru eq '2'}"> Pesin</c:when>
 				<c:when test="${odemeSekliList.odemeTuru eq '3' }"> Taksit</c:when>
 				<c:when test="${odemeSekliList.odemeTuru eq '4' }"> Kredi Karti</c:when>
+				<c:when test="${odemeSekliList.odemeTuru eq '5' }"> EFT / Havale</c:when>
 				
 				</c:choose>
 			

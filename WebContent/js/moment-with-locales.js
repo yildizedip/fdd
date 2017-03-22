@@ -12020,7 +12020,7 @@ var suffixes$3 = {
 hooks.defineLocale('tr', {
     months : 'Ocak_Subat_Mart_Nisan_Mayis_Haziran_Temmuz_Agustos_Eylül_Ekim_Kasım_Aralık'.split('_'),
     monthsShort : 'Oca_Sub_Mar_Nis_May_Haz_Tem_Ağu_Eyl_Eki_Kas_Ara'.split('_'),
-    weekdays : 'Pazar_Pazartesi_Salı_Carsamba_Persembe_Cuma_Cumartesi'.split('_'),
+    weekdays : 'Pazar_Pazartesi_Sali_Carsamba_Persembe_Cuma_Cumartesi'.split('_'),
     weekdaysShort : 'Paz_Pts_Sal_Car_Per_Cum_Cts'.split('_'),
     weekdaysMin : 'Pz_Pt_Sa_Ca_Pe_Cu_Ct'.split('_'),
     longDateFormat : {

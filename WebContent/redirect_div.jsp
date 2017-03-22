@@ -78,6 +78,9 @@
 								Kaydý iþlemleri</a></li>
 						<li><a target="frame" href="HastaAnketListesi.jsp">Anketler</a></li>
 						<li><a target="frame"
+							href="OperasyonuKesinlesmemisHastaListesi.jsp">Tedavisi
+								Kesinleþmiþ Hastalar</a></li>
+						<li><a target="frame"
 							href="OperasyonuKesinlesmemisHastaListesi.jsp?tip=1">Tedavisi
 								Kesinleþmemiþ Hastalar</a></li>
 						<li><a target="frame" href="HastaBorcTarihleriListesi.jsp">Borçlu
