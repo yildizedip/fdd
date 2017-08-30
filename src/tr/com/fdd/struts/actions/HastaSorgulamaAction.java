@@ -16,6 +16,7 @@ import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 public class HastaSorgulamaAction extends Action {
@@ -27,7 +28,7 @@ public class HastaSorgulamaAction extends Action {
 
 		Connection conn = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			request.setCharacterEncoding("ISO-8859-9");
 			String islemTip = request.getParameter("islem");
 			String hastaId = request.getParameter("hastaId");

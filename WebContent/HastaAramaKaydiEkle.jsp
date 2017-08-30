@@ -89,7 +89,7 @@ var basTarihi;
 		<font
 			style="font-size: 12px; font-family: monospace; color: graytext;">
 			
-			..: Arama Kaydý Giriþ
+			..: Arama Kaydý Giriþsdfsd
 			
 		 </font>
 		<hr>

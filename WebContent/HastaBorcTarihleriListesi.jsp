@@ -157,7 +157,7 @@ var basTarihi;
 
 	<hr>
 	
-	<a href="HastaBazliToplamOdemeListesi.jsp?tip=13" class="btn btn-info">Borç Tarihi Ekle</a>
+	<a href="HastaBazliToplamOdemeListesi.jsp?tip=17" class="btn btn-info">Borç Tarihi Ekle</a>
 	
 	<br>
 	<table class="table table-bordered" id="example">

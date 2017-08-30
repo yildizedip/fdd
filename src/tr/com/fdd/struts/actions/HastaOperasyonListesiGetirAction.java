@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 public class HastaOperasyonListesiGetirAction extends Action {
@@ -30,7 +31,7 @@ public class HastaOperasyonListesiGetirAction extends Action {
 		try {
 
 			SQLUtils sqlUtils = new SQLUtils();
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 			THastaDTO hasta = sqlUtils.getHasta(
 					new Integer(hastaId).intValue(), conn, subeId.intValue());
@@ -44,7 +45,7 @@ public class HastaOperasyonListesiGetirAction extends Action {
 
 			request.setAttribute("hasta", hasta);
 			if (hastaOperasyonListesi.size() == 0) {
-				request.setAttribute("noContent", "Kayýt Bulunamadý");
+				request.setAttribute("noContent", "Kayï¿½t Bulunamadï¿½");
 				return mapping.findForward("noContent");
 
 			} else {

@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TIslemTipDTO;
+import tr.com.fdd.mysql.DbConnection;
 
 public class SubeOperasyonFiyatEslestir extends Action {
 
@@ -26,7 +27,7 @@ public class SubeOperasyonFiyatEslestir extends Action {
 			String subeId=request.getParameter("subeId");
 			SQLUtils sqlUtils= new SQLUtils();
 			
-			 conn = SQLUtils.getMySqlConneciton();
+			 conn = DbConnection.getMySqlConneciton();
 			 List<TIslemTipDTO> islemTurList= sqlUtils.getOperasyonTurList(conn,Integer.parseInt(subeId));
 			 request.setAttribute("islemTurListesi", islemTurList);
 			 request.getSession().setAttribute("selectedSubeId", subeId);

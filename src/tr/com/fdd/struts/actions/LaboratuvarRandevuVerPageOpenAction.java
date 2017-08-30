@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TLabrotuvarDTO;
+import tr.com.fdd.mysql.DbConnection;
 
 public class LaboratuvarRandevuVerPageOpenAction extends Action {
 	
@@ -23,7 +24,7 @@ public class LaboratuvarRandevuVerPageOpenAction extends Action {
 			
 			String labIslemIdStr= request.getParameter("id");
 			
-			connection= SQLUtils.getMySqlConneciton();
+			connection= DbConnection.getMySqlConneciton();
 			SQLUtils sqlUtils= new SQLUtils();
 			TLabrotuvarDTO labIslem = sqlUtils.getLabratuvarIslem(connection, Integer.parseInt(labIslemIdStr));
 			request.setAttribute("labIslem", labIslem);

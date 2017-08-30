@@ -1,161 +1,138 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 
+<%@ page language="java" contentType="text/html; charset=ISO-8859-9"
+	pageEncoding="ISO-8859-9"%>
+	
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DentalNet</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- CSS Files -->
+<link href="backyard/css/bootstrap.min.css" rel="stylesheet"	media="screen">
+<link href="backyard/css/font-awesome.min.css" rel="stylesheet">
+<link href="backyard/css/animate.css" rel="stylesheet" media="screen">
 
-    <!-- Custom CSS -->
-    <link href="css/modern-business.css" rel="stylesheet">
+<!-- Colors -->
+<link href="backyard/css/css-index.css" rel="stylesheet" media="screen">
 
-    <!-- Custom Fonts -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-<title>..</title>
-
-<style type="text/css">
-
-</style>
+<!-- Google Fonts -->
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" />
 
 </head>
-<body class="bg-info" >
- <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  		     <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header ">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"> Dicle Fırat Diş </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right " id="bs-example-navbar-collapse-1">
-            
-                   <form class="navbar-form" role="search"		action="login.do" method="post">
-     				<div class="form-group">
-							 <p class="bg-warning">  ${requestScope.failure} </p> 
+
+<body data-spy="scroll" data-target="#navbar-scroll">
+
+	<div id="preloader"></div>
+	<div id="top"></div>
+
+	<!-- /.parallax full screen background image -->
+	<div class="fullscreen landing parallax bg-info"
+		style="background-image: url('Images/2.jpg');" data-img-width="2000"
+		data-img-height="1333" data-diff="100">
+
+		<div class="overlay ">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7">
+
+						<!-- /.logo -->
+						<div class="logo wow fadeInDown">
+							<a href=""> <font size="15"> D e n t a l N e t </font>
+							</a>
 						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Ku Adı"
-								name="userName"> <input type="password"
-								class="form-control" placeholder="Parola" name="password">
+
+						<!-- /.main title -->
+						<h1 class="wow fadeInLeft">Online Hasta Takip Sistemi</h1>
+
+						<!-- /.header paragraph -->
+						<div class="landing-text wow fadeInUp">
+							<p>DentalNet hastane sisteminizi online olarak takip etmenize
+								imkan sunar.</p>
 						</div>
-						
-						<input type="submit" class="btn btn-default" value="Login" > 
-						
-						<br>
-						
 
-					</form>
-            
-              
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-	
-   
-    
-    <div class="bg-white">
-    <div id="myCarousel" class="carousel slide">
-        <div class="carousel-inner">
 
-            <!--Carousel item 1-->
-            <div class="item active" align="center">
-                <img src="Images/2.jpg" alt="buffalo-skyline" />
-                <div class="carousel-caption">
-                </div>
-            </div>
 
-       
-        </div>
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-    </div>
-</div>
-    
+					</div>
 
-    <!-- Page Content -->
-    <div class="container">
+					<!-- /.signup form -->
+					<div class="col-md-5">
 
-        <!-- Marketing Icons Section -->
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <h1 class="page-header">
-                   HİZMETLERİMİZ
-                </h1>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading ">
-                        <h4 ><i class="fa fa-fw fa-check"></i> İmplant Tedavisi</h4>
-                    </div>
-                    <div class="panel-body">
-                        <p>Dental implantlar; diş eksikliklerinde hastayı dişsizlikten kurtarmak amacıyla 
-                        çene kemiğine yerleştirilen titanyum alaşımlı yapay diş köklerinden oluşmaktadır.
-                         </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-gift"></i> Ortodonti Tel Tedavisi</h4>
-                    </div>
-                    <div class="panel-body">
-                        <p>Çapraşık dişler nedeniyle oluşan estetik kusurların tedavisi ve
-                         etkilerinin en iyi şekilde yeniden yerine getirilmesi amacıyla tedaviler uygulanır. 
-                         “Ortodontik tedaviler” halk arasında “Tel tedavisi”olarak bilinir. </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-compass"></i> Diş Protezleri</h4>
-                    </div>
-                    <div class="panel-body">
-                        <p>Protez, çeşitli nedenlerle kaybedilen dişlerin yerine konabilen, ağızda estetik bozuklukların giderilmesini
-                         sağlayan, fonksiyonel olarak ihtiyaçlara göre çeşitlilik gösteren yapay materyallerdir. </p>
-                    </div>
-                </div>
-            </div>
+						<div class="signup-header wow fadeInUp">
+							<h3 class="form-title text-center">Sisteme Giris</h3>
+							<form class="form-header" action="login.do" method="post"
+								role="form">
+								<input type="hidden" name="u" value="503bdae81fde8612ff4944435">
+								<input type="hidden" name="id" value="bfdba52708">
+								
+								<div class="form-group">
+									<input class="form-control input-lg" name="userName" id="name"
+										type="text" placeholder="Ad" required>
+								</div>
+								<div class="form-group">
+									<input class="form-control input-lg" name="password" id="email"
+										type="password" placeholder="Parola" required>
+								</div>
+								<div class="form-group last">
+									<input type="submit" class="btn btn-warning btn-block btn-lg"
+										value="Sisteme Giris">
+								</div>
+								
+								<c:if test="${!requestScope.failure} "> 
+									<p class="bg-danger">  ${requestScope.failure} </p> 
+								</c:if>
+								 
+								<p class="privacy text-center"></p>
+							</form>
+						</div>
 
-        </div>
-        
-        
-            
-        <!-- /.row -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <p>Copyright &copy; Dicle Fırat Diş 2014</p>
-                </div>
-            </div>
-        </footer>
+	<!-- NAVIGATION -->
+	<div id="menu">
+		<nav class="navbar-wrapper navbar-default" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-backyard">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
 
-    </div>
-    <!-- /.container -->
-    	<script	src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
-	
+				</div>
+
+				<div id="navbar-scroll"
+					class="collapse navbar-collapse navbar-backyard navbar-right">
+					<ul class="nav navbar-nav">
+						<li> <p>Copyright &copy; Dental Net 2014</p> </li>
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<!-- /.javascript files -->
+	<script src="backyard/js/jquery.js"></script>
+	<script src="backyard/js/bootstrap.min.js"></script>
+	<script src="backyard/js/custom.js"></script>
+	<script src="backyard/js/jquery.sticky.js"></script>
+	<script src="backyard/js/wow.min.js"></script>
+	<script src="backyard/js/owl.carousel.min.js"></script>
+	<script>
+		new WOW().init();
+	</script>
 </body>
 </html>

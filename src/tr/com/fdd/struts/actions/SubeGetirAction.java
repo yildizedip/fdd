@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TSubeDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.SubeForm;
 import tr.com.fdd.utils.GUIMessages;
 
@@ -27,7 +28,7 @@ public class SubeGetirAction extends Action {
 		Connection connection = null;
 		SQLUtils sqlUutil = new SQLUtils();
 		try {
-			connection = SQLUtils.getMySqlConneciton();
+			connection = DbConnection.getMySqlConneciton();
 			// sube sorgulama icin kullaniliyor.
 		
 			List<TSubeDTO> subeList = sqlUutil.getSubeList(connection,	subeForm.getsAd());

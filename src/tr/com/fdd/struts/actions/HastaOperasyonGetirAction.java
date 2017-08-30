@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.utils.GUIMessages;
 import tr.com.fdd.utils.GenelDegiskenler;
 
@@ -30,7 +31,7 @@ public class HastaOperasyonGetirAction extends Action {
 		String hastaId = request.getParameter("hastaId");
 		Connection conn = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 
 			SQLUtils sqlUtils = new SQLUtils();
 

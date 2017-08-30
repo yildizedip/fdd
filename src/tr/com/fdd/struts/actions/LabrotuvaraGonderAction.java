@@ -23,6 +23,7 @@ import tr.com.fdd.dto.TIslemDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
 import tr.com.fdd.dto.TLabrotuvarDTO;
 import tr.com.fdd.dto.TLabrotuvarProvaDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.LabrotuvarForm;
 import tr.com.fdd.utils.Commons;
@@ -38,7 +39,7 @@ public class LabrotuvaraGonderAction extends Action {
 			throws Exception {
 		Transaction tran = null;
 		Session session = null;
-		Connection conn = SQLUtils.getMySqlConneciton();
+		Connection conn = DbConnection.getMySqlConneciton();
 
 		try {
 			TLabrotuvarDTO labrotuvarDTO = new TLabrotuvarDTO();
@@ -119,7 +120,7 @@ public class LabrotuvaraGonderAction extends Action {
 
 			SQLUtils sqlUtils = new SQLUtils();
 			String hastaId = request.getParameter("id");
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			Integer subeId = (Integer) request.getSession().getAttribute(
 					"subeId");
 			THastaDTO hasta = sqlUtils.getHasta(
@@ -145,7 +146,7 @@ public class LabrotuvaraGonderAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kayýt hatalý");
+			request.setAttribute("warn", "Kayï¿½t hatalï¿½");
 			return mapping.findForward("exception");
 
 		} finally {

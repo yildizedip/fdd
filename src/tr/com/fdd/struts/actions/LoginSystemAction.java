@@ -25,8 +25,11 @@ import net.sf.hibernate.SessionFactory;
 import net.sf.hibernate.cfg.Configuration;
 import tr.com.fdd.dto.TDepoDTO;
 import tr.com.fdd.dto.TDoktorDTO;
+import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.dto.TMenuDTO;
 import tr.com.fdd.dto.TSubeDTO;
 import tr.com.fdd.dto.TTurKodDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.utils.GenelDegiskenler;
 
@@ -58,7 +61,7 @@ public class LoginSystemAction extends Action {
 		try {
 			sqlUtils = new SQLUtils();
 
-			connection = SQLUtils.getMySqlConneciton();
+			connection = DbConnection.getMySqlConneciton();
 			cfg = new Configuration().configure("/myhibernate.cfg.xml");
 			sessions = cfg.buildSessionFactory();
 			session = sessions.openSession(MysqlUtil.instance.getConnection());
@@ -142,6 +145,14 @@ public class LoginSystemAction extends Action {
 //			
 //			
 
+			// menu bilgileri aliniyor..
+			
+			Object[] logins=	(Object[]) sessionInf.getAttribute("sessionMember");
+			TKullaniciLoginDTO kullaniciLoginDTO=(TKullaniciLoginDTO) logins[0];
+		
+			setMenuInformation(connection, sqlUtils, sessionInf,kullaniciLoginDTO,Integer.parseInt(sube_Id));
+			
+			
 			return mapping.findForward("success");
 			// }
 
@@ -246,6 +257,36 @@ public class LoginSystemAction extends Action {
 			list.add(i);
 		}
 		return list;
+	}
+	
+	private void setMenuInformation(Connection connection, SQLUtils sqlUtils,
+			HttpSession sessionInf, TKullaniciLoginDTO kullaniciLoginDTO, int sube_id)
+			throws SQLException {
+		int rol_id = Integer.parseInt(kullaniciLoginDTO.getKuTur());
+		List<TMenuDTO> kullaniciMenuList = sqlUtils.getMenuList(connection, rol_id, 0,sube_id);
+
+		for (int i = 0; i < kullaniciMenuList.size(); i++) {
+			TMenuDTO menu = kullaniciMenuList.get(i);
+
+			setSubMenu(menu, connection, rol_id, sqlUtils,sube_id);
+
+		}
+		sessionInf.setAttribute("kullaniciMenuList",kullaniciMenuList);
+	}
+
+
+	private void setSubMenu(TMenuDTO menu, Connection connection, int rol_id,
+			SQLUtils utils, int sube_id) throws SQLException {
+
+		menu.setSubMenu(utils.getMenuList(connection, rol_id, menu.getId(),sube_id));
+
+		if (menu.getSubMenu().size() > 0) {
+			for (int i = 0; i < menu.getSubMenu().size(); i++) {
+				TMenuDTO m = menu.getSubMenu().get(i);
+				m.setSubMenu(utils.getMenuList(connection, rol_id, m.getId(),sube_id));
+			}
+		}
+
 	}
 
 }

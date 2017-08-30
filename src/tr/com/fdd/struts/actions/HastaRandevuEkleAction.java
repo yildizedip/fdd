@@ -25,6 +25,7 @@ import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.THastaRandevuDTO;
 import tr.com.fdd.dto.TIslemDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.HastaRandevuForm;
 import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
@@ -52,7 +53,7 @@ public class HastaRandevuEkleAction extends Action {
 			String disAdet = request.getParameter("disAdet");
 
 			SQLUtils sqlUtils = new SQLUtils();
-			Connection conn = SQLUtils.getMySqlConneciton();
+			Connection conn = DbConnection.getMySqlConneciton();
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 
 			hastaRandevuForm = (HastaRandevuForm) form;
@@ -90,11 +91,13 @@ public class HastaRandevuEkleAction extends Action {
 				long protokolNo = lastProtokolNo + 1;
 				tHastaDto.setProtokolNo(Long.toString(protokolNo));
 
+//				Query query = session.createQuery("from tr.com.fdd.dto.THastaDTO  p where p.durum='A' "
+//						+ " and p.subeId= :subeId and p.ad= :ad and p.soyad=:soyad and p.tel=:tel");
 				Query query = session.createQuery("from tr.com.fdd.dto.THastaDTO  p where p.durum='A' "
-						+ " and p.subeId= :subeId and p.ad= :ad and p.soyad=:soyad and p.tel=:tel");
+						+ " and p.subeId= :subeId and p.ad= :ad and p.soyad=:soyad ");
 				query.setString("ad", tHastaDto.getAd());
 				query.setString("soyad", tHastaDto.getSoyad());
-				query.setString("tel", tHastaDto.getTel());
+			//	query.setString("tel", tHastaDto.getTel());
 				query.setInteger("subeId", tHastaDto.getSubeId());
 				List<THastaDTO> result = query.list();
 
@@ -156,7 +159,7 @@ public class HastaRandevuEkleAction extends Action {
 				session.save(tHastaRandevu);
 				tran.commit();
 
-				conn = SQLUtils.getMySqlConneciton();
+				conn = DbConnection.getMySqlConneciton();
 
 				request.setAttribute("warn", GenelDegiskenler.FormMessages.SUCCESS);
 				TDoktorDTO doktorDTO = sqlUtils.getDoktor(-1, hastaRandevuForm.getDoktorId(), conn, true, subeId);
@@ -176,7 +179,7 @@ public class HastaRandevuEkleAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", GUIMessages.ISLEM_BASARILI);
+			request.setAttribute("warn", GUIMessages.ISLEM_BASARISIZ);
 			return mapping.findForward("exception");
 		} finally {
 			if (session != null && session.isOpen())
@@ -247,7 +250,6 @@ public class HastaRandevuEkleAction extends Action {
 			hastaOdemeDTO.setAciklama("Toplam Ucret");
 
 			Integer hastaGelirId = (Integer) session.save(hastaOdemeDTO);
-
 		}
 
 		// IMPLANT

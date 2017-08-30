@@ -20,6 +20,7 @@ import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.TKullaniciBilgiDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.LoginForm;
 import tr.com.fdd.utils.GUIMessages;
 import tr.com.fdd.utils.GenelDegiskenler;
@@ -110,7 +111,7 @@ public class KullaniciGuncelleAction extends Action {
 			if (tip!=null && tip.equals("kisiselBilgileriGuncelle")) {
 				return mapping.findForward("goToLogoutPage");
 			}
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			sqlUtils = new SQLUtils();
 			List<LoginForm> kullaniciList = sqlUtils.getKullaniciList(conn, "");
 			request.setAttribute("kullaniciList", kullaniciList);

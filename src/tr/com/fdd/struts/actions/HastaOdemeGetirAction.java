@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.THastaOdemeDTO;
+import tr.com.fdd.mysql.DbConnection;
 
 public class HastaOdemeGetirAction extends Action {
 
@@ -19,7 +20,7 @@ public class HastaOdemeGetirAction extends Action {
 		Connection conn = null;
 		try {
 			String odemeId = request.getParameter("id");
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			SQLUtils sqlUtils = new SQLUtils();
 			THastaOdemeDTO hastaOdeme = sqlUtils.getHastaOdeme(
 					Integer.parseInt(odemeId), conn);

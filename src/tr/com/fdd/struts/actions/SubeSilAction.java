@@ -17,6 +17,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TSubeDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 
 public class SubeSilAction extends Action {
@@ -45,7 +46,7 @@ public class SubeSilAction extends Action {
 	            
 	        request.setAttribute("warn", id+ "nolu kayit  silinmistir.");
 	       
-	         conn =SQLUtils.getMySqlConneciton();
+	         conn =DbConnection.getMySqlConneciton();
 			SQLUtils sqlUtils= new SQLUtils();
 			List<TSubeDTO>  subeList= sqlUtils.getSubeList(conn, "");	
 			request.setAttribute("subeList", subeList);
@@ -62,7 +63,7 @@ public class SubeSilAction extends Action {
 					
 					e1.printStackTrace();
 				}
-				request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+				request.setAttribute("warn", "Kayï¿½t Silme ï¿½ï¿½leminde Hata Oluï¿½tu.");
 				return mapping.findForward("exception");
 		} finally {
 			

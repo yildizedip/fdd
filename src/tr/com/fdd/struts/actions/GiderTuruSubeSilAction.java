@@ -17,6 +17,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TTurKodSubeDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.LoginForm;
 import tr.com.fdd.utils.GUIMessages;
 
@@ -31,7 +32,7 @@ public class GiderTuruSubeSilAction extends Action {
 		Session sess = null;
 		Transaction tran = null;
 
-		Connection conn = SQLUtils.getMySqlConneciton();
+		Connection conn = DbConnection.getMySqlConneciton();
 		SQLUtils sqlUtils = new SQLUtils();
 		try {
 			sess = GenericAction.getHibernateSession();
@@ -46,7 +47,7 @@ public class GiderTuruSubeSilAction extends Action {
 			tran.commit();
 			request.setAttribute("warn", GUIMessages.KAYIT_SILME_BASARILI);
 
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			sqlUtils = new SQLUtils();
 			List<LoginForm> kullaniciList = sqlUtils.getKullaniciList(conn, "");
 			request.setAttribute("kullaniciList", kullaniciList);
@@ -61,7 +62,7 @@ public class GiderTuruSubeSilAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+			request.setAttribute("warn", "Kayï¿½t Silme ï¿½ï¿½leminde Hata Oluï¿½tu.");
 			conn.rollback();
 			conn.close();
 			return mapping.findForward("exception");

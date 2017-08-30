@@ -33,6 +33,9 @@ import tr.com.fdd.utils.enums.LaboratuvarIslemDurum;
  * @author User
  * 
  */
+
+
+
 public class LoginAction extends GenericAction {
 
 	/**
@@ -82,9 +85,6 @@ public class LoginAction extends GenericAction {
 				TKullaniciBilgiDTO kullaniciBilgiDTO = getKullaniciBilgi(session, kullaniciLoginDTO.getKuId());
 				sessionInf.setAttribute("sessionMember", new Object[] {	kullaniciLoginDTO, kullaniciBilgiDTO });
 
-				// menu bilgileri aliniyor..
-				setMenuInformation(connection, sqlUtils, sessionInf,kullaniciLoginDTO);
-				
 				//labIslem bilgileri aliniyor.
 				//List<?> labIslemTipList = labIslemTipList(session);
 				//List<?> labDurumList = labDurumList();
@@ -166,35 +166,6 @@ public class LoginAction extends GenericAction {
 
 	}
 
-	private void setMenuInformation(Connection connection, SQLUtils sqlUtils,
-			HttpSession sessionInf, TKullaniciLoginDTO kullaniciLoginDTO)
-			throws SQLException {
-		int rol_id = Integer.parseInt(kullaniciLoginDTO.getKuTur());
-		List<TMenuDTO> kullaniciMenuList = sqlUtils.getMenuList(connection, rol_id, 0);
-
-		for (int i = 0; i < kullaniciMenuList.size(); i++) {
-			TMenuDTO menu = kullaniciMenuList.get(i);
-
-			setSubMenu(menu, connection, rol_id, sqlUtils);
-
-		}
-		sessionInf.setAttribute("kullaniciMenuList",kullaniciMenuList);
-	}
-
-
-	private void setSubMenu(TMenuDTO menu, Connection connection, int rol_id,
-			SQLUtils utils) throws SQLException {
-
-		menu.setSubMenu(utils.getMenuList(connection, rol_id, menu.getId()));
-
-		if (menu.getSubMenu().size() > 0) {
-			for (int i = 0; i < menu.getSubMenu().size(); i++) {
-				TMenuDTO m = menu.getSubMenu().get(i);
-				m.setSubMenu(utils.getMenuList(connection, rol_id, m.getId()));
-			}
-		}
-
-	}
 
 	private List<?> getLoginInformation(Session session, String uName,
 			String pass) throws HibernateException {

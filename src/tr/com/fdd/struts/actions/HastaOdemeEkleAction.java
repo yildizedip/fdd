@@ -8,19 +8,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.hibernate.HibernateException;
-import net.sf.hibernate.Session;
-import net.sf.hibernate.Transaction;
-
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.HastaOdemeForm;
 import tr.com.fdd.utils.Commons;
@@ -38,7 +37,7 @@ public class HastaOdemeEkleAction extends GenericAction {
 	
 		try {
 		
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			THastaOdemeDTO tHastaOdemeDto = new THastaOdemeDTO();
 
 			HastaOdemeForm hastaOdemeForm = (HastaOdemeForm) form;

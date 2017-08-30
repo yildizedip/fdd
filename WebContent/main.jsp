@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 
 <link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
-<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="sitil/bootstrap.min.css">
 
 <link rel="stylesheet"	href="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 

@@ -15,6 +15,7 @@ import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.THastaRandevuDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.HastaRandevuForm;
 import tr.com.fdd.utils.GenelDegiskenler;
 
@@ -38,7 +39,8 @@ public class HastaRandevuGuncelleSilAction extends GenericAction {
 
 			THastaRandevuDTO result = (THastaRandevuDTO) query.uniqueResult();
 			
-			result.setAciklama(hastaRandevuForm.getAciklama());
+			String aciklama=hastaRandevuForm.getAciklama().replaceAll("\r\n", " ");
+			result.setAciklama(aciklama);
 			result.setRandevuTarihiBaslangic(hastaRandevuForm.getRandevuTarihiBaslangic());
 			result.setRandevuTarihiBitis(hastaRandevuForm.getRandevuTarihiBitis());
 		//	result.setIslem(hastaRandevuForm.getIslem());
@@ -51,7 +53,7 @@ public class HastaRandevuGuncelleSilAction extends GenericAction {
 			tran.commit();
 
 			SQLUtils sqlUtils = new SQLUtils();
-			Connection conn = SQLUtils.getMySqlConneciton();
+			Connection conn = DbConnection.getMySqlConneciton();
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 
 			TDoktorDTO doktorDTO = sqlUtils.getDoktor(-1, hastaRandevuForm.getDoktorId(), conn, true, subeId);

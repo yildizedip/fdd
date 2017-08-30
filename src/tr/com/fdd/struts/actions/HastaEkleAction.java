@@ -55,15 +55,15 @@ public class HastaEkleAction extends GenericAction {
 			}
 
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
-			setFormInfoToDtos(hastaKartiForm, tHastaDto, tIslemDto, tOdemeDto, subeId); // form bilgileridto lara eklenir.
+			setFormInfoToDtos(hastaKartiForm, tHastaDto, tIslemDto, tOdemeDto, subeId);  // form bilgileridto lara eklenir.
 			tran = session.beginTransaction();
 			// hasta ekle
 			Query query = session.createQuery("from tr.com.fdd.dto.THastaDTO  p where p.durum='A' "
-					+ " and p.subeId= :subeId and  p.ad= :ad and p.soyad=:soyad and p.tel= :tel ");
+					+ " and p.subeId= :subeId and  p.ad= :ad and p.soyad=:soyad ");
 			query.setString("ad", tHastaDto.getAd());
 			query.setString("soyad", tHastaDto.getSoyad());
 			query.setInteger("subeId", subeId);
-			query.setString("tel", hastaKartiForm.getTel());
+		//	query.setString("tel", hastaKartiForm.getTel());
 
 			List<THastaDTO> result = query.list();
 

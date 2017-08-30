@@ -90,7 +90,7 @@ function validateForm(){
 				
 				<td>Tarih</td>
 				<td>
-					<input name="tarihStr" id="tarihStr" value="${tarihStr}" class="form-control"  > 
+					<input name="tarihStr" id="tarihStr" value="${tarihStr}" class="form-control" > 
 					<input type="hidden" name="subeId"	value="${subeId}">
 					
 				</td>

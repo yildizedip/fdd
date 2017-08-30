@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.TIslemDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.HastaForm;
 import tr.com.fdd.utils.GenelDegiskenler;
@@ -28,9 +29,15 @@ public class OperasyonuKesinlesmemisHastaListesiAction extends Action {
 
 		try {
 
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			
-			String tip= request.getParameter("tip");
+			
+			/**
+			 public static String OP_KESINLESMEMIS = "1";
+			 public static String OP_KESINLESMIS = "2";
+	         public static String OP_KESINLESMEMIS_ARAMA_KAYDI = "3";
+		*/
+			String tip= request.getParameter("tip"); 
 		
 		
 			
@@ -52,7 +59,7 @@ public class OperasyonuKesinlesmemisHastaListesiAction extends Action {
 							hastaForm.getBasTar(),hastaForm.getBitTar(), operasyonTip, hastaForm.getTel(), hastaForm.getDoktorId());
 
 			if (hastaOperasyonListesi.size() == 0) {
-				request.setAttribute("noContent", "Kayýt Bulunamadý");
+				request.setAttribute("noContent", "KayÄ±t BulunamadÄ±");
 				return mapping.findForward("noContent");
 			} else {
 				double toplamUcret= getToplamUcret(hastaOperasyonListesi);

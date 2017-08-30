@@ -22,6 +22,7 @@ import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.TDepoDTO;
 import tr.com.fdd.dto.TDepoSiparisDTO;
 import tr.com.fdd.dto.TSubeDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
 
@@ -45,7 +46,7 @@ public class DepoSiparisEkleAction extends Action {
 			
 			SQLUtils sqlUtils= new SQLUtils();
 			
-			connection =SQLUtils.getMySqlConneciton();
+			connection =DbConnection.getMySqlConneciton();
 			TSubeDTO subeDTO= sqlUtils.getSubeBilgi(connection, Integer.parseInt(subeId));
 			
 			Random random= new Random();

@@ -20,6 +20,7 @@ import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.TKullaniciBilgiDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.LoginForm;
 import tr.com.fdd.utils.GUIMessages;
@@ -98,13 +99,14 @@ public class KullaniciEkleAction extends Action {
 				doktorDTO.setdAd(frm.getAd());
 				doktorDTO.setdMemberId(loginId);
 				doktorDTO.setdSoyad(frm.getSoyad());
-				doktorDTO.setdBrans("Diþ Hekimi");
+				doktorDTO.setdBrans("Dis Hekimi");
 				doktorDTO.setdDurum("A");
+				doktorDTO.setdAktif("A");
 
 				session.save(doktorDTO);
 			}
 			tran.commit();
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			sqlUtils = new SQLUtils();
 			List<LoginForm> kullaniciList = sqlUtils.getKullaniciList(conn, "");
 			request.setAttribute("kullaniciList", kullaniciList);
@@ -118,11 +120,11 @@ public class KullaniciEkleAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kayýt hatalý");
+			request.setAttribute("warn", "Kayï¿½t hatalï¿½");
 			return mapping.findForward("exception");
 
 		} catch (Exception e) {
-			request.setAttribute("warn", "Kayýt hatalý");
+			request.setAttribute("warn", "Kayï¿½t hatalï¿½");
 			return mapping.findForward("exception");
 
 		} finally {

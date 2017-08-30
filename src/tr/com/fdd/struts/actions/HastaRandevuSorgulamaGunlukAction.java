@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TDoktorDTO;
+import tr.com.fdd.mysql.DbConnection;
 
 public class HastaRandevuSorgulamaGunlukAction extends Action {
 
@@ -21,7 +22,7 @@ public class HastaRandevuSorgulamaGunlukAction extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		Connection conn = SQLUtils.getMySqlConneciton();
+		Connection conn = DbConnection.getMySqlConneciton();
 		try {
 			
 			SQLUtils sqlUtils = new SQLUtils();

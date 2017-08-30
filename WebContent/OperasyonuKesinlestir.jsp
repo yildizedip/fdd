@@ -2,6 +2,7 @@
 <%@page import="tr.com.fdd.dto.TIslemDTO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="tr.com.fdd.struts.actions.SQLUtils"%>
+<%@page import="tr.com.fdd.mysql.DbConnection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-9" pageEncoding="ISO-8859-9"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -55,7 +56,7 @@
 	String hastaId = request.getParameter("hastaId");
 	String subeId = request.getParameter("subeId");
 	SQLUtils utils = new SQLUtils();
-	Connection conn = SQLUtils.getMySqlConneciton();
+	Connection conn = DbConnection.getMySqlConneciton();
 	TIslemDTO islem = utils.getOperasyonuKesinlesmemisHasta(Integer.parseInt(islemId), conn);
 	System.out.print(subeId);
 	THastaDTO hasta = utils.getHasta(Integer.parseInt(hastaId), conn, new Integer(subeId).intValue());

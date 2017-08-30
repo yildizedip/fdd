@@ -3,7 +3,7 @@ package tr.com.fdd.utils;
 public class GUIMessages {
 	
 	public static String ODEME_VAR="Hastaya ait Ödeme bulunmaktadır.";
-	public static String HASTA_VAR="Hasta zaten bulunmaktadır.";
+	public static String HASTA_VAR="Eklemek istediğiniz hasta zaten bulunmaktadır.";
 	public static String HASTA_VAR_RANDEVu="Girilen isimde hasta zaten mevcuttur. Lüten hasta seçerek randevu ekleyiniz.";
 	public static String KAYIT_EKLEME_BASARILI="Kayıt başarı ile eklendi..";
 	public static String KAYIT_SILME_BASARILI="Kayıt başarı silindi..";

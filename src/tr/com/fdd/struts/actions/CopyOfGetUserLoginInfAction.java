@@ -22,6 +22,7 @@ import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.TKullaniciBilgiDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
 import tr.com.fdd.dto.TMenuDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.LoginForm;
 import tr.com.fdd.struts.form.SubeForm;
@@ -61,7 +62,7 @@ public class CopyOfGetUserLoginInfAction extends Action {
 			session.beginTransaction();
 
 			sqlUtils = new SQLUtils();
-			connection = SQLUtils.getMySqlConneciton();
+			connection = DbConnection.getMySqlConneciton();
 			
 			/**
 			 * subeler listesi aliniyor.
@@ -102,15 +103,15 @@ public class CopyOfGetUserLoginInfAction extends Action {
 
 					// menu bilgileri aliniyor..
 					int rol_id = Integer.parseInt(kullaniciLoginDTO.getKuTur());
-					List<TMenuDTO> kullaniciMenuList = sqlUtils.getMenuList(connection, rol_id, 0);
+				//	List<TMenuDTO> kullaniciMenuList = sqlUtils.getMenuList(connection, rol_id, 0);
 
-					for (int i = 0; i < kullaniciMenuList.size(); i++) {
-						TMenuDTO menu = kullaniciMenuList.get(i);
-
-						setSubMenu(menu, connection, rol_id, sqlUtils);
-
-					}
-					sessionInf.setAttribute("kullaniciMenuList",kullaniciMenuList);
+//					for (int i = 0; i < kullaniciMenuList.size(); i++) {
+//						TMenuDTO menu = kullaniciMenuList.get(i);
+//
+//						setSubMenu(menu, connection, rol_id, sqlUtils);
+//
+//					}
+//					sessionInf.setAttribute("kullaniciMenuList",kullaniciMenuList);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -151,14 +152,14 @@ public class CopyOfGetUserLoginInfAction extends Action {
 	private void setSubMenu(TMenuDTO menu, Connection connection, int rol_id,
 			SQLUtils utils) throws SQLException {
 
-		menu.setSubMenu(utils.getMenuList(connection, rol_id, menu.getId()));
-
-		if (menu.getSubMenu().size() > 0) {
-			for (int i = 0; i < menu.getSubMenu().size(); i++) {
-				TMenuDTO m = menu.getSubMenu().get(i);
-				m.setSubMenu(utils.getMenuList(connection, rol_id, m.getId()));
-			}
-		}
+//		menu.setSubMenu(utils.getMenuList(connection, rol_id, menu.getId()));
+//
+//		if (menu.getSubMenu().size() > 0) {
+//			for (int i = 0; i < menu.getSubMenu().size(); i++) {
+//				TMenuDTO m = menu.getSubMenu().get(i);
+//				m.setSubMenu(utils.getMenuList(connection, rol_id, m.getId()));
+//			}
+//		}
 
 	}
 

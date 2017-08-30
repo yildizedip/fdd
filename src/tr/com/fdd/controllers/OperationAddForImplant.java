@@ -19,6 +19,7 @@ import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.actions.GenericAction;
 import tr.com.fdd.struts.actions.SQLUtils;
@@ -42,7 +43,7 @@ public class OperationAddForImplant implements IOperationAddController {
 		Session session = null;
 		
 		SQLUtils utils=new SQLUtils();
-	    Connection conn=	SQLUtils.getMySqlConneciton();
+	    Connection conn=	DbConnection.getMySqlConneciton();
 		
 		try {
 			
@@ -180,7 +181,7 @@ public class OperationAddForImplant implements IOperationAddController {
 			
 			// sayfaya gidecek attribute leri setle
 			
-			conn=SQLUtils.getMySqlConneciton(); // yenilemeyince commit yemiyor..
+			conn=DbConnection.getMySqlConneciton(); // yenilemeyince commit yemiyor..
 			
 			
 			SQLUtils sqlUtils = new SQLUtils();

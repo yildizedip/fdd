@@ -18,6 +18,7 @@ import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.LoginForm;
 import tr.com.fdd.utils.GenelDegiskenler;
 
@@ -54,7 +55,7 @@ public class KullaniciSilAction extends Action {
 			}
 			tran.commit();	   	            
 	        request.setAttribute("warn", id+ " nolu kayit  silinmistir.");	       
-	        conn =SQLUtils.getMySqlConneciton();
+	        conn =DbConnection.getMySqlConneciton();
 			SQLUtils sqlUtils= new SQLUtils();
 			List<LoginForm>  kullaniciList= sqlUtils.getKullaniciList(conn, "");	
 			request.setAttribute("kullaniciList", kullaniciList);
@@ -71,7 +72,7 @@ public class KullaniciSilAction extends Action {
 					
 					e1.printStackTrace();
 				}
-				request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+				request.setAttribute("warn", "Kayï¿½t Silme ï¿½ï¿½leminde Hata Oluï¿½tu.");
 				return mapping.findForward("exception");
 		} finally {
 			conn.close();			

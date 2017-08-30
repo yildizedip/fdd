@@ -18,6 +18,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 
 public abstract class GenericAction extends Action {
@@ -66,7 +67,7 @@ public abstract class GenericAction extends Action {
 		Session session = sessions.openSession(MysqlUtil.instance.getConnection());
 		//burda hibernate xmlden de dataconnection alinir.
 		
-		Connection connection =SQLUtils.getMySqlConneciton();
+		Connection connection = DbConnection.getMySqlConneciton();
 		
 		return executeCode(session,connection, mapping, form, request, response, null);
 		

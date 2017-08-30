@@ -17,6 +17,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TKullaniciSubeDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.LoginForm;
 import tr.com.fdd.struts.form.SubeForm;
 import tr.com.fdd.utils.GUIMessages;
@@ -63,7 +64,7 @@ public class KullaniciSubeEkleAction extends Action {
 			}					
 			tran.commit();   
 	        
-	        conn =SQLUtils.getMySqlConneciton();
+	        conn =DbConnection.getMySqlConneciton();
 			SQLUtils sqlUtils= new SQLUtils();
 			List<LoginForm>  kullaniciList= sqlUtils.getKullaniciList(conn, "");	
 			request.setAttribute("kullaniciList", kullaniciList);
@@ -80,7 +81,7 @@ public class KullaniciSubeEkleAction extends Action {
 					
 					e1.printStackTrace();
 				}
-				request.setAttribute("warn", "Kayýt Ekleme Ýþleminde Hata Oluþtu.");
+				request.setAttribute("warn", "Kayï¿½t Ekleme ï¿½ï¿½leminde Hata Oluï¿½tu.");
 				return mapping.findForward("exception");
 		} finally {
 			if (sess != null && sess.isOpen())

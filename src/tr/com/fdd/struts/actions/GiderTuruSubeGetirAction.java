@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TTurKodDTO;
+import tr.com.fdd.mysql.DbConnection;
 
 public class GiderTuruSubeGetirAction extends Action {
 
@@ -24,7 +25,7 @@ public class GiderTuruSubeGetirAction extends Action {
 		Connection connection = null;
 		SQLUtils sqlUtil = new SQLUtils();
 		try {
-			connection = SQLUtils.getMySqlConneciton();
+			connection = DbConnection.getMySqlConneciton();
 		
 			TTurKodDTO dto=sqlUtil.getGiderTur(connection, turId);			
 			

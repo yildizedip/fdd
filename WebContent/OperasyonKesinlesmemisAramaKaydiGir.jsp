@@ -2,17 +2,44 @@
 <%@page import="tr.com.fdd.dto.TIslemDTO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="tr.com.fdd.struts.actions.SQLUtils"%>
+<%@page import="tr.com.fdd.mysql.DbConnection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-9"
 	pageEncoding="ISO-8859-9"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+	
+	
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script src="script/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet"
+	href="styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
 <link rel="stylesheet" href="css/edip.css" type="text/css" />
+<link rel="stylesheet" href="css/demo_page.css" type="text/css" />
+<link rel="stylesheet" href="css/demo_table.css" type="text/css" />
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" />
 
 <script type="text/javascript" src="js/epoch_classes.js"></script>
-<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<script type="text/javascript" src="js/edip.js"></script>
+<script type="text/javascript" src="js/jquery.ui.datepicker-tr.js"></script>
 <title>Hasta Güncelle</title>
 <script type="text/javascript">
 	window.onload = function() {
@@ -53,83 +80,51 @@
 String islemId= request.getParameter("islemId");
 String hastaId= request.getParameter("hastaId");
 String subeId= request.getParameter("subeId");
+
 if(islemId != null && hastaId!=null &&  subeId!=null){
-SQLUtils utils= new SQLUtils();
-Connection conn =SQLUtils.getMySqlConneciton();
+	SQLUtils utils= new SQLUtils();
+	Connection conn =DbConnection.getMySqlConneciton();;
 
-TIslemDTO islem=  utils.getOperasyonuKesinlesmemisHasta(Integer.parseInt(islemId),conn);
-System.out.print(subeId);
-THastaDTO hasta= utils.getHasta(Integer.parseInt(hastaId),conn,new Integer(subeId).intValue());
+	TIslemDTO islem=  utils.getOperasyonuKesinlesmemisHasta(Integer.parseInt(islemId),conn);
+	System.out.print(subeId);
+	THastaDTO hasta= utils.getHasta(Integer.parseInt(hastaId),conn,new Integer(subeId).intValue());
 
-request.setAttribute("operasyon",islem);
-request.setAttribute("hasta",hasta);
+	request.setAttribute("operasyon",islem);
+	request.setAttribute("hasta",hasta);
 }
  %>
 </head>
-<body>
+<body style="color: black; background-color: white; font-size: 11px;">
 <div>
 
-			<hr>
-		<font
-			style="font-size: 12px; font-family: monospace; color: graytext;">
-		..: Hasta Arama Kaydı Gir </font>
-		<hr>
+<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+		<div class="page-header ">
+			<div class="page-title" style="font-size: 15px;">
 
+			Hasta Arama Kaydı Gir - {  ${hasta.ad} - ${hasta.soyad} (${hasta.tel}) }
+
+
+			</div>
+
+			<button class="btn pull-right"
+				style="background-image: url('Images/printIcon2.jpg'); height: 22px; width: 22px"
+				onclick="window.print()"></button>
+
+		</div>
+		<div class="bg-success">${requestScope.warn}</div>
+
+		<div class="clearfix"></div>
+	</div>
+
+
+		<div class="col-lg-6">
 		
-		<table class="sorgulama">
-			<tr>
-				<td colspan="2" style="text-align: center;">HASTA BİLGİLERİ</td>
-			</tr>
-			<tr>
-				<td>Protokol No</td>
-
-				<td><input class="inputTextfield" name="protokolNo" id="protokolNo"
-					value="${hasta.protokolNo }" /> </td>
-			</tr>
-
-			<tr>
-				<td>TC Kimlik</td>
-				<td><input class="inputTextfield" name="tckimlik" id="tckimlik"
-					value="${hasta.tckimlik }" /> <input type="hidden" name="id"
-					value="${hasta.id }"></td>
-			</tr>
-			<tr>
-				<td>Ad-Soyad</td>
-
-				<td><input class="inputTextfield" name="ad" id="ad"
-					value="${hasta.ad }" /> <input class="inputTextfield" name="soyad"
-					id="soyad" value="${hasta.soyad }" /></td>
-					
-					
-			</tr>
-
-				<tr>
-				<td>TEl</td>
-				<td><input class="inputTextfield" name="tckimlik" id="tckimlik"
-					value="${hasta.tel}" /> </td>
-			</tr>
-
-		
-
-			<tr>
-				<td colspan="2" align="left">
-				
-				<label style="color: red;">
-				${requestScope.warn}</label>
-				
-				</td>
-
-			</tr>
-
-		</table>
-		
-		<hr>
 		<c:if test="${odemeListesi eq null}">
 		
 		<form action="aramaKaydiEkle.do" method="post" onsubmit="return validation()">
-		<table class="sorgulama">
+		<table  class="table table-bordered">
 			<tr>
-				<td colspan="3" style="text-align: center;">ARAMA KAYDI BİLGİLERİ GİRİŞ</td>
+				<td colspan="3" class="bg-info" style="text-align: center;">ARAMA KAYDI BİLGİLERİ GİRİŞ</td>
 			</tr>
 			<tr>
 				<td>Operasyon	 Tipi-Tarihi</td>
@@ -196,14 +191,14 @@ request.setAttribute("hasta",hasta);
 			
 			<tr>
 				<td>Saat</td>
-				<td><select size="1" name="saat" id="saat" style="width: 56px; font-size:12px ">
+				<td><select size="1" name="saat" id="saat" style="width: 90px; font-size:12px ">
 					<option value="-1" label="Saat">
 					<c:forEach items="${saatler}" var="saat" >
 					<option value="${saat}" label="${saat}" ></option>				
 					</c:forEach>
 				</select>
 				
-				 : <select name="dakika" id="dakika" size="1" style="width: 52px; font-size:12px ">
+				 : <select name="dakika" id="dakika" size="1" style="width: 90px; font-size:12px ">
 				<option value="-1" label="Dk">
 				<c:forEach items="${dakikalar}" var="dakika">
 				<option label="${dakika }" value="${dakika }">
@@ -237,6 +232,8 @@ request.setAttribute("hasta",hasta);
 		</table>
 		</form>
 		</c:if>
+		
+		</div>
 	
 </div>
 </body>

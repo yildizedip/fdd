@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.LoginForm;
 import tr.com.fdd.utils.GUIMessages;
@@ -27,7 +28,7 @@ public class KullaniciGetirAction extends Action {
 		Connection connection = null;
 		SQLUtils sqlUtil = new SQLUtils();
 		try {
-			connection = SQLUtils.getMySqlConneciton();
+			connection = DbConnection.getMySqlConneciton();
 			// sube sorgulama icin kullaniliyor.
 
 			List<LoginForm> kullaniciList = sqlUtil.getKullaniciList(

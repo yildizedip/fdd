@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.THastaIslemBorcTakipDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.IslemBorcOdemeTakipForm;
 import tr.com.fdd.utils.GUIMessages;
@@ -26,7 +27,7 @@ public class BorcOdemeListesiAction extends Action {
 
 		Connection conn = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();			
+			conn = DbConnection.getMySqlConneciton();			
 			IslemBorcOdemeTakipForm borcForm= (IslemBorcOdemeTakipForm) form;
 			
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");

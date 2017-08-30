@@ -22,8 +22,7 @@
 
 <link type="text/css" rel="stylesheet"
 	href="styles/font-awesome.min.css">
-<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="styles/main.css">
+<link type="text/css" rel="stylesheet" href="sitil/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="styles/nestable.css">
 
 
@@ -41,11 +40,27 @@
 	href="css/jquery.dataTables.min.css" />
 
 <style type="text/css">
-.fc-past {
-	background-color: #CECEF6;
+
+.fc-future {
+	background-color: white;
 }
 
-
+.fc h2 {
+   font-size: 16px;
+   font-family: sans-serif;
+}
+.fc h3 {
+   font-size: 16px;
+   font-family: sans-serif;
+}
+.fc h4 {
+   font-size: 16px;
+   font-family: sans-serif;
+}
+.fc h5 {
+   font-size: 16px;
+   font-family: sans-serif;
+}
 .modal-header, .close {
 	background-color: #5cb85c;
 	color: white !important;
@@ -56,6 +71,17 @@
 .modal-footer {
 	background-color: #f9f9f9;
 }
+
+#popup {
+	display: none;
+}
+
+body {
+	padding: 0;
+	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	font-size: 12px;
+	color: black;
+}
 </style>
 
 <script>
@@ -64,7 +90,7 @@
 	<c:forEach items="${selectedDoctor.doktorRandevuList}" var="randevu">
 
 	var event = {
-		"title" : '${randevu.hasta.ad} ${randevu.hasta.soyad}',
+		"title" : '${randevu.hasta.ad} ${randevu.hasta.soyad} ${randevu.hasta.protokolNo} ${randevu.aciklama}',
 		"start" : '${randevu.randevuTarihiBaslangic}',
 		"end" : '${randevu.randevuTarihiBitis}',
 		"description" : '${randevu.aciklama}',
@@ -332,10 +358,11 @@
 											height : 800,
 											fixedWeekCount : false,
 											weekNumbers : true,
+											columnFormat : 'DD.MM dddd',
 											navLinks : true, // can click day/week names to navigate views
 											selectable : true,
 											businessHours : false,
-											minTime : "08:00:00",
+											minTime : "07:00:00",
 											maxTime : "22:00:00",
 											allDaySlot : false,
 											selectHelper : true,
@@ -415,7 +442,7 @@
 														'red');
 												$(this)
 														.css('font-size',
-																'12px');
+																'10px');
 
 												// $('#start').val(moment(calEvent.start).format('YYYY-MM-DD HH:mm'));
 												//	$('#end').val(moment(calEvent.end).format('YYYY-MM-DD HH:mm'));
@@ -555,7 +582,7 @@
 												element.attr('href',
 														'javascript:void(0);');
 												$(element).css('font-size',
-														'12px');
+														'10px');
 												if (event.geldimi == 'on')
 													$(element).css(
 															'background-color',
@@ -817,38 +844,21 @@
 	}
 </script>
 
-<style>
-#popup {
-	display: none;
-}
-
-body {
-	padding: 0;
-	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
-	font-size: 12px;
-	color: black;
-}
-</style>
 
 <title>Randevu Ekle</title>
 </head>
 <body>
 
-
-	<div id="title-breadcrumb-option-demo"
-		class="page-title-breadcrumb bg-success">
-
-		<div class="page-header pull-left">
-			<div class="page-title" style="font-size: 13px;">
-				<span id="myDate"> </span> Hekim : ${selectedDoctor.dAd}
-				${selectedDoctor.dSoyad}
+		<div class="pull-left">
+			<div  style="font-size: 12px;">
+				Hekim : ${selectedDoctor.dAd}	${selectedDoctor.dSoyad}
 			</div>
 		</div>
-		<button class="btn pull-right"
+		<div class="pull-right">  
+		<button class="btn"
 			style="background-image: url('Images/printIcon2.jpg'); height: 20px; width: 20px"
 			onclick="window.print()"></button>
-		<div class="clearfix"></div>
-	</div>
+		</div>
 
 	<div class="row">
 
@@ -902,7 +912,7 @@ body {
 												<div class="form-group">
 			
 													<div class="input-icon">
-														<i class="fa fa-user" aria-hidden="true"></i> <input
+														 <input
 															class="form-control" name="hastaAd" placeholder="Hasta Ad"
 															id="hastaad" >
 			
@@ -914,7 +924,7 @@ body {
 											<div class="col-lg-5">
 												<div class="form-group">
 													<div class="input-icon">
-														<i class="fa fa-user" aria-hidden="true"></i> <input
+														 <input
 															class="form-control" name="hastaSoyad"
 															placeholder="Hasta Soyad " id="hastasoyad"
 															 >
@@ -938,7 +948,7 @@ body {
 											<div class="col-lg-5">
 												<div class="form-group">
 													<div class="input-icon">
-														<i class="fa fa-phone"></i> <input class="form-control"
+														 <input class="form-control"
 															name="telefon" placeholder="Telefon 05051119922"
 															id="telefon" >
 			
@@ -975,7 +985,7 @@ body {
 								<div class="col-lg-6">
 									<div class="form-group">
 										<div class="input-icon">
-											<i class="fa fa-calendar "></i> <input
+											 <input
 												class="form-control bg-info" type="text"
 												name="randevuTarihiBaslangic" placeholder="Baþlangýç "
 												id="start" data-validation="required" style="color: black;">
@@ -988,7 +998,7 @@ body {
 								<div class="col-lg-6">
 									<div class="form-group">
 										<div class="input-icon">
-											<i class="fa fa-calendar "></i> <input
+											 <input
 												class="form-control bg-info" type="text"
 												name="randevuTarihiBitis" placeholder="Bitiþ" id="end"
 												data-validation="required" style="color: black;">
@@ -1155,20 +1165,13 @@ body {
 											</div>
 											
 											
-											<div class="btn-group btn-group-xs" >
-											
-											
+											<div class="btn-group btn-group-xs">
 														<button type="button"
 												class="btn btn-default disno">Alt Çene</button>
 												
 												</div>
-
-											
-
 								</div>
 							</div>
-								
-								
 								
 								</div>
 								
@@ -1187,7 +1190,7 @@ body {
 								<div class="col-lg-3">
 									<div class="form-group">
 										<div class="input-icon">
-											<i class="fa fa-try" aria-hidden="true"></i> <input
+										<input
 												class="form-control" name="tedaviUcret" placeholder="Ücret"
 												id="tedaviUcretYeni"  >
 
@@ -1229,7 +1232,7 @@ body {
 								<div class="col-lg-12">
 									<div class="form-group">
 										<div class="input-icon">
-											<i class="fa fa-info" aria-hidden="true"></i> <input
+											 <input
 												class="form-control" name="tedaviAciklama"
 												placeholder="Açýklama" id="tedaviAciklamaYeni"
 												>
@@ -1280,7 +1283,7 @@ body {
 									<div class="form-group">
 										<label for="inputName" class="control-label">Tarih </label>
 										<div class="input-icon">
-											<i class="fa fa-calendar" aria-hidden="true"></i> <input
+											 <input
 												class="form-control" name="tedaviTarih" placeholder="Tarih"
 												id="tedaviTarih" readonly="readonly">
 
@@ -1291,7 +1294,7 @@ body {
 									<div class="form-group">
 										<label for="inputName" class="control-label">Ücret </label>
 										<div class="input-icon">
-											<i class="fa fa-try" aria-hidden="true"></i> <input
+											 <input
 												class="form-control" name="tedaviUcret" placeholder="Ücret"
 												id="tedaviUcret" readonly="readonly">
 
@@ -1302,7 +1305,7 @@ body {
 									<div class="form-group">
 										<label for="inputName" class="control-label">Diþ No </label>
 										<div class="input-icon">
-											<i class="fa fa-pencil" aria-hidden="true"></i> <input
+											<input
 												class="form-control" name="tedaviDisNo" placeholder="Diþ No"
 												id="tedaviDisNo" readonly="readonly">
 
@@ -1316,7 +1319,7 @@ body {
 									<div class="form-group">
 										<label for="inputName" class="control-label">Açýklama</label>
 										<div class="input-icon">
-											<i class="fa fa-info" aria-hidden="true"></i> <input
+											 <input
 												class="form-control" name="tedaviAciklama"
 												placeholder="Açýklama" id="tedaviAciklama"
 												readonly="readonly">
@@ -1489,7 +1492,7 @@ body {
 					<div class="col-lg-12">
 						<div class="form-group">
 							<div class="input-icon">
-								<i class="fa fa-calendar" aria-hidden="true"></i> <input
+								 <input
 									class="form-control" name="randevuTarihiBaslangic"
 									id="startTime">
 

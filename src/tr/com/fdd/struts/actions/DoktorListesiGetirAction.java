@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.DoktorForm;
 import tr.com.fdd.utils.GUIMessages;
@@ -26,7 +27,7 @@ public class DoktorListesiGetirAction extends Action {
 		Connection connection = null;
 		SQLUtils sqlUtil = new SQLUtils();
 		try {
-			connection = SQLUtils.getMySqlConneciton();			
+			connection = DbConnection.getMySqlConneciton();			
 		
 			List<DoktorForm> doktorList = sqlUtil.getDoktorList(connection,frm.getdAd());
 			

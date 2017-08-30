@@ -18,6 +18,7 @@ import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.utils.GUIMessages;
 import tr.com.fdd.utils.GenelDegiskenler;
@@ -34,7 +35,7 @@ public class HastaGetirAction extends Action {
 		SQLUtils ut = new SQLUtils();
 
 		try {
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			String hastaId = request.getParameter("id");
 			String tip = request.getParameter("type");
 

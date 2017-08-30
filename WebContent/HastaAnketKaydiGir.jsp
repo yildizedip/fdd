@@ -6,6 +6,7 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="tr.com.fdd.struts.actions.SQLUtils"%>
+<%@page import="tr.com.fdd.mysql.DbConnection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-9"
 	pageEncoding="ISO-8859-9"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -66,7 +67,7 @@
 String hastaId= request.getParameter("hastaId");
 String subeId= request.getParameter("subeId");
 SQLUtils utils= new SQLUtils();
-Connection conn =SQLUtils.getMySqlConneciton();
+Connection conn =DbConnection.getMySqlConneciton();
 THastaDTO hasta=new THastaDTO();
 System.out.print(subeId);
 if(subeId!=null && hastaId!=null)

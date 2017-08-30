@@ -17,6 +17,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TDoktorSubeDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.DoktorForm;
 import tr.com.fdd.struts.form.SubeForm;
 import tr.com.fdd.utils.GUIMessages;
@@ -31,7 +32,7 @@ public class DoktorSubeSilAction extends Action {
 		SubeForm subeForm= (SubeForm) form;		
 		Session sess= null;
 		Transaction tran=null;
-	    Connection conn =SQLUtils.getMySqlConneciton();
+	    Connection conn =DbConnection.getMySqlConneciton();
 		SQLUtils sqlUtils= new SQLUtils();
 		try{
 			sess=GenericAction.getHibernateSession();
@@ -66,7 +67,7 @@ public class DoktorSubeSilAction extends Action {
 					
 					e1.printStackTrace();
 				}
-				request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+				request.setAttribute("warn", "Kayï¿½t Silme ï¿½ï¿½leminde Hata Oluï¿½tu.");
 				return mapping.findForward("exception");
 		} finally {
 			if (sess != null && sess.isOpen())

@@ -2,6 +2,7 @@ package tr.com.fdd.struts.actions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.THastaDTO;
+import tr.com.fdd.dto.TIslemTipDTO;
+import tr.com.fdd.dto.TMenuDTO;
 import tr.com.fdd.dto.TSubeDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.SubeForm;
 import tr.com.fdd.utils.GUIMessages;
@@ -40,7 +44,7 @@ public class SubeEkleAction extends Action {
 		SQLUtils sqlUtils= new SQLUtils();
 		
 		try {
-			conn=SQLUtils.getMySqlConneciton();
+			
 			TSubeDTO tSubeDTO = new TSubeDTO();
 			
 			SubeForm subeForm=(SubeForm) form;
@@ -55,7 +59,7 @@ public class SubeEkleAction extends Action {
 
 				query.setString("ad", tSubeDTO.getsAd());
 				
-				List<THastaDTO> result =  query.list();
+				List<TSubeDTO> result =  query.list();
 			int id=0;
 			if(result.size()!=0){
 				tran.commit();
@@ -66,8 +70,26 @@ public class SubeEkleAction extends Action {
 			else
 			{
 				id=(Integer) session.save(tSubeDTO);
-				request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);
+				
 				tran.commit();
+				
+				conn=DbConnection.getMySqlConneciton();
+				List<TMenuDTO> menuList=sqlUtils.getAllMenu(conn);
+				
+				for (TMenuDTO tMenuDTO : menuList) {
+					
+					sqlUtils.addMenu2Sube(conn, id, tMenuDTO.getId());
+				}
+				
+				List<TIslemTipDTO> opersyonList=sqlUtils.getAllOperasyon(conn);
+				
+				
+				for (TIslemTipDTO tIslemTipDTO : opersyonList) {
+					
+					sqlUtils.addOperasyon2Sube(conn, id, tIslemTipDTO.getId());
+				}
+				
+				request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);
 				
 			}
 						
@@ -77,6 +99,17 @@ public class SubeEkleAction extends Action {
 			
 			
 			return mapping.findForward("success");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (tran != null)
+				try {
+					tran.rollback();
+				} catch (HibernateException e1) {
+					
+					e1.printStackTrace();
+				}
+				request.setAttribute("warn", GUIMessages.ISLEM_BASARISIZ);
+				return mapping.findForward("exception");
 		} catch (HibernateException e) {
 			if (tran != null)
 				try {
@@ -85,14 +118,10 @@ public class SubeEkleAction extends Action {
 					
 					e1.printStackTrace();
 				}
-				request.setAttribute("warn", "Kayýt hatalý");
-				return mapping.findForward("exception");
-		} catch (IllegalAccessException e) {
-			request.setAttribute("warn", "Kayýt hatalý");
+			request.setAttribute("warn", GUIMessages.ISLEM_BASARISIZ);
 			return mapping.findForward("exception");
-
 		} catch (InvocationTargetException e) {
-			request.setAttribute("warn", "Kayýt hatalý");
+			request.setAttribute("warn", GUIMessages.ISLEM_BASARISIZ);
 			return mapping.findForward("exception");
 
 		} finally {

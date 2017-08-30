@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TIslemDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.TAramaForm;
 import tr.com.fdd.utils.GenelDegiskenler;
@@ -27,7 +28,7 @@ public class GetHastaOperasyonListForAramaKaydiAction extends Action {
 			throws Exception {
 		Connection conn = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			String tip= request.getParameter("tip");
 			String operasyonTip=request.getParameter("islemTipi");
 			TAramaForm aramaForm= (TAramaForm) form;
@@ -51,7 +52,7 @@ public class GetHastaOperasyonListForAramaKaydiAction extends Action {
 //							hastaForm.getBasTar(),hastaForm.getBitTar(), operasyonTip);
 //
 //			if (hastaOperasyonListesi.size() == 0) {
-//				request.setAttribute("noContent", "Kayýt Bulunamadý");
+//				request.setAttribute("noContent", "Kayï¿½t Bulunamadï¿½");
 //				return mapping.findForward("noContent");
 //			} else {
 //				double toplamUcret= getToplamUcret(hastaOperasyonListesi);

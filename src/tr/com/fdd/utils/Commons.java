@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.actions.SQLUtils;
 
 public class Commons {
@@ -154,7 +155,7 @@ public class Commons {
 	
 	public static void refreshSelectedHasta(HttpServletRequest request, Connection connection, int hastaId) throws SQLException{
 		
-		connection =SQLUtils.getMySqlConneciton();
+		connection =DbConnection.getMySqlConneciton();
 		Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 		SQLUtils sqlUtils = new SQLUtils();
 		

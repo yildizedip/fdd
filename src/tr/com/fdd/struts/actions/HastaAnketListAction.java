@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TAnketDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.HastaForm;
 
@@ -25,7 +26,7 @@ public class HastaAnketListAction extends Action {
 
 		Connection conn = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();			
+			conn = DbConnection.getMySqlConneciton();			
 			HastaForm hastaForm= (HastaForm) form;
 			
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
@@ -39,7 +40,7 @@ public class HastaAnketListAction extends Action {
 							hastaForm.getBasTar(),hastaForm.getBitTar());
 
 			if (anketListesi.size() == 0) {
-				request.setAttribute("warn", "Kayýt Bulunamadý");
+				request.setAttribute("warn", "Kayï¿½t Bulunamadï¿½");
 				return mapping.findForward("noContent");
 			} else {
 				request.setAttribute("anketListesi",	anketListesi);

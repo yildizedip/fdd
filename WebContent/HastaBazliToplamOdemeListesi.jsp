@@ -214,6 +214,15 @@
                                                                    
                                                                     
                                                                     <select size="1" name="tip" class="form-control">
+																			<option label="Hastalarýn Ödeme Durumu" value="10">Hastalarýn Ödeme Durumu</option>
+																			<option label="Tedavisi Bitmiþ Hastalar" value="12">Tedavisi Bitmiþ Hastalar</option>
+																			<option label="Tedavisi Devam Eden Hastalar" value="16">Tedavisi Devam Eden Hastalar</option>
+																			<option label="Tedavisi Devam Eden Hastalar (Ödemesi Bitmiþ)" value="15">Tedavisi Devam Eden Hastalar (Ödemesi Bitmiþ)</option>
+																			<option label="Borçlu Hastalar (Tedavisi Biten)" value="13" >Borçlu Hastalar (Tedavisi Biten)</option>
+																			<option label="Borçlu Hastalar (Tedavisi Devam Eden)" value="17" >Borçlu Hastalar (Tedavisi Devam Eden)</option>
+																	</select>
+																	<!--  
+																	 <select size="1" name="tip" class="form-control">
 																			<option label="Hastalarýn Toplam Ödeme Durumu" value="10">Hastalarýn Toplam Ödeme Durumu</option>
 																			<option label="Tedavisi Bitmiþ Hasta Listesi" value="12">Tedavisi Bitmiþ Hasta Listesi</option>
 																			<option label="Tedavisi Devam Eden Hasta Listesi" value="16">Tedavisi Devam Eden Hasta Listesi</option>
@@ -224,6 +233,8 @@
 																			<option label="Tedavsi Devam Eden Ödemesi Bitmiþ Hasta Listesi" value="15">Tedavsi Devam Eden Ödemesi Bitmiþ Hasta Listesi</option>
 												
 																	</select>
+																	
+																	-->
                                                                    
                                                                     
                                                             </div>

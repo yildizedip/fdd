@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TLabrotuvarDTO;
+import tr.com.fdd.mysql.DbConnection;
 
 public class LabIslemSorgulaAction extends Action {
 
@@ -24,7 +25,7 @@ public class LabIslemSorgulaAction extends Action {
 		String requestPage = request.getParameter("requestPage");
 
 		try {
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 
 			SQLUtils utils = new SQLUtils();
 

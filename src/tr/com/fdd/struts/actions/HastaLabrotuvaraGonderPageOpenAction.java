@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 
 public class HastaLabrotuvaraGonderPageOpenAction extends Action {
 
@@ -24,7 +25,7 @@ public class HastaLabrotuvaraGonderPageOpenAction extends Action {
 
 		Connection conn = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			String islemId = request.getParameter("islemId");
 			String hastaId = request.getParameter("hastaId");
 			SQLUtils sqlUtils = new SQLUtils();

@@ -7,7 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
 <link rel="stylesheet" href="css/edip.css" type="text/css" />
-<title>DF-Şube Seç</title>
 <style type="text/css">
 #main {
 	height: 500px;
@@ -68,7 +67,7 @@ body {
 
 </c:if> 
 
-YEKİLİ OLUNAN ŞUBELER...
+YETKİLİ ŞUBELER...
 <hr>
 <table class="sofTSmall">
 	<tr>

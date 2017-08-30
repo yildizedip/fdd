@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TLabrotuvarDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 public class HastaLabrotuvarIslemleriAction extends Action {
@@ -23,7 +24,7 @@ public class HastaLabrotuvarIslemleriAction extends Action {
 
 		Connection conn = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			String labIslemId = request.getParameter("labIslemId");
 			String labIslemTip = request.getParameter("labIslemTip");
 

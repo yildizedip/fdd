@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.THastaDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.HastaForm;
 import tr.com.fdd.utils.GUIMessages;
 import tr.com.fdd.utils.GenelDegiskenler;
@@ -23,7 +24,7 @@ public class HastaBasicSorgulamaAction extends Action {
 
 		Connection conn = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			request.setCharacterEncoding("ISO-8859-9");
 			String islemTip = request.getParameter("islem");
 			

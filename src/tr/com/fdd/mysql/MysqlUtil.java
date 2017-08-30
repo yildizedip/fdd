@@ -1,10 +1,15 @@
 package tr.com.fdd.mysql;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 import javax.swing.ImageIcon;
 
@@ -28,22 +33,47 @@ public class MysqlUtil {
 //			 String userName = GenelDegiskenler.USERNAME_GERCEK;
 //			 String password = GenelDegiskenler.PASSWORD_GERCEK;
 			
-			String connectionString = GenelDegiskenler.CONNECTIONSTRING_TEST;
-			String userName = GenelDegiskenler.USERNAME_TEST;
-			String password = GenelDegiskenler.PASSWORD_TEST;
+	//		String connectionString = GenelDegiskenler.CONNECTIONSTRING_TEST;
+	//		String userName = GenelDegiskenler.USERNAME_TEST;
+	//		String password = GenelDegiskenler.PASSWORD_TEST;
 			
-//			 String connectionString = GenelDegiskenler.CONNECTIONSTRING_GERCEK_TEST;
-//			 String userName = GenelDegiskenler.USERNAME_GERCEK_TEST;
-//			 String password = GenelDegiskenler.PASSWORD_GERCEK_TEST;
+//			String connectionString = GenelDegiskenler.CONNECTIONSTRING_GERCEK_TEST;
+//			String userName = GenelDegiskenler.USERNAME_GERCEK_TEST;
+//			String password = GenelDegiskenler.PASSWORD_GERCEK_TEST;
+			
+			Properties prop = new Properties();
+			InputStream input = null;
+			input = this.getClass().getResourceAsStream("db.properties");
 
-			conn = DriverManager.getConnection(connectionString, userName,	password);
+			// load a properties file
+			prop.load(input);
+			
+			String ip= prop.getProperty("ip");
+			String db= prop.getProperty("db");
+			String port= prop.getProperty("port");
+			String user = prop.getProperty("user");
+			String password= prop.getProperty("password");
+			
+			//"jdbc:mysql://127.0.0.1:3306/dfdiscom_db?autoReconnect=true&useUnicode=true&characterEncoding=latin5";
+			
+			String connectionString = "jdbc:mysql://"+ip+":"+port+"/"+db+"?autoReconnect=true&useUnicode=true&characterEncoding=latin5";
+			conn = DriverManager.getConnection(connectionString, user,	password);
 			conn.setAutoCommit(false);
+			
 			setNamesLatin5(conn);
+			
 			return conn;
+			
 		} catch (ClassNotFoundException e) {
 			throw e;
 		} catch (SQLException e) {
 			throw e;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

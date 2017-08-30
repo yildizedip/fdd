@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import tr.com.fdd.dto.TGelirGiderDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.mysql.DbConnection;
 
 public class GetGelirSorgulamaAction extends Action {
 
@@ -40,7 +41,7 @@ public class GetGelirSorgulamaAction extends Action {
 			String basTar = request.getParameter("bas_tar");
 			String bitTar = request.getParameter("bit_tar");
 
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			Integer subeId = (Integer) request.getSession().getAttribute(
 					"subeId");
 			String aciklama = request.getParameter("aciklama");
@@ -51,7 +52,7 @@ public class GetGelirSorgulamaAction extends Action {
 					subeId.intValue());
 
 			if (gelirListesi.size() == 0) {
-				request.setAttribute("noContent", "Kayýt Bulunamadý");
+				request.setAttribute("noContent", "Kayï¿½t Bulunamadï¿½");
 				return mapping.findForward("noContent");
 
 			} else {

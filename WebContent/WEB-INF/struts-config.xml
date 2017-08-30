@@ -195,8 +195,8 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			validate="true">
 
 			<forward name="success" path="/HastaIslemleri.jsp"></forward>
-			<forward name="failure" path="/HastaEkle.jsp"></forward>
-			<forward name="exception" path="/exception.jsp"></forward>
+			<forward name="failure" path="/HastaIslemleri.jsp"></forward>
+			<forward name="exception" path="/HastaIslemleri.jsp"></forward>
 
 		</action>
 
@@ -697,7 +697,7 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			type="tr.com.fdd.struts.actions.HastaAramaKaydiSilAction"
 			validate="true">
 			<forward name="success" path="/HastaAramaKayitListesi.jsp"></forward>
-			<forward name="noContent" path="/exception.jsp"></forward>
+			<forward name="noContent" path="/exception.jsp"></forward>""
 			<forward name="exception" path="/exception.jsp"></forward>
 		</action>
 		
@@ -784,7 +784,7 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			validate="true">
 
 			<forward name="success" path="/randevu.jsp"></forward>
-			<forward name="failure" path="/randevu.jsp"></forward>
+			<forward name="failure" path="/randevuGunluk.jsp"></forward>
 
 		</action>
 
@@ -863,6 +863,16 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			<forward name="success" path="/SubeOperasyonFiyatEslestir.jsp"></forward>
 			<forward name="noContent" path="/SubeOperasyonFiyatEslestir.jsp"></forward>
 			<forward name="exception" path="/SubeOperasyonFiyatEslestir.jsp"></forward>
+		</action>
+		
+		<action path="/getRandevuListesi" scope="request" name="hastaRandevuForm"
+			input="/RandevuListesi.jsp"
+			type="tr.com.fdd.struts.actions.GetRandevuAction"
+			validate="true">
+			<forward name="randevu" path="/randevuGunluk.jsp"></forward>
+			<forward name="success" path="/RandevuListesi.jsp"></forward>
+			<forward name="noContent" path="/RandevuListesi.jsp"></forward>
+			<forward name="exception" path="/RandevuListesi.jsp"></forward>
 		</action>
 		
 	</action-mappings>

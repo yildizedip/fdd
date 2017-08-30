@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 
@@ -34,7 +35,7 @@ public class GetDoktorOperasyonListesiAction extends Action {
 		String bitTar = request.getParameter("bit_tar");
 		
 		SQLUtils sqlUtils= new SQLUtils();
-		conn =SQLUtils.getMySqlConneciton();
+		conn =DbConnection.getMySqlConneciton();
 		TDoktorDTO doktor= sqlUtils.getDoktor(Integer.parseInt(kullaniciId), -1, conn, false, -1);
 
 		Integer subeId= (Integer) request.getSession().getAttribute("subeId");

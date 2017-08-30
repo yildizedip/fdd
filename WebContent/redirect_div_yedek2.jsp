@@ -287,19 +287,19 @@ font-size: 10px;
 	
 	function validateSifreForm(){
 	
-	var eskiSifre= document.forms["SifreForm"]["password"].value;
-	var yeniSifre = document.forms["SifreForm"]["newPassword"].value;
-	var yeniSifreTekrar = document.forms["SifreForm"]["reNewPassword"].value;
-	
-	if(eskiSifre != ${sessionScope.sessionMember[0].kuSifre}){
-		alert("Eski þifre yanlýþ girildi.");
-		return false;
-	}	
-	
-	if(yeniSifre != yeniSifreTekrar){
-		alert("Þifreler uyuþmamaktadýr.");
-		return false;		
-	};
+		var eskiSifre= document.forms["SifreForm"]["password"].value;
+		var yeniSifre = document.forms["SifreForm"]["newPassword"].value;
+		var yeniSifreTekrar = document.forms["SifreForm"]["reNewPassword"].value;
+		
+		if(eskiSifre != ${sessionScope.sessionMember[0].kuSifre}){
+			alert("Eski þifre yanlýþ girildi.");
+			return false;
+		}	
+		
+		if(yeniSifre != yeniSifreTekrar){
+			alert("Þifreler uyuþmamaktadýr.");
+			return false;		
+		};
 
 
 	};

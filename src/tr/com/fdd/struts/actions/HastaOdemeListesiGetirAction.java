@@ -4,15 +4,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 public class HastaOdemeListesiGetirAction extends Action {
@@ -24,7 +28,7 @@ public class HastaOdemeListesiGetirAction extends Action {
 
 		Connection conn = null;
 		try {
-			conn = SQLUtils.getMySqlConneciton();
+			conn = DbConnection.getMySqlConneciton();
 			String islemId = request.getParameter("islemId");
 			String hastaId = request.getParameter("hastaId");
 			String tip = request.getParameter("tip");
@@ -72,7 +76,7 @@ public class HastaOdemeListesiGetirAction extends Action {
 
 			}
 			if (hastaOdemeListesi.size() == 0) {
-				request.setAttribute("noContent", "Kayýt Bulunamadý");
+				request.setAttribute("noContent", "Kayï¿½t Bulunamadï¿½");
 				return mapping.findForward("noContent");
 
 			} else {

@@ -185,13 +185,12 @@ var basTarihi;
 					</td>
 				</tr>
 				<tr>
+					<td> Hasta Eklenme Tarihi :  </td>
+					<td> 
 					
-					<td style="width: 164px;"> 
-					Tarih : 
-					<input class="inputTextfield" name="basTar" id="basTar" />
+					<input class="inputTextfield" name="basTar" id="basTar" /> - <input class="inputTextfield" name="bitTar" id="bitTar" />
 					
 					</td>
-					<td><input class="inputTextfield" name="bitTar" id="bitTar" /></td>
 
 					
 				</tr>
@@ -226,6 +225,7 @@ var basTarihi;
 				<th>Doktor</th>
 				<th>Ücret</th>
 				<th>Tarih</th>
+				<th>Aranma Sayýsý</th>
 
 				<c:if
 					test="${sessionScope.sessionMember[0].kuTur ne '3'
@@ -253,6 +253,8 @@ var basTarihi;
 					<td>${islem.doktor.dAd} ${islem.doktor.dSoyad}</td>
 					<td>${islem.miktar}</td>
 					<td width="120px">${islem.islemTarihi}</td>
+					
+					<td>${islem.aramaKayitListesi.size()}</td>
 
 					<c:if
 						test="${sessionScope.sessionMember[0].kuTur ne '3' && param.tip eq '1' }">

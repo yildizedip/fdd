@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.TIslemDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.actions.GenericAction;
 import tr.com.fdd.struts.actions.SQLUtils;
 import tr.com.fdd.struts.form.IslemForm;
@@ -67,7 +68,7 @@ public class OperationAddGeneral implements IOperationAddController {
 			logger.info("operasyon id=" + islemId);
 			logger.info("odeme id=" + hastaGelirId);
 
-			Connection conn = SQLUtils.getMySqlConneciton();
+			Connection conn = DbConnection.getMySqlConneciton();
 			SQLUtils sqlUtils = new SQLUtils();
 			List<TIslemDTO> hastaOperasyonListesi = sqlUtils.getHastaOperasyonListesi(tIslemDto.getHastaId(), 0, conn);
 

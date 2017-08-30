@@ -11,8 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
-<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="styles/bootstrap.css">
+<link type="text/css" rel="stylesheet" href="sitil/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="styles/main.css">
 <link type="text/css" rel="stylesheet" href="styles/nestable.css">
 
@@ -44,14 +43,69 @@
    font-size: 11px;
 }
 
+body {
+	padding: 0;
+	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	font-size: 12px;
+	color: black;
+	background-color: white;
+}
+
+.modal-header, .close {
+	background-color: #5cb85c;
+	color: white !important;
+	text-align: center;
+	font-size: 30px;
+}
 </style>
 
 
-
 <script>
+
+<c:if test="${not empty warn}">
+
+alert('${warn}')
+</c:if> 
 	$(document)
 			.ready(
 					function() {
+						
+						 '<c:if test="${!empty randevuListesi}">' // randevu sayfasindan hasta sec ile gelen hasta
+
+									$('#randevuListModal').modal('show');
+						 
+						 
+						'</c:if> ' 
+						
+						
+						$('#randevuListKapat').click(function() {
+							//send form for randevu
+							$('#getRandevuGunlukForm').submit();
+						    
+						});
+						
+						
+						
+					$('#nextButton').click(function() {
+							
+							<c:forEach items="${doktorList4Randevu}" var="ra">
+							
+							 $('#${ra.dId}').fullCalendar('next');
+							
+							</c:forEach>
+						    
+						});
+						
+						$('#previousButton').click(function() {
+							
+							<c:forEach items="${doktorList4Randevu}" var="ra">
+							
+							 $('#${ra.dId}').fullCalendar('prev');
+							
+							</c:forEach>
+						    
+						});
+							
 						
 						
 						var tarih=new Date();
@@ -126,22 +180,22 @@
 								{
 
 									header : {
-										left : 'prev,next today',
+										left : '',
 										center : '',
-										right : 'title'
+										right : ''
 									},
 									defaultView : 'agendaDay',
-									height : 600,
+									height : 600 ,
 									locale : 'tr',
 									theme :false,
 									selectable : true,
-									minTime : "08:00:00",
+									minTime : "09:00:00",
 									maxTime : "22:00:00",
-									
 									fixedWeekCount:false,
-									weekNumbers : true,
+									weekNumbers : false,
 									navLinks : true, // can click day/week names to navigate views
 									businessHours : false,
+									columnFormat : 'DD.MM dddd',
 						
 									slotDuration : '00:30:00',
 									contentHeight : 600,
@@ -187,6 +241,7 @@
 											});
 										});
 									}
+
 
 								});
 
@@ -256,12 +311,12 @@
 	display: none;
 }
 
-body {
-	padding: 0;
-	font-size: 10px;
-	color:black; 
-	font-family: serif;
+.fc-button-prev {
+	display: none;
 }
+
+
+
 </style>
 
 <title>Randevu</title>
@@ -269,10 +324,46 @@ body {
 <body>
 
 
+<form id="getRandevuGunlukForm" method="get" action="hastaGunlukRandevuSorgula.do">
 
 
-			
+
+  </form>
 		<div class="col-lg-12">
+		
+		
+		<div class="row"> 
+		
+		<div class="col-lg-6" align="left"> 
+		
+		 <button id="previousButton"> << </button> 
+		 <button id="nextButton"> >> </button> 
+		
+		
+		</div>
+		<div class="col-lg-6" align="right"> 
+		
+		
+		
+			<form   class="form-inline" action="getRandevuListesi.do" method="post" >
+							
+							<div class="form-group">
+								    <input type="text" class="form-control tarih" placeholder="Protokol No" name="protokolNo" id="protokolNo">
+								  </div>
+								  <div class="form-group">
+								    <input type="text" class="form-control tarih"  placeholder="Hasta Ad" name="ad" id="ad">
+								    <input type="hidden" name="page" value="fromRandevu" >
+								  </div>
+								  
+								  <button type="submit" class="btn btn-default">Randevu Ara</button>
+			
+								
+							</form>
+		
+		
+		  </div>
+		  
+		  </div>
 		
 		<h4 id="myDate" align="center"> </h4>
 			<table class="table table-hover table-bordered">
@@ -316,5 +407,70 @@ body {
 	</div>
 
 
+
+	<div class="modal fade" id="randevuListModal" 
+		tabindex="-1" role="dialog"	aria-labelledby="exampleModalLabel" style="color: black; font-size: 11px;" >
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+						<h4 class="modal-title" id="exampleModalLabel">Randevu Listesi</h4>
+					</div>
+
+					<div class="modal-body">
+		
+		
+		<table id="example" class="table table-bordered">
+								<thead>
+			
+									<tr>
+										<th>Hasta</th>
+										<th>Randevu</th>
+										<th>Açýklama</th>
+										<th>Doktor Ad</th>
+			
+			
+									</tr>
+			
+								</thead>
+								<tbody>
+									<c:forEach items="${randevuListesi}" var="randevu"
+										varStatus="count">
+			
+										<tr>
+											<td>${randevu.hasta.ad } ${randevu.hasta.soyad }   ${randevu.hasta.protokolNo }</td>
+											<td>${randevu.randevuTarihiBaslangic} - ${randevu.randevuBitSaat}</td>
+											<td>${randevu.aciklama }</td>
+											<td>${randevu.doktor.dAd } ${randevu.doktor.dSoyad }</td>
+			
+			
+			
+										</tr>
+			
+			
+									</c:forEach>
+			
+								</tbody>
+			
+			
+			
+							</table>
+			
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" id="randevuListKapat" data-dismiss="modal">Kapat</button>
+						
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+		
 </body>
 </html>
