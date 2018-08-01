@@ -73,7 +73,6 @@ function validateForm(){
 </head>
 <body style="color:black;">
 
-
 <div class="bg-success"> ${requestScope.warn} </div>
 <div class="col-lg-6">  
 
@@ -90,7 +89,25 @@ function validateForm(){
 				
 				<td>Tarih</td>
 				<td>
-					<input name="tarihStr" id="tarihStr" value="${tarihStr}" class="form-control" > 
+				
+				
+				
+				<c:choose>
+				 <c:when test="${(odeme_tarih_degistir eq 'off') and (sessionScope.sessionMember[0].kuTur eq '4') }">
+				 	
+				 	<input name="tarihStr" id="tarihStr" value="${tarihStr}" class="form-control" disabled="disabled" >
+						
+				 
+				 </c:when>
+				 
+				 <c:otherwise>
+				 	<input name="tarihStr" id="tarihStr" value="${tarihStr}" class="form-control" >
+				 	
+				 
+				 </c:otherwise>
+				</c:choose>
+				
+					
 					<input type="hidden" name="subeId"	value="${subeId}">
 					
 				</td>
@@ -118,6 +135,7 @@ function validateForm(){
 
 							<option label="Peþin" value="1">Peþin</option>
 							<option label="Kredi Kartý" value="2">Kredi Kartý</option>
+							<option label="Havale / EFT" value="3">Havale / EFT</option>
 						
 				</select>
 				

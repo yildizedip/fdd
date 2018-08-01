@@ -16,6 +16,7 @@ import tr.com.fdd.dto.TAnketDTO;
 import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.HastaForm;
+import tr.com.fdd.utils.GUIMessages;
 
 public class HastaAnketListAction extends Action {
 
@@ -40,7 +41,7 @@ public class HastaAnketListAction extends Action {
 							hastaForm.getBasTar(),hastaForm.getBitTar());
 
 			if (anketListesi.size() == 0) {
-				request.setAttribute("warn", "Kay�t Bulunamad�");
+				request.setAttribute("warn", GUIMessages.KAYIT_BULUNAMADI);
 				return mapping.findForward("noContent");
 			} else {
 				request.setAttribute("anketListesi",	anketListesi);

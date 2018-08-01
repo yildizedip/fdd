@@ -87,7 +87,7 @@ public class GetGelirGiderDurumuAction extends Action {
 			if (kuTur.equals(GenelDegiskenler.KullaniciTurleri.DOKTOR)) {
 				doktorAd = kullaniciBilgiDTO.getKuAd();
 				doktorId = ((TDoktorDTO) sqlUtils.getDoktor(
-						kullaniciLoginDTO.getKuId(), -1, conn, false, -1)).getdId();
+						kullaniciLoginDTO.getKuId(), -1, conn, false, -1,null,null)).getdId();
 			}
 
 			boolean implantGeliriGoster=false;
@@ -96,12 +96,38 @@ public class GetGelirGiderDurumuAction extends Action {
 			
 			List<THastaOdemeDTO> gelirList = sqlUtils.gelirListesi(basTar,
 					bitTar, doktorId, islemTip,subeId.intValue(), conn, implantGeliriGoster);
+			
+			
+			List<TGelirGiderDTO> gelirListHarici = sqlUtils.gelirListesiHarici(basTar,
+					bitTar, subeId.intValue(), conn);
 
-			if (gelirList.size() == 0 && giderList.size() == 0)
+			if (gelirList.size() == 0 && giderList.size() == 0 && gelirListHarici.size()==0){
 
 				request.setAttribute("warn", "Kayıt Bulunamadı");
+				
+				if (GenelDegiskenler.GET_GUNSONU_RAPORU.equals(islem)) {
+					return mapping.findForward("goGunSonuRaporu");
+				}
+
+				else if (GenelDegiskenler.GET_GELIR_RAPORU.equals(islem) ) {
+					return mapping.findForward("goGelirRaporu");
+				} 
+				else if (GenelDegiskenler.GET_GELIR_TURU_FOR_IMPLANT.equals(islem)) {
+					return mapping.findForward("goGelirRaporuImplant");
+				} 			
+				else if (GenelDegiskenler.GET_GIDER_RAPOR.equals(islem)) {
+					return mapping.findForward("goGiderRaporu");
+				} else
+					return mapping.findForward("success");
+				
+				
+				
+			}
+			
+			else{
 
 			Double toplamGelir = new Double(0);
+			Double toplamGelirHarici = new Double(0);
 			Double toplamGider = new Double(0);
 
 			for (int i = 0; i < gelirList.size(); i++) {
@@ -115,6 +141,12 @@ public class GetGelirGiderDurumuAction extends Action {
 				TGelirGiderDTO gider = giderList.get(i);
 
 				toplamGider = toplamGider + gider.getMiktar();
+			}
+			
+			for (int i = 0; i < gelirListHarici.size(); i++) {
+				TGelirGiderDTO gelirHarici = gelirListHarici.get(i);
+				
+				toplamGelirHarici = toplamGelirHarici + gelirHarici.getMiktar();
 			}
 
 		
@@ -165,8 +197,10 @@ public class GetGelirGiderDurumuAction extends Action {
 			request.setAttribute("giderIstatistikler", giderIstatistikler);
 
 			request.setAttribute("toplamGelir", toplamGelir);
+			request.setAttribute("toplamGelirHarici", toplamGelirHarici);
 			request.setAttribute("toplamGider", toplamGider);
 			request.setAttribute("gelirList", gelirList);
+			request.setAttribute("gelirListHarici", gelirListHarici);
 			request.setAttribute("giderList", giderList);
 			request.setAttribute("basTar", basTar);
 			request.setAttribute("bitTar", bitTar);
@@ -229,6 +263,7 @@ public class GetGelirGiderDurumuAction extends Action {
 
 			// }
 
+			}
 		} catch (Exception e) {
 			try {
 

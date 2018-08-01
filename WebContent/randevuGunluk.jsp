@@ -10,32 +10,28 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/moment-with-locales.js"></script>
+<script src="js/fullcalendar.js"></script>
+<script src='js/locale-all.js'></script>
+<script src="script/bootstrap.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/jquery.form-validator.min.js"></script>
+<script type="text/javascript" src="js/jquery.maskedinput.min.js"></script>
+<script src="js/zebra_datepicker.js" charset="UTF-8"></script>
+
+
 <link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="sitil/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="styles/main.css">
 <link type="text/css" rel="stylesheet" href="styles/nestable.css">
-
-
-
+<link rel="stylesheet" type="text/css" href="css/zebra-datepicker.css" />
+<link rel="stylesheet" type="text/css" href="css/fullcalendar.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.ui.theme.css" />
 <link rel="stylesheet" type="text/css"	href="css/jquery-ui.structure.css" />
 <link rel="stylesheet" type="text/css"	href="css/jquery.dataTables.min.css" />
-
-<link rel="stylesheet" type="text/css" href="css/fullcalendar.css" />
-<link rel="stylesheet" type="text/css"	href="css/fullcalendar.print.min.css" media="print" />
-
-
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/moment-with-locales.js"></script>
-<script src="script/bootstrap.min.js"></script>
-
-<script src='js/locale-all.js'></script>
-
-<script src="js/jquery.dataTables.min.js"></script>
-<script src="js/fullcalendar.js"></script>
-<script src="js/fullcalendar.min.js"></script>
-
 
 
 <style type="text/css">
@@ -84,7 +80,7 @@ alert('${warn}')
 						    
 						});
 						
-						
+						/**
 						
 					$('#nextButton').click(function() {
 							
@@ -106,7 +102,7 @@ alert('${warn}')
 						    
 						});
 							
-						
+						**/
 						
 						var tarih=new Date();
 						var gun=tarih.getDay();
@@ -190,7 +186,7 @@ alert('${warn}')
 									theme :false,
 									selectable : true,
 									minTime : "09:00:00",
-									maxTime : "22:00:00",
+									maxTime : "21:00:00",
 									fixedWeekCount:false,
 									weekNumbers : false,
 									navLinks : true, // can click day/week names to navigate views
@@ -211,10 +207,10 @@ alert('${warn}')
 										$(this).css('border-color', 'red');
 										$('#start').val(
 												moment(calEvent.start).format(
-														'LLL'));
+														'L'));
 										$('#end').val(
 												moment(calEvent.end).format(
-														'LLL'));
+														'L'));
 										$('#title').val(calEvent.title);
 
 									},
@@ -226,11 +222,9 @@ alert('${warn}')
 										element.click(function() {
 
 											$("#startTime").html(
-													moment(event.start).format(
-															'LLL'));
+													moment(event.start).format('L'));
 											$("#endTime").html(
-													moment(event.end).format(
-															'LLL'));
+													moment(event.end).format('L'));
 											
 											$("#eventInfo").html(event.description);
 
@@ -315,8 +309,6 @@ alert('${warn}')
 	display: none;
 }
 
-
-
 </style>
 
 <title>Randevu</title>
@@ -336,8 +328,12 @@ alert('${warn}')
 		
 		<div class="col-lg-6" align="left"> 
 		
+		<!-- 
 		 <button id="previousButton"> << </button> 
 		 <button id="nextButton"> >> </button> 
+		
+		 -->
+		
 		
 		
 		</div>
@@ -376,18 +372,18 @@ alert('${warn}')
 						
 							<div class="bg-info">
 							
-							<span  style="font-size: 12px;"> ${randevu.dAd}
-								${randevu.dSoyad} </span>
+							<span  style="font-size: 12px;">  <strong> ${randevu.dAd} ${randevu.dSoyad} </strong>  </span>
 								
 								</div>
 								
 								
 							<form action="hastaRandevuSorgula.do" method="post">
-								<input type="submit" value="Randevu Ver" class="btn btn-link" style="font-size: 12px;">
+								<input type="submit" value="Randevu Görüntüle /  Ver" class="btn btn-link " style="font-size: 12px; ">
 								<input type="hidden" name="doktor" value="${randevu.dId}">
 								<div id="${randevu.dId}"></div>
 							</form> 
-
+							
+							
 							
 						</td>
 

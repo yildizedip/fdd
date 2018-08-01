@@ -23,6 +23,7 @@ import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.SessionFactory;
 import net.sf.hibernate.cfg.Configuration;
+import tr.com.fdd.dto.TAyarDTO;
 import tr.com.fdd.dto.TDepoDTO;
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
@@ -31,6 +32,7 @@ import tr.com.fdd.dto.TSubeDTO;
 import tr.com.fdd.dto.TTurKodDTO;
 import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
+import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 public class LoginSystemAction extends Action {
@@ -72,7 +74,8 @@ public class LoginSystemAction extends Action {
 			 */
 
 			List<TTurKodDTO> odemeSekliList = getOdemeSekli(session);
-			List<TDoktorDTO> doktorList = sqlUtils.getDoktorList(connection,Integer.parseInt(sube_Id), false);
+			
+			List<TDoktorDTO> doktorList = sqlUtils.getDoktorList(connection,Integer.parseInt(sube_Id), false,null,null);
 			
 			List<?> giderTurKodList = sqlUtils.getGiderTurList(connection,Integer.parseInt(sube_Id));
 			
@@ -85,7 +88,6 @@ public class LoginSystemAction extends Action {
 		//	List<?> hastaList = sqlUtils.getHastaList(connection, Integer.parseInt(sube_Id),null,null,null, true);
 
 			GenelDegiskenler deg = new GenelDegiskenler();
-
 		
 			HttpSession sessionInf = request.getSession();
 
@@ -100,6 +102,9 @@ public class LoginSystemAction extends Action {
 			sessionInf.setAttribute("islemTurList", islemTurList);
 			sessionInf.setAttribute("saatler", deg.getHours());
 			sessionInf.setAttribute("dakikalar", deg.getDakikalar(5));
+			
+			
+			
 	//		sessionInf.setAttribute("hastaList", hastaList);
 
 			/**
@@ -118,19 +123,28 @@ public class LoginSystemAction extends Action {
 
 			TSubeDTO subeDTO = sqlUtils.getSubeBilgi(connection, subeId);
 			sessionInf.setAttribute("sube", subeDTO);
-
-			Integer getHastaSayisi = sqlUtils.getHastaSayisi(connection, subeId);
-			Integer getOperasyonuKesinlesmemisHastaSayisi = sqlUtils.getOperasonuKesinlesmemisHastaSayisi(connection, subeId);
-			List<Object[]> getTopOperations = sqlUtils.getTopOperations(connection, subeId);
-			List<Object[]> getDoktorIslemOperations = sqlUtils.getDoktorIslemSayisi(connection, subeId);
-			List<Object[]> getTopGider = sqlUtils.getTopGider(connection,subeId);
-			sessionInf.setAttribute("getHastaSayisi", getHastaSayisi);
-			sessionInf.setAttribute("getTopOperations", getTopOperations);
+			
+			List<TAyarDTO> ayarlar= sqlUtils.getAyarlar(connection, subeId);
+			
+	//		Integer getHastaSayisi = sqlUtils.getHastaSayisi(connection, subeId);
+	//		Integer getOperasyonuKesinlesmemisHastaSayisi = sqlUtils.getOperasonuKesinlesmemisHastaSayisi(connection, subeId);
+	//		List<Object[]> getTopOperations = sqlUtils.getTopOperations(connection, subeId);
+	//		List<Object[]> getDoktorIslemOperations = sqlUtils.getDoktorIslemSayisi(connection, subeId);
+	//		List<Object[]> getTopGider = sqlUtils.getTopGider(connection,subeId);
+		//	sessionInf.setAttribute("getHastaSayisi", getHastaSayisi);
+		//	sessionInf.setAttribute("getTopOperations", getTopOperations);
 		//	sessionInf.setAttribute("getDoktorIslemOperations",	getDoktorIslemOperations);
 		//	sessionInf.setAttribute("getTopGider", getTopGider);
 		//	sessionInf.setAttribute("getOperasyonuKesinlesmemisHastaSayisi",getOperasyonuKesinlesmemisHastaSayisi);
 			sessionInf.setAttribute("disSayisiList", getDisSayisiList());
 			sessionInf.setAttribute("adetList", getAdetSayisiList());
+			sessionInf.setAttribute("ayarlar", ayarlar);
+			
+			for (TAyarDTO tAyarDTO : ayarlar) {
+				sessionInf.setAttribute(tAyarDTO.getName(), tAyarDTO.getValue());
+				
+			}
+			
 		//	sessionInf.setAttribute("depoList", getDepoList(session));
 		//	sessionInf.setAttribute("depoUrunTipList", getDepoUrunTipList(session));
 			

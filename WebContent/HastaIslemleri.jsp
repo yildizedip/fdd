@@ -48,17 +48,31 @@ td { font-size: 11px; }
 
 <body style="color: black; background-color: white;">
 
+<c:forEach items="${ayarlar}" var="ayar" >
+							
+								<c:if test="${ayar.name eq 'odeme_tarih_degistir' }">
+									
+									<c:set var="odeme_tarih_degistir" value="${ayar.value}"> </c:set>
+								</c:if> 
+							
+							</c:forEach>
+							
+							
 
 	<div class="container col-lg-12 col-md-12" style="font-size: 13px;">
 
 		<div class="row">
 		
+
+		<div class="collapse in " id="hastaAra">
+			
 			<div class="col-lg-4">
+			
+			
 			<button type="button" class="btn btn-link btn-sm pull-right " data-toggle="modal"
 						data-target="#hastaEkleModal">Hasta Ekle</button>
+						
 			<div class="panel panel-default" >
-			
-			
 			
 			<div class="panel-heading" >
 				 Hasta Listesi
@@ -82,13 +96,16 @@ td { font-size: 11px; }
 								<input class="form-control" name="soyad" id="hstSoyad"	placeholder="Soyad"   />
 							</div>
 							
+							<div class="form-group">
+								<input class="form-control" name="tel" id="tel"	placeholder="Telefon"   />
+							</div>
 						
 							<div class="form-group">
 								<input type="submit" class="btn btn-sm btn-default" value="Ara" name="bnt_gonder" />
 								
 								</div>
 						</form>
-<hr>
+					<hr>
 				<c:if test="${!empty hastaList}">
 						<div id="hastaTable" >
 
@@ -127,6 +144,7 @@ td { font-size: 11px; }
 						
 				</div>
 		</div>
+	</div>
 		
 <c:if test="${!empty hastaListesi}">
 
@@ -194,14 +212,18 @@ td { font-size: 11px; }
 									var="operasyon" varStatus="count">
 
 									<div class="panel"
+										 >
+
+
+										<div class="panel-heading"
+										
 										<c:choose>
 																	<c:when test="${operasyon.durumu eq 'A'}">style="background-color: #ECF8E0"</c:when>
 																	<c:when test="${operasyon.durumu eq 'B'}">style="background-color: #EFF8FB"</c:when>		
 																	<c:when test="${operasyon.durumu eq 'K'}">style="background-color: #FBEFF2"</c:when>		
-																</c:choose>>
-
-
-										<div class="panel-heading" >
+										</c:choose> 
+										
+										 >
 											<div class="row">
 												<div>
 													Tedavi: ${operasyon.islemTip.ad} (${operasyon.disNo})
@@ -214,11 +236,11 @@ td { font-size: 11px; }
 														<c:when test="${operasyon.durumu eq 'K'}">Kesinleþmedi</c:when>
 													</c:choose>
 													  
-													  &nbsp; &nbsp; &nbsp; Tarih:${operasyon.islemTarihi}  &nbsp; &nbsp; &nbsp; Miktar: ${operasyon.miktar}
+													  &nbsp; &nbsp; &nbsp; Tarih:${operasyon.islemTarihi}  &nbsp; &nbsp; &nbsp; Fiyat: ${operasyon.miktar}
 													  
 														 &nbsp; &nbsp; &nbsp;  <c:if test="${operasyon.aciklama ne ''}"> Açýklama:${operasyon.aciklama}  </c:if>
 
-													<button type="button" class="btn btn-info btn-sm pull-right"
+													<button type="button" class="btn btn-success btn-xs pull-right"
 														data-toggle="collapse" data-target="#${operasyon.id}">
 														Detay</button>
 
@@ -228,19 +250,24 @@ td { font-size: 11px; }
 											</div>
 										</div>
 
-										<div class="collapse" id="${operasyon.id}">
+										<div class="collapse" id="${operasyon.id}" >
 											<div class="panel-body ">
+											
 
-												<div class="col-lg-6 col-md-6">
+												<div class="col-lg-5 col-md-5">
 
-													<div class="col-lg-6 col-md-6">
+													
 
-														<div>Tedavi Tarihi : ${operasyon.islemTarihi} -
-															${operasyon.islemBitisTarihi}</div>
+														<div>
+														<strong>Tedavi Tarihi :  </strong>
+														${operasyon.islemTarihi} 
+															${operasyon.islemBitisTarihi}
+															
+															</div>
 
-														<div>Diþ Sayýsý : ${operasyon.disAdet}</div>
+														<div> <strong>Diþ Sayýsý :  </strong>    ${operasyon.disAdet}</div>
 
-														<div>Diþ Numaralarý : ${operasyon.disNo}</div>
+														<div> <strong>Diþ No'lar :  </strong>  ${operasyon.disNo}</div>
 
 														<div>
 															<c:if test="${!empty operasyon.implantCerrahDoktor}">
@@ -254,113 +281,25 @@ td { font-size: 11px; }
 																								${operasyon.implantDestekDoktor.dSoyad} )
 																						</c:if>
 														</div>
-													</div>
+													
 
 
-													<div class="col-lg-6 col-md-6">
+														<div>  <strong> Tedavi Fiyat : </strong>  ${operasyon.miktar}</div>
+														<div>  <strong> Kalan Ödeme Miktarý : </strong>   ${operasyon.kalanMiktar} </div>
+														<div> <strong> Açýklama : </strong>   ${operasyon.aciklama}</div>
 
-
-														<div>Fiyat : ${operasyon.miktar}</div>
-														<div>Kalan Ödeme Miktarý : ${operasyon.kalanMiktar}
-														</div>
-														<div>Açýklama : ${operasyon.aciklama}</div>
-
-													</div>
 												</div>
 
 
-												<div class="col-md-6">
-
-													<c:if test="${!empty operasyon.aramaKayitListesi}">
-														<table class="table table-hover table-bordered">
-
-															<thead>
-																<tr>
-																	<td class="helpHed">Arama Tarih</td>
-																	<td class="helpHed">Açýklama</td>
-																</tr>
-
-															</thead>
-
-															<tbody>
-
-																<c:forEach items="${operasyon.aramaKayitListesi}"
-																	var="arama" varStatus="count">
-
-																	<tr>
-
-																		<td class="helpHed">${arama.aramaTarih}
-																			${arama.aramaSaat}</td>
-																		<td class="helpHed">${arama.aciklama}</td>
-																	</tr>
-
-																</c:forEach>
-
-
-															</tbody>
-
-
-
-
-														</table>
-
-
-
-													</c:if>
-
-													<c:if test="${!empty operasyon.randevuList}">
-														<table class="table table-hover table-bordered">
-
-															<thead>
-																<tr>
-																	<td class="helpHed">Randevu Tarih</td>
-																	<td class="helpHed">Açýklama</td>
-																	<td class="helpHed">Durum</td>
-																</tr>
-
-															</thead>
-
-															<tbody>
-
-																<c:forEach items="${operasyon.randevuList}"
-																	var="randevu" varStatus="count">
-
-																	<tr>
-
-																		<td class="helpHed">${randevu.randevuTarihiBaslangic}
-																			- ${randevu.randevuTarihiBitis}</td>
-																		<td class="helpHed">${randevu.aciklama}</td>
-																		<td class="helpHed">${randevu.aciklama}</td>
-
-
-																	</tr>
-
-																</c:forEach>
-
-
-															</tbody>
-
-
-
-
-														</table>
-
-
-
-													</c:if>
-
-
+												<div class="col-lg-7 col-md-7">
 
 													<c:if test="${!empty operasyon.odemeList}">
-
-														<hr>
-														<!-- odeme tablosu -->
 														<table class="table table-hover table-bordered">
 															<thead>
 																<tr>
 																	<td class="helpHed">Ödeme Tarih</td>
-																	<td class="helpHed">Ödenen Miktar</td>
-																	<td class="helpHed">Ödeme Türü</td>
+																	<td class="helpHed">Miktar</td>
+																	<td class="helpHed">Tür</td>
 																	<td class="helpHed">Açýklama</td>
 
 																	<c:if test="${silAktif ne '0' }">
@@ -408,7 +347,7 @@ td { font-size: 11px; }
 																			<c:if
 																				test="${sessionScope.sessionMember[0].kuTur ne '3' }">
 																				<td class="helpBod">
-																					<button type="button" class="btn btn-link"
+																					<button type="button" class="btn btn-link btn-xs"
 																						data-toggle="modal"
 																						data-target="#odemeGuncelleModal"
 																						data-odemeid="${odeme.id}"
@@ -418,7 +357,7 @@ td { font-size: 11px; }
 
 																				</td>
 																				<td class="helpBod">
-																					<button type="button" class="btn btn-link"
+																					<button type="button" class="btn btn-link btn-xs"
 																						data-toggle="modal" data-target="#odemeSilModal"
 																						data-odemeid="${odeme.id}"
 																						data-odememiktar="${odeme.miktar}">Sil</button>
@@ -1004,7 +943,7 @@ td { font-size: 11px; }
 								<div class="col-lg-6 col-md-6">
 									<div class="form-group">
 									
-									Tedavi Tarihi : 
+									<strong> Tedavi Tarihi :  </strong>
 										<input name="islemTarihiStr" id="islemTarihiStr"
 											class="tarih " type="text"
 											placeholder="Tedavi Tarih Giriniz."
@@ -1101,16 +1040,10 @@ td { font-size: 11px; }
 								</div>
 								<div class="col-lg-5 col-md-5">
 									<div class="form-group">
-
-										
 											<input
 											class="form-control" placeholder="Adet" name="disAdet"
 											id="disAdet" data-validation="required"
 											data-validation-error-msg="Zorunlu Alan">
-											
-											
-
-
 									</div>
 								</div>
 								<div class="col-lg-2 col-md-2">
@@ -1341,8 +1274,8 @@ td { font-size: 11px; }
 									<div class="form-group">
 										<div class="input-icon">
 												
-										<input id="bntKaydet" class="btn btn-default pull-right" type="submit"		value="Ekle" />
-									
+										<input id="bntKaydetTedavi" class="btn btn-default pull-right" type="submit" value="Ekle" onclick="return checkTedavi();" />
+										
 										</div>
 									</div>
 
@@ -1431,7 +1364,7 @@ td { font-size: 11px; }
 						<input id="bntKaydet" class="btn btn-default" type="submit"
 							value="Bitir" />
 						<button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
-					</div>
+					</div>checkTedavi
 
 				</form>
 			</div>
@@ -1476,6 +1409,9 @@ td { font-size: 11px; }
 	</div>
 
 
+
+
+	
 
 
 	<!--- OPERASYON GUNCELLE . -->
@@ -1595,11 +1531,32 @@ td { font-size: 11px; }
 							type="hidden" name="hastaId" id="hastaIdOdemeModal" /> <input
 							type="hidden" name="doktorId" id="doktorIdOdemeModal" />
 
+
+
 						<table class="table">
 							<tr>
 								<td>Tarih</td>
-								<td><input type="text" name="odemeTarihiStr" class="tarih"
-									id="odemeTarihiStrModal"   /></td>
+								<td>
+								
+								
+								<c:choose>
+								    <c:when test="${odeme_tarih_degistir eq 'on'}">
+								    
+								    <input type="text" name="odemeTarihiStr" class="tarih"
+									id="odemeTarihiStrModal"/>
+								                      
+								
+								         </c:when>
+								         <c:otherwise>
+								         
+								                   <input type="text" name="odemeTarihiStr" class="tarih" disabled="disabled"
+									id="odemeTarihiStrModal"/>
+								
+								         </c:otherwise>
+								</c:choose>
+								
+									
+									</td>
 							</tr>
 
 							<tr>
@@ -2053,6 +2010,30 @@ td { font-size: 11px; }
 
 
 	<script type="text/javascript"> 
+	
+	function checkTedavi() {
+		
+		var miktar = $("#operasyonUcret").val();
+		var disNo = $("#disNo").val();
+		var tedavi = $("#islemTipi option:selected").html();
+		
+		
+		
+		
+		var message= $.trim(tedavi) + ' tedavisi ve '+ disNo+' numaralarý için tedavi fiyatý:' + miktar + ' olarak belirlenmiþtir. Kaydetmek için emin misiniz?'  ;
+		
+		if (confirm(message)) {
+		    
+		    return true;
+		} else {
+		   
+		    return false;
+		    
+		}
+			
+	}
+	
+	
 		function validateFormOperasyonEkle() {
 
 			var doktorId = document.forms["operasyonEkleForm"]["doktorId"].value;
@@ -2221,6 +2202,10 @@ td { font-size: 11px; }
 
 							var disno = [];
 							var disAdet=0;
+							
+							
+							
+							
 
 							$('.disno').on('click', function(e) {
 
@@ -2560,8 +2545,9 @@ td { font-size: 11px; }
 							
 							$('#islemTipi').on('change', function () {
 								
-								var  value= this.value;
 								
+								var adet= $('#disAdet').val()
+								var  value= this.value;
 								'<c:forEach items="${islemTurList}" var="islem">'
 								
 
@@ -2569,8 +2555,10 @@ td { font-size: 11px; }
 								{
 									
 									 var fiyat=	'${islem.subeTip.fiyat}';
+									 
+									 
 								 
-									 $('#operasyonUcret').val(fiyat);
+									 $('#operasyonUcret').val(fiyat*adet);
 								 
 								 
 								}

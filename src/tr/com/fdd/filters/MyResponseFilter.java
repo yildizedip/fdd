@@ -2,6 +2,7 @@ package tr.com.fdd.filters;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
 import java.util.Enumeration;
 
 import javax.servlet.Filter;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.actions.SQLUtils;
 
 /**
@@ -74,6 +77,7 @@ public class MyResponseFilter implements Filter {
 					Object[] sessions = (Object[]) sessionInf.getAttribute("sessionMember");
 
 					if (sessions == null) {
+						
 						RequestDispatcher dips = request.getRequestDispatcher("/logout.jsp");
 						dips.forward(request, response);
 					} else {
@@ -100,6 +104,8 @@ public class MyResponseFilter implements Filter {
 		// dips.forward(request, response);
 		// }
 	}
+
+	
 
 	private void go(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws UnsupportedEncodingException, IOException, ServletException {

@@ -64,7 +64,12 @@
 						<c:if test="${sessionScope.sessionMember[0].kuTur eq '4' }">
 						<td class="">
 						
-						<html:link action="/SilGider?id=${gider.id}" style="color:#4184AA; font-size:14px"> Sil </html:link>
+						<button type="button" class="btn btn-link btn-xs " style="color: red;"
+													data-toggle="modal" data-target="#silModal"
+													data-giderid="${gider.id}"
+													data-gidermiktar="${gider.miktar}"
+													
+													>Sil</button>
 						</td>
 						<td class="">
 						<button type="button" class="btn btn-link" data-toggle="modal" 
@@ -167,8 +172,43 @@
 	</div>
 	
 	
+<div id="silModal" class="modal fade">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="exampleModalLabel">ÖDEME SİL</h4>
+				</div>
+				<form action="SilGider.do" method="post">
+					<div class="modal-body">
+						<h5>
+							<span id="giderMiktar"> </span> <span> TL miktarında gider
+								silinecektir.. Emin misiniz? </span>
+						</h5>
+						<input type="hidden" name="id" id="giderId">
+
+					</div>
+
+					<div class="modal-footer">
+						<input id="bntKaydet" class="btn btn-default" type="submit"
+							value="Sil" />
+						<button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+	
 
 <script type="text/javascript">
+
 
 $(document).ready(
 		function() {
@@ -190,6 +230,23 @@ $(document).ready(
 				  modal.find('#miktar').val(miktar)
 				 
 			});
+			
+			
+			$('#silModal').on(
+					'show.bs.modal',
+					function(event) {
+						var button = $(event.relatedTarget)
+						var giderId = button.data('giderid')
+						var giderMiktar = button.data('gidermiktar')
+
+						var modal = $(this)
+						modal.find('#giderId').val(giderId)
+						modal.find('#giderMiktar').html(giderMiktar)
+
+					});
+			
+			
+			
 			
 		});
 

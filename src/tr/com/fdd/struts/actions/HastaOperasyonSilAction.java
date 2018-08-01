@@ -39,6 +39,9 @@ public class HastaOperasyonSilAction extends GenericAction {
 			query.setInteger("var", id);
 			TIslemDTO result = (TIslemDTO) query.uniqueResult();
 			result.setDurumu("P");
+			result.setSilen(Commons.getActiveSession(request).getKuId());
+			result.setSilmeTarihiStr(Commons.getNow());
+			
 
 			tran.commit();
 			

@@ -19,6 +19,12 @@
 		<property name="paraBirimi" column="PARA_BIRIMI" type="java.lang.String" />
 		<property name="durum" column="DURUM" type="java.lang.String" />
 		<property name="subeId" column="SUBE_ID" type="int" />
+		<property name="eklenmeTarihi" column="eklenme_tarihi" type="java.lang.String" />
+		<property name="guncellemeTarihi" column="guncelleme_tarihi" type="java.lang.String" />
+		<property name="silinmeTarihi" column="silinme_tarihi" type="java.lang.String" />
+		<property name="guncelleyen" column="guncelleyen" type="int" />
+		<property name="silen" column="silen" type="int" />
+
 	
 	
 	

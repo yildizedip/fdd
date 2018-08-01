@@ -23,6 +23,7 @@ public class THastaDTO implements Serializable {
 	private Date eklenmeTarihi;
 	private String eklenmeTarihiStr;
 	private Date guncellenmeTarihi;
+	private Integer guncelleyenKisi;
 	private int subeId;
 	private List<TIslemDTO> hastaOperasyonList;
 	private List<TIslemDTO> hastaSelectedDoktorOperasyonList; //sadece belli bir doktorun yaptigi operasyonlar- randevu icin
@@ -131,5 +132,12 @@ public class THastaDTO implements Serializable {
 	public void setHastaSelectedDoktorOperasyonList(List<TIslemDTO> hastaSelectedDoktorOperasyonList) {
 		this.hastaSelectedDoktorOperasyonList = hastaSelectedDoktorOperasyonList;
 	}
+	public Integer getGuncelleyenKisi() {
+		return guncelleyenKisi;
+	}
+	public void setGuncelleyenKisi(Integer guncelleyenKisi) {
+		this.guncelleyenKisi = guncelleyenKisi;
+	}
+	
 
 }

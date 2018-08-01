@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,10 +46,18 @@ public class Commons {
 		return dt;
 	}
 	
+	
+	public static String getNow() 
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm"); 
+		Date today = Calendar.getInstance().getTime();        
+		String dt = dateFormat.format(today);
+		
+		return dt;
+	}
+	
 	public static String getTomorrow() 
 	{
-		
-		
 		Calendar cal = Calendar.getInstance();    
 		cal.setTime(new Date());    
 		cal.add( Calendar.DATE, 1 );
@@ -58,7 +67,67 @@ public class Commons {
 		return dt;
 	}
 	
+	/**
+	 * str should be year.month.day format (2017.10.30)
+	 * @param dateStr
+	 * @return
+	 */
+	public static String getTomorrow(String dateStr) 
+	{
+		if(dateStr==null || dateStr.equals("")) return dateStr;
+		
+		
+		String[] dateStrArr = dateStr.split("\\.");
+		
+		Calendar cal = Calendar.getInstance();    
+		cal.set(Integer.parseInt(dateStrArr[0]), Integer.parseInt(dateStrArr[1]), Integer.parseInt(dateStrArr[2]));
+		cal.add( Calendar.DATE, 1 );
+		      
+		String dt = dateFormat.format(cal.getTime());
+		
+		return dt;
+	}
 	
+	
+	/**
+	 * dateStr should be year.month.day format (2017.10.30)
+	 * @param dateStr
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static String minusDays(String dateStr, int days) throws ParseException 
+	{
+		Date dt=dateFormat.parse(dateStr);
+	
+		DateTime dtOrg = new DateTime(dt);
+		DateTime dtPlusOne = dtOrg.minusDays(days);
+		
+		Date plusDate= dtPlusOne.toDate();
+		
+		String plusDataeStr= dateFormat.format(plusDate);
+		
+		return plusDataeStr;
+	}
+	/**
+	 * dateStr should be year.month.day format (2017.10.30)
+	 * @param dateStr
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static String addDays(String dateStr, int days) throws ParseException 
+	{
+		
+		Date dt=dateFormat.parse(dateStr);
+	
+		DateTime dtOrg = new DateTime(dt);
+		DateTime dtPlusOne = dtOrg.plusDays(days);
+		
+		Date plusDate= dtPlusOne.toDate();
+		
+		String plusDataeStr= dateFormat.format(plusDate);
+		
+		return plusDataeStr;
+	}
 	
 	public double getToplamOdemeMiktari(List<THastaOdemeDTO> list) {
 

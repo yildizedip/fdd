@@ -37,6 +37,7 @@ public class HastaBazliToplamOdemeListesiAction extends GenericAction {
 			String tip = request.getParameter("tip");
 			String basTar = request.getParameter("basTar");
 			String bitTar = request.getParameter("bitTar");
+			String protokol = request.getParameter("protokol");
 
 			request.setAttribute("basTar", basTar);
 			request.setAttribute("bitTar", bitTar);
@@ -60,7 +61,7 @@ public class HastaBazliToplamOdemeListesiAction extends GenericAction {
 			hastaBazliToplamOdemeListesi = sqlUtils
 					.hastaBazliToplamOdemeListesi(connection, "A", doktorId,
 							subeId.intValue(), basTar, bitTar, frm.getAd(),
-							frm.getSoyad(), frm.getProtokolNo());
+							frm.getSoyad(), protokol);
 
 			boolean checkNull = true;
 			for (int i = 0; i < hastaBazliToplamOdemeListesi.size(); i++) {	

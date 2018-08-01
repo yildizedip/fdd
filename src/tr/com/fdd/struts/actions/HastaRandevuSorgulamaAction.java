@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.mysql.DbConnection;
+import tr.com.fdd.utils.Commons;
 
 public class HastaRandevuSorgulamaAction extends Action {
 
@@ -29,7 +30,13 @@ public class HastaRandevuSorgulamaAction extends Action {
 			SQLUtils sqlUtils = new SQLUtils();
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 			
-			TDoktorDTO doktorDTO=sqlUtils.getDoktor(-1,Integer.parseInt(doktorId), conn, true,subeId);
+			String today=Commons.getToday();
+			
+			String randevuBaslTarihStr= Commons.minusDays(today, 7);
+			
+			String randevuBitisTarihStr= Commons.addDays(today, 300);
+			
+			TDoktorDTO doktorDTO=sqlUtils.getDoktor(-1,Integer.parseInt(doktorId), conn, true,subeId,randevuBaslTarihStr,randevuBitisTarihStr);
 
 //			List<THastaRandevuDTO> randevuListesi = sqlUtils.getRandevuListesi(
 //					conn, subeId.intValue(), Integer.parseInt(doktorId)); // no doktor 

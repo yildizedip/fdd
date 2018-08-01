@@ -34,6 +34,8 @@ public class HastaGuncelleAction extends GenericAction {
 
 		//Transaction tran = null;
 		try {
+			
+			
 			String hastaId = request.getParameter("id");
 			int id = new Integer(hastaId).intValue();
 
@@ -54,6 +56,8 @@ public class HastaGuncelleAction extends GenericAction {
 			result.setTckimlik(hastaDto.getTckimlik());
 			result.setTel(hastaDto.getTel());
 			result.setProtokolNo(hastaDto.getProtokolNo());
+			result.setGuncellenmeTarihi(new Date());
+			result.setGuncelleyenKisi(Commons.getActiveSession(request).getKuId());
 
 			tran.commit();
 

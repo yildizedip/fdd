@@ -38,7 +38,7 @@ public class HastaBasicSorgulamaAction extends Action {
 			List<THastaDTO> hastaListesi = sqlUtils.getHastaList(conn, subeId, 
 					hastaForm.getAd(),
 					hastaForm.getSoyad(), 
-					hastaForm.getProtokolNo(), false);
+					hastaForm.getProtokolNo(),hastaForm.getTel(), false);
 
 			if (hastaListesi.size() == 0) {
 				request.setAttribute("noContent", GUIMessages.VERI_BULUNAMADI);

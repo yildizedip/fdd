@@ -21,6 +21,15 @@
 	    <property name="iliskiliIslemId" column="iliskili_islem_id" type="int" /> 
 	 	 <property name="disAdet" column="dis_say" type="int" /> 
 	 	 <property name="disNo" column="dis_no" type="java.lang.String" /> 
+	 	
+	 	 <property name="guncellemeTarihiStr" column="guncelleme_tarihi" type="java.lang.String" /> 
+	 	 <property name="silmeTarihiStr" column="silme_tarihi" type="java.lang.String" /> 
+	 	 <property name="eklenmeTarihiStr" column="eklenme_tarihi_str" type="java.lang.String" /> 
+	 	 
+	 	 <property name="guncelleyenKisi" column="guncelleyen_kisi" type="int" /> 
+	 	 <property name="ekleyenKisi" column="ekleyen_kisi" type="int" /> 
+	 	 <property name="silen" column="silen" type="int" /> 
+	 	
 	<!-- 
 	
 	    <property name="implantUcret" column="impl_ucret" type="double" />

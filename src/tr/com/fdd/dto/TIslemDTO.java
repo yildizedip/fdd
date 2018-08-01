@@ -5,11 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import tr.com.fdd.utils.enums.LaboratuvarIslemDurum;
-
 
 public class TIslemDTO implements Serializable {
-
 	
 	/**
 	 * 
@@ -25,6 +22,7 @@ public class TIslemDTO implements Serializable {
 	private double kalanMiktar;
 	private double toplamOdenenMiktar;
 	private String durumu;
+	private String durumuStr;
 	private String aciklama;
 	private Date eklenmeTarihi;
 	private String eklenmeTarihiStr;
@@ -54,7 +52,11 @@ public class TIslemDTO implements Serializable {
 	private TDoktorDTO implantCerrahDoktor;
 	private TDoktorDTO implantDestekDoktor;
 	
-	
+	private String guncellemeTarihiStr;
+	private Integer guncelleyenKisi;
+	private String silmeTarihiStr;
+	private Integer silen;
+	private Integer ekleyenKisi;
 	
 	
 	public List<String> getOdemeListStr() {
@@ -289,6 +291,42 @@ public class TIslemDTO implements Serializable {
 	}
 	public void setRandevuList(List<THastaRandevuDTO> randevuList) {
 		this.randevuList = randevuList;
+	}
+	public String getGuncellemeTarihiStr() {
+		return guncellemeTarihiStr;
+	}
+	public void setGuncellemeTarihiStr(String guncellemeTarihiStr) {
+		this.guncellemeTarihiStr = guncellemeTarihiStr;
+	}
+	public Integer getGuncelleyenKisi() {
+		return guncelleyenKisi;
+	}
+	public void setGuncelleyenKisi(Integer guncelleyenKisi) {
+		this.guncelleyenKisi = guncelleyenKisi;
+	}
+	public String getSilmeTarihiStr() {
+		return silmeTarihiStr;
+	}
+	public void setSilmeTarihiStr(String silmeTarihiStr) {
+		this.silmeTarihiStr = silmeTarihiStr;
+	}
+	public Integer getSilen() {
+		return silen;
+	}
+	public void setSilen(Integer silen) {
+		this.silen = silen;
+	}
+	public Integer getEkleyenKisi() {
+		return ekleyenKisi;
+	}
+	public void setEkleyenKisi(Integer ekleyenKisi) {
+		this.ekleyenKisi = ekleyenKisi;
+	}
+	public String getDurumuStr() {
+		return durumuStr;
+	}
+	public void setDurumuStr(String durumuStr) {
+		this.durumuStr = durumuStr;
 	}
 	
 		

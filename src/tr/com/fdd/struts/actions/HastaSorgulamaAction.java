@@ -17,6 +17,7 @@ import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.TIslemDTO;
 import tr.com.fdd.mysql.DbConnection;
+import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 public class HastaSorgulamaAction extends Action {
@@ -59,7 +60,13 @@ public class HastaSorgulamaAction extends Action {
 			
 			if(GenelDegiskenler.RANDEVU_GETIR.equals(islemTip) || GenelDegiskenler.RANDEVU_GETIR_HASTA_ISLEMLERI.equals(islemTip) ){
 				
-				TDoktorDTO doktorDTO=sqlUtils.getDoktor(-1,Integer.parseInt(doktorId), conn, true,subeId);
+				String today=Commons.getToday();
+				
+				String randevuBaslTarihStr= Commons.minusDays(today, 7);
+				
+				String randevuBitisTarihStr= Commons.addDays(today, 60);
+				
+				TDoktorDTO doktorDTO=sqlUtils.getDoktor(-1,Integer.parseInt(doktorId), conn, true,subeId,randevuBaslTarihStr,randevuBitisTarihStr);
 
 				TIslemDTO randevuTedavi= null;
 				

@@ -36,7 +36,7 @@ public class GetDoktorOperasyonListesiAction extends Action {
 		
 		SQLUtils sqlUtils= new SQLUtils();
 		conn =DbConnection.getMySqlConneciton();
-		TDoktorDTO doktor= sqlUtils.getDoktor(Integer.parseInt(kullaniciId), -1, conn, false, -1);
+		TDoktorDTO doktor= sqlUtils.getDoktor(Integer.parseInt(kullaniciId), -1, conn, false, -1,null,null);
 
 		Integer subeId= (Integer) request.getSession().getAttribute("subeId");
 		

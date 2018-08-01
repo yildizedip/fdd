@@ -26,7 +26,6 @@
 
 <link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
 
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
@@ -109,86 +108,105 @@ var basTarihi;
 </head>
 <body style="color:black ; background-color: white;">
 
-		<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-		<div class="page-header ">
-		
-				<div class="page-title" style="font-size: 20px;">
-					Tedavisi Kesinleþmemiþ Hastalarýn Arama Kaydý Listesi 
-				</div>
+	<div class="row">
 
-				<button class="btn pull-right"
-					style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
-					onclick="window.print()">
-				</button>
+		<div class="col-lg-6"></div>
+		<div class="col-lg-6">
+
+			<button class="btn pull-right"
+				style="background-image: url('Images/printIcon2.jpg'); height: 22px; width: 22px"
+				onclick="window.print()"></button>
 
 		</div>
-		<div class="bg-success">${requestScope.warn}</div>
 
-		<div class="clearfix"></div>
 	</div>
-	
-<br>
 
-<div class="col-lg-6"> 
+	<br>
+
+
+ 
 	<form action="hastaAramaKaydiListGetir.do" method="post">
-		<table class="table table-bordered">
-			<tr>
-				<td colspan="7" style="text-align: center;" class="bg-info">ARAMA KAYDI SORGULA</td>
-			</tr>
-			<tr>
-				<td>Protokol No</td>
-				<td><input class="inputTextfield" name="protokolNo"
-					id="hstProtokol" /> <input type="hidden" name="tip" id="tip"
-					value="${param.tip}" /></td>
-				<td>Ad</td>
-				<td><input class="inputTextfield" name="ad" id="hstProtokol" /></td>
-				<td>Soyad</td>
-				<td><input class="inputTextfield" name="soyad" id="hstProtokol" /></td>
-			</tr>
-			<tr>
-				<td>Ýþlem</td>
-				<td colspan="5"><select size="1" name="islemTipi" >
-						<option label="Operasyon Seçiniz.." value="-1" />
+	
+			<div class="col-lg-8 ">
 
-						<c:forEach items="${islemTurList}" var="islem">
-							<option label="${islem.ad}" value="${islem.id }" />
-						</c:forEach>
-				</select></td>
-			</tr>
-			<tr>
-				<td style="width: 56px;">Arama Tarih :</td>
-				<td style="width: 164px;"><input class="inputTextfield"
-					name="basTar" id="basTar" /></td>
-				<td>/</td>
-				<td colspan="4"><input class="inputTextfield" name="bitTar"
-					id="bitTar" /></td>
-			</tr>
-
-			<tr>
-				<td colspan="7" style="text-align: center;">
-				<label id="lbl_error" style="color: red;">${requestScope.warn}
-				${requestScope.noContent} </label>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="7" style="text-align: center;"><input
-					type="submit" value="Sorgula" name="bnt_gonder" /></td>
-			</tr>
-		</table>
+				<div class="panel panel-default">  
+				<div class="panel-heading"> 
+				
+						Sorgula
+				</div>
+				
+				<div class="panel-body">  
+			
+						<div class="form-group">
+							
+							<div class="row"> 
+								
+								<div class="col-lg-6">
+										<input class="form-control" name="protokolNo"	id="hstProtokol"  placeholder="Protokol No" /> 
+										<input type="hidden" name="tip" id="tip"	value="${param.tip}" /> 
+								</div>
+								
+							</div>
+							
+						</div>
+						
+						<div class="form-group">
+							
+							<div class="row"> 
+								
+								<div class="col-lg-6">	<input class="form-control" name="ad" id="hstProtokol" placeholder="Ad" /> </div>
+								<div class="col-lg-6">  <input class="form-control" name="soyad" id="hstProtokol" placeholder="Soyad" /> </div>
+								
+							</div>
+							
+						</div>
+						
+						<div class="form-group">
+							
+							<div class="row"> 
+								
+								<div class="col-lg-6">
+										<select size="1" name="islemTipi" class="form-control" >
+												<option label="Operasyon Seçiniz.." value="-1" />
+						
+												<c:forEach items="${islemTurList}" var="islem">
+													<option label="${islem.ad}" value="${islem.id }" />
+												</c:forEach>
+										</select>
+								</div>
+								
+							</div>
+							
+						</div>
+						
+						
+						<div class="form-group">
+							
+							<div class="row"> 
+								
+								<div class="col-lg-6">	<input class="form-control" name="basTar" id="basTar"  placeholder="Baþlangýç Tarihi"/> </div>
+								<div class="col-lg-6">  <input class="form-control" name="bitTar" id="bitTar" placeholder="Bitiþ Tarihi" /> </div>
+								
+							</div>
+							
+						</div>
+						<button type="submit" class="btn btn-info btn-sm">Sorgula</button>
+					</div>
+				</div>
+			</div>
 	</form>
 	
-	</div>
 
 	<div class="clearfix"></div>
 	
 	
-	<a href="OperasyonuKesinlesmemisHastaListesi.jsp?tip=3" class="btn btn-success">Arama Kaydý Ekle</a>
+	<a href="OperasyonuKesinlesmemisHastaListesi.jsp?tip=3" class="btn btn-info btn-sm">Arama Kaydý Ekle</a>
 	<br>
 	<br>
 	<table class="table table-bordered" id="example">
 		<thead>
 			<tr>
-				<th class="bg-success" colspan="13"> <h4 align="center">Arama Kayýt Listesi <h4 align="center"></th>
+				<th class="bg-success" colspan="13"> <h4 align="center">Tedavisi Kesinleþmemiþ Hastalarýn Arama Kayýt Listesi </h4></th>
 			</tr>
 			<tr>
 				<th class=""></th>

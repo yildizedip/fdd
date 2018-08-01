@@ -79,6 +79,10 @@
 
 				<li><html:link page="/SubeOperasyonFiyatEslestir.jsp"
 						target="frame">Tedavi Fiyat Tanýmla </html:link></li>
+						
+						
+				<li><html:link page="/SubeKarZarar.jsp"
+						target="frame"> Þube Kar Zarar Durumu </html:link></li>
 
 
 			</ul>

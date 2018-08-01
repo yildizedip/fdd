@@ -28,7 +28,6 @@
 <link type="text/css" rel="stylesheet"
 	href="styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
 
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
@@ -98,121 +97,128 @@ var basTarihi;
 </head>
 <body style="color: black; background-color: white; font-size: 11px;">
 
-	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-		<div class="page-header ">
-			<div class="page-title" style="font-size: 15px;">
 
-				<c:choose>
-					<c:when test="${param.tip eq '1' }">
-			Tedavisi Kesinleþmemiþ Hasta Sorgulama
-			</c:when>
-					<c:when test="${param.tip eq '3' }">
-			 Arama Kaydý Giriþ
-			</c:when>
-					<c:otherwise>
-			 Tedavisi Kesinleþmiþ Hasta Listesi
-			</c:otherwise>
-				</c:choose>
+<div class="row">
 
+<div class="col-lg-6"> 
 
-			</div>
+</div>
+<div class="col-lg-6"> 
 
-			<button class="btn pull-right"
+<button class="btn pull-right"
 				style="background-image: url('Images/printIcon2.jpg'); height: 22px; width: 22px"
 				onclick="window.print()"></button>
 
-		</div>
-		<div class="bg-success">${requestScope.warn}</div>
+</div>
 
-		<div class="clearfix"></div>
-	</div>
-
-
-	<br>
-	<div class="col-lg-6">
-
-
+</div>
 		<form action="operasyonuKesinlesmemisHastaListesi.do" method="post">
-		<input type="hidden" name="tip" id="tip"						value="${param.tip}" />
-			<table class="table table-bordered">
-				<tr>
-					<td colspan="2" class="bg-info">SORGULA</td>
-				</tr>
-				<tr>
-					
-					<td><input class="inputTextfield" name="ad" id="hstProtokol" placeholder="Ad" /></td>
-					<td><input class="inputTextfield" name="soyad"	id="hstProtokol" placeholder="Soyad" /></td>
-				</tr>
+		
+			<input type="hidden" name="tip" id="tip" value="${param.tip}" />
+		
+			<div class="col-lg-8 ">
+
+				<div class="panel panel-default">  
+				<div class="panel-heading"> 
 				
+							<c:choose>
+								<c:when test="${param.tip eq '1' }">
+									Tedavisi Kesinleþmemiþ Hasta Sorgulama
+								</c:when>
+								<c:when test="${param.tip eq '3' }">
+									 Arama Kaydý Giriþ
+								</c:when>
+								<c:otherwise>
+									 Tedavisi Kesinleþmiþ Hasta Listesi
+								</c:otherwise>
+							</c:choose>
 				
-				<tr>
-					<td> 
+				</div>
+				
+				<div class="panel-body">  
+			
+						<div class="form-group">
+							
+							<div class="row"> 
+								
+								<div class="col-lg-6"> <input class="form-control" name="ad" id="hstProtokol" placeholder="Ad" /> </div>
+								<div class="col-lg-6"> <input class="form-control" name="soyad"	id="hstProtokol" placeholder="Soyad" /> </div>
+								
+							</div>
+							
+						</div>
 						
-							<select size="1" name="islemTipi">
-								<option label="Tedavi Seçiniz.." value="-1">Tedavi Seçiniz</option>
+						
+						<div class="form-group">
+						
+						
+							<div class="row"> 
+								
+								<div class="col-lg-6"> 
+										
+										<select size="1" name="islemTipi" class="form-control">
+											<option label="Tedavi Seçiniz.." value="-1">Tedavi Seçiniz</option>
+				
+											<c:forEach items="${islemTurList}" var="islem">
+												<option label="${islem.ad}" value="${islem.id }"> ${islem.ad}</option>
+											</c:forEach>
+								 		</select>
+										
+								</div>
+								<div class="col-lg-6"> 
+								
+										 <c:choose>
+											<c:when test="${sessionScope.sessionMember[0].kuTur ne '3'}">
 	
-								<c:forEach items="${islemTurList}" var="islem">
-									<option label="${islem.ad}" value="${islem.id }"> ${islem.ad}</option>
-								</c:forEach>
-						 </select>
+													<select size="1" name="doktorId" class="form-control" >
+																		<option label="Diþ Hekimi Seçiniz.." value="-1">Diþ Hekimi Seçiniz..</option>
+									
+																		<c:forEach items="${doktorList}" var="doktorDTO">
+																			<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } "
+																				value="${doktorDTO.dId }"
+																				<c:if test="${doktorDTO.dId eq operasyonDoktorId }">
+																	selected="selected"
+																	</c:if>>
+																				${doktorDTO.dAd } ${doktorDTO.dSoyad }</option>
+																		</c:forEach>
+													</select>
 					
-					</td>
-					
-					<td >
-						<c:choose>
-							<c:when test="${sessionScope.sessionMember[0].kuTur ne '3'}">
-	
-								<select size="1" name="doktorId">
-										<option label="Diþ Hekimi Seçiniz.." value="-1">Diþ Hekimi Seçiniz..</option>
-	
-										<c:forEach items="${doktorList}" var="doktorDTO">
-											<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } "
-												value="${doktorDTO.dId }"
-												<c:if test="${doktorDTO.dId eq operasyonDoktorId }">
-									selected="selected"
-									</c:if>>
-												${doktorDTO.dAd } ${doktorDTO.dSoyad }</option>
-										</c:forEach>
-								</select>
-	
-							</c:when>
-							<c:otherwise>
-								<td></td>
-							</c:otherwise>
-
-						</c:choose>
-					
-					</td>
-				</tr>
-				<tr>
-					<td> Hasta Eklenme Tarihi :  </td>
-					<td> 
-					
-					<input class="inputTextfield" name="basTar" id="basTar" /> - <input class="inputTextfield" name="bitTar" id="bitTar" />
-					
-					</td>
-
-					
-				</tr>
-
-				<tr>
-					<td colspan="7" style="text-align: center;"><input
-						type="submit" value="Sorgula" name="bnt_gonder" /></td>
-				</tr>
-			</table>
+											</c:when>
+											<c:otherwise>
+												<td></td>
+											</c:otherwise>
+				
+										</c:choose>
+								</div>
+								
+							</div>
+						</div>
+						
+						<div class="form-group">
+						
+									<div class="row"> 
+										<div class="col-lg-6"> <input class="form-control" name="basTar" id="basTar" />  </div>
+										<div class="col-lg-6"> <input class="form-control" name="bitTar" id="bitTar" /> </div>
+									</div>
+						</div>
+						
+						<button type="submit" class="btn btn-info btn-sm">Gönder</button>
+					</div>
+				</div>
+			</div>
 		</form>
-<label
-						style="color: red;"> ${requestScope.warn} </label>
+		
+		<label style="color: red;"> ${requestScope.warn} </label>
 
-	</div>
 
 	<hr>
 	<table class="table table-bordered" id="example">
 		<thead>
 
 			<tr>
-				<th class="bg-success" colspan="11">
-					<h4 align="center">Hasta Listesi</h4>
+				<th class="bg-info" colspan="12">
+				
+					<div> Hasta Listesi </div>
 				</th>
 			</tr>
 

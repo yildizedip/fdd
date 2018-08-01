@@ -51,6 +51,8 @@ public class HastaOperasyonEkleAction extends GenericAction {
 		tIslemDto.setDurumu(hastaKartiForm.getOperasyonDurum());
 		tIslemDto.setEklenmeTarihi(new Date());
 		tIslemDto.setIslemTarihiStr(hastaKartiForm.getIslemTarihiStr());
+		tIslemDto.setEklenmeTarihiStr(Commons.getNow());
+		tIslemDto.setEkleyenKisi(Commons.getActiveSession(request).getKuId());
 
 		if (hastaKartiForm.getIslemTarihiStr() == null || hastaKartiForm.getIslemTarihiStr().equals("") )
 			tIslemDto.setIslemTarihi(new Date());

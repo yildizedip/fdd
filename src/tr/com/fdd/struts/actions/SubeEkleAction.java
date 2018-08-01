@@ -23,6 +23,7 @@ import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.dto.TIslemTipDTO;
 import tr.com.fdd.dto.TMenuDTO;
 import tr.com.fdd.dto.TSubeDTO;
+import tr.com.fdd.dto.TTurKodDTO;
 import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.SubeForm;
@@ -84,9 +85,17 @@ public class SubeEkleAction extends Action {
 				List<TIslemTipDTO> opersyonList=sqlUtils.getAllOperasyon(conn);
 				
 				
+				List<TTurKodDTO> giderTurkodList=sqlUtils.getGiderTurKods(conn);
+				
+				
 				for (TIslemTipDTO tIslemTipDTO : opersyonList) {
 					
 					sqlUtils.addOperasyon2Sube(conn, id, tIslemTipDTO.getId());
+				}
+				
+				for (TTurKodDTO kod : giderTurkodList) {
+					
+					sqlUtils.addGiderTurKod2Sube(conn, id, kod.getTurId());
 				}
 				
 				request.setAttribute("warn", GUIMessages.KAYIT_EKLEME_BASARILI);

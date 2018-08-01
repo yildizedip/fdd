@@ -22,10 +22,7 @@
 
 <link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
-<link rel="stylesheet" href="css/edip.css" type="text/css" />
-<link rel="stylesheet" href="css/demo_page.css" type="text/css" />
 <link rel="stylesheet" href="css/demo_table.css" type="text/css" />
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
 <link rel="stylesheet" href="css/jquery-ui.css" type="text/css" />
@@ -82,7 +79,7 @@
 	$("document")
 			.ready(
 					function() {
-						$('#example')
+						$('#tablo')
 								.dataTable(
 										{
 
@@ -93,12 +90,12 @@
 													[ 25, 50, 100, "Hepsi" ] ],
 											"oLanguage" : {
 
-												"sLengthMenu" : "Sayfada _MENU_ kayýt gösterilsin.",
+												"sLengthMenu" : "_MENU_ ",
 												"sZeroRecords" : "",
 												"sInfo" : "_TOTAL_ kayýt arasýndan  _START_ ile _END_ kayýt gösterilmektedir.",
 												"sInfoEmpty" : "",
 												"sInfoFiltered" : "(filtered from _MAX_ total records)",
-												"sSearch" : "Aranacak Kelimeyi Yazýn:",
+												"sSearch" : "Ara",
 												"sPrevious" : "Önceki",
 												"sEmptyTable" : "Veri Bulunamadý"
 
@@ -136,10 +133,12 @@
 	    	 var sira=   $(row.children().get(0)).text();
 	    	 var protokol=   $(row.children().get(1)).text();
 	    	 var adSoyad=   $(row.children().get(2)).text();
-	    	 var operasyon=   $(row.children().get(3)).text();
-	    	 var ucret=   $(row.children().get(9)).text();
-	    	 var kalan=   $(row.children().get(11)).text();
-	    	 var islemId=   $(row.children().get(13)).text();
+	    	 
+	    	 var operasyon=   $(row.children().get(4)).text();
+	    	 
+	    	 var ucret=   $(row.children().get(6)).text();
+	    	 var kalan=   $(row.children().get(8)).text();
+	    	 var islemId=   $(row.children().get(11)).text();
 	   
 	    	 
 	    	   $('#protokol').val(protokol);
@@ -197,31 +196,28 @@
 
 
 		<form action="hastaBazliToplamOdemeListesi.do"	method="post">
+		
+		
+				<div class="col-lg-4 ">
 			
-			<div class="col-lg-6"> 
-
-<div class="panel panel-blue" >
-                                            <div class="panel-heading">
-                                                Sorgulama</div>
-                                            <div class="panel-body pan">
-                                                <div class="form-body pal">
-                                                
-                                                 <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <label for="inputName" class="control-label">
-                                                                    Rapor Tipi </label>
-                                                                   
-                                                                    
-                                                                    <select size="1" name="tip" class="form-control">
-																			<option label="Hastalarýn Ödeme Durumu" value="10">Hastalarýn Ödeme Durumu</option>
-																			<option label="Tedavisi Bitmiþ Hastalar" value="12">Tedavisi Bitmiþ Hastalar</option>
-																			<option label="Tedavisi Devam Eden Hastalar" value="16">Tedavisi Devam Eden Hastalar</option>
-																			<option label="Tedavisi Devam Eden Hastalar (Ödemesi Bitmiþ)" value="15">Tedavisi Devam Eden Hastalar (Ödemesi Bitmiþ)</option>
-																			<option label="Borçlu Hastalar (Tedavisi Biten)" value="13" >Borçlu Hastalar (Tedavisi Biten)</option>
-																			<option label="Borçlu Hastalar (Tedavisi Devam Eden)" value="17" >Borçlu Hastalar (Tedavisi Devam Eden)</option>
-																	</select>
-																	<!--  
+				<div class="panel panel-default">  
+				<div class="panel-heading"> Sorgula </div>
+				
+				<div class="panel-body">  
+				
+				
+						
+						<div class="form-group">
+							
+							<div class="row"> 
+							
+								<div class="col-lg-6" > <input class="form-control"	name="protokol" id="protokol" placeholder="Protokol No"> </div>
+							
+							</div>
+						</div>
+			
+						<div class="form-group">
+								<!--  
 																	 <select size="1" name="tip" class="form-control">
 																			<option label="Hastalarýn Toplam Ödeme Durumu" value="10">Hastalarýn Toplam Ödeme Durumu</option>
 																			<option label="Tedavisi Bitmiþ Hasta Listesi" value="12">Tedavisi Bitmiþ Hasta Listesi</option>
@@ -235,65 +231,48 @@
 																	</select>
 																	
 																	-->
-                                                                   
-                                                                    
-                                                            </div>
-                                                        </div>
-                                                      
-                                                    </div>
-                                                
-                                                
-                                                
-                                                 <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="inputName" class="control-label">
-                                                                    Ödeme Baþlangýç Tarihi </label>
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                   <input class="form-control"	name="basTar" id="basTar">
-                                                                    
-                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="inputEmail" class="control-label">
-                                                                    Ödeme Bitiþ Tarihi</label>
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                    <input  class="form-control" name="bitTar" id="bitTar"> 
-                                                                    </div>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                
-                                                 
-                                                </div>
-                                                <div class="form-actions text-right pal">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        Sorgula</button>
-                                                </div>
-                                            </div>
-                                        </div>
- </div>
-
+							
+							 <select size="1" name="tip" class="form-control">
+																			<option label="Hastalarýn Ödeme Durumu" value="10">Hastalarýn Ödeme Durumu</option>
+																			<option label="Tedavisi Bitmiþ Hastalar" value="12">Tedavisi Bitmiþ Hastalar</option>
+																			<option label="Tedavisi Devam Eden Hastalar" value="16">Tedavisi Devam Eden Hastalar</option>
+																			<option label="Tedavisi Devam Eden Hastalar (Ödemesi Bitmiþ)" value="15">Tedavisi Devam Eden Hastalar (Ödemesi Bitmiþ)</option>
+																			<option label="Borçlu Hastalar (Tedavisi Biten)" value="13" >Borçlu Hastalar (Tedavisi Biten)</option>
+																			<option label="Borçlu Hastalar (Tedavisi Devam Eden)" value="17" >Borçlu Hastalar (Tedavisi Devam Eden)</option>
+							</select>
+						</div>
+						<div class="form-group">
+							
+							<div class="row"> 
+							
+							<div class="col-lg-6" > <input class="form-control"	name="basTar" id="basTar" placeholder="Ödeme Baþ. Tarihi"> </div>
+							<div class="col-lg-6" align="left">  <input  class="form-control" name="bitTar" id="bitTar" placeholder="Ödeme Bitiþ Tarihi">  </div>
+						</div>
+					
+					<div class="form-group">
+						<br>
+						<button type="submit" class="btn btn-info btn-sm">Gönder</button>
+					
+					</div>
+					</div>
+				
+				</div>
+			
+				</div>
+				</div>
+		
 		</form>
 		
 		<div class="clearfix"></div>
-		<h4>
 		
+		<c:if test="${!empty hastaBazliToplamOdemeListesi}">
 		
-		
-		 </h4>
-
-			<table class="table table-bordered" id="example" style="font-size: 15px;" >
+			<table class="table table-bordered table-striped" id="tablo" style="font-size:small;">
 				<thead>
-				<tr class="bg-warning" >
-				<td colspan="13" align="center">
+				<tr class="bg-info" >
+				<td colspan="12" align="center">
 					<c:choose>
-							<c:when test="${requestScope.raporIslemTipi eq '10' }"> Hastalarýn Toplam Ödeme Durumu</c:when>
+							<c:when test="${requestScope.raporIslemTipi eq '10' }"> Hasta Tedavi Ödeme Listesi</c:when>
 							<c:when test="${requestScope.raporIslemTipi eq '11' }"> Ödemesi Bitmiþ Hasta Listesi </c:when>
 							<c:when test="${requestScope.raporIslemTipi eq '12' }"> Tedavisi Bitmiþ Hasta Listesi </c:when>
 							<c:when test="${requestScope.raporIslemTipi eq '13' }"> Tedavisi Bitmiþ Ödemesi Devam Eden Hasta Listesi </c:when>
@@ -303,29 +282,22 @@
 							<c:when test="${requestScope.raporIslemTipi eq '17' }"> Ödemesi Devam Eden Hasta Listesi </c:when>
 
 						</c:choose>
-					
-				
 				 </td>
 				</tr>
 				
-					<tr  >
-						<th class=""></th>
-						<th class="">Prt. No</th>
+					<tr >
+						<th></th>
+						<th> Prt. No</th>
 						<th class="">Hasta</th>
-						<th class="">Ýþlem</th>
-						<th class="">Adet</th>
 						<th class="">Doktor</th>
-						<th width="77px" class="">Ýþlem T.</th>
-
-
-						<th width="20px" class="">Öd. Miktarlarý</th>
-						<th width="107px" class="">Öd. Trhleri</th>
-						<th width="70px" class="">Ücret</th>
-						<th width="70px" class="">Öd. Mik.</th>
-
-						<th width="70px" class="">Kal. Mik.</th>
+						<th class="">Tedavi</th>
+						<th class="">Tedavi Tarihi</th>
+						<th  class="">Tedavi Ücret</th>
+						<th  class="">Ödemeler</th>
+						<th  class="">Kalan Miktar</th>
+						<th class="">Ödeme  Tarihleri</th>
 					
-						<th width="70px" class=""></th>
+						<th class=""> </th>
 						<th width="0px" style="border-color: white;" ></th>
 						<!-- 
 			<th width="70px" class="">Doktor Hes.</th>	
@@ -337,40 +309,31 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${hastaBazliToplamOdemeListesi}" var="odeme"			varStatus="count">
+					<c:forEach items="${hastaBazliToplamOdemeListesi}" var="odeme"	varStatus="count">
 
 						<tr>
-							<td class="">${count.count}</td>
-							<td class="">${odeme.hasta.protokolNo}</td>
-
-							<td class="">${odeme.hasta.ad}
-								${odeme.hasta.soyad} - ${odeme.hasta.tel}</td>
-							<td class="">${odeme.islemTip.ad}</td>
-							<td class="">${odeme.islem.disAdet}</td>
-							<td class="">${odeme.doktor.dAd}
-								${odeme.doktor.dSoyad}</td>
-							<td class="">${odeme.islem.islemTarihiStr}
-								${odeme.islem.islemBitisTarihiStr}</td>
+							<td>${count.count}</td>
+							<td>${odeme.hasta.protokolNo}</td>
+							<td>${odeme.hasta.ad}	${odeme.hasta.soyad} - ${odeme.hasta.tel}</td>
+							<td>${odeme.doktor.dAd} 	${odeme.doktor.dSoyad}</td>
+							<td>${odeme.islemTip.ad} (${odeme.islem.disAdet}) - ${odeme.islem.durumuStr} </td>
+							<td class="">${odeme.islem.islemTarihiStr}	${odeme.islem.islemBitisTarihiStr}</td>
+							<td class="">${odeme.ucret}</td>
+							
+							
 							<td class=""><c:forEach
 									items="${odeme.islem.odemeListStr}" var="odemeler">
 											${odemeler}<br>
-								</c:forEach></td>
-
+								</c:forEach>
+							</td>
+								
+							<td class="">${odeme.kalanMiktar}</td>
 							<td class=""><c:forEach
 									items="${odeme.islem.odemeTarihListStr}" var="odemeler">
 									${odemeler}<br>
 
 
 								</c:forEach></td>
-
-							<td class="">${odeme.ucret}</td>
-
-
-
-							<td class="">${odeme.miktar}</td>
-
-
-							<td class="">${odeme.kalanMiktar}</td>
 
 							<!--  
 								<td style=" font-size: 9px " class="">${odeme.doktorHesap} </td>
@@ -379,7 +342,7 @@
 
 						<td class="">  <a id="opener" class="gunGir"> Gün Gir</a>  </td>
 				
-						<td width="1px"  style="font-size:1px; visibility: hidden; border-color: white;">${odeme.islem.id}</td>
+						<td width="1px"  style="font-size:1px; visibility: hidden;">${odeme.islem.id}</td>
 				
 						</tr>
 
@@ -394,40 +357,35 @@
 						<th></th>
 						<th></th>
 						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
 						<th>TOPLAM</th>
 
 						<th style="font-size: 10px; color: Blue;">${toplamUcret}</th>
 						<th style="font-size: 10px; color: Blue">${toplamMiktar}</th>
-						<th style="font-size: 10px; color: Blue">
-							${toplamKalanMiktar}</th>
+						<th style="font-size: 10px; color: Blue"> ${toplamKalanMiktar}</th>
 							<th></th>
 							<th style="border-color: white;"></th>
-
-
 					</tr>
 
 				</tfoot>
 
 			</table>
+			
+			</c:if>
 
 
 
-<div id="dialog" title="Hasta Borç Tarihi Ekleme">
+<div class="dialog" id="dialog" title="Hasta Borç Tarihi Ekleme">
 
 		<form name="borcForm" id="borcForm" action="borcOdemeTarihEkle.do" method="post" onsubmit="return validateForm()">
         <table>
-            <tr>
-                <td> Protokol No : </td>
-                <td><input type="text" name="protokol" id="protokol" disabled="disabled" /></td>
-                <td><input type="hidden" name="islemId" id="islemId" /></td>
-                
-            </tr>
+           
             <tr>
                 <td> Ad-Soyad </td>
-                <td><input type="text" name="adSoyad" id="adSoyad" disabled="disabled" /></td>
+                <td>
+                <input type="text" name="adSoyad" id="adSoyad" disabled="disabled" />
+                <input type="hidden" name="islemId" id="islemId" />
+                
+                </td>
                 
             </tr>
             <tr>
@@ -460,12 +418,12 @@
             </tr>
             <tr>
                 <td>Açýklama :  </td>
-                <td> <textarea id="aciklama" name="aciklama"  cols="60" rows="10"></textarea> </td>
+                <td> <textarea id="aciklama" name="aciklama"  cols="30" rows="3"></textarea> </td>
                 
             </tr>
            
             <tr>
-                <td>Kaydet </td>
+                <td> </td>
                 <td> <input type="submit"  value="Kaydet"> </td>
                 
             </tr>

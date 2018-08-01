@@ -17,6 +17,7 @@ import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.THastaRandevuDTO;
 import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.HastaRandevuForm;
+import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GenelDegiskenler;
 
 public class HastaRandevuGuncelleSilAction extends GenericAction {
@@ -56,7 +57,13 @@ public class HastaRandevuGuncelleSilAction extends GenericAction {
 			Connection conn = DbConnection.getMySqlConneciton();
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 
-			TDoktorDTO doktorDTO = sqlUtils.getDoktor(-1, hastaRandevuForm.getDoktorId(), conn, true, subeId);
+			String today=Commons.getToday();
+			
+			String randevuBaslTarihStr= Commons.minusDays(today, 7);
+			
+			String randevuBitisTarihStr= Commons.addDays(today, 60);
+			
+			TDoktorDTO doktorDTO = sqlUtils.getDoktor(-1, hastaRandevuForm.getDoktorId(), conn, true, subeId,randevuBaslTarihStr,randevuBitisTarihStr);
 			request.setAttribute("selectedDoctor", doktorDTO);
 
 			return mapping.findForward("success");

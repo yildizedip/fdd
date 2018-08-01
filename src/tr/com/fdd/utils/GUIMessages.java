@@ -22,9 +22,10 @@ public class GUIMessages {
 	public static String OPERASYON_YOK="Hastaya ait operasyon bulunmamaktadır.";
 	public static String HATA="Hata oluştu.";
 	public static String KULLANICI_BULUNAMADI="Kullanıcı Bulunamadı";
+	public static String TEKRAR_GIRIS="Lütfen Tekrar Giriş Yapınız.";
 	public static String VERI_BULUNAMADI="Veri Bulunamadı.";
 	public static String KAYIT_VAR="KAYIT MEVCUT";
-	public static String KAYIT_BASARILI="Islem Basarılı";
+	public static String KAYIT_BASARILI="İşlem başarılı ile gerçekleştirildi.";
 	public static String ISLEM_BASARILI="Islem Basarılı ile gerçekleştirildi.";
 	public static String ISLEM_BASARISIZ="Gerçekleştirilen işlemde hata oluştu.";
 	public static String YANLIS_KOD_GIRILDI="Yanlis Kod Girildi";

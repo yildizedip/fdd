@@ -17,8 +17,12 @@
 		<property name="aciklama" column="aciklama" type="java.lang.String" />
 		<property name="eklenmeTarihi" column="eklenme_tarihi" type="java.util.Date" />
 		<property name="guncellenmeTarihi" column="guncellenme_tarihi" type="java.util.Date" />
+		<property name="guncellenmeTarihiStr" column="guncellenme_tarihi_str" type="java.lang.String" />
 		<property name="islemId" column="islem_id" type="int" />
 		<property name="doktorId" column="doktor_id" type="int" />
+		<property name="guncelleyenKisi" column="guncelleyen_kisi" type="int" />
+		<property name="silinmeTarihiStr" column="silinme_tarihi_str" type="java.lang.String" />
+		<property name="silen" column="silen" type="int" />
 	
 	
 	</class>

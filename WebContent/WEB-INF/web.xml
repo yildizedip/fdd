@@ -29,6 +29,7 @@ id="WebApp_ID" version="2.5">
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
   <login-config>
     <auth-method>FORM</auth-method>
     <form-login-config>
@@ -39,7 +40,14 @@ id="WebApp_ID" version="2.5">
 
   <listener>
     <listener-class>tr.com.fdd.listeners.MyRequestListener</listener-class>
+    
   </listener>
+  
+  <listener>
+     <listener-class> tr.com.fdd.listeners.MySessionListener</listener-class>
+  </listener>
+  
+  
   <filter>
     <display-name>MyResponseFilter</display-name>
     <filter-name>MyResponseFilter</filter-name>
@@ -51,7 +59,7 @@ id="WebApp_ID" version="2.5">
   </filter-mapping>
   
    <welcome-file-list>
-    <welcome-file>login4.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
 </web-app>

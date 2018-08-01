@@ -85,10 +85,25 @@
 					
 			 <tbody>
 			<tr>
-				<td  colspan="4">Tarih : <input
-					class="inputTextfield" name="bas_tar" id="bas_tar"> /<input
-					class="inputTextfield" name="bit_tar" id="bit_tar"></td>
-
+				<td  colspan="4"> Tarih : 
+				
+				<c:choose>
+					
+					<c:when test="${(odeme_tarih_degistir eq 'off') and (sessionScope.sessionMember[0].kuTur eq '4') }">
+						<input class="inputTextfield" name="bas_tar" id="bas_tar" disabled="disabled"> /
+						<input class="inputTextfield" name="bit_tar" id="bit_tar" disabled="disabled">
+					 
+					 </c:when>
+					 
+					 <c:otherwise>
+					 	<input class="inputTextfield" name="bas_tar" id="bas_tar"> /
+						<input class="inputTextfield" name="bit_tar" id="bit_tar">
+					 
+					 </c:otherwise>
+				
+				</c:choose>
+				
+				</td>
 
 			</tr>
 			<tr>

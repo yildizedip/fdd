@@ -2,13 +2,11 @@ package tr.com.fdd.struts.actions;
 
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -17,11 +15,8 @@ import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
-import tr.com.fdd.dto.TIslemDTO;
 import tr.com.fdd.dto.TIslemTipDTO;
 import tr.com.fdd.dto.TIslemTipSubeDTO;
-import tr.com.fdd.struts.form.IslemForm;
-import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
 
 public class SubeTedaviFiyatGuncelleAction extends GenericAction {
@@ -53,7 +48,6 @@ public class SubeTedaviFiyatGuncelleAction extends GenericAction {
 			tran.commit();
 			
 			SQLUtils sqlUtils= new SQLUtils();
-			
 			
 			 List<TIslemTipDTO> islemTurList= sqlUtils.getOperasyonTurList(connection,Integer.parseInt(subeId));
 			 request.setAttribute("islemTurListesi", islemTurList);

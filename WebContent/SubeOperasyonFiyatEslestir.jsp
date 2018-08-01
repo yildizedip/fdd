@@ -26,82 +26,76 @@
 <body>
 
 
-		<form action="getOperasyonTur.do" method="post">
-		
-		
-			<div class="col-lg-3 col-md-6">
+	<form action="getOperasyonTur.do" method="post">
 
-				<div class="form-group">
-					<div class="input-icon">
+		<div class="col-lg-3 col-md-6">
 
-						<select size="1" name="subeId" id="subeId"
-							class="form-control">
-							<option label="Þube Seçiniz.." value="-1">Þube
-								Seçiniz..</option>
+			<div class="form-group">
+				<div class="input-icon">
 
-							<c:forEach items="${subelerList}" var="sube">
-								<option label="${sube.sAd}" value="${sube.sId}">
-									${sube.sAd}</option>
-							</c:forEach>
-						</select>
+					<select size="1" name="subeId" id="subeId" class="form-control">
+						<option label="Þube Seçiniz.." value="-1">Þube Seçiniz..</option>
 
-					</div>
+						<c:forEach items="${subelerList}" var="sube">
+							<option label="${sube.sAd}" value="${sube.sId}">
+								${sube.sAd}</option>
+						</c:forEach>
+					</select>
+
 				</div>
 			</div>
-			
-			<div class="col-lg-2"> 
-			
-			<input type="submit" value="getir">
-			
-			
-			
-			 				 </div>
-
-		</form>
-
-
-
-		<div class="col-lg-6 ">
-
-			<table class="table table-bordered">
-
-				<thead>
-
-					<tr>
-
-						<td>Sube</td>
-						<td>Tedavi</td>
-						<td>Fiyat</td>
-						<td>Güncelle</td>
-
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${islemTurListesi}" var="islem">
-
-						<tr>
-							<td>${islem.ad }</td>
-							<td>${islem.subeTip.subeAd }</td>
-							<td>${islem.subeTip.fiyat}</td>
-							<td>
-							
-							<button type="button" class="btn btn-link" data-toggle="modal" data-target="#fiyatGunceleModal"	data-id="${islem.subeTip.id}"
-																						data-fiyat="${islem.subeTip.fiyat}">Güncelle</button>
-							</td>
-						</tr>
-					</c:forEach>
-
-
-				</tbody>
-
-			</table>
 		</div>
 
+		<div class="col-lg-2">
+
+			<input type="submit" value="getir">
 
 
-	
-	
-	
+
+		</div>
+
+	</form>
+
+
+
+	<div class="col-lg-6 ">
+
+		<table class="table table-bordered">
+
+			<thead>
+
+				<tr>
+
+					<td>Sube</td>
+					<td>Tedavi</td>
+					<td>Fiyat</td>
+					<td>Güncelle</td>
+
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${islemTurListesi}" var="islem">
+
+					<tr>
+						<td>${islem.ad }</td>
+						<td>${islem.subeTip.subeAd }</td>
+						<td>${islem.subeTip.fiyat}</td>
+						<td>
+
+							<button type="button" class="btn btn-link" data-toggle="modal"
+								data-target="#fiyatGunceleModal" data-id="${islem.subeTip.id}"
+								data-fiyat="${islem.subeTip.fiyat}">Güncelle</button>
+						</td>
+					</tr>
+				</c:forEach>
+
+
+			</tbody>
+
+		</table>
+	</div>
+
+
 	<div id="fiyatGunceleModal" class="modal fade">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -115,10 +109,11 @@
 				</div>
 				<form action="SubeTedaviFiyatGuncelle.do" method="post">
 					<div class="modal-body">
-						
-						<input type="hidden" name="id" id="fiyatId">
-						<input type="hidden" name="subeId" id="subeIdGuncelle" value="${selectedSubeId}">
-						<input type="text" name="fiyat" id="fiyat">
+
+						<input type="hidden" name="id" id="fiyatId"> <input
+							type="hidden" name="subeId" id="subeIdGuncelle"
+							value="${selectedSubeId}"> <input type="text"
+							name="fiyat" id="fiyat">
 
 					</div>
 
@@ -132,10 +127,9 @@
 			</div>
 		</div>
 	</div>
-	
+
 
 	<script type="text/javascript">
-	
 		$('#islemTipi').on('change', function() {
 
 			var value = this.value;
@@ -154,7 +148,6 @@
 
 		});
 
-		
 		/* $('#subeId').on('change', function() {
 
 			var subeId = this.value;
@@ -166,45 +159,35 @@
 
 
 		});
- */
-		
-		var islemId=-1;
+		 */
+
+		var islemId = -1;
 
 		$('#guncelleButton').click(function() {
 
-			
-			
 			'<c:forEach items="${islemTurListesi}" var="islem">'
-			
+
 			if (islemId == '${islem.id}') {
 
-				var fiyat=	$('#fiyat').val();
-
-				
+				var fiyat = $('#fiyat').val();
 
 			}
 
 			'</c:forEach>'
-			
-			
-		});
-
-	
-
-		$('#fiyatGunceleModal').on('show.bs.modal',
-				function(event) {
-					var button = $(event.relatedTarget)
-					var id = button.data('id')
-					var fiyat = button.data('fiyat')
-
-					
-					islemId=id;
-					var modal = $(this)
-					modal.find('#fiyatId').val(id)
-					modal.find('#fiyat').val(fiyat)
 
 		});
-		
+
+		$('#fiyatGunceleModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget)
+			var id = button.data('id')
+			var fiyat = button.data('fiyat')
+
+			islemId = id;
+			var modal = $(this)
+			modal.find('#fiyatId').val(id)
+			modal.find('#fiyat').val(fiyat)
+
+		});
 	</script>
 
 

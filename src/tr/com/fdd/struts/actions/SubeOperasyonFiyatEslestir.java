@@ -24,11 +24,21 @@ public class SubeOperasyonFiyatEslestir extends Action {
 
 		Connection conn = null;
 		try {
-			String subeId=request.getParameter("subeId");
+			String subeIdStr=request.getParameter("subeId");
+			Integer subeId=null;
+			
+			if(subeIdStr==null){
+				
+				subeId = (Integer) request.getSession().getAttribute("subeId");
+			} else{
+				subeId=Integer.parseInt(subeIdStr);
+			}
+			
+			
 			SQLUtils sqlUtils= new SQLUtils();
 			
 			 conn = DbConnection.getMySqlConneciton();
-			 List<TIslemTipDTO> islemTurList= sqlUtils.getOperasyonTurList(conn,Integer.parseInt(subeId));
+			 List<TIslemTipDTO> islemTurList= sqlUtils.getOperasyonTurList(conn,subeId);
 			 request.setAttribute("islemTurListesi", islemTurList);
 			 request.getSession().setAttribute("selectedSubeId", subeId);
 

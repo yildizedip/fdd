@@ -25,6 +25,7 @@ public class THastaOdemeDTO implements Serializable {
 	private Date eklenmeTarihi;
 	private String eklenmeTarihiStr;
 	private Date guncellenmeTarihi;
+	private String guncellenmeTarihiStr;
 	private THastaDTO hasta;
 	private TDoktorDTO doktor;
 	private TIslemDTO islem;
@@ -32,6 +33,10 @@ public class THastaOdemeDTO implements Serializable {
 	
 	private double doktorHesap;
 	private double sirketHesap;
+	
+	private Integer guncelleyenKisi;
+	private Integer silen;
+	private String silinmeTarihiStr;
 	
 	
 	public int getId() {
@@ -160,6 +165,32 @@ public class THastaOdemeDTO implements Serializable {
 	}
 	public void setSirketHesap(double sirketHesap) {
 		this.sirketHesap = sirketHesap;
+	}
+	public String getGuncellenmeTarihiStr() {
+		return guncellenmeTarihiStr;
+	}
+	public void setGuncellenmeTarihiStr(String guncellenmeTarihiStr) {
+		this.guncellenmeTarihiStr = guncellenmeTarihiStr;
+	}
+	
+	
+	public String getSilinmeTarihiStr() {
+		return silinmeTarihiStr;
+	}
+	public void setSilinmeTarihiStr(String silinmeTarihiStr) {
+		this.silinmeTarihiStr = silinmeTarihiStr;
+	}
+	public Integer getSilen() {
+		return silen;
+	}
+	public void setSilen(Integer silen) {
+		this.silen = silen;
+	}
+	public Integer getGuncelleyenKisi() {
+		return guncelleyenKisi;
+	}
+	public void setGuncelleyenKisi(Integer guncelleyenKisi) {
+		this.guncelleyenKisi = guncelleyenKisi;
 	}
 	
 	

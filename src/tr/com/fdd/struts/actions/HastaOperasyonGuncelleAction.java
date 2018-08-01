@@ -64,13 +64,18 @@ public class HastaOperasyonGuncelleAction extends GenericAction {
 
 			result.setIslemTip(islemDto.getIslemTip());
 			result.setIslemTipi(islemDto.getIslemTipi());
+			
+			if(islemDto.getDoktorId()!=0)
 			result.setDoktorId(islemDto.getDoktorId());
+			
 			result.setMiktar(islemDto.getMiktar());
 			result.setGuncellenmeTarihi(new Date());
 			result.setAciklama(islemDto.getAciklama());
 			result.setDisNo(islemDto.getDisNo());
 			result.setIslemTarihi(islemDto.getIslemTarihi());
 			result.setIslemBitisTarihi(islemDto.getIslemBitisTarihi());
+			result.setGuncellemeTarihiStr(Commons.getNow());
+			result.setGuncelleyenKisi(Commons.getActiveSession(request).getKuId());
 
 			tran.commit();
 			

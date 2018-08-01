@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TGelirGiderDTO;
+import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
 
 public class SilGiderAction extends Action {
@@ -35,6 +36,10 @@ public class SilGiderAction extends Action {
 			gelirGiderDTO.setInteger("var", new Integer(id).intValue());
 			TGelirGiderDTO result = (TGelirGiderDTO) gelirGiderDTO.uniqueResult();
 			result.setDurum("P");
+			result.setSilinmeTarihi(Commons.getNow());
+			result.setSilen(Commons.getActiveSession(request).getKuId());
+			
+			
 	        
 			tran.commit();
 	    
@@ -51,7 +56,7 @@ public class SilGiderAction extends Action {
 					
 					e1.printStackTrace();
 				}
-				request.setAttribute("warn", "Kayýt Silme Ýþleminde Hata Oluþtu.");
+				request.setAttribute("warn", "Kayï¿½t Silme ï¿½ï¿½leminde Hata Oluï¿½tu.");
 				return mapping.findForward("exception");
 		} finally {
 			if (sess != null && sess.isOpen())

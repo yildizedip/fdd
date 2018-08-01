@@ -58,6 +58,8 @@ public class HastaRandevuEkleAction extends Action {
 
 			hastaRandevuForm = (HastaRandevuForm) form;
 			hastaRandevuForm.setAciklama(hastaRandevuForm.getAciklama().replaceAll("\r\n", " "));
+			hastaRandevuForm.setAciklama(hastaRandevuForm.getAciklama().replaceAll("'", " "));
+			hastaRandevuForm.setAciklama(hastaRandevuForm.getAciklama().replaceAll("\"", " "));
 			
 
 			// if (hastaRandevuForm.getRandevuTarihiStr() == null)
@@ -147,22 +149,29 @@ public class HastaRandevuEkleAction extends Action {
 					
 					hastaRandevuForm.setAciklama("REZERVE");
 				}
-
-				Object[] kullaniciBilgileri = (Object[]) request.getSession().getAttribute("sessionMember");
-				TKullaniciLoginDTO kullanici = (TKullaniciLoginDTO) kullaniciBilgileri[0];
-				hastaRandevuForm.setEkleyenKisi(kullanici.getKuId());
+				
+				
+				hastaRandevuForm.setEkleyenKisi(Commons.getActiveSession(request).getKuId());
 				hastaRandevuForm.setEklenmeTarihi(new Date());
 				hastaRandevuForm.setDurum("A");
 
 				THastaRandevuDTO tHastaRandevu = new THastaRandevuDTO();
 				BeanUtils.copyProperties(tHastaRandevu, hastaRandevuForm);
+				
 				session.save(tHastaRandevu);
 				tran.commit();
 
 				conn = DbConnection.getMySqlConneciton();
 
 				request.setAttribute("warn", GenelDegiskenler.FormMessages.SUCCESS);
-				TDoktorDTO doktorDTO = sqlUtils.getDoktor(-1, hastaRandevuForm.getDoktorId(), conn, true, subeId);
+				
+				String today=Commons.getToday();
+				
+				String randevuBaslTarihStr= Commons.minusDays(today, 7);
+				
+				String randevuBitisTarihStr= Commons.addDays(today, 60);	
+				
+				TDoktorDTO doktorDTO = sqlUtils.getDoktor(-1, hastaRandevuForm.getDoktorId(), conn, true, subeId,randevuBaslTarihStr, randevuBitisTarihStr);
 
 				request.setAttribute("selectedDoctor", doktorDTO);
 
@@ -192,168 +201,168 @@ public class HastaRandevuEkleAction extends Action {
 		}
 	}
 
-	private void addTedavi(HastaRandevuForm hastaRandevuForm, Session session, String tedavi, String implantAktif,
-			String operasyonDurum, String implantBaglayanDoktorId, String implantCerrahId, String tedaviTarih,
-			String tedaviUcret, String tedaviDisNo, String tedaviAciklama, String disAdet, int hasta_id)
-			throws ParseException, HibernateException {
-		TIslemDTO tIslemDto = new TIslemDTO();
-		tIslemDto.setAciklama(tedaviAciklama);
-		if (disAdet.equals(""))
-			tIslemDto.setDisAdet(0);
-		else {
-			tIslemDto.setDisAdet(Integer.parseInt(disAdet));
-		}
-		tIslemDto.setDisNo(tedaviDisNo);
-		tIslemDto.setDoktorId(hastaRandevuForm.getDoktorId());
-
-		if (operasyonDurum == null)
-			tIslemDto.setDurumu("A");
-		else if (operasyonDurum.equals("on"))
-			tIslemDto.setDurumu("K");
-
-		tIslemDto.setEklenmeTarihi(new Date());
-		tIslemDto.setIslemTarihiStr(tedaviTarih);
-
-		if (tedaviTarih == null || tedaviTarih.equals(""))
-			tIslemDto.setIslemTarihi(new Date());
-		else {
-
-			tIslemDto.setIslemTarihi(Commons.convertStringToDate(tedaviTarih));
-		}
-
-		tIslemDto.setIslemTipi(Integer.parseInt(tedavi));
-		if (tedaviUcret.equals(""))
-			tIslemDto.setMiktar(0);
-		else
-			tIslemDto.setMiktar(Double.parseDouble(tedaviUcret));
-
-		tIslemDto.setHastaId(hasta_id);
-
-		if (implantAktif == null) {
-
-			Integer islemId = (Integer) session.save(tIslemDto);
-
-			hastaRandevuForm.setIslemId(islemId);
-
-			// operasyona ait ilk odeme bilgisi setleniyor...
-			THastaOdemeDTO hastaOdemeDTO = new THastaOdemeDTO();
-			hastaOdemeDTO.setIslemId(islemId.intValue());
-			hastaOdemeDTO.setHastaId(tIslemDto.getHastaId());
-			hastaOdemeDTO.setDoktorId(tIslemDto.getDoktorId());
-			hastaOdemeDTO.setOdemeTarihi(tIslemDto.getEklenmeTarihi());
-			hastaOdemeDTO.setOdemeTuru(1); // 1 anlasilan fiyat
-											// demektir.
-			hastaOdemeDTO.setMiktar(tIslemDto.getMiktar());
-			hastaOdemeDTO.setKalanMiktar(tIslemDto.getMiktar());
-			hastaOdemeDTO.setEklenmeTarihi(tIslemDto.getEklenmeTarihi());
-			hastaOdemeDTO.setDurumu("A");
-			hastaOdemeDTO.setAciklama("Toplam Ucret");
-
-			Integer hastaGelirId = (Integer) session.save(hastaOdemeDTO);
-		}
-
-		// IMPLANT
-
-		else {
-
-			TIslemDTO implantAnaDTO = new TIslemDTO();
-
-			implantAnaDTO.setAciklama(tedaviAciklama);
-			implantAnaDTO.setHastaId(hasta_id);
-			implantAnaDTO.setEklenmeTarihi(new Date());
-			implantAnaDTO.setDisAdet(Integer.parseInt(disAdet));
-			implantAnaDTO.setDisNo(tedaviDisNo);
-
-			if (operasyonDurum == null)
-				implantAnaDTO.setDurumu("A");
-			else if (operasyonDurum.equals("on"))
-				implantAnaDTO.setDurumu("K");
-
-			if (tedaviTarih == null || tedaviTarih.equals(""))
-				implantAnaDTO.setIslemTarihi(new Date());
-			else {
-
-				implantAnaDTO.setIslemTarihi(Commons.convertStringToDate(tedaviTarih));
-			}
-
-			implantAnaDTO.setDoktorId(GenelDegiskenler.DoktorTipleri.DOKTOR_IMPLANT);
-			implantAnaDTO.setIslemTipi(GenelDegiskenler.OperasyonTipleri.IMPLANT);
-			implantAnaDTO.setMiktar(Double.parseDouble(tedaviUcret));
-
-			Integer islemAnaId = (Integer) session.save(implantAnaDTO);
-			hastaRandevuForm.setIslemId(islemAnaId);
-
-			// iliskili islem d
-
-			TIslemDTO implantCerrahDTO = new TIslemDTO();
-
-			implantCerrahDTO.setIliskiliIslemId(islemAnaId);
-
-			implantCerrahDTO.setAciklama(tedaviAciklama);
-			implantCerrahDTO.setHastaId(hasta_id);
-			implantCerrahDTO.setEklenmeTarihi(new Date());
-			implantCerrahDTO.setDisAdet(Integer.parseInt(disAdet));
-			implantCerrahDTO.setDisNo(tedaviDisNo);
-
-			if (operasyonDurum == null)
-				implantCerrahDTO.setDurumu("A");
-			else if (operasyonDurum.equals("on"))
-				implantCerrahDTO.setDurumu("K");
-
-			if (tedaviTarih == null || tedaviTarih.equals(""))
-				implantCerrahDTO.setIslemTarihi(new Date());
-			else {
-
-				implantCerrahDTO.setIslemTarihi(Commons.convertStringToDate(tedaviTarih));
-			}
-
-			implantCerrahDTO.setDoktorId(Integer.parseInt(implantCerrahId));
-			implantCerrahDTO.setIslemTipi(GenelDegiskenler.OperasyonTipleri.IMPLANT_CERRAH);
-			implantCerrahDTO.setMiktar(0);
-
-			Integer islemId = (Integer) session.save(implantCerrahDTO);
-			// yardimci
-
-			TIslemDTO implantBaglayanDTO = new TIslemDTO();
-			implantBaglayanDTO.setIliskiliIslemId(islemId);
-
-			implantBaglayanDTO.setAciklama(tedaviAciklama);
-			implantBaglayanDTO.setHastaId(hasta_id);
-			implantBaglayanDTO.setEklenmeTarihi(new Date());
-			implantBaglayanDTO.setDisAdet(Integer.parseInt(disAdet));
-			implantBaglayanDTO.setDisNo(tedaviDisNo);
-
-			if (operasyonDurum == null)
-				implantBaglayanDTO.setDurumu("A");
-			else if (operasyonDurum.equals("on"))
-				implantBaglayanDTO.setDurumu("K");
-
-			if (tedaviTarih == null || tedaviTarih.equals(""))
-				implantBaglayanDTO.setIslemTarihi(new Date());
-			else {
-
-				implantBaglayanDTO.setIslemTarihi(Commons.convertStringToDate(tedaviTarih));
-			}
-			implantBaglayanDTO.setDoktorId(Integer.parseInt(implantBaglayanDoktorId));
-			implantBaglayanDTO.setIslemTipi(GenelDegiskenler.OperasyonTipleri.IMPLANT_DESTEK);
-			implantBaglayanDTO.setMiktar(0);
-			Integer islemIdOperasyon = (Integer) session.save(implantBaglayanDTO);
-
-			THastaOdemeDTO hastaOdemeAnaDTO = new THastaOdemeDTO();
-			hastaOdemeAnaDTO.setIslemId(islemAnaId.intValue());
-			hastaOdemeAnaDTO.setDoktorId(implantAnaDTO.getDoktorId());
-			hastaOdemeAnaDTO.setMiktar(implantAnaDTO.getMiktar());
-			hastaOdemeAnaDTO.setKalanMiktar(implantAnaDTO.getMiktar());
-			hastaOdemeAnaDTO.setOdemeTuru(1);
-			hastaOdemeAnaDTO.setDurumu("A");
-			hastaOdemeAnaDTO.setAciklama("Toplam Ucret");
-			hastaOdemeAnaDTO.setEklenmeTarihi(new Date());
-			hastaOdemeAnaDTO.setOdemeTarihi(new Date());
-			hastaOdemeAnaDTO.setHastaId(hasta_id);
-
-			Integer hastaGelirAnaId = (Integer) session.save(hastaOdemeAnaDTO);
-
-		}
-	}
+//	private void addTedavi(HastaRandevuForm hastaRandevuForm, Session session, String tedavi, String implantAktif,
+//			String operasyonDurum, String implantBaglayanDoktorId, String implantCerrahId, String tedaviTarih,
+//			String tedaviUcret, String tedaviDisNo, String tedaviAciklama, String disAdet, int hasta_id)
+//			throws ParseException, HibernateException {
+//		TIslemDTO tIslemDto = new TIslemDTO();
+//		tIslemDto.setAciklama(tedaviAciklama);
+//		if (disAdet.equals(""))
+//			tIslemDto.setDisAdet(0);
+//		else {
+//			tIslemDto.setDisAdet(Integer.parseInt(disAdet));
+//		}
+//		tIslemDto.setDisNo(tedaviDisNo);
+//		tIslemDto.setDoktorId(hastaRandevuForm.getDoktorId());
+//
+//		if (operasyonDurum == null)
+//			tIslemDto.setDurumu("A");
+//		else if (operasyonDurum.equals("on"))
+//			tIslemDto.setDurumu("K");
+//
+//		tIslemDto.setEklenmeTarihi(new Date());
+//		tIslemDto.setIslemTarihiStr(tedaviTarih);
+//
+//		if (tedaviTarih == null || tedaviTarih.equals(""))
+//			tIslemDto.setIslemTarihi(new Date());
+//		else {
+//
+//			tIslemDto.setIslemTarihi(Commons.convertStringToDate(tedaviTarih));
+//		}
+//
+//		tIslemDto.setIslemTipi(Integer.parseInt(tedavi));
+//		if (tedaviUcret.equals(""))
+//			tIslemDto.setMiktar(0);
+//		else
+//			tIslemDto.setMiktar(Double.parseDouble(tedaviUcret));
+//
+//		tIslemDto.setHastaId(hasta_id);
+//
+//		if (implantAktif == null) {
+//
+//			Integer islemId = (Integer) session.save(tIslemDto);
+//
+//			hastaRandevuForm.setIslemId(islemId);
+//
+//			// operasyona ait ilk odeme bilgisi setleniyor...
+//			THastaOdemeDTO hastaOdemeDTO = new THastaOdemeDTO();
+//			hastaOdemeDTO.setIslemId(islemId.intValue());
+//			hastaOdemeDTO.setHastaId(tIslemDto.getHastaId());
+//			hastaOdemeDTO.setDoktorId(tIslemDto.getDoktorId());
+//			hastaOdemeDTO.setOdemeTarihi(tIslemDto.getEklenmeTarihi());
+//			hastaOdemeDTO.setOdemeTuru(1); // 1 anlasilan fiyat
+//											// demektir.
+//			hastaOdemeDTO.setMiktar(tIslemDto.getMiktar());
+//			hastaOdemeDTO.setKalanMiktar(tIslemDto.getMiktar());
+//			hastaOdemeDTO.setEklenmeTarihi(tIslemDto.getEklenmeTarihi());
+//			hastaOdemeDTO.setDurumu("A");
+//			hastaOdemeDTO.setAciklama("Toplam Ucret");
+//
+//			Integer hastaGelirId = (Integer) session.save(hastaOdemeDTO);
+//		}
+//
+//		// IMPLANT
+//
+//		else {
+//
+//			TIslemDTO implantAnaDTO = new TIslemDTO();
+//
+//			implantAnaDTO.setAciklama(tedaviAciklama);
+//			implantAnaDTO.setHastaId(hasta_id);
+//			implantAnaDTO.setEklenmeTarihi(new Date());
+//			implantAnaDTO.setDisAdet(Integer.parseInt(disAdet));
+//			implantAnaDTO.setDisNo(tedaviDisNo);
+//
+//			if (operasyonDurum == null)
+//				implantAnaDTO.setDurumu("A");
+//			else if (operasyonDurum.equals("on"))
+//				implantAnaDTO.setDurumu("K");
+//
+//			if (tedaviTarih == null || tedaviTarih.equals(""))
+//				implantAnaDTO.setIslemTarihi(new Date());
+//			else {
+//
+//				implantAnaDTO.setIslemTarihi(Commons.convertStringToDate(tedaviTarih));
+//			}
+//
+//			implantAnaDTO.setDoktorId(GenelDegiskenler.DoktorTipleri.DOKTOR_IMPLANT);
+//			implantAnaDTO.setIslemTipi(GenelDegiskenler.OperasyonTipleri.IMPLANT);
+//			implantAnaDTO.setMiktar(Double.parseDouble(tedaviUcret));
+//
+//			Integer islemAnaId = (Integer) session.save(implantAnaDTO);
+//			hastaRandevuForm.setIslemId(islemAnaId);
+//
+//			// iliskili islem d
+//
+//			TIslemDTO implantCerrahDTO = new TIslemDTO();
+//
+//			implantCerrahDTO.setIliskiliIslemId(islemAnaId);
+//
+//			implantCerrahDTO.setAciklama(tedaviAciklama);
+//			implantCerrahDTO.setHastaId(hasta_id);
+//			implantCerrahDTO.setEklenmeTarihi(new Date());
+//			implantCerrahDTO.setDisAdet(Integer.parseInt(disAdet));
+//			implantCerrahDTO.setDisNo(tedaviDisNo);
+//
+//			if (operasyonDurum == null)
+//				implantCerrahDTO.setDurumu("A");
+//			else if (operasyonDurum.equals("on"))
+//				implantCerrahDTO.setDurumu("K");
+//
+//			if (tedaviTarih == null || tedaviTarih.equals(""))
+//				implantCerrahDTO.setIslemTarihi(new Date());
+//			else {
+//
+//				implantCerrahDTO.setIslemTarihi(Commons.convertStringToDate(tedaviTarih));
+//			}
+//
+//			implantCerrahDTO.setDoktorId(Integer.parseInt(implantCerrahId));
+//			implantCerrahDTO.setIslemTipi(GenelDegiskenler.OperasyonTipleri.IMPLANT_CERRAH);
+//			implantCerrahDTO.setMiktar(0);
+//
+//			Integer islemId = (Integer) session.save(implantCerrahDTO);
+//			// yardimci
+//
+//			TIslemDTO implantBaglayanDTO = new TIslemDTO();
+//			implantBaglayanDTO.setIliskiliIslemId(islemId);
+//
+//			implantBaglayanDTO.setAciklama(tedaviAciklama);
+//			implantBaglayanDTO.setHastaId(hasta_id);
+//			implantBaglayanDTO.setEklenmeTarihi(new Date());
+//			implantBaglayanDTO.setDisAdet(Integer.parseInt(disAdet));
+//			implantBaglayanDTO.setDisNo(tedaviDisNo);
+//
+//			if (operasyonDurum == null)
+//				implantBaglayanDTO.setDurumu("A");
+//			else if (operasyonDurum.equals("on"))
+//				implantBaglayanDTO.setDurumu("K");
+//
+//			if (tedaviTarih == null || tedaviTarih.equals(""))
+//				implantBaglayanDTO.setIslemTarihi(new Date());
+//			else {
+//
+//				implantBaglayanDTO.setIslemTarihi(Commons.convertStringToDate(tedaviTarih));
+//			}
+//			implantBaglayanDTO.setDoktorId(Integer.parseInt(implantBaglayanDoktorId));
+//			implantBaglayanDTO.setIslemTipi(GenelDegiskenler.OperasyonTipleri.IMPLANT_DESTEK);
+//			implantBaglayanDTO.setMiktar(0);
+//			Integer islemIdOperasyon = (Integer) session.save(implantBaglayanDTO);
+//
+//			THastaOdemeDTO hastaOdemeAnaDTO = new THastaOdemeDTO();
+//			hastaOdemeAnaDTO.setIslemId(islemAnaId.intValue());
+//			hastaOdemeAnaDTO.setDoktorId(implantAnaDTO.getDoktorId());
+//			hastaOdemeAnaDTO.setMiktar(implantAnaDTO.getMiktar());
+//			hastaOdemeAnaDTO.setKalanMiktar(implantAnaDTO.getMiktar());
+//			hastaOdemeAnaDTO.setOdemeTuru(1);
+//			hastaOdemeAnaDTO.setDurumu("A");
+//			hastaOdemeAnaDTO.setAciklama("Toplam Ucret");
+//			hastaOdemeAnaDTO.setEklenmeTarihi(new Date());
+//			hastaOdemeAnaDTO.setOdemeTarihi(new Date());
+//			hastaOdemeAnaDTO.setHastaId(hasta_id);
+//
+//			Integer hastaGelirAnaId = (Integer) session.save(hastaOdemeAnaDTO);
+//
+//		}
+//	}
 
 }

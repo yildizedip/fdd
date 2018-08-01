@@ -19,25 +19,17 @@
 <script src="js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="js/jquery.form-validator.min.js"></script>
 <script type="text/javascript" src="js/jquery.maskedinput.min.js"></script>
-
-<link type="text/css" rel="stylesheet"
-	href="styles/font-awesome.min.css">
-<link type="text/css" rel="stylesheet" href="sitil/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="styles/nestable.css">
-
-
 <script src="js/zebra_datepicker.js" charset="UTF-8"></script>
 
-
+<link type="text/css" rel="stylesheet" href="styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="sitil/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/nestable.css">
 <link rel="stylesheet" type="text/css" href="css/zebra-datepicker.css" />
-
 <link rel="stylesheet" type="text/css" href="css/fullcalendar.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.ui.theme.css" />
-<link rel="stylesheet" type="text/css"
-	href="css/jquery-ui.structure.css" />
-<link rel="stylesheet" type="text/css"
-	href="css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css" />
+<link rel="stylesheet" type="text/css"	href="css/jquery.dataTables.min.css" />
 
 <style type="text/css">
 
@@ -362,8 +354,8 @@ body {
 											navLinks : true, // can click day/week names to navigate views
 											selectable : true,
 											businessHours : false,
-											minTime : "07:00:00",
-											maxTime : "22:00:00",
+											minTime : "09:00:00",
+											maxTime : "21:00:00",
 											allDaySlot : false,
 											selectHelper : true,
 											editable : true,

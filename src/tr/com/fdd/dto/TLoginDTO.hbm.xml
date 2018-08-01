@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+<hibernate-mapping package="tr.com.fdd.dto">
+	<class name="TLoginDTO" table="t_login_info">
+		<id name="id" column="id" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		<property name="kuId" column="ku_id" type="int" />
+		<property name="loginDate" column="login_date" type="java.lang.String" />
+		<property name="logoutDate" column="logout_date" type="java.lang.String" />
+		<property name="loginIp" column="login_ip" type="java.lang.String" />
+		<property name="logoutIp" column="logout_ip" type="java.lang.String" />
+		
+	</class>
+</hibernate-mapping>

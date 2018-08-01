@@ -77,13 +77,24 @@
 				</td>
 			</tr>
 			<tr>
-				<td >Tarih :</td>
-				<td >
+				<td> Tarih :</td>
+				<td>
 				
-				<input 	name="bas_tar" id="bas_tar"> / <input name="bit_tar" id="bit_tar"> </td>
-				
+					<c:choose>
+						
+						<c:when test="${(odeme_tarih_degistir eq 'off') and (sessionScope.sessionMember[0].kuTur eq '4') }">
+							<input 	name="bas_tar" id="bas_tar" disabled="disabled"> / <input name="bit_tar" id="bit_tar" disabled="disabled">
+						 </c:when>
+						 
+						 <c:otherwise>
+						 <input name="bas_tar" id="bas_tar"> / <input name="bit_tar" id="bit_tar">
+						 
+						 </c:otherwise>
+					</c:choose>
+				 </td>
 			</tr>
-			<tr> <td >Gider Türü</td> <td colspan="3">
+			<tr> <td >Gider Türü</td> 
+			<td colspan="3">
 			 <select size="1" name="giderTuru" >
 
 				<option label="Gider Türü Seçiniz.." value="-1">Gider Türü Seçiniz..</option>

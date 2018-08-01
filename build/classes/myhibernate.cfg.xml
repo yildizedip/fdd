@@ -41,6 +41,7 @@
 		<mapping resource="/tr/com/fdd/dto/THastaIslemBorcTakipDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/THastaRandevuDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/TIslemTipSubeDTO.hbm.xml" />
+		<mapping resource="/tr/com/fdd/dto/TLoginDTO.hbm.xml" />
 		
 		
 	

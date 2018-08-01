@@ -54,6 +54,8 @@ public class GuncelleGiderAction extends Action {
 			result.setMiktar(miktarDouble);
 			result.setTarih(Commons.convertStringToDate(tarih));
 			result.setGiderTuru(giderTuru);
+			result.setGuncellemeTarihi(Commons.getNow());
+			result.setGuncelleyen(Commons.getActiveSession(request).getKuId());
 	        
 			tran.commit();
 	            

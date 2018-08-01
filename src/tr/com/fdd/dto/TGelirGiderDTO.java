@@ -17,7 +17,7 @@ public class TGelirGiderDTO implements Serializable {
 	private String aciklama;
 	private Date tarih;
 	private String tarihStr;
-	private int girenKisi;
+	private Integer girenKisi;
 	private int doktor;
 	private String turAd ;
 	
@@ -36,6 +36,12 @@ public class TGelirGiderDTO implements Serializable {
 	private int subeId;
 	private THastaDTO hasta;
 	private TTurKodDTO turKodDTO;
+	
+	private String eklenmeTarihi;
+	private String guncellemeTarihi;
+	private String silinmeTarihi;
+	private Integer guncelleyen;
+	private Integer silen;
 	
 	public int getTip() {
 		return tip;
@@ -75,12 +81,7 @@ public class TGelirGiderDTO implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getGirenKisi() {
-		return girenKisi;
-	}
-	public void setGirenKisi(int girenKisi) {
-		this.girenKisi = girenKisi;
-	}
+	
 	
 	public String getTurAd() {
 		return turAd;
@@ -185,6 +186,43 @@ public class TGelirGiderDTO implements Serializable {
 	public void setTurKodDTO(TTurKodDTO turKodDTO) {
 		this.turKodDTO = turKodDTO;
 	}
-
+	public String getEklenmeTarihi() {
+		return eklenmeTarihi;
+	}
+	public void setEklenmeTarihi(String eklenmeTarihi) {
+		this.eklenmeTarihi = eklenmeTarihi;
+	}
+	public String getGuncellemeTarihi() {
+		return guncellemeTarihi;
+	}
+	public void setGuncellemeTarihi(String guncellemeTarihi) {
+		this.guncellemeTarihi = guncellemeTarihi;
+	}
+	
+	public String getSilinmeTarihi() {
+		return silinmeTarihi;
+	}
+	public void setSilinmeTarihi(String silinmeTarihi) {
+		this.silinmeTarihi = silinmeTarihi;
+	}
+	public Integer getGuncelleyen() {
+		return guncelleyen;
+	}
+	public void setGuncelleyen(Integer guncelleyen) {
+		this.guncelleyen = guncelleyen;
+	}
+	public Integer getSilen() {
+		return silen;
+	}
+	public void setSilen(Integer silen) {
+		this.silen = silen;
+	}
+	public Integer getGirenKisi() {
+		return girenKisi;
+	}
+	public void setGirenKisi(Integer girenKisi) {
+		this.girenKisi = girenKisi;
+	}
+	
 	
 }

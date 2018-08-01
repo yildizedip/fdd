@@ -127,11 +127,15 @@
 				  modal.find('.modal-body #recipient-name').val(recipient)
 		}); */
 	 });
+	
+	function myFunction() {
+	    alert("Page is loaded");
+	}
 	   
 	</script>
 
 </head>
-<body>
+<body onload="myFunction()">
 
 
 

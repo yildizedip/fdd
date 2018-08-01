@@ -45,7 +45,9 @@ public class AddGiderAction extends GenericAction {
 			// gelir 1 gider 2 olarak tanimlandi
 			
 			gelirGiderForm.setTip(2);			
-			BeanUtils.copyProperties(tGelirGiderDto, gelirGiderForm );		
+			BeanUtils.copyProperties(tGelirGiderDto, gelirGiderForm );	
+			
+			tGelirGiderDto.setEklenmeTarihi(Commons.getNow());
 			
 			tran = session.beginTransaction();
 			session.save(tGelirGiderDto);

@@ -2,6 +2,7 @@ package tr.com.fdd.struts.actions;
 
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,7 +59,11 @@ public class OdemeGuncelleAction extends GenericAction {
 			result.setGuncellenmeTarihi(new Date());
 			result.setMiktar(dto.getMiktar());
 			result.setOdemeTuru(dto.getOdemeTuru());
+			
+			result.setGuncellenmeTarihiStr(Commons.getNow());
+			
 			result.setOdemeTarihi(dto.getOdemeTarihi());
+			result.setGuncelleyenKisi(Commons.getActiveSession(request).getKuId());
 			tran.commit();
 
 			Commons.refreshSelectedHasta(request, connection, result.getHastaId());
@@ -67,6 +72,7 @@ public class OdemeGuncelleAction extends GenericAction {
 			return mapping.findForward("success");
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			if (tran != null)
 				try {
 					tran.rollback();
@@ -74,7 +80,7 @@ public class OdemeGuncelleAction extends GenericAction {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kay�t Silme ��leminde Hata Olu�tu.");
+			request.setAttribute("warn", GUIMessages.ISLEM_BASARISIZ);
 			return mapping.findForward("exception");
 		} finally {
 			if (sess != null && sess.isOpen())
