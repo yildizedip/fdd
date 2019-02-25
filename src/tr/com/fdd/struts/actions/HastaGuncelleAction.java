@@ -2,29 +2,24 @@ package tr.com.fdd.struts.actions;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
-
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.struts.form.HastaForm;
 import tr.com.fdd.utils.Commons;
 import tr.com.fdd.utils.GUIMessages;
-import tr.com.fdd.utils.GenelDegiskenler;
 
 public class HastaGuncelleAction extends GenericAction {
 
@@ -56,6 +51,7 @@ public class HastaGuncelleAction extends GenericAction {
 			result.setTckimlik(hastaDto.getTckimlik());
 			result.setTel(hastaDto.getTel());
 			result.setProtokolNo(hastaDto.getProtokolNo());
+			result.setAdres(hastaDto.getAdres());
 			result.setGuncellenmeTarihi(new Date());
 			result.setGuncelleyenKisi(Commons.getActiveSession(request).getKuId());
 

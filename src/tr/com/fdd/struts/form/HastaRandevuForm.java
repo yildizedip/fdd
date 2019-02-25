@@ -37,6 +37,7 @@ public class HastaRandevuForm extends ActionForm implements Serializable {
 	private String telefon;
 	private String randevuyaGelinmedi;
 	private String randevuBosSaatAktif;
+	private Integer beklenenOdeme;
 
 	@Override
 	public ActionErrors validate(ActionMapping mapping,
@@ -223,6 +224,13 @@ public class HastaRandevuForm extends ActionForm implements Serializable {
 		this.randevuBosSaatAktif = randevuBosSaatAktif;
 	}
 
-	
+	public Integer getBeklenenOdeme() {
+		return beklenenOdeme;
+	}
+
+	public void setBeklenenOdeme(Integer beklenenOdeme) {
+		this.beklenenOdeme = beklenenOdeme;
+	}
+
 
 }

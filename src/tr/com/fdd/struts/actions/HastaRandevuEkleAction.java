@@ -1,8 +1,6 @@
 package tr.com.fdd.struts.actions;
 
 import java.sql.Connection;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +19,7 @@ import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
 import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.THastaDTO;
-import tr.com.fdd.dto.THastaOdemeDTO;
 import tr.com.fdd.dto.THastaRandevuDTO;
-import tr.com.fdd.dto.TIslemDTO;
-import tr.com.fdd.dto.TKullaniciLoginDTO;
 import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.HastaRandevuForm;
 import tr.com.fdd.utils.Commons;
@@ -51,6 +46,7 @@ public class HastaRandevuEkleAction extends Action {
 			String tedaviDisNo = request.getParameter("tedaviDisNo");
 			String tedaviAciklama = request.getParameter("tedaviAciklama");
 			String disAdet = request.getParameter("disAdet");
+			String beklenenOdeme = request.getParameter("beklenenOdeme");
 
 			SQLUtils sqlUtils = new SQLUtils();
 			Connection conn = DbConnection.getMySqlConneciton();

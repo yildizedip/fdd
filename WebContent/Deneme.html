@@ -7,39 +7,65 @@
 </head>
 <body>
 
-<div class="container col-lg-12 col-md-12" style="font-size: 13px;">
+	<div class="container col-lg-12 col-md-12" style="font-size: 13px;">
+		<div class="row">
 
-<div class="row"> 
-
-		<form class="form-inline" action="hastaBasicSorgula.do" method="post"
-						id="hastaSorgulaForm">
+			<input id="iste" type="submit" class="btn btn-sm btn-default" value="Ara"
+						name="bnt_gonder" />
+						
+						<select id="mySelect">
 						
 						
-							<div class="form-group">
-								<input class="form-control" name="ad" id="hstAd" placeholder="Ad" />
-							</div>
+						</select>
 
-							<div class="form-group">
-								<input class="form-control" name="soyad" id="hstSoyad"	placeholder="Soyad" />
+		</div>
 
-							</div>
-							
-							<div class="form-group">
-								<input type="submit" class="btn btn-sm btn-default" value="Ara" name="bnt_gonder" />
-								
-								</div>
-							
-							
-							
-						</form>
+	</div>
+
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			var myKeyVals = {
+				A1984 : 1,
+				A9873 : 5,
+				A1674 : 2,
+				A8724 : 1,
+				A3574 : 3,
+				A1165 : 5
+			}
+
+			//id değeri iste olan butona tıklandığına
+			$('#iste').click(function() {
+				//aşağıda ki ajax metodu çalışacak
+				$.ajax({
+					type : 'POST',
+					url : "hastaSorgula4Protokol.do",
+					data : myKeyVals,
+					dataType : "text",
+					success : function(data) {
 						
-						</div>
-						
-						</div>
+						aa = jQuery.parseJSON(data)
+                        var options = [];
 
- <script src="js/jquery-3.1.1.min.js"></script>
-   <script src="js/jquery-ui.min.js"></script>
-   <script src="js/bootstrap.min.js"></script>
+						alert(aa.length)
+                        for (var i = 0; i < aa.length; i++) {
+
+                            var id= aa[i]['ad']
+
+                            options.push(' <option value=" ' ,id, ' "> ', id ,' </option>');
+
+                        }
+                        
+                        $('#mySelect').html(options.join(''));
+					    
+					}
+				})
+			})
+		})
+	</script>
 
 </body>
 </html>

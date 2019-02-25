@@ -190,6 +190,17 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 
 		</action>
 		
+		<action path="/hastaSorgula4Protokol" scope="request" name="hastaForm"
+			input="/HastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaAra4ProtokolAction"
+			validate="true">
+
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="failure" path="/exception.jsp"></forward>
+			<forward name="randevu" path="/randevu.jsp"></forward>
+			<forward name="noContent" path="/HastaIslemleri.jsp"></forward>
+
+		</action>
+		
 		<action path="/hastaSorgulaForHastaAnket" scope="request" name="hastaForm"
 			input="/HastaAnketKaydiHastaSorgula.jsp" type="tr.com.fdd.struts.actions.HastaSorgulamaForAnketAction"
 			validate="true">
@@ -484,7 +495,7 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			input="/KullaniciEkleGuncelleSil.jsp"
 			type="tr.com.fdd.struts.actions.KullaniciGuncelleAction"
 			validate="true">
-			<forward name="success" path="/KullaniciEkleGuncelleSil.jsp"></forward>
+			<forward name="success" path="/KullaniciEkleGunHastaIslemleriActioncelleSil.jsp"></forward>
 			<forward name="noContent" path="/KullaniciEkleGuncelleSil.jsp"></forward>
 			<forward name="exception" path="/KullaniciEkleGuncelleSil.jsp"></forward>
 			<forward name="goToLogoutPage" path="/redirect_div.jsp"></forward>
@@ -912,6 +923,33 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
 			<forward name="success" path="/GelirRaporu.jsp"></forward>
 			<forward name="failure" path="/GelirRaporu.jsp"></forward>
 			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+		<action path="/getLastPatient" scope="request" name="gelirGiderForm"
+			input="/GelirRaporu.jsp" type="tr.com.fdd.struts.actions.HastaIslemleriAction"
+			validate="true">
+			<forward name="success" path="/HastaIslemleri.jsp"></forward>
+			<forward name="failure" path="/HastaIslemleri.jsp"></forward>
+			<forward name="exception" path="/exception.jsp"></forward>
+		</action>
+		
+			
+		<action path="/getAyarlar" scope="request" name="hastaRandevuForm"
+			input="/Ayarlar.jsp"
+			type="tr.com.fdd.struts.actions.GetAyarlarAction"
+			validate="true">
+			<forward name="success" path="/Ayarlar.jsp"></forward>
+			<forward name="noContent" path="/Ayarlar.jsp"></forward>
+			<forward name="exception" path="/Ayarlar.jsp"></forward>
+		</action>
+		
+		<action path="/AyarTarihDegistirilsinGuncelle" scope="request" name="hastaRandevuForm"
+			input="/Ayarlar.jsp"
+			type="tr.com.fdd.struts.actions.AyarTarihDegistirGuncelleAction"
+			validate="true">
+			<forward name="success" path="/Ayarlar.jsp"></forward>
+			<forward name="noContent" path="/Ayarlar.jsp"></forward>
+			<forward name="exception" path="/Ayarlar.jsp"></forward>
 		</action>
 		
 		

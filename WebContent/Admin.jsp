@@ -83,6 +83,9 @@
 						
 				<li><html:link page="/SubeKarZarar.jsp"
 						target="frame"> Şube Kar Zarar Durumu </html:link></li>
+						
+				<li><html:link page="/Ayarlar.jsp"
+						target="frame"> Ayarlar </html:link></li>
 
 
 			</ul>

@@ -61,7 +61,7 @@
 					
 					<td class="" >${gider.aciklama}</td>
 					<c:if test="${silAktif ne '0' }">
-						<c:if test="${sessionScope.sessionMember[0].kuTur eq '4' }">
+						<c:if test="${sessionScope.sessionMember[0].kuTur ne '3' }">
 						<td class="">
 						
 						<button type="button" class="btn btn-link btn-xs " style="color: red;"

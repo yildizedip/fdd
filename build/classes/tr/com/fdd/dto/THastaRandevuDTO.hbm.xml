@@ -20,6 +20,7 @@
 		<property name="eklenmeTarihi" column="eklenme_tarihi" type="java.util.Date" />
 		<property name="ekleyenKisi" column="ekleyen_kisi_id" type="int" />
 		<property name="randevuyaGelinmedi" column="randevu_gelmedi" type="java.lang.String" />
+		<property name="beklenenOdeme" column="beklenen_odeme" type="int" />
 	
 	</class>
 </hibernate-mapping>

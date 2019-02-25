@@ -178,7 +178,10 @@ function openDoktorPopUp(){
 <div><label> Adres.........:</label> <input
 	class="inputTextfield" name="adres" id="adres"></div>
 
-<div><label> Tür.............:</label> <select name="kuTur"
+<div>
+<label> Tür.............:</label> 
+
+<select name="kuTur"
 	id="kuTur" onchange="openDoktorPopUp()">
 	<option value="-1" label="Seçiniz...">
 	<option value="2" label="Müdür">
@@ -187,7 +190,20 @@ function openDoktorPopUp(){
 	<option value="5" label="Lab Teknisyeni">
 	<option value="6" label="Yardýmcý Personel">
 	<option value="7" label="Depo Takip">
-</select></div>
+</select>
+
+
+</div>
+
+<div>
+<label> Þube..........:</label> 
+<select size="1" name="subeId" class="subeler">
+		<option label="Þube Seçiniz.." value="-1"></option>
+		<c:forEach items="${subelerList}" var="sube">
+			<option label="${sube.sAd}" value="${sube.sId}"></option>
+		</c:forEach>
+	</select>
+</div>
 
 <div><input type="submit" value=" Ekle "></div>
 </form>

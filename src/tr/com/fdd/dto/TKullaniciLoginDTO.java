@@ -17,6 +17,7 @@ public class TKullaniciLoginDTO implements Serializable {
 	private String durum;
 	private String userIp;
 	private Date kuGuncellenmeTarihi;
+	private int subeId;
 
 	public String getKuMail() {
 		return kuMail;
@@ -80,6 +81,14 @@ public class TKullaniciLoginDTO implements Serializable {
 
 	public void setUserIp(String userIp) {
 		this.userIp = userIp;
+	}
+
+	public int getSubeId() {
+		return subeId;
+	}
+
+	public void setSubeId(int subeId) {
+		this.subeId = subeId;
 	}
 
 }

@@ -16,6 +16,7 @@ public class THastaRandevuDTO implements Serializable {
 	private TIslemTipDTO islemTipDto;	
 	private TIslemDTO islemDto;	
 	private Date randevuTarihi;
+	private String randevuTarihiStr;
 	private int islemId;	
 	private int doktorId;
 	private String aciklama;
@@ -30,6 +31,7 @@ public class THastaRandevuDTO implements Serializable {
 	private String randevuyaGelinmedi;
 	private String randevuBasSaat;
 	private String randevuBitSaat;
+	private Integer beklenenOdeme;
 	
 	
 	public int getId() {
@@ -159,6 +161,18 @@ public class THastaRandevuDTO implements Serializable {
 	}
 	public void setRandevuBitSaat(String randevuBitSaat) {
 		this.randevuBitSaat = randevuBitSaat;
+	}
+	public Integer getBeklenenOdeme() {
+		return beklenenOdeme;
+	}
+	public void setBeklenenOdeme(Integer beklenenOdeme) {
+		this.beklenenOdeme = beklenenOdeme;
+	}
+	public String getRandevuTarihiStr() {
+		return randevuTarihiStr;
+	}
+	public void setRandevuTarihiStr(String randevuTarihiStr) {
+		this.randevuTarihiStr = randevuTarihiStr;
 	}
 	
 	

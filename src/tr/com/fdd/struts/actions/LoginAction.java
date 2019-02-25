@@ -64,8 +64,6 @@ public class LoginAction extends GenericAction {
 
 			HttpSession sessionInf = request.getSession();
 
-			
-
 			TKullaniciLoginDTO kullaniciLoginDTO = null;
 			TKullaniciBilgiDTO kullaniciBilgiDTO = null;
 

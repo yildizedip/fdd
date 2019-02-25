@@ -18,8 +18,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tr.com.fdd.dto.TDoktorDTO;
+import tr.com.fdd.dto.TDoktorSubeDTO;
 import tr.com.fdd.dto.TKullaniciBilgiDTO;
 import tr.com.fdd.dto.TKullaniciLoginDTO;
+import tr.com.fdd.dto.TKullaniciSubeDTO;
+import tr.com.fdd.dto.TTurKodDTO;
+import tr.com.fdd.dto.TTurKodSubeDTO;
 import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.mysql.MysqlUtil;
 import tr.com.fdd.struts.form.LoginForm;
@@ -43,6 +47,9 @@ public class KullaniciEkleAction extends Action {
 		try {
 			session = GenericAction.getHibernateSession();
 			tran = session.beginTransaction();
+			
+			conn = DbConnection.getMySqlConneciton();
+			sqlUtils = new SQLUtils();
 
 			/**
 			 * KULLANICI LOGIN EKLEME
@@ -88,7 +95,17 @@ public class KullaniciEkleAction extends Action {
 			tKullaniciBilgiDTO.setKuAdres(frm.getAdres());
 
 			session.save(tKullaniciBilgiDTO);
+			
+			/**
+			 * sube ekleme
+			 */
 
+			TKullaniciSubeDTO dto= new TKullaniciSubeDTO();
+			dto.setDurum("A");
+			dto.setKuId(loginId);
+			dto.setsId(frm.getSubeId());
+			
+			session.save(dto);
 			/**
 			 * DOKTOR EKLEME
 			 */
@@ -103,11 +120,55 @@ public class KullaniciEkleAction extends Action {
 				doktorDTO.setdDurum("A");
 				doktorDTO.setdAktif("A");
 
-				session.save(doktorDTO);
+				int doktor_id= (Integer)session.save(doktorDTO);
+				
+				/** 
+				 * doktor gider turu ekle
+				 */
+				
+				TTurKodDTO giderTurDto = new TTurKodDTO();
+				
+				giderTurDto.setTurAd(frm.getAd() + " " + frm.getSoyad());
+				
+				int maxGiderTurId=sqlUtils.getMaxGiderTur(conn);
+				
+				giderTurDto.setTurKod(maxGiderTurId+1);
+				giderTurDto.setTurTip(1);
+				giderTurDto.setTurDurum("A");
+				
+				int giderTurId = (Integer)	session.save(giderTurDto);
+				
+				/**
+				 * doktor gider tur sube ekle
+				 */
+				
+				TTurKodSubeDTO giderTurSubeDto = new TTurKodSubeDTO();
+				giderTurSubeDto.setDurum("A");
+				giderTurSubeDto.setSubeId(frm.getSubeId());
+				giderTurSubeDto.setTkId(giderTurId);
+				
+				session.save(giderTurSubeDto);
+				
+				/**
+				 * doktor kullanici guncelle
+				 */
+				
+				tKullaniciBilgiDTO.setGiderKodu(giderTurId);
+				session.update(tKullaniciBilgiDTO);
+				
+				/**
+				 * doktor sube ekle
+				 */
+				
+				TDoktorSubeDTO doktorSubeDto= new TDoktorSubeDTO();
+				doktorSubeDto.setDurum("A");
+				doktorSubeDto.setSbId(frm.getSubeId());
+				doktorSubeDto.setdId(doktor_id);
+				session.save(doktorSubeDto);
+				
 			}
 			tran.commit();
-			conn = DbConnection.getMySqlConneciton();
-			sqlUtils = new SQLUtils();
+			
 			List<LoginForm> kullaniciList = sqlUtils.getKullaniciList(conn, "");
 			request.setAttribute("kullaniciList", kullaniciList);
 
@@ -120,11 +181,11 @@ public class KullaniciEkleAction extends Action {
 
 					e1.printStackTrace();
 				}
-			request.setAttribute("warn", "Kay�t hatal�");
+			request.setAttribute("warn",GUIMessages.ISLEM_BASARILI);
 			return mapping.findForward("exception");
 
 		} catch (Exception e) {
-			request.setAttribute("warn", "Kay�t hatal�");
+			request.setAttribute("warn", GUIMessages.ISLEM_BASARISIZ);
 			return mapping.findForward("exception");
 
 		} finally {

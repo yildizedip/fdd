@@ -42,7 +42,7 @@ public class HastaAnketListAction extends Action {
 
 			if (anketListesi.size() == 0) {
 				request.setAttribute("warn", GUIMessages.KAYIT_BULUNAMADI);
-				return mapping.findForward("noContent");
+				return mapping.findForward("success");
 			} else {
 				request.setAttribute("anketListesi",	anketListesi);
 				return mapping.findForward("success");

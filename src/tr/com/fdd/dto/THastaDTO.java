@@ -20,6 +20,7 @@ public class THastaDTO implements Serializable {
 	private String tel;
 	private String tckimlik;
 	private String durum;
+	private String adres;
 	private Date eklenmeTarihi;
 	private String eklenmeTarihiStr;
 	private Date guncellenmeTarihi;
@@ -29,10 +30,13 @@ public class THastaDTO implements Serializable {
 	private List<TIslemDTO> hastaSelectedDoktorOperasyonList; //sadece belli bir doktorun yaptigi operasyonlar- randevu icin
 	private List<TAnketDTO> hastaAnketList;
 	private List<TAramaKaydiDTO> hastaAramaKaydiList;
+	private List<THastaRandevuDTO> hastaRandevuList;
 	private int hastaAnketSayisi;
 	
 	
+	
 	public int getHastaAnketSayisi() {
+		if(getHastaAnketList()!=null)
 		hastaAnketSayisi=getHastaAnketList().size();
 		return hastaAnketSayisi;
 	}
@@ -139,5 +143,23 @@ public class THastaDTO implements Serializable {
 		this.guncelleyenKisi = guncelleyenKisi;
 	}
 	
+	 public String getValue() {
+		 return String.format("%s %s", getAd(),getSoyad());
+	 }
+	 public String getLabel() {
+		 return String.format("%s %s", getAd(),getSoyad());
+	 }
+	public String getAdres() {
+		return adres;
+	}
+	public void setAdres(String adres) {
+		this.adres = adres;
+	}
+	public List<THastaRandevuDTO> getHastaRandevuList() {
+		return hastaRandevuList;
+	}
+	public void setHastaRandevuList(List<THastaRandevuDTO> hastaRandevuList) {
+		this.hastaRandevuList = hastaRandevuList;
+	}
 
 }

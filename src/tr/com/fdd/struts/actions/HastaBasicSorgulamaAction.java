@@ -3,12 +3,19 @@ package tr.com.fdd.struts.actions;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import tr.com.fdd.dto.TDoktorDTO;
 import tr.com.fdd.dto.THastaDTO;
 import tr.com.fdd.mysql.DbConnection;
 import tr.com.fdd.struts.form.HastaForm;
@@ -22,14 +29,42 @@ public class HastaBasicSorgulamaAction extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
+		
+		
 		Connection conn = null;
 		try {
 			conn = DbConnection.getMySqlConneciton();
 			request.setCharacterEncoding("ISO-8859-9");
 			String islemTip = request.getParameter("islem");
 			
+			String hastaprm = request.getParameter("term");
+			String prt = request.getParameter("protokolNo");
 			
 			HastaForm hastaForm = (HastaForm) form;
+			
+			if(hastaprm!=null) {	
+			
+				String[] adsoyad= hastaprm.split(" ");
+				
+				if(adsoyad.length > 0)
+				{
+					String ad=adsoyad[0];
+					hastaForm.setAd(ad);
+					
+					if(adsoyad.length >1) {
+						
+						String soyad=adsoyad[1];
+						hastaForm.setSoyad(soyad);
+					}
+					if(adsoyad.length >2) {
+						
+						String protokol =adsoyad[2];
+						hastaForm.setProtokolNo(protokol);
+					}
+				}
+			}
+			
+			
 			Integer subeId = (Integer) request.getSession().getAttribute("subeId");
 
 			SQLUtils sqlUtils = new SQLUtils();
@@ -45,7 +80,6 @@ public class HastaBasicSorgulamaAction extends Action {
 				//return mapping.findForward("noContent");
 
 			}
-			response.setContentType("text/html");
 			request.setAttribute("hastaList", hastaListesi);
 
 			if (GenelDegiskenler.RANDEVU_EKLE.equals(islemTip))
@@ -82,14 +116,42 @@ public class HastaBasicSorgulamaAction extends Action {
 //
 //				}
 		//		request.setAttribute("hastaList", hastaListesiRandevu); sadece secilen doktora iliskiin  hasta gelir
+				TDoktorDTO doktorDTO= new TDoktorDTO();
+				doktorDTO.setdId(Integer.parseInt(doktorId));
+				request.setAttribute("selectedDoctor", doktorDTO);
 				request.setAttribute("doktorId", doktorId);
 				request.setAttribute("randevuBitTar", randevuBitTar);
 				request.setAttribute("randevuBasTar", randevuBasTar);
 				
+//				JSONObject returnObject = new JSONObject();
+//				
+//				returnObject.put("aaa", "aaaa");
+//				request.setAttribute("jsonObj", returnObject);
+				
+				
 				return mapping.findForward("randevu");
+				
 				}
-			else
-				return mapping.findForward("success");
+			else {
+				
+				String json = null;
+		        
+		        try {
+		        	
+	
+		            json = new ObjectMapper().writeValueAsString(hastaListesi);
+		            response.setCharacterEncoding("UTF-8");
+		            response.setContentType("application/json");
+		            response.getWriter().print(json);
+		            
+		        } catch (JsonProcessingException ex) {
+		        	
+		        	ex.printStackTrace();
+		        }
+				
+				return null;
+				//return mapping.findForward("success");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("exception", e);

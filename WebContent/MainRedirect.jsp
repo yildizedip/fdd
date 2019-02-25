@@ -18,9 +18,10 @@
 	
 <form id="send" action="hastaGunlukRandevuSorgula.do"  method="post">
 
-</form>
-
-
+   </form>
+   
+   
+   <br>
 
 		<!-- jQuery -->
 		<script src="scriptt/jquery.js"></script>
@@ -40,9 +41,6 @@
 		$(document).ready(function(){
 			
 			$("#send").submit();
-
-			
-			
 			     
 			});
 		</script>

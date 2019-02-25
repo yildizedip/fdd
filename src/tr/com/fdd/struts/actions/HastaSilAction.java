@@ -36,8 +36,12 @@ public class HastaSilAction extends GenericAction {
 			result.setDurum("P");
 
 			tran.commit();
-			Commons.removeHastaFromHastaList(result, request);
+			//Commons.removeHastaFromHastaList(result, request);
 			request.setAttribute("warn", GUIMessages.KAYIT_SILME_BASARILI);
+			
+			Commons.setLastHasta(request, connection);
+			
+			
 			return mapping.findForward("success");
 
 		} catch (Exception e) {

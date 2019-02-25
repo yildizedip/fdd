@@ -18,6 +18,7 @@
 		<property name="subeId" column="sube_id" type="int" />		
 		<property name="guncelleyenKisi" column="guncelleyenKisi" type="int" />		
 		<property name="durum" column="DURUM" type="java.lang.String" />
+		<property name="adres" column="adres" type="java.lang.String" />
 	
 	
 	</class>

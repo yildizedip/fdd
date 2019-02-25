@@ -8,7 +8,9 @@ public class TAyarDTO implements Serializable {
 	private int id;
 	private String name;
 	private String value;
-	private int state;
+	private String state;
+	private int subeId;
+	private String subeAd;
 	
 	
 	public int getId() {
@@ -29,10 +31,23 @@ public class TAyarDTO implements Serializable {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public int getState() {
+	
+	public int getSubeId() {
+		return subeId;
+	}
+	public void setSubeId(int subeId) {
+		this.subeId = subeId;
+	}
+	public String getSubeAd() {
+		return subeAd;
+	}
+	public void setSubeAd(String subeAd) {
+		this.subeAd = subeAd;
+	}
+	public String getState() {
 		return state;
 	}
-	public void setState(int state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 

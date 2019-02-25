@@ -74,12 +74,12 @@ function validateForm(){
 <body style="color:black;">
 
 <div class="bg-success"> ${requestScope.warn} </div>
-<div class="col-lg-6">  
+<div class="container" style="background-color: white;">  
 
 	<form name="form" action="addGider.do" method="post"	onsubmit="return validateForm()">
 		<table class="table table-bordered">
 		
-		<tr>
+			<tr>
 				<td colspan="4"
 					style="text-align: center; font: bold; font-size: 20px;" class="bg-blue" >Gider Ekle
 				</td>
@@ -93,7 +93,7 @@ function validateForm(){
 				
 				
 				<c:choose>
-				 <c:when test="${(odeme_tarih_degistir eq 'off') and (sessionScope.sessionMember[0].kuTur eq '4') }">
+				 <c:when test="${(odeme_tarih_degistir eq 'off')}">
 				 	
 				 	<input name="tarihStr" id="tarihStr" value="${tarihStr}" class="form-control" disabled="disabled" >
 						

@@ -42,8 +42,8 @@
 		<mapping resource="/tr/com/fdd/dto/THastaRandevuDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/TIslemTipSubeDTO.hbm.xml" />
 		<mapping resource="/tr/com/fdd/dto/TLoginDTO.hbm.xml" />
+		<mapping resource="/tr/com/fdd/dto/TAyarDTO.hbm.xml" />
 		
 		
-	
 	</session-factory>
 </hibernate-configuration>

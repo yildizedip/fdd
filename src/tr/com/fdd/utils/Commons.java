@@ -231,9 +231,27 @@ public class Commons {
 		THastaDTO hasta= sqlUtils.getHasta(hastaId, connection, subeId);
 		
 		// request and seesion update
-		List<THastaDTO> hastaListesi= new ArrayList<THastaDTO>();
-		hastaListesi.add(hasta);
+//		List<THastaDTO> hastaListesi= new ArrayList<THastaDTO>();
+//		hastaListesi.add(hasta);
+//		
+//		request.setAttribute("hastaListesi", hastaListesi);
+		request.setAttribute("lastHasta", hasta);
+	}
+	
+	
+	public static void setLastHasta(HttpServletRequest request, Connection connection) throws SQLException{
 		
-		request.setAttribute("hastaListesi", hastaListesi);
+		connection =DbConnection.getMySqlConneciton();
+		Integer subeId = (Integer) request.getSession().getAttribute("subeId");
+		SQLUtils sqlUtils = new SQLUtils();
+		
+		THastaDTO hasta= sqlUtils.getLastHasta(connection, subeId);
+		
+		// request and seesion update
+//		List<THastaDTO> hastaListesi= new ArrayList<THastaDTO>();
+//		hastaListesi.add(hasta);
+//		
+//		request.setAttribute("hastaListesi", hastaListesi);
+		request.setAttribute("lastHasta", hasta);
 	}
 }

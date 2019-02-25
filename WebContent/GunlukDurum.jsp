@@ -17,19 +17,30 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/epoch_classes.js"></script>
 <script src="script/bootstrap.min.js"></script>
 
 
-<link type="text/css" rel="stylesheet"
-	href="styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/demo_table.css" type="text/css" />
+<link rel="stylesheet" href="css/epoch_styles.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" />
 
+<script type="text/javascript" src="js/epoch_classes.js"></script>
+<script type="text/javascript" src="js/edip.js"></script>
+<script type="text/javascript" src="js/jquery.ui.datepicker-tr.js"></script>
+
+<script type="text/javascript"  src="lib/jquery-1.10.2.js"></script>
+<script type="text/javascript"  src="lib/jquery-ui-1.10.4.js"></script>
+<script type="text/javascript"  src="lib/jquery.dataTables.js"></script>
+
+<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/i18n/jquery-ui-i18n.min.js"></script>
 
 <script type="text/javascript"> 
 		 var basTarihi;
@@ -53,142 +64,154 @@
 
 <title></title>
 </head>
-<body style="color:black ; background-color: white;" >
-
-	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-		<div class="page-header ">
-			<div class="page-title" style="font-size: 20px;">GÜN SONU
-				RAPORU</div>
-
-			<button class="btn pull-right"
-				style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
-				onclick="window.print()"></button>
-
-		</div>
-		<div class="bg-success">${requestScope.warn}</div>
-
-		<div class="clearfix"></div>
-	</div>
-
-<div class="col-lg-6">  
- 
-	<form action="getGelirGiderDurumu.do" method="post">
-		<input type="hidden" value="10"	name="islem">
-
-		<table class="table table-bordered">
-		
-		<tr>
-				<td colspan="4"
-					style="text-align: center; font: bold; font-size: 20px;" class="bg-blue" >Sorgula
-				</td>
-			</tr>
-					
-			 <tbody>
-			<tr>
-				<td  colspan="4"> Tarih : 
-				
-				<c:choose>
-					
-					<c:when test="${(odeme_tarih_degistir eq 'off') and (sessionScope.sessionMember[0].kuTur eq '4') }">
-						<input class="inputTextfield" name="bas_tar" id="bas_tar" disabled="disabled"> /
-						<input class="inputTextfield" name="bit_tar" id="bit_tar" disabled="disabled">
-					 
-					 </c:when>
-					 
-					 <c:otherwise>
-					 	<input class="inputTextfield" name="bas_tar" id="bas_tar"> /
-						<input class="inputTextfield" name="bit_tar" id="bit_tar">
-					 
-					 </c:otherwise>
-				
-				</c:choose>
-				
-				</td>
-
-			</tr>
-			<tr>
-				<td colspan="2">
-				<select size="1" name="doktorId"
-					>
-						<option label="Doktor Seçiniz.." value="-1">Doktor Seçiniz..</option>
-
-						<c:forEach items="${doktorList}" var="doktorDTO">
-							<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } "
-								value="${doktorDTO.dId }">${doktorDTO.dAd } ${doktorDTO.dSoyad }</option>
-						</c:forEach>
-				</select></td>
-				
-				
-				<td colspan="1"> <select size="1" name="islemTipi">
-						<option label="Tedavi Seçiniz.." value="-1">Tedavi Seçiniz..</option>
-
-						<c:forEach items="${islemTurList}" var="islem">
-							<option label="${islem.ad}" value="${islem.id }">${islem.ad}</option>
-						</c:forEach>
-				</select></td>
-				<td><select size="1" name="giderTuru" >
-
-						<option label="Gider Türü Seçiniz.." value="-1">Gider Türü Seçiniz..</option>
-						<c:forEach items="${sessionScope.giderTurKodlari}" var="turKodDTO">
-							<option label="${turKodDTO.turAd }" value="${turKodDTO.turKod }">${turKodDTO.turAd }</option>
-						</c:forEach>
-				</select></td>
-
-
-
-			</tr>
-
-
-			<tr>
-				<td colspan="4" style="text-align: center;">
-				<input
-					type="submit" name="btn_Sorgula" value="Sorgula">
-					<input
-					type="hidden" name="doctor"
-					value="${sessionScope.sessionMember[0].kuId }" id="bas_tar"></td>
-			</tr>
-			
-			</tbody>
-
-		</table>
-	</form>
+<body style="color: black; background-color: white;">
 
 	<%
-		Date bugun = new Date();
-		SimpleDateFormat sdff = new SimpleDateFormat("yyyy.MM.dd");
-		String gunlukTarih = sdff.format(bugun);
-		request.setAttribute("bugun", gunlukTarih);
-	%>
-	
-	
-	</div>
-	<div class="clearfix"></div>
-	
-	
+			Date bugun = new Date();
+			SimpleDateFormat sdff = new SimpleDateFormat("yyyy.MM.dd");
+			String gunlukTarih = sdff.format(bugun);
+			request.setAttribute("bugun", gunlukTarih);
+		%>
+		
+		
+		<div> <button class="btn pull-right"
+				style="background-image: url('Images/printIcon2.jpg'); height: 24px; width: 32px"
+				onclick="window.print()"></button> </div>
+		
+	<div class="col-lg-6 ">
 
-<div class="col-lg-8"> 
-	<myTagFiles:GelirRaporu silAktif="0">
-		<c:if test="${param.bas_tar ==null}">
+		<div class="panel panel-default">
+
+			<div class="panel-heading">Gün Sonu Durumu Sorgula (Gelir -
+				Gider Analizi)</div>
+
+			<div class="panel-body">
+
+				<form action="getGelirGiderDurumu.do" method="post">
+
+					<input type="hidden" value="10" name="islem">
+					<div class="form-group">
+						<div class="row">
+
+							<c:choose>
+								<c:when
+									test="${(odeme_tarih_degistir eq 'off') and (sessionScope.sessionMember[0].kuTur eq '4') }">
+
+									<div class="col-lg-3">
+										<label class="form-control">Tarih :</label>
+									</div>
+
+									<div class="col-lg-4">
+										<input class="form-control" name="bas_tar" id="bas_tar"
+											disabled="disabled">
+									</div>
+									<div class="col-lg-5" align="left">
+										<input class="form-control" name="bit_tar" id="bit_tar"
+											disabled="disabled">
+									</div>
+								</c:when>
+
+								<c:otherwise>
+									<div class="col-lg-6">
+										<input class="form-control" name="bas_tar" id="bas_tar">
+									</div>
+									<div class="col-lg-6" align="left">
+										<input class="form-control" name="bit_tar" id="bit_tar">
+									</div>
+
+								</c:otherwise>
+
+							</c:choose>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-6">
+								<select size="1" name="doktorId" class="form-control">
+									<option label="Doktor Seçiniz.." value="-1">Doktor
+										Seçiniz..</option>
+
+									<c:forEach items="${doktorList}" var="doktorDTO">
+										<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } "
+											value="${doktorDTO.dId }">${doktorDTO.dAd }
+											${doktorDTO.dSoyad }</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="col-lg-6">
+								<select size="1" name="islemTipi" class="form-control">
+									<option label="Tedavi Seçiniz.." value="-1">Tedavi
+										Seçiniz..</option>
+
+									<c:forEach items="${islemTurList}" var="islem">
+										<option label="${islem.ad}" value="${islem.id }">${islem.ad}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+
+
+
+					</div>
+
+					<div class="form-group">
+						<select size="1" name="giderTuru" class="form-control">
+
+							<option label="Gider Türü Seçiniz.." value="-1">Gider
+								Türü Seçiniz..</option>
+							<c:forEach items="${sessionScope.giderTurKodlari}"
+								var="turKodDTO">
+								<option label="${turKodDTO.turAd }" value="${turKodDTO.turKod }">${turKodDTO.turAd }</option>
+							</c:forEach>
+						</select>
+
+					</div>
+
+					<div class="form-group">
+						<br>
+
+						<button type="submit" class="btn btn-info btn-sm">Sorgula</button>
+
+						<input type="hidden" name="doctor"
+							value="${sessionScope.sessionMember[0].kuId }" id="bas_tar">
+
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="clearfix"></div>
+
+
+
+	<div class="col-lg-8">
+		<myTagFiles:GelirRaporu silAktif="0">
+			<c:if test="${param.bas_tar ==null}">
 									${bugun} - ${bugun}
 									
 									</c:if>
 					${param.bas_tar} - ${param.bit_tar}
 					</myTagFiles:GelirRaporu>
-		</div>
+	</div>
 
-<div class="col-lg-4">
+	<div class="col-lg-4">
 
 
-	   <myTagFiles:GiderRaporu silAktif="0">
-		<c:if test="${param.bas_tar ==null}">
+		<myTagFiles:GiderRaporu silAktif="0">
+			<c:if test="${param.bas_tar ==null}">
 									${bugun} - ${bugun}
 									
 									</c:if>
 					${param.bas_tar} - ${param.bit_tar}
 					</myTagFiles:GiderRaporu>
-					
-					</div>
 
+	</div>
 
 </body>
 </html>

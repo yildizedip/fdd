@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.struts.action.ActionForm;
 import org.slf4j.Logger;
@@ -46,6 +47,10 @@ import tr.com.fdd.utils.enums.ProvaTip;
 public class SQLUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(SQLUtils.class);
+	
+	public SQLUtils() {
+		// TODO Auto-generated constructor stub
+	}
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 
@@ -990,12 +995,14 @@ public class SQLUtils {
 			dto.setDurum(rs.getString("durum"));
 			dto.setIslemId(rs.getInt("islem_id"));
 			dto.setRandevuyaGelinmedi(rs.getString("randevu_gelmedi"));
+			dto.setBeklenenOdeme(rs.getInt("beklenen_odeme"));
 
 			hasta.setAd(rs.getString("ad"));
 			hasta.setSoyad(rs.getString("soyad"));
 			hasta.setTckimlik(rs.getString("tckimlik"));
 			hasta.setProtokolNo(rs.getString("protokol_no"));
 			hasta.setTel(rs.getString("tel"));
+			
 
 			dto.setHasta(hasta);
 
@@ -1259,12 +1266,14 @@ public class SQLUtils {
 			hasta.setTckimlik(rs.getString("tckimlik"));
 			hasta.setProtokolNo(rs.getString("protokol_no"));
 			hasta.setTel(rs.getString("tel"));
+			hasta.setAdres(rs.getString("adres"));
 			hasta.setId(rs.getInt("id"));
 			hasta.setDurum(rs.getString("durum"));
 
 			hasta.setEklenmeTarihi(rs.getDate("eklenmeTarihi"));
-
-			List<TIslemDTO> list = getHastaOperasyonListesiGoruntuleForAnket(hasta.getId(), conn, subeId);
+			if (hasta.getEklenmeTarihi() != null)
+				hasta.setEklenmeTarihiStr(sdf.format(hasta.getEklenmeTarihi()));
+			
 
 			List<TAnketDTO> anketList = getHastaAnketList(hasta.getId(), conn);
 
@@ -1272,39 +1281,44 @@ public class SQLUtils {
 
 			// imlant varmi
 
-			for (int j = 0; j < list.size(); j++) {
-				TIslemDTO tIslemDTO = list.get(j);
+			List<TIslemDTO> list = getHastaOperasyonListesiGoruntuleForAnket(hasta.getId(), conn, subeId);
+			checkImplant(list);
 
-				if (tIslemDTO.getIslemTipi() == GenelDegiskenler.OperasyonTipleri.IMPLANT) {
+			hasta.setHastaOperasyonList(list);
+			hasta.setHastaRandevuList(getHastaRandevuList(conn,hasta.getId()));
 
-					for (int i = 0; i < list.size(); i++) {
-						TIslemDTO implantCerrah = list.get(i);
-						if (implantCerrah.getIliskiliIslemId() == tIslemDTO.getId() && !(implantCerrah
-								.getIslemTipi() == GenelDegiskenler.OperasyonTipleri.IMPLANT_USTU_OPERASYON)) {
-							tIslemDTO.setImplantCerrahDoktor(implantCerrah.getDoktor());
+			
+		}
+		return hasta;
+	}
 
-							for (int k = 0; k < list.size(); k++) {
-								TIslemDTO implantDestek = list.get(k);
-								if (implantDestek.getIliskiliIslemId() == implantCerrah.getId() && !(implantDestek
-										.getIslemTipi() == GenelDegiskenler.OperasyonTipleri.IMPLANT_USTU_OPERASYON)) {
-									tIslemDTO.setImplantDestekDoktor(implantDestek.getDoktor());
+	private void checkImplant(List<TIslemDTO> list) {
+		for (int j = 0; j < list.size(); j++) {
+			TIslemDTO tIslemDTO = list.get(j);
 
-									list.remove(i);
-									list.remove(k);
-								}
+			if (tIslemDTO.getIslemTipi() == GenelDegiskenler.OperasyonTipleri.IMPLANT) {
+
+				for (int i = 0; i < list.size(); i++) {
+					TIslemDTO implantCerrah = list.get(i);
+					if (implantCerrah.getIliskiliIslemId() == tIslemDTO.getId() && !(implantCerrah
+							.getIslemTipi() == GenelDegiskenler.OperasyonTipleri.IMPLANT_USTU_OPERASYON)) {
+						tIslemDTO.setImplantCerrahDoktor(implantCerrah.getDoktor());
+
+						for (int k = 0; k < list.size(); k++) {
+							TIslemDTO implantDestek = list.get(k);
+							if (implantDestek.getIliskiliIslemId() == implantCerrah.getId() && !(implantDestek
+									.getIslemTipi() == GenelDegiskenler.OperasyonTipleri.IMPLANT_USTU_OPERASYON)) {
+								tIslemDTO.setImplantDestekDoktor(implantDestek.getDoktor());
+
+								list.remove(i);
+								list.remove(k);
 							}
-
 						}
+
 					}
 				}
 			}
-
-			hasta.setHastaOperasyonList(list);
-
-			if (hasta.getEklenmeTarihi() != null)
-				hasta.setEklenmeTarihiStr(sdf.format(hasta.getEklenmeTarihi()));
 		}
-		return hasta;
 	}
 
 	public List<THastaDTO> getHastaList(Connection conn, int subeId, String ad, String soyad, String protokolNo,String tel,
@@ -2708,6 +2722,26 @@ public class SQLUtils {
 		return giderTurList;
 
 	}
+	
+	public int getMaxGiderTur(Connection connection) throws SQLException {
+
+		String sql = " SELECT max(tur_id) TUR_ID FROM dfdiscom_db.t_tur_kod ";
+
+		PreparedStatement stm;
+
+		stm = connection.prepareStatement(sql);
+
+		int maxGiderTurId=-1;
+		logger.info(sql);
+		ResultSet rs = stm.executeQuery();
+
+		while (rs.next()) {
+			maxGiderTurId= rs.getInt("TUR_ID");
+		}
+
+		return maxGiderTurId;
+
+	}
 
 	private List<SubeForm> getTurSubeList(Connection connection, int turId) throws SQLException {
 		List<SubeForm> subeList = new ArrayList<SubeForm>();
@@ -3539,6 +3573,7 @@ public class SQLUtils {
 			dto.setAciklama(rs.getString("aciklama"));
 			dto.setEklenmeTarihiStr(rs.getString("eklenme_tarihi"));
 			dto.setRandevuyaGelinmedi(rs.getString("randevu_gelmedi"));
+			dto.setBeklenenOdeme(rs.getInt("beklenen_odeme"));
 			
 			THastaDTO hastaDTO= new THastaDTO();
 			hastaDTO.setAd(rs.getString("ad"));
@@ -3976,6 +4011,144 @@ public class SQLUtils {
 		
 		return subeGelirList;
 	}
+
+	public THastaDTO getLastHasta(Connection connection, Integer subeId) throws SQLException {
+		
+		String sql = "SELECT * FROM dfdiscom_db.t_hasta where durum <> 'P' and sube_id=? order by id desc LIMIT 1 ";
+		
+		PreparedStatement stm;
+		
+		stm = connection.prepareStatement(sql);
+		
+		stm.setInt(1, subeId);
+		
+		ResultSet rs = stm.executeQuery();
+		
+		logger.info(" getLastHasta " + " : " + sql.toString());
+		
+		THastaDTO dto= null;
+		while (rs.next()) {
+			dto= new THastaDTO();
+			dto.setId(rs.getInt("id"));
+			dto.setAd(rs.getString("ad"));
+			dto.setSoyad(rs.getString("soyad"));
+			dto.setProtokolNo(rs.getString("protokol_no"));
+			dto.setTel(rs.getString("tel"));
+			dto.setAdres(rs.getString("adres"));
+			dto.setTckimlik(rs.getString("tckimlik"));
+			dto.setEklenmeTarihiStr(rs.getString("eklenmeTarihi"));
+			
+			
+			dto.setEklenmeTarihi(rs.getDate("eklenmeTarihi"));
+			if (dto.getEklenmeTarihi() != null)
+				dto.setEklenmeTarihiStr(sdf.format(dto.getEklenmeTarihi()));
+			
+
+			List<TAnketDTO> anketList = getHastaAnketList(dto.getId(), connection);
+
+			dto.setHastaAnketList(anketList);
+
+			List<TIslemDTO> list = getHastaOperasyonListesiGoruntuleForAnket(dto.getId(), connection, subeId);
+			checkImplant(list);
+
+			dto.setHastaOperasyonList(list);
+			
+			dto.setHastaRandevuList(getHastaRandevuList(connection, dto.getId()));
+		}
+		
+		return dto;
+	}
 	
+	
+	public List<TAyarDTO> getSubeAyarlar(Connection conn, int subeId) throws SQLException {
+
+		String sql = " SELECT  * FROM t_ayarlar a, t_sube s where a.state='A' and a.sube_id=s.sb_id and a.sube_id="+subeId ;
+		PreparedStatement stm = conn.prepareStatement(sql);
+		// if(subeId!=-1){
+		// stm.setInt(1, subeId);
+		// }
+		logger.info("getSubeAyarlar :" + sql);
+
+		List<TAyarDTO> list = new ArrayList<TAyarDTO>();
+		ResultSet rs = stm.executeQuery();
+
+		while (rs.next()) {
+			TAyarDTO dto = new TAyarDTO();
+
+			dto.setId(rs.getInt("id"));
+			dto.setName(rs.getString("name"));
+			dto.setValue(rs.getString("value"));
+			dto.setSubeId(rs.getInt("sube_id"));
+			dto.setSubeAd(rs.getString("sb_ad"));
+
+
+			list.add(dto);
+		}
+		return list;
+
+	}
+	
+	public List<THastaRandevuDTO> getHastaRandevuList(Connection conn, int hasta_id)
+			throws SQLException {
+
+		String sql = "SELECT * FROM t_hasta_randevu ran , t_doktor d, t_hasta h " + 
+				" where h.id=ran.hasta_id and  ran.doktor_id= d.d_id and h.id=? ";
+
+		PreparedStatement stm = conn.prepareStatement(sql);
+		logger.info("Get Hasta Randevu List = " + sql);
+
+		stm.setInt(1, hasta_id);
+
+		ResultSet rs = stm.executeQuery();
+
+		List<THastaRandevuDTO> list = new ArrayList<THastaRandevuDTO>();
+		while (rs.next()) {
+			THastaRandevuDTO dto = new THastaRandevuDTO();
+
+			dto.setId(rs.getInt("id"));
+			dto.setHastaId(rs.getInt("hasta_id"));
+			dto.setRandevuTarihiBaslangic(rs.getString("randevu_tarihi_baslangic"));
+			dto.setRandevuTarihiBitis(rs.getString("randevu_tarihi_bitis"));
+			dto.setDoktorId(rs.getInt("doktor_id"));
+			dto.setAciklama(rs.getString("aciklama"));
+			dto.setDurum(rs.getString("durum"));
+			dto.setIslemId(rs.getInt("islem_id"));
+			dto.setRandevuyaGelinmedi(rs.getString("randevu_gelmedi"));
+			dto.setBeklenenOdeme(rs.getInt("beklenen_odeme"));
+			 
+
+			if(dto.getRandevuTarihiBaslangic()!=null) {
+			try {
+				dto.setRandevuTarihi(new SimpleDateFormat("yyyy-mm-dd").parse(dto.getRandevuTarihiBaslangic().split(" ")[0]));
+				dto.setRandevuTarihiStr(new SimpleDateFormat("dd/MM/yyyy EEEE",new Locale("tr")).format(dto.getRandevuTarihi()));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				dto.setRandevuBasSaat(dto.getRandevuTarihiBaslangic().split(" ")[1]);
+			}
+			if(dto.getRandevuTarihiBitis()!=null)
+			dto.setRandevuBitSaat(dto.getRandevuTarihiBitis().split(" ")[1]);
+			
+			THastaDTO hasta= new THastaDTO();
+			hasta.setAd(rs.getString("ad"));
+			hasta.setSoyad(rs.getString("soyad"));
+			hasta.setTckimlik(rs.getString("tckimlik"));
+			hasta.setProtokolNo(rs.getString("protokol_no"));
+			hasta.setTel(rs.getString("tel"));
+			
+			
+			TDoktorDTO doktorDTO = new TDoktorDTO();
+			doktorDTO.setdAd(rs.getString("d_ad"));
+			doktorDTO.setdSoyad(rs.getString("d_soyad"));
+
+			dto.setHasta(hasta);
+			dto.setDoktor(doktorDTO);
+
+			list.add(dto);
+		}
+		return list;
+	}
+
 
 }

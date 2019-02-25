@@ -48,7 +48,7 @@ body {
 }
 
 .modal-header, .close {
-	background-color: #5cb85c;
+	background-color: #567FAB;
 	color: white !important;
 	text-align: center;
 	font-size: 30px;
@@ -68,6 +68,7 @@ alert('${warn}')
 						
 						 '<c:if test="${!empty randevuListesi}">' // randevu sayfasindan hasta sec ile gelen hasta
 
+									$('#randevuListModal').modal({backdrop:'static', keyboard: false});
 									$('#randevuListModal').modal('show');
 						 
 						 
@@ -117,9 +118,7 @@ alert('${warn}')
 						//$('#myDate').text(dt_to);
 
 						$('#example').DataTable({
-							select : {
-								style : 'single'
-							}
+							 "order": [[ 1, "desc" ]]
 						});
 
 						var table = $('#example').DataTable();
@@ -166,6 +165,7 @@ alert('${warn}')
 							"description": 'Hasta : ${randevu.hasta.ad} ${randevu.hasta.soyad}'
 								+ '<br>Tedavi: ${randevu.islemTipDto.ad}'
 								+ '<br> Açýklama: ${randevu.aciklama}'
+								+ '<br> Beklenen Odeme: ${randevu.beklenenOdeme}'
 						}
 
 						val.push(event);
@@ -316,12 +316,13 @@ alert('${warn}')
 <body>
 
 
+
 <form id="getRandevuGunlukForm" method="get" action="hastaGunlukRandevuSorgula.do">
 
 
 
   </form>
-		<div class="col-lg-12">
+		<div class="container">
 		
 		
 		<div class="row"> 
@@ -345,13 +346,13 @@ alert('${warn}')
 							
 							<div class="form-group">
 								    <input type="text" class="form-control tarih" placeholder="Protokol No" name="protokolNo" id="protokolNo">
-								  </div>
+							</div>
 								  <div class="form-group">
 								    <input type="text" class="form-control tarih"  placeholder="Hasta Ad" name="ad" id="ad">
 								    <input type="hidden" name="page" value="fromRandevu" >
 								  </div>
 								  
-								  <button type="submit" class="btn btn-default">Randevu Ara</button>
+								  <button type="submit" class="btn btn-primary">Randevu Ara</button>
 			
 								
 							</form>
@@ -361,36 +362,40 @@ alert('${warn}')
 		  
 		  </div>
 		
-		<h4 id="myDate" align="center"> </h4>
-			<table class="table table-hover table-bordered">
-
+		
+		<div class="row"> 
+				<h4 id="myDate" align="center"> </h4>
 				
-				<tr>
-					<c:forEach items="${doktorList4Randevu}" var="randevu">
-
-						<td align="center">
+					<table class="table table-hover table-bordered">
+		
 						
-							<div class="bg-info">
-							
-							<span  style="font-size: 12px;">  <strong> ${randevu.dAd} ${randevu.dSoyad} </strong>  </span>
+						<tr>
+							<c:forEach items="${doktorList4Randevu}" var="randevu">
+		
+								<td align="center">
 								
-								</div>
-								
-								
-							<form action="hastaRandevuSorgula.do" method="post">
-								<input type="submit" value="Randevu Görüntüle /  Ver" class="btn btn-link " style="font-size: 12px; ">
-								<input type="hidden" name="doktor" value="${randevu.dId}">
-								<div id="${randevu.dId}"></div>
-							</form> 
-							
-							
-							
-						</td>
-
-					</c:forEach>
-
-				</tr>
-			</table>
+									<div style="background-color: #567FAB; color: white;">
+									
+									<span  style="font-size:18px;">   ${randevu.dAd} ${randevu.dSoyad}  </span>
+										
+										</div>
+										
+										
+									<form action="hastaRandevuSorgula.do" method="post">
+										<input type="submit" value="Randevu Görüntüle /  Ver" class="btn btn-link" >
+										<input type="hidden" name="doktor" value="${randevu.dId}">
+										<div id="${randevu.dId}"></div>
+									</form> 
+									
+									
+									
+								</td>
+		
+							</c:forEach>
+		
+						</tr>
+					</table>
+				</div>
 		</div>
 
 
@@ -404,16 +409,10 @@ alert('${warn}')
 
 
 
-	<div class="modal fade" id="randevuListModal" 
-		tabindex="-1" role="dialog"	aria-labelledby="exampleModalLabel" style="color: black; font-size: 11px;" >
+	<div class="modal fade" id="randevuListModal"  tabindex="-1" role="dialog"	aria-labelledby="exampleModalLabel" style="color: black; font-size: 10px;" >
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-
 						<h4 class="modal-title" id="exampleModalLabel">Randevu Listesi</h4>
 					</div>
 
@@ -428,6 +427,7 @@ alert('${warn}')
 										<th>Randevu</th>
 										<th>Açýklama</th>
 										<th>Doktor Ad</th>
+										<th>Beklenen Ödeme</th>
 			
 			
 									</tr>
@@ -442,8 +442,7 @@ alert('${warn}')
 											<td>${randevu.randevuTarihiBaslangic} - ${randevu.randevuBitSaat}</td>
 											<td>${randevu.aciklama }</td>
 											<td>${randevu.doktor.dAd } ${randevu.doktor.dSoyad }</td>
-			
-			
+											<td>${randevu.beklenenOdeme }</td>
 			
 										</tr>
 			

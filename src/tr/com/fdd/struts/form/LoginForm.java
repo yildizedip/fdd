@@ -33,7 +33,7 @@ public class LoginForm  extends ActionForm{
 	private String durum;
 	private List<SubeForm> kuSubeList;
 	private String giderKodu;
-	
+	private int subeId;
 	
 	public String getUserName() {
 		return userName;
@@ -56,8 +56,8 @@ public class LoginForm  extends ActionForm{
 		if(  (userName!=null && userName.equals("") )  
 				|| (password!=null && password.equals(""))){
 			ActionMessages messages= new ActionMessages();
-			messages.add("login", new ActionMessage("Lütfen kullanýcý ad veya parola giriniz."));
-			request.setAttribute("errorMessage", "Lütfen kullanýcý ad veya parola giriniz.");
+			messages.add("login", new ActionMessage("Lï¿½tfen kullanï¿½cï¿½ ad veya parola giriniz."));
+			request.setAttribute("errorMessage", "Lï¿½tfen kullanï¿½cï¿½ ad veya parola giriniz.");
 			errors.add(messages);
 			
 		}	
@@ -123,6 +123,12 @@ public class LoginForm  extends ActionForm{
 	}
 	public String getGiderKodu() {
 		return giderKodu;
+	}
+	public int getSubeId() {
+		return subeId;
+	}
+	public void setSubeId(int subeId) {
+		this.subeId = subeId;
 	}
 	
 

@@ -8,43 +8,19 @@
 <%@page import="java.util.Date"%>
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<title>Hasta Kartý Ekle</title>
+<title>Hasta</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/moment-with-locales.js"></script>
-<script src="js/fullcalendar.js"></script>
-<script src="js/fullcalendar.min.js"></script>
-<script src='js/locale-all.js'></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.dataTables.min.js"></script>
-<script src="js/jquery.form-validator.min.js"></script>
-<script src="js/jquery.maskedinput.min.js"></script>
-<script src="js/zebra_datepicker.js" charset="UTF-8"></script>
 
-<link type="text/css" rel="stylesheet"
-	href="styles/font-awesome.min.css">
-<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css" />
-<link rel="stylesheet" type="text/css"	href="css/jquery.dataTables.min.css" />
+<link type="text/css" rel="stylesheet" href="sitil/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css" />
 <link rel="stylesheet" type="text/css" href="css/zebra-datepicker.css" />
-
-
-<link type="text/css" rel="stylesheet" href="styles/nestable.css">
-
-<link rel="stylesheet" type="text/css" href="css/fullcalendar.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.ui.theme.css" />
-<link rel="stylesheet" type="text/css"
-	href="css/jquery-ui.structure.css" />
-<link rel="stylesheet" type="text/css"
-	href="css/jquery.dataTables.min.css" />
-
+<link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
 
 <style type="text/css">
 .modal-header, .close {
@@ -72,43 +48,71 @@ td { font-size: 11px; }
 
 <body style="color: black; background-color: white;">
 
+							<c:forEach items="${ayarlar}" var="ayar" >
+							
+								<c:if test="${ayar.name eq 'odeme_tarih_degistir' }">
+									
+									<c:set var="odeme_tarih_degistir" value="${ayar.value}"> </c:set>
+								</c:if> 
+							
+							</c:forEach>
+							
+							
 
-	<div class="container col-lg-12 col-md-12" style="font-size: 11px;">
+	<div class="container col-lg-12 col-md-12" style="font-size: 13px;">
 
 		<div class="row">
 		
+
+		<div class="collapse in " id="hastaAra">
+			
 			<div class="col-lg-4">
 			
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <h4>Hasta Listesi</h4>
-					</div>
-					<div class="panel-body">
-					
-
+			
+			<button type="button" class="btn btn-link btn-sm pull-right " data-toggle="modal"
+						data-target="#hastaEkleModal">Hasta Ekle</button>
+						
+			<div class="panel panel-default" >
+			
+			<div class="panel-heading" >
+				 Hasta Listesi
+				</div>
+				
+				<div class="panel-body" >  
+				
 						<form class="form-inline" action="hastaBasicSorgula.do" method="post"
 						id="hastaSorgulaForm">
 						
-							<div class="form-group ">
-								<input class="form-control" name="ad" id="hstAd" placeholder="Ad" />
+						 
+						
+							<div class="form-group">
+								<input class="form-control" name="protokolNo" id="hstPrt" placeholder="P. No"    />
+							</div>
+							<div class="form-group">
+								<input class="form-control" name="ad" id="hstAd" placeholder="Ad"   />
 							</div>
 
 							<div class="form-group">
-								<input class="form-control" name="soyad" id="hstSoyad"	placeholder="Soyad" />
-
+								<input class="form-control" name="soyad" id="hstSoyad"	placeholder="Soyad"   />
 							</div>
-								<input type="submit" class="btn btn-sm btn-default" value="Ara" name="bnt_gonder" />
-
 							
+							<div class="form-group">
+								<input class="form-control" name="tel" id="tel"	placeholder="Telefon"   />
+							</div>
+						
+							<div class="form-group">
+								<input type="submit" class="btn btn-sm btn-default" value="Ara" name="bnt_gonder" />
+								
+								</div>
 						</form>
-
-				<br>
+					<hr>
+				<c:if test="${!empty hastaList}">
 						<div id="hastaTable" >
 
-							<table id="example" class="table" style="font-size: 11px;">
-								<thead>
+							<table id="example" class="table table-default"  >
+								<thead >
 									<tr>
-										<th>Protokol No</th>
+										<th>Prt.No</th>
 										<th>Ad</th>
 										<th>Soyad</th>
 										<th>Telefon</th>
@@ -120,9 +124,9 @@ td { font-size: 11px; }
 										<tr>
 											<td>${hasta.protokolNo}</td>
 											<td>${hasta.ad}</td>
-											<td>${hasta.soyad}</td>
-											<td>${hasta.tel}</td>
-											<td hidden="true">${hasta.id }</td>
+											<td >${hasta.soyad}</td>
+											<td >${hasta.tel}</td>
+											<td hidden="true" width="1px;" style="size: 2px; font-size: 1px;">${hasta.id}</td>
 										</tr>
 									</c:forEach>
 
@@ -131,55 +135,63 @@ td { font-size: 11px; }
 
 						</div>
 						
-							<button type="button" class="btn btn-default" 
-						id="buttonSec">Seç</button>
-					</div>
-				</div>
+							<button type="button" class="btn btn-default"  id="buttonSec"> Seç </button>
+						
+						</c:if>
 
-			</div>
+		</div>
+						
+				</div>
+		</div>
+	</div>
 		
+<c:if test="${!empty hastaListesi}">
 
 			<div class="col-lg-8" id="hastaPanel" >
-
+			
 				<div class="panel panel-default">
 
-					<div class="panel-heading" >${hastaListesi[0].ad}
-						${hastaListesi[0].soyad} (${hastaListesi[0].tel}) &nbsp;&nbsp;
-						Protokol No : ${hastaListesi[0].protokolNo}</div>
-
-					<div class="panel-body" style="font-size: 11px; size: 11px;">
-
-						<c:if test="${silAktif ne '0' }">
-							<c:if test="${sessionScope.sessionMember[0].kuTur ne '3' }">
-
-								<button type="button" class="btn btn-link " data-toggle="modal"
-									data-target="#hastaGuncelleModal"
-									data-whatever="${hastaListesi[0].id}">Güncelle</button>
-								<button type="button" class="btn btn-link" data-toggle="modal"
-									data-target="#operasyonEkleModal"
-									data-whatever="${hastaListesi[0].id}">Tedavi Ekle</button>
-								<button type="button" class="btn btn-link" data-toggle="modal"
-									data-target="#anketEkleModal"
-									data-whatever="${hastaListesi[0].id}">Anket Ekle</button>
-								<button type="button" class="btn btn-danger pull-right"
-									data-toggle="modal" data-target="#hastasSilModal"
-									data-whatever="${hastaListesi[0].id}">Sil</button>
-							</c:if>
-
-						</c:if>
-					</div>
-				</div>
+					<div class="panel-heading" >
+					
+					
+					<div class="row">
+						  
+						 	 <div class="col-lg-7" style="font-size: 12px;"> 
+						  			${hastaListesi[0].ad}
+										${hastaListesi[0].soyad} (${hastaListesi[0].tel}) &nbsp;&nbsp;
+										Protokol No : ${hastaListesi[0].protokolNo}
+										
+							</div>
+							
+							<div class="col-lg-5"> 
+										<c:if test="${silAktif ne '0' }">
+											<c:if test="${sessionScope.sessionMember[0].kuTur ne '3' }">
 				
-				<!-- 
+												<button type="button" class="btn btn-link btn-xs " data-toggle="modal"
+													data-target="#hastaGuncelleModal"
+													data-whatever="${hastaListesi[0].id}">Güncelle</button>
+												<button type="button" class="btn btn-link btn-xs" data-toggle="modal"
+													data-target="#operasyonEkleModal"
+													data-whatever="${hastaListesi[0].id}">Tedavi Ekle</button>
+												<button type="button" class="btn btn-link btn-xs" data-toggle="modal"
+													data-target="#anketEkleModal"
+													data-whatever="${hastaListesi[0].id}">Anket Ekle</button>
+												<button type="button" class="btn btn-link btn-xs " style="color: red;"
+													data-toggle="modal" data-target="#hastasSilModal"
+													data-whatever="${hastaListesi[0].id}">Sil</button>
+											</c:if>
 				
-				TEDAVILER VE ODEMELER
-				
-				 -->
-				
-				
-					<c:if test="${!empty hastaListesi}">
-
-			<div class="page-content">
+										</c:if>
+							</div>
+						
+						</div>
+						
+						
+						</div>
+						
+						<div class="panel-body">
+						
+				<div class="col-lg-12"> 
 
 				<div id="tab-general">
 					<div class="row mbl">
@@ -187,26 +199,30 @@ td { font-size: 11px; }
 							<li class="active"><a href="#tedavi-tab" data-toggle="tab">Tedavi
 									Ve Ödemeler</a></li>
 							<li><a href="#anket-tab" data-toggle="tab">Anket</a></li>
-							<li><a href="#hasta-info-tab" data-toggle="tab">Hasta
-									Bilgileri</a></li>
+							
 						</ul>
 						<div id="generalTabContent" class="tab-content responsive">
 
 							<div id="tedavi-tab" class="tab-pane fade in active">
-
+								
+								<div style="font-size: 11px;">
 
 								<c:forEach items="${hastaListesi[0].hastaOperasyonList}"
 									var="operasyon" varStatus="count">
 
 									<div class="panel"
+										 >
+
+
+										<div class="panel-heading"
+										
 										<c:choose>
 																	<c:when test="${operasyon.durumu eq 'A'}">style="background-color: #ECF8E0"</c:when>
 																	<c:when test="${operasyon.durumu eq 'B'}">style="background-color: #EFF8FB"</c:when>		
 																	<c:when test="${operasyon.durumu eq 'K'}">style="background-color: #FBEFF2"</c:when>		
-																</c:choose>>
-
-
-										<div class="panel-heading" style="font-size: 12px;">
+										</c:choose> 
+										
+										 >
 											<div class="row">
 												<div>
 													Tedavi: ${operasyon.islemTip.ad} (${operasyon.disNo})
@@ -219,11 +235,11 @@ td { font-size: 11px; }
 														<c:when test="${operasyon.durumu eq 'K'}">Kesinleþmedi</c:when>
 													</c:choose>
 													  
-													  &nbsp; &nbsp; &nbsp; Tarih:${operasyon.islemTarihi}  &nbsp; &nbsp; &nbsp; Miktar: ${operasyon.miktar}
+													  &nbsp; &nbsp; &nbsp; Tarih:${operasyon.islemTarihi}  &nbsp; &nbsp; &nbsp; Fiyat: ${operasyon.miktar}
 													  
 														 &nbsp; &nbsp; &nbsp;  <c:if test="${operasyon.aciklama ne ''}"> Açýklama:${operasyon.aciklama}  </c:if>
 
-													<button type="button" class="btn btn-info pull-right"
+													<button type="button" class="btn btn-success btn-xs pull-right"
 														data-toggle="collapse" data-target="#${operasyon.id}">
 														Detay</button>
 
@@ -233,19 +249,24 @@ td { font-size: 11px; }
 											</div>
 										</div>
 
-										<div class="collapse" id="${operasyon.id}">
+										<div class="collapse" id="${operasyon.id}" >
 											<div class="panel-body ">
+											
 
-												<div class="col-lg-6 col-md-6">
+												<div class="col-lg-5 col-md-5">
 
-													<div class="col-lg-6 col-md-6">
+													
 
-														<div>TEDAVÝ TARÝHÝ : ${operasyon.islemTarihi} -
-															${operasyon.islemBitisTarihi}</div>
+														<div>
+														<strong>Tedavi Tarihi :  </strong>
+														${operasyon.islemTarihi} 
+															${operasyon.islemBitisTarihi}
+															
+															</div>
 
-														<div>DÝÞ ADET : ${operasyon.disAdet}</div>
+														<div> <strong>Diþ Sayýsý :  </strong>    ${operasyon.disAdet}</div>
 
-														<div>DÝÞ NO : ${operasyon.disNo}</div>
+														<div> <strong>Diþ No'lar :  </strong>  ${operasyon.disNo}</div>
 
 														<div>
 															<c:if test="${!empty operasyon.implantCerrahDoktor}">
@@ -259,113 +280,25 @@ td { font-size: 11px; }
 																								${operasyon.implantDestekDoktor.dSoyad} )
 																						</c:if>
 														</div>
-													</div>
+													
 
 
-													<div class="col-lg-6 col-md-6">
+														<div>  <strong> Tedavi Fiyat : </strong>  ${operasyon.miktar}</div>
+														<div>  <strong> Kalan Ödeme Miktarý : </strong>   ${operasyon.kalanMiktar} </div>
+														<div> <strong> Açýklama : </strong>   ${operasyon.aciklama}</div>
 
-
-														<div>FÝYAT : ${operasyon.miktar}</div>
-														<div>KALAN ÖDEME MÝKTARI : ${operasyon.kalanMiktar}
-														</div>
-														<div>AÇIKLAMA : ${operasyon.aciklama}</div>
-
-													</div>
 												</div>
 
 
-												<div class="col-md-6">
-
-													<c:if test="${!empty operasyon.aramaKayitListesi}">
-														<table class="table table-hover table-bordered">
-
-															<thead>
-																<tr>
-																	<td class="helpHed">Arama Tarih</td>
-																	<td class="helpHed">Açýklama</td>
-																</tr>
-
-															</thead>
-
-															<tbody>
-
-																<c:forEach items="${operasyon.aramaKayitListesi}"
-																	var="arama" varStatus="count">
-
-																	<tr>
-
-																		<td class="helpHed">${arama.aramaTarih}
-																			${arama.aramaSaat}</td>
-																		<td class="helpHed">${arama.aciklama}</td>
-																	</tr>
-
-																</c:forEach>
-
-
-															</tbody>
-
-
-
-
-														</table>
-
-
-
-													</c:if>
-
-													<c:if test="${!empty operasyon.randevuList}">
-														<table class="table table-hover table-bordered">
-
-															<thead>
-																<tr>
-																	<td class="helpHed">Randevu Tarih</td>
-																	<td class="helpHed">Açýklama</td>
-																	<td class="helpHed">Durum</td>
-																</tr>
-
-															</thead>
-
-															<tbody>
-
-																<c:forEach items="${operasyon.randevuList}"
-																	var="randevu" varStatus="count">
-
-																	<tr>
-
-																		<td class="helpHed">${randevu.randevuTarihiBaslangic}
-																			- ${randevu.randevuTarihiBitis}</td>
-																		<td class="helpHed">${randevu.aciklama}</td>
-																		<td class="helpHed">${randevu.aciklama}</td>
-
-
-																	</tr>
-
-																</c:forEach>
-
-
-															</tbody>
-
-
-
-
-														</table>
-
-
-
-													</c:if>
-
-
+												<div class="col-lg-7 col-md-7">
 
 													<c:if test="${!empty operasyon.odemeList}">
-
-														<hr>
-														<!-- odeme tablosu -->
 														<table class="table table-hover table-bordered">
 															<thead>
 																<tr>
 																	<td class="helpHed">Ödeme Tarih</td>
-																	<td class="helpHed">Ödenen Miktar</td>
-																	<td class="helpHed">Ödeme Türü</td>
+																	<td class="helpHed">Miktar</td>
+																	<td class="helpHed">Tür</td>
 																	<td class="helpHed">Açýklama</td>
 
 																	<c:if test="${silAktif ne '0' }">
@@ -413,7 +346,7 @@ td { font-size: 11px; }
 																			<c:if
 																				test="${sessionScope.sessionMember[0].kuTur ne '3' }">
 																				<td class="helpBod">
-																					<button type="button" class="btn btn-link"
+																					<button type="button" class="btn btn-link btn-xs"
 																						data-toggle="modal"
 																						data-target="#odemeGuncelleModal"
 																						data-odemeid="${odeme.id}"
@@ -423,7 +356,7 @@ td { font-size: 11px; }
 
 																				</td>
 																				<td class="helpBod">
-																					<button type="button" class="btn btn-link"
+																					<button type="button" class="btn btn-link btn-xs"
 																						data-toggle="modal" data-target="#odemeSilModal"
 																						data-odemeid="${odeme.id}"
 																						data-odememiktar="${odeme.miktar}">Sil</button>
@@ -451,7 +384,7 @@ td { font-size: 11px; }
 											<div class="panel-footer">
 
 
-												<button type="button" class="btn btn-link randevuEkleButton"
+												<button type="button" class="btn btn-link btn-sm randevuEkleButton"
 													id="randevuEkle" value="${operasyon.doktorId}"
 													data-opId="${operasyon.id}">Randevu Ekle</button>
 												<!--  
@@ -462,7 +395,7 @@ td { font-size: 11px; }
 												<c:if test="${silAktif ne '0' }">
 																			<c:if
 																				test="${sessionScope.sessionMember[0].kuTur ne '3' }">
-												<button type="button" class="btn btn-link"
+												<button type="button" class="btn btn-link btn-sm"
 													data-toggle="modal" data-target="#operasyonGuncelleModal"
 													data-opid="${operasyon.id}"
 													data-opdoktor="${operasyon.doktorId}"
@@ -475,7 +408,7 @@ td { font-size: 11px; }
 
 
 												<c:if test="${operasyon.kalanMiktar >0}">
-													<button type="button" class="btn btn-link"
+													<button type="button" class="btn btn-link btn-sm"
 														data-toggle="modal" data-target="#odemeEkleModal"
 														data-opid="${operasyon.id}"
 														data-odkalanmiktar="${operasyon.kalanMiktar}"
@@ -484,19 +417,19 @@ td { font-size: 11px; }
 												</c:if>
 
 												<c:if test="${operasyon.durumu eq 'A'}">
-													<button type="button" class="btn btn-link"
+													<button type="button" class="btn btn-link btn-sm"
 														data-toggle="modal" data-target="#operasyonBitirModal"
 														data-opid="${operasyon.id}"
 														data-opad="${operasyon.islemTip.ad}">Bitir</button>
 												</c:if>
 
 												<c:if test="${operasyon.durumu eq 'K'}">
-													<button type="button" class="btn btn-link"
+													<button type="button" class="btn btn-link btn-sm"
 														data-toggle="modal"
 														data-target="#operasyonKesinlestirModal"
 														data-opid="${operasyon.id}"
 														data-opad="${operasyon.islemTip.ad}">Kesinleþtir</button>
-													<button type="button" class="btn btn-link"
+													<button type="button" class="btn btn-link btn-sm"
 														data-toggle="modal" data-target="#aramaKaydiEkleModal"
 														data-opid="${operasyon.id}"
 														data-opad="${operasyon.islemTip.ad}">Arama Kaydý
@@ -504,13 +437,13 @@ td { font-size: 11px; }
 												</c:if>
 
 
-												<button type="button" class="btn btn-link"
+												<button type="button" class="btn btn-link btn-sm"
 													data-toggle="modal"
 													data-target="#operasyonOdemeGunuGirModal"
 													data-opid="${operasyon.id}"
 													data-kalanmiktar="${operasyon.kalanMiktar}">Ödeme
 													Günü Gir</button>
-												<button type="button" class="btn btn-danger pull-right"
+												<button type="button" class="btn btn-danger pull-right btn-sm"
 													data-toggle="modal" data-target="#operasyonSilModal"
 													data-opid="${operasyon.id}"
 													data-opad="${operasyon.islemTip.ad}">Sil</button>
@@ -526,6 +459,8 @@ td { font-size: 11px; }
 									</div>
 
 								</c:forEach>
+								
+								</div>
 
 							</div>
 							<div id="anket-tab" class="tab-pane">
@@ -594,40 +529,22 @@ td { font-size: 11px; }
 								</div>
 							</div>
 
-							<div id="hasta-info-tab" class="tab-pane">
-								<div class="panel panel-white">
-
-									<div class="panel-body">
-
-										<div class="col-lg-6 col-md-6">
-
-											<p>Hasta Ad :${hastaListesi[0].ad}
-												${hastaListesi[0].soyad}</p>
-
-											<p>Protokol No : ${hastaListesi[0].protokolNo}</p>
-											<p>Tc Kimlik No : ${hastaListesi[0].tckimlik}</p>
-
-										</div>
-									</div>
-
-
-								</div>
-							</div>
-
 
 						</div>
 					</div>
 				</div>
-			</div>
-		</c:if>
+						
+						
+						</div>
+						</div>
+
 				
-				
-				
+				</div>
 				
 				
 			</div>
 
-			
+			</c:if>
 			<div>
 
 				<h4>${requestScope.warn}</h4>
@@ -682,7 +599,7 @@ td { font-size: 11px; }
 							<div class="col-lg-6 col-md-6">
 								<div class="form-group">
 									<div class="input-icon">
-										<i class="fa fa-user"></i> <input name="ad" id="ad"
+										<input name="ad" id="ad"
 											type="text" placeholder="Ad" class="form-control"
 											data-validation="length" data-validation-length="min3" />
 
@@ -692,7 +609,7 @@ td { font-size: 11px; }
 							<div class="col-lg-6 col-md-6">
 								<div class="form-group">
 									<div class="input-icon">
-										<i class="fa fa-user"></i> <input id="inputLastName"
+										<input id="inputLastName"
 											name="soyad" id="soyad" type="text" placeholder="Soyad"
 											class="form-control" data-validation="length"
 											data-validation-length="min2" />
@@ -706,7 +623,7 @@ td { font-size: 11px; }
 							<div class="col-lg-6 col-md-6">
 								<div class="form-group">
 									<div class="input-icon">
-										<i class="fa fa-phone"></i> <input name="tel" id="tel"
+										 <input name="tel" id="tel"
 											type="text" placeholder="Telefon" class="form-control"
 											data-validation="required" data-validation-length="min11" />
 									</div>
@@ -716,7 +633,7 @@ td { font-size: 11px; }
 							<div class="col-lg-6 col-md-6">
 								<div class="form-group">
 									<div class="input-icon">
-										<i class="fa fa-user"></i> <input id="tckimlik"
+										 <input id="tckimlik"
 											onkeyup="kontrol()" name="tckimlik" type="text"
 											placeholder="Tc Kimlik No" class="form-control" />
 									</div>
@@ -729,9 +646,9 @@ td { font-size: 11px; }
 
 					<div class="modal-footer">
 						<input id="bntHastaKaydet" type="submit" value="Hasta Ekle"
-							class="btn btn-default" />
+							class="btn btn-default btn-sm" />
 
-						<button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Vazgeç</button>
 					</div>
 
 				</form>
@@ -1025,7 +942,7 @@ td { font-size: 11px; }
 								<div class="col-lg-6 col-md-6">
 									<div class="form-group">
 									
-									Tedavi Tarihi : 
+									<strong> Tedavi Tarihi :  </strong>
 										<input name="islemTarihiStr" id="islemTarihiStr"
 											class="tarih " type="text"
 											placeholder="Tedavi Tarih Giriniz."
@@ -1122,16 +1039,10 @@ td { font-size: 11px; }
 								</div>
 								<div class="col-lg-5 col-md-5">
 									<div class="form-group">
-
-										
 											<input
 											class="form-control" placeholder="Adet" name="disAdet"
 											id="disAdet" data-validation="required"
 											data-validation-error-msg="Zorunlu Alan">
-											
-											
-
-
 									</div>
 								</div>
 								<div class="col-lg-2 col-md-2">
@@ -1362,8 +1273,8 @@ td { font-size: 11px; }
 									<div class="form-group">
 										<div class="input-icon">
 												
-										<input id="bntKaydet" class="btn btn-default pull-right" type="submit"		value="Ekle" />
-									
+										<input id="bntKaydetTedavi" class="btn btn-default pull-right" type="submit" value="Ekle" onclick="return checkTedavi();" />
+										
 										</div>
 									</div>
 
@@ -1452,7 +1363,7 @@ td { font-size: 11px; }
 						<input id="bntKaydet" class="btn btn-default" type="submit"
 							value="Bitir" />
 						<button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
-					</div>
+					</div>checkTedavi
 
 				</form>
 			</div>
@@ -1497,6 +1408,9 @@ td { font-size: 11px; }
 	</div>
 
 
+
+
+	
 
 
 	<!--- OPERASYON GUNCELLE . -->
@@ -1616,11 +1530,32 @@ td { font-size: 11px; }
 							type="hidden" name="hastaId" id="hastaIdOdemeModal" /> <input
 							type="hidden" name="doktorId" id="doktorIdOdemeModal" />
 
+
+
 						<table class="table">
 							<tr>
 								<td>Tarih</td>
-								<td><input type="text" name="odemeTarihiStr" class="tarih"
-									id="odemeTarihiStrModal"   /></td>
+								<td>
+								
+								
+								<c:choose>
+								    <c:when test="${odeme_tarih_degistir eq 'on'}">
+								    
+								    <input type="text" name="odemeTarihiStr" class="tarih"
+									id="odemeTarihiStrModal"/>
+								                      
+								
+								         </c:when>
+								         <c:otherwise>
+								         
+								                   <input type="text" name="odemeTarihiStr" class="tarih" disabled="disabled"
+									id="odemeTarihiStrModal"/>
+								
+								         </c:otherwise>
+								</c:choose>
+								
+									
+									</td>
 							</tr>
 
 							<tr>
@@ -1725,13 +1660,16 @@ td { font-size: 11px; }
 							<tr>
 								<td>Odeme Türü</td>
 
-								<td><select size="1" class="form-control" name="odemeTuru"
-									id="">
+								<td>
+								<select size="1" class="form-control" name="odemeTuru"
+									>
 										<option label="Peþinat" value="2" />
 										<option label="Taksit" value="3" />
 										<option label="Kredi Kartý" value="4" />
 
-								</select>""</td>
+								</select>
+								
+								</td>
 							</tr>
 
 
@@ -1978,7 +1916,7 @@ td { font-size: 11px; }
 
 							<tr>
 								<td>Arama Tarihi</td>
-								<td><input class="tarih" name="aramaTarihiStr"
+								<td><input class="tarih" name="aramaTarihiStr" 
 									id="aramaTarihiEkleStr" /></td>
 							<tr>
 								<td>Saat</td>
@@ -2063,7 +2001,38 @@ td { font-size: 11px; }
 	<!-- button actions dialogsss  END .. -->
 
 
-	<script type="text/javascript">
+   <script src="js/jquery-3.1.1.min.js"></script>
+   <script src="js/jquery-ui.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/zebra_datepicker.js" charset="UTF-8"></script>
+
+
+	<script type="text/javascript"> 
+	
+	function checkTedavi() {
+		
+		var miktar = $("#operasyonUcret").val();
+		var disNo = $("#disNo").val();
+		var tedavi = $("#islemTipi option:selected").html();
+		
+		
+		
+		
+		var message= $.trim(tedavi) + ' tedavisi ve '+ disNo+' numaralarý için tedavi fiyatý:' + miktar + ' olarak belirlenmiþtir. Kaydetmek için emin misiniz?'  ;
+		
+		if (confirm(message)) {
+		    
+		    return true;
+		} else {
+		   
+		    return false;
+		    
+		}
+			
+	}
+	
+	
 		function validateFormOperasyonEkle() {
 
 			var doktorId = document.forms["operasyonEkleForm"]["doktorId"].value;
@@ -2113,6 +2082,13 @@ td { font-size: 11px; }
 				.ready(
 						function() {
 
+							
+							var date = $.datepicker.formatDate(
+									'yy.mm.dd', new Date());
+
+							$("#islemTarihiStr").val(date);
+							$("#odemeTarihiStr").val(date);
+							
 							var myLanguage = {
 								errorTitle : 'Form submission failed!',
 								requiredFields : 'You have not answered all required fields',
@@ -2155,9 +2131,6 @@ td { font-size: 11px; }
 								imageRatioNotAccepted : 'Image ratio is not accepted'
 							};
 
-							$.validate({
-								language : myLanguage
-							});
 
 							$('#example')
 									.DataTable(
@@ -2166,14 +2139,18 @@ td { font-size: 11px; }
 													style : 'single',
 
 												},
+												"searching":     false,
+												"paging":false,
 												 "iDisplayLength": 5,
 												 "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
 												order : [ [ 4, "desc" ] ],
 												language : {
 
 													sSearch : "Ara:",
-													sLengthMenu : "Sayfada _MENU_ kayýt göster",
-													sInfo : "_TOTAL_ kayýttan _START_ - _END_ arasýndaki kayýtlar gösteriliyor",
+													sLengthMenu : "_MENU_",
+													sInfo : "_TOTAL_ kayýt",
+													infoEmpty: " ",
+													zeroRecords: " ",
 
 												}
 
@@ -2227,39 +2204,14 @@ td { font-size: 11px; }
 								$("#kalanMiktar").val(kalan);
 							});
 
-							$.datepicker.regional['tr'] = {
-								closeText : 'kapat',
-								prevText : '&#x3C;geri',
-								nextText : 'ileri&#x3e',
-								currentText : 'bugün',
-								monthNames : [ 'Ocak', 'Þubat', 'Mart',
-										'Nisan', 'Mayýs', 'Haziran', 'Temmuz',
-										'Aðustos', 'Eylül', 'Ekim', 'Kasým',
-										'Aralýk' ],
-								monthNamesShort : [ 'Oca', 'Þub', 'Mar', 'Nis',
-										'May', 'Haz', 'Tem', 'Aðu', 'Eyl',
-										'Eki', 'Kas', 'Ara' ],
-								dayNames : [ 'Pazar', 'Pazartesi', 'Salý',
-										'Çarþamba', 'Perþembe', 'Cuma',
-										'Cumartesi' ],
-								dayNamesShort : [ 'Pz', 'Pt', 'Sa', 'Ça', 'Pe',
-										'Cu', 'Ct' ],
-								dayNamesMin : [ 'Pz', 'Pt', 'Sa', 'Ça', 'Pe',
-										'Cu', 'Ct' ],
-								weekHeader : 'Hf',
-								dateFormat : 'dd.mm.yy',
-								firstDay : 1,
-								isRTL : false,
-								showMonthAfterYear : false,
-								yearSuffix : ''
-							};
-							$.datepicker
-									.setDefaults($.datepicker.regional['tr'])
-
 							$('input.tarih').Zebra_DatePicker();
 
 							var disno = [];
 							var disAdet=0;
+							
+							
+							
+							
 
 							$('.disno').on('click', function(e) {
 
@@ -2321,8 +2273,7 @@ td { font-size: 11px; }
 									});
 
 							//OPERASYON BITIR
-							$('#operasyonBitirModal').on(
-									'show.bs.modal',
+							$('#operasyonBitirModal').on('show.bs.modal',
 									function(event) {
 										var button = $(event.relatedTarget) // Button that triggered the modal
 										var opid = button.data('opid') // Extract info from data-* attributes
@@ -2333,11 +2284,12 @@ td { font-size: 11px; }
 										var modal = $(this)
 										modal.find('#operasyonId').val(opid)
 										modal.find('#operasyonAd').html(opads)
-
+										
 										var date = $.datepicker.formatDate(
 												'yy.mm.dd', new Date());
 
 										$("#operasyonBitirTrhStr").val(date)
+										
 									});
 
 							//OPERASYON KESINLESTIR
@@ -2352,6 +2304,12 @@ td { font-size: 11px; }
 										var modal = $(this)
 										modal.find('#operasyonId').val(opid)
 										modal.find('#operasyonAd').html(opads)
+										
+										var date = $.datepicker.formatDate(
+												'yy.mm.dd', new Date());
+										
+										$("#operasyonKesinlestirTrhStr").val(date)
+										
 									});
 
 							//OPERASYON EKLE
@@ -2362,12 +2320,15 @@ td { font-size: 11px; }
 											width : '100%', //probably not needed
 											height : '100%', //probably not needed 
 										});
-
+										
 										var date = $.datepicker.formatDate(
 												'yy.mm.dd', new Date());
 
 										$("#islemTarihiStr").val(date);
 										$("#odemeTarihiStr").val(date);
+										
+
+									
 									});
 
 							//OPERASYON GUNCELLE
@@ -2423,17 +2384,19 @@ td { font-size: 11px; }
 										var opid = button.data('opid') // Extract info from data-* attributes
 										var doktorId = button.data('doktorid') // Extract info from data-* attributes
 										var hastaId = button.data('hastaid') // Extract info from data-* attributes
-										var kalanMiktar = button
-												.data('odkalanmiktar') // Extract info from data-* attributes
+										var kalanMiktar = button.data('odkalanmiktar') // Extract info from data-* attributes
 
+										
 										var date = $.datepicker.formatDate(
 												'yy.mm.dd', new Date());
-
+										
 										// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 										// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 										var modal = $(this)
+										
 										modal.find('#odemeTarihiStrModal').val(
 												date)
+										
 										modal.find('#kalanOdemeMiktariModal')
 												.val(kalanMiktar)
 										modal.find('#islemIdOdemeModal').val(
@@ -2457,27 +2420,16 @@ td { font-size: 11px; }
 												var odemeaciklama = button
 														.data('odemeaciklama') // Extract info from data-* attributes
 
-												var date = $.datepicker
-														.formatDate('yy.mm.dd',
-																new Date());
+												var date = $.datepicker.formatDate('yy.mm.dd',new Date());
 
 												// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 												// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 												var modal = $(this)
-												modal
-														.find(
-																'#odemeTarihiStrOdemeGuncelleModal')
-														.val(date)
-												modal.find('#odemeGuncelleId')
-														.val(odemeId)
-												modal
-														.find(
-																'#odememiktarguncellemeModal')
-														.val(odememiktar)
-												modal
-														.find(
-																'#odemeaciklamaguncellemeModal')
-														.val(odemeaciklama)
+												modal.find('#odemeGuncelleId').val(odemeId)
+												modal.find('#odememiktarguncellemeModal').val(odememiktar)
+												modal.find('#odemeaciklamaguncellemeModal').val(odemeaciklama)
+												
+												modal.find('#odemeTarihiStrOdemeGuncelleModal').val(date)
 
 											});
 
@@ -2486,8 +2438,7 @@ td { font-size: 11px; }
 									function(event) {
 										var button = $(event.relatedTarget)
 										var odemeId = button.data('odemeid')
-										var odememiktar = button
-												.data('odememiktar')
+										var odememiktar = button.data('odememiktar')
 
 										var modal = $(this)
 										modal.find('#odemeId').val(odemeId)
@@ -2504,9 +2455,13 @@ td { font-size: 11px; }
 										var kalanMiktar = button
 												.data('kalanmiktar')
 
+										var date = $.datepicker.formatDate(
+												'yy.mm.dd', new Date());
+										
 										var modal = $(this)
 										modal.find('#islemId').val(opid)
 										modal.find('#kalan').val(kalanMiktar)
+										modal.find('#borcOdemeTarihiStr').val(date)
 
 									});
 
@@ -2516,9 +2471,13 @@ td { font-size: 11px; }
 										var opid = button.data('opid')
 										var opad = button.data('opad')
 
+										var date = $.datepicker.formatDate(
+												'yy.mm.dd', new Date());
+										
 										var modal = $(this)
 										modal.find('#islemId').val(opid)
 										modal.find('#operasyonAd').html(opad)
+										modal.find('#aramaTarihiEkleStr').val(date)
 									});
 
 							$('#randevuEkleModal').on(
@@ -2592,8 +2551,9 @@ td { font-size: 11px; }
 							
 							$('#islemTipi').on('change', function () {
 								
-								var  value= this.value;
 								
+								var adet= $('#disAdet').val()
+								var  value= this.value;
 								'<c:forEach items="${islemTurList}" var="islem">'
 								
 
@@ -2601,8 +2561,10 @@ td { font-size: 11px; }
 								{
 									
 									 var fiyat=	'${islem.subeTip.fiyat}';
+									 
+									 
 								 
-									 $('#operasyonUcret').val(fiyat);
+									 $('#operasyonUcret').val(fiyat*adet);
 								 
 								 
 								}
@@ -2635,16 +2597,7 @@ td { font-size: 11px; }
 
 							$('#hastaPanel').prop("hidden", false);
 
-							'</c:if> '
-
-						/* 	'<c:if test="${!empty hastaList}">' // randevu sayfasindan hasta sec ile gelen hasta
-
-							$('#hastaSecModal').modal('show');
-							$('#hastaTable').show();
-
-							'</c:if> ' */
-
-							$("#tel").mask("0999 9999999");
+							'</c:if>'
 
 						});
 	</script>

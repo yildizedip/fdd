@@ -2,7 +2,6 @@
 	pageEncoding="ISO-8859-9"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -21,7 +20,9 @@
 <script type="text/javascript" src="js/jquery.maskedinput.min.js"></script>
 <script src="js/zebra_datepicker.js" charset="UTF-8"></script>
 
-<link type="text/css" rel="stylesheet" href="styles/font-awesome.min.css">
+
+<link type="text/css" rel="stylesheet"
+	href="styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="sitil/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="styles/nestable.css">
 <link rel="stylesheet" type="text/css" href="css/zebra-datepicker.css" />
@@ -29,32 +30,35 @@
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.ui.theme.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css" />
-<link rel="stylesheet" type="text/css"	href="css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css" />
 
 <style type="text/css">
-
 .fc-future {
 	background-color: white;
 }
 
 .fc h2 {
-   font-size: 16px;
-   font-family: sans-serif;
+	font-size: 16px;
+	font-family: sans-serif;
 }
+
 .fc h3 {
-   font-size: 16px;
-   font-family: sans-serif;
+	font-size: 16px;
+	font-family: sans-serif;
 }
+
 .fc h4 {
-   font-size: 16px;
-   font-family: sans-serif;
+	font-size: 16px;
+	font-family: sans-serif;
 }
+
 .fc h5 {
-   font-size: 16px;
-   font-family: sans-serif;
+	font-size: 16px;
+	font-family: sans-serif;
 }
+
 .modal-header, .close {
-	background-color: #5cb85c;
+	background-color: #567FAB;
 	color: white !important;
 	text-align: center;
 	font-size: 30px;
@@ -109,73 +113,63 @@ body {
 			.ready(
 					function() {
 
-
-
 						$('#tedaviVar').hide();
 						$('#tedaviYok').hide();
+						$('#hastaTable').hide();
 
-
-					/* 	'<c:if test="${hastaListesi[0].hastaSelectedDoktorOperasyonList.size()>0}">'
+						/* 	'<c:if test="${hastaListesi[0].hastaSelectedDoktorOperasyonList.size()>0}">'
+								
+								$('#tedaviYok').hide();
+								$('#tedaviVar').show();
 							
-							$('#tedaviYok').hide();
-							$('#tedaviVar').show();
 						
-					
-						'</c:if>' */
+							'</c:if>' */
 
-						
-				/* 		$('#yeniTedaviEkle').on('click', function(e) {
+						/* 		$('#yeniTedaviEkle').on('click', function(e) {
 
-							$('#tedaviYok').show();
-							$('#tedaviVar').hide();
-						}); */
-
+									$('#tedaviYok').show();
+									$('#tedaviVar').hide();
+								}); */
 
 						var disno = [];
-						var disAdet=0;
+						var disAdet = 0;
 
 						$('.disno').on('click', function(e) {
 
 							var no = $(this).html();
-							
+
 							var varmi = true;
 							for (i = 0; i < disno.length; i++) {
 								text = disno[i];
 								if (text == no)
 									varmi = false;
 							}
-							if (varmi){
+							if (varmi) {
 								disno.push(no);
 								disAdet++;
-								
+
 							}
 
 							varmi = true;
 							//var txtdisno=$('#disNo').val() +no;							
 							$('#disNoYeni').val(disno);
-							
-							
-							
-							
 							$('#disAdetYeni').val(disAdet);
-							
+
 						});
-						
+
 						$('#disnosil').on('click', function(e) {
 
 							var no = $(this).html();
 							disno.pop();
 							//var txtdisno=$('#disNo').val() +no;							
 							$('#disNoYeni').val(disno);
-							
-						if(disAdet>0)
-							  disAdet--;
-							
-							
-							$('#disAdetYeni').val(disAdet);
-							
-						});
 
+							if (disAdet > 0)
+								disAdet--;
+
+							$('#disAdetYeni').val(disAdet);
+
+						});
 
 						$('#tedaviTarihYeni').Zebra_DatePicker();
 
@@ -196,15 +190,15 @@ body {
 
 								$("#hastaBilgileri").hide();
 								$("#randevuBilgileri").hide();
-						//		$("#tedaviYok").hide();
+								//		$("#tedaviYok").hide();
 							} else {
 
 								$("#hastaBilgileri").show();
 								$("#randevuBilgileri").show();
-						//		$("#tedaviYok").show();
+								//		$("#tedaviYok").show();
 							}
 						});
-						
+
 						//$('#exampleModal').modal('show');
 
 						var myLanguage = {
@@ -257,20 +251,33 @@ body {
 						$('#example')
 								.DataTable(
 										{
+											 "info":     false,
+											 "searching":false,
+											 "lengthChange": false,
+											 
 											select : {
 												style : 'single',
 
 											},
-											 "iDisplayLength": 5,
-											 "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
-											order : [ [ 4, "desc" ] ],
+											"iDisplayLength" : 5,
+											"lengthMenu" : [ [ 5, 25, 50, -1 ],
+													[ 5, 25, 50, "All" ] ],
+											order : [ [ 1, "desc" ] ],
 											language : {
 
 												sSearch : "Ara:",
-												sLengthMenu : "Sayfada _MENU_ kayýt göster",
+												sLengthMenu : "_MENU_",
 												sInfo : "_TOTAL_ kayýttan _START_ - _END_ arasýndaki kayýtlar gösteriliyor",
 
-											}
+											},
+											
+											 "columnDefs": [
+										            {
+										                "targets": [ 4 ],
+										                "visible": false
+										            },
+										           
+										        ]
 
 										});
 
@@ -283,43 +290,32 @@ body {
 
 						$('#buttonSec').click(
 								function() {
+
 									var ids = $.map(table.rows('.selected')
 											.data(), function(item) {
 										return item
 									});
 
-									/*     $('#hastaad').val(ids[1]);
-									    $('#hastasoyad').val(ids[2]);
-									    $('#protokol').val(ids[0]);
-									    $('#telefon').val(ids[3]);
-									    $('#hastaId').val(ids[4]); */
+									$('#hastaad').val(ids[1]);
+									$('#hastasoyad').val(ids[2]);
+									$('#protokol').val(ids[0]);
+									$('#telefon').val(ids[3]);
+									$('#hastaId').val(ids[4]);
 
 									var start = $('#start').val();
 									var end = $('#end').val();
 									var title = $('#title').val();
 
-									// $('#randevuBasTar').val(start);
-									// $('#randevuBitTar').val(end);
+									$('#randevuBasTar').val(start);
+									$('#randevuBitTar').val(end);
 									$('#randevuAciklama').val(title);
 
 									$('#hasta_id').val(ids[4]);
-									$('#pageAction').val('randevu-getir');
-									$('#send').submit();
+									$('#randevuDoktorId').val("${doktorId}");
+									//$('#pageAction').val('randevu-getir');
+									//$('#send').submit();
+
 								});
-
-						$('#exampleModal').on(
-								'show.bs.modal',
-								function(event) {
-									var button = $(event.relatedTarget) // Button that triggered the modal
-									var recipient = button.data('whatever') // Extract info from data-* attributes
-
-									// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-									// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-									var modal = $(this)
-									modal.find('.modal-body #recipient-name')
-											.val(recipient)
-								});
-
 
 						$('#hastaEkleDialog').on(
 								'show.bs.modal',
@@ -332,7 +328,8 @@ body {
 									var date = $.datepicker.formatDate(
 											'yy.mm.dd', new Date());
 
-									$("#tedaviTarihYeni").val(date)
+									$("#start").val('${randevuBasTar}')
+									$("#end").val('${randevuBitTar}')
 
 								});
 
@@ -347,14 +344,13 @@ body {
 											defaultView : 'agendaWeek',
 											locale : "tr",
 											theme : false,
-											height : 800,
 											fixedWeekCount : false,
 											weekNumbers : true,
-											columnFormat : 'DD.MM dddd',
+											columnFormat : 'DD/MM dddd',
 											navLinks : true, // can click day/week names to navigate views
 											selectable : true,
 											businessHours : false,
-											minTime : "09:00:00",
+											minTime : "08:00:00",
 											maxTime : "21:00:00",
 											allDaySlot : false,
 											selectHelper : true,
@@ -413,7 +409,21 @@ body {
 
 												//$("#islemTipi").val(9);
 												//$('#title').text(eventData['title']);
-												$('#hastaEkleDialog').modal('show');
+												$('#hastaEkleDialog').modal(
+														'show');
+
+												$('#start')
+														.val(
+																moment(
+																		eventData['start'])
+																		.format(
+																				"YYYY-MM-DD HH:mm"));
+												$('#end')
+														.val(
+																moment(
+																		eventData['end'])
+																		.format(
+																				"YYYY-MM-DD HH:mm"));
 
 												/* dialog=$("#hastaEkleDialog").dialog({
 													modal : true,
@@ -695,7 +705,8 @@ body {
 
 						'<c:if test="${requestScope.actionTip eq 1}">' // hasta islemlerinden secilen hasta
 
-						$('#hastaInfo').html(
+						$('#hastaInfo')
+								.html(
 										"Lütfen ${hastaListesi[0].ad} ${hastaListesi[0].soyad} hastanýn ${randevuTedavi.islemTip.ad}  tedavisi için randevu tarih ve saati seçiniz.");
 
 						$('#hastaId').val('${hastaListesi[0].id}');
@@ -719,11 +730,11 @@ body {
 
 						' </c:if> '
 
-						 '<c:if test="${!empty hastaList}">' // randevu sayfasindan hasta sec ile gelen hasta
+						'<c:if test="${!empty hastaList}">' // randevu sayfasindan hasta sec ile gelen hasta
 
-						$('#exampleModal').modal('show');
+						$('#hastaEkleDialog').modal('show');
 						$('#hastaTable').show();
-						'</c:if> ' 
+						'</c:if> '
 
 						'<c:if test="${requestScope.actionTip eq 2}">' // randevu sayfasindan hasta sec ile gelen hasta
 
@@ -770,36 +781,25 @@ body {
 											'</c:forEach>'
 										});
 
-						$('#islemTipiYeni').on('change', function () {
-							
-							var  value= this.value;
-							
-							'<c:forEach items="${islemTurList}" var="islem">'
-							
+						$('#islemTipiYeni').on('change', function() {
 
-							if(value == '${islem.id}')
-							{
-								
-								 var fiyat=	'${islem.subeTip.fiyat}';
-							 
-								 $('#tedaviUcretYeni').val(fiyat);
-							 
-							 
+							var value = this.value;
+
+							'<c:forEach items="${islemTurList}" var="islem">'
+
+							if (value == '${islem.id}') {
+
+								var fiyat = '${islem.subeTip.fiyat}';
+
+								$('#tedaviUcretYeni').val(fiyat);
+
 							}
 
-							
 							'</c:forEach>'
-							
+
 						});
 
-						
-
-
-							
 					});
-
-
-	
 
 	function validate() {
 
@@ -841,622 +841,36 @@ body {
 </head>
 <body>
 
-		<div class="pull-left">
-			<div  style="font-size: 12px;">
-				Hekim : ${selectedDoctor.dAd}	${selectedDoctor.dSoyad}
-			</div>
-		</div>
-		<div class="pull-right">  
-		<button class="btn"
-			style="background-image: url('Images/printIcon2.jpg'); height: 20px; width: 20px"
-			onclick="window.print()"></button>
-		</div>
+<div class="container">
 
 	<div class="row">
+		<div>
+			<div style="text-align: center; font-size: 18px; font-weight: bold;">
+				<span> ${selectedDoctor.dAd} ${selectedDoctor.dSoyad}</span>
+			</div>
+		</div>
+		<div class="pull-right">
+			<button class="btn"
+				style="background-image: url('Images/printIcon2.jpg'); height: 20px; width: 20px"
+				onclick="window.print()"></button>
+		</div>
+	</div>
+	<div class="row">
 
-<!-- 	RANDEVU EKLE  -->
+		<!-- 	RANDEVU EKLE  -->
 
+		<div class="row">
 
-		<div class="modal fade " id="hastaEkleDialog" tabindex="-1"
-			role="dialog" aria-labelledby="exampleModalLabel"
-			style="color: black;">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header bg-success">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="exampleModalLabel">RANDEVU EKLE</h4>
-					</div>
-
-
-					<form action="HastaRandevuEkle.do" method="post"
-						onsubmit="return validate()">
-						<div class="modal-body">
-						
-						<div class="col-lg-3 col-md-6">
-									<div class="form-group">
-
-										<div class="input-icon">
-											<div class="checkbox">
-												<label> <input type="checkbox" id="randevuBosSaat"
-													name="randevuBosSaatAktif" /> &nbsp; Randevuyu Reserve Et
-												</label>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-								
-						
-							<input name="hastaId" id="hastaId" hidden="true"> <input
-								name="islemId" id="islemId" hidden="true"> <input
-								name="doktorId" id="doktorId" value="${selectedDoctor.dId}"
-								hidden="true">
-								
-								<div class="col-lg-6" id="hastaBilgileri">
-									<p>Hasta Bilgileri</p>
-									<div class="clearfix"></div>
-							
-											<div class="col-lg-5">
-												<div class="form-group">
-			
-													<div class="input-icon">
-														 <input
-															class="form-control" name="hastaAd" placeholder="Hasta Ad"
-															id="hastaad" >
-			
-													</div>
-			
-												</div>
-											</div>
-			
-											<div class="col-lg-5">
-												<div class="form-group">
-													<div class="input-icon">
-														 <input
-															class="form-control" name="hastaSoyad"
-															placeholder="Hasta Soyad " id="hastasoyad"
-															 >
-			
-													</div>
-												</div>
-											</div>
-			
-											<div class="col-lg-2">
-												<div class="form-group">
-													<div class="input-icon">
-														<button type="button" class="btn btn-primary"
-															id="hastaSecButton" data-toggle="modal"
-															data-target="#exampleModal"
-															data-whatever="${hastaListesi[0].id}">Seç</button>
-													</div>
-												</div>
-											</div>
-			
-										
-											<div class="col-lg-5">
-												<div class="form-group">
-													<div class="input-icon">
-														 <input class="form-control"
-															name="telefon" placeholder="Telefon 05051119922"
-															id="telefon" >
-			
-													</div>
-												</div>
-											</div>
-											
-											
-											
-											<!--  
-			
-											<div class="col-lg-5">
-												<div class="form-group">
-													<div class="input-icon">
-														<i class="fa fa-pencil" aria-hidden="true"></i> <input
-															class="form-control" name="protokol"
-															placeholder="Protokol" id="protokol"  >
-			
-													</div>
-												</div>
-											</div>
-											
-											-->
-			
-							</div>
-							
-							
-							
-							<div class="col-lg-6" id="randevuBilgileri">
-								
-									<p>Randevu Bilgileri</p>
-									<div class="clearfix"></div>
-
-								<div class="col-lg-6">
-									<div class="form-group">
-										<div class="input-icon">
-											 <input
-												class="form-control bg-info" type="text"
-												name="randevuTarihiBaslangic" placeholder="Baþlangýç "
-												id="start" data-validation="required" style="color: black;">
-										</div>
-									</div>
-								</div>
-
-
-
-								<div class="col-lg-6">
-									<div class="form-group">
-										<div class="input-icon">
-											 <input
-												class="form-control bg-info" type="text"
-												name="randevuTarihiBitis" placeholder="Bitiþ" id="end"
-												data-validation="required" style="color: black;">
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-12">
-									<div class="form-group">
-
-										<textarea class="form-control" name="aciklama"
-											placeholder="Açýklama Giriniz" rows="1" id="title" cols="20" data-validation="required" data-validation-error-msg="Lütfen Açýklama Giriniz."></textarea>
-
-									</div>
-								</div>
-							
-							</div>
-							
-								<div class="clearfix"></div>
-								
-						
-						<div id="tedaviYok"> 	
-								
-							
-							<p>Tedavi Bilgileri</p>
-							
-							
-								<div class="col-lg-6 col-md-6" >
-									<div class="form-group">
-										<div class="input-icon">
-
-											<select size="1" name="islemTipi" id="islemTipiYeni"
-												class="form-control">
-												<option label="Tedavi Seçiniz.." value="-1">Tedavi
-													Seçiniz..</option>
-
-												<c:forEach items="${islemTurList}" var="islem">
-													<option label="${islem.ad}" value="${islem.id}"
-														<c:if test="${iliskiliIslemId ne null && islem.id==43}"> selected="selected"   </c:if>="">
-														${islem.ad}</option>
-												</c:forEach>
-											</select>
-
-										</div>
-									</div>
-								</div>
-
-
-								<div class="col-lg-3 col-md-6">
-									<div class="form-group">
-
-										<div class="checkbox">
-											<label> <input type="checkbox" name="implantAktif"
-												id="implantAktif" /> &nbsp; Implant
-											</label>
-										</div>
-
-									</div>
-								</div>
-								
-								<div class="col-lg-3 col-md-6">
-									<div class="form-group">
-
-										<div class="input-icon">
-											<div class="checkbox">
-												<label> <input type="checkbox" id="durumu"
-													name="operasyonDurum" /> &nbsp; Kesinleþmedi
-												</label>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								
-								
-								
-								
-							<div class="row" id="implantOk" hidden="true">
-								<div class="col-lg-12 col-md-12">
-									<div class="form-group ">
-										<select size="1" name="implantBaglayanDoktorId"
-											class="form-control">
-											<option label="Protez Doktor Seçiniz.." value="-1"></option>
-
-											<c:forEach items="${doktorList}" var="doktorDTO">
-												<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } "
-													value="${doktorDTO.dId }">${doktorDTO.dAd }
-													${doktorDTO.dSoyad }</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-12 col-md-12">
-									<div class="form-group ">
-										<select size="1" name="implantCerrahId" class="form-control">
-											<option label="Cerrah Doktor Seçiniz.." value="-1"></option>
-
-											<c:forEach items="${doktorList}" var="doktorDTO">
-												<option label="${doktorDTO.dAd } ${doktorDTO.dSoyad } "
-													value="${doktorDTO.dId }">${doktorDTO.dAd }
-													${doktorDTO.dSoyad }</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-
-
-
-							</div>
-								
-								
-								
-								<div class="col-lg-12">
-								
-									<div class="form-group">
-
-										<div class="input-icon">
-
-											<div class="btn-group btn-group-xs" >
-												<button type="button"
-													class="btn btn-default disno">Üst Çene</button>
-												
-												</div>
-											<div class="btn-group btn-group-xs" id="buttons">
-
-												<button type="button" class="btn btn-info disno">18</button>
-												<button type="button" class="btn btn-info disno">17</button>
-												<button  type="button" class="btn btn-info disno">16</button>
-												<button type="button" class="btn btn-info disno">15</button>
-												<button type="button" class="btn btn-info disno">14</button>
-												<button type="button" class="btn btn-info disno">13</button>
-												<button type="button" class="btn btn-info disno">12</button>
-												<button type="button" class="btn btn-info disno">11</button>
-
-												<button type="button" class="btn btn-white"></button>
-
-												<button type="button" class="btn btn-success disno">21</button>
-												<button type="button" class="btn btn-success disno">22</button>
-												<button type="button" class="btn btn-success disno">23</button>
-												<button type="button" class="btn btn-success disno">24</button>
-												<button type="button" class="btn btn-success disno">25</button>
-												<button type="button" class="btn btn-success disno">26</button>
-												<button type="button" class="btn btn-success disno">27</button>
-												<button type="button" class="btn btn-success disno">28</button>
-												<br> <br>
-												<button type="button" class="btn btn-danger disno">48</button>
-												<button type="button" class="btn btn-danger disno">47</button>
-												<button type="button" class="btn btn-danger disno">46</button>
-												<button type="button" class="btn btn-danger disno">45</button>
-												<button type="button" class="btn btn-danger disno">44</button>
-												<button type="button" class="btn btn-danger disno">43</button>
-												<button type="button" class="btn btn-danger disno">42</button>
-												<button type="button" class="btn btn-danger disno">41</button>
-
-												<button type="button" class="btn btn-white"></button>
-												<button type="button" class="btn btn-warning disno">31</button>
-												<button type="button" class="btn btn-warning disno">32</button>
-												<button type="button" class="btn btn-warning disno">33</button>
-												<button type="button" class="btn btn-warning disno">34</button>
-												<button type="button" class="btn btn-warning disno">35</button>
-												<button type="button" class="btn btn-warning disno">36</button>
-												<button type="button" class="btn btn-warning disno">37</button>
-												<button type="button" class="btn btn-warning disno">38</button>
-											</div>
-											
-											
-											<div class="btn-group btn-group-xs">
-														<button type="button"
-												class="btn btn-default disno">Alt Çene</button>
-												
-												</div>
-								</div>
-							</div>
-								
-								</div>
-								
-							
-								<div class="col-lg-3">
-									<div class="form-group">
-										<div class="input-icon">
-											Tedavi Tarih: 
-											<input
-												 name="tedaviTarih" placeholder="Tarih"
-												id="tedaviTarihYeni" >
-
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<div class="form-group">
-										<div class="input-icon">
-										<input
-												class="form-control" name="tedaviUcret" placeholder="Ücret"
-												id="tedaviUcretYeni"  >
-
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-2">
-									<div class="form-group">
-										<div class="input-icon">
-											<i class="fa fa-pencil" aria-hidden="true"></i> <input
-												class="form-control" name="tedaviDisNo" placeholder="Diþ No"
-												id="disNoYeni" >
-
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-2 ">
-									<div class="form-group">
-
-										
-											<input
-											class="form-control" placeholder="Adet" name="disAdet"
-											id="disAdetYeni" >
-											
-
-									</div>
-								</div>
-								
-								<div class="col-lg-2 col-md-2">
-									<div class="form-group">
-
-										<button type="button" id="disnosil" class="btn btn-warning">Sil</button>
-									</div>
-								</div>
-								
-								<div class="clearfix"> </div>
-						
-								<div class="col-lg-12">
-									<div class="form-group">
-										<div class="input-icon">
-											 <input
-												class="form-control" name="tedaviAciklama"
-												placeholder="Açýklama" id="tedaviAciklamaYeni"
-												>
-
-										</div>
-									</div>
-								</div>
-						</div>
-								
-
-						
-						
-						<div id="tedaviVar">  
-						
-						
-								
-								
-								<input id="yeniTedaviEkle" class="btn btn-link" value="Yeni Tedavi Ekle">
-								
-							<p>Varolan Tedaviler</p>
-								
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="form-group">
-										<div class="input-icon">
-
-											<select size="1" name="islem" id="islemTipi"
-												class="form-control">
-												<option label="Tedavi Seçiniz.." value="-1">Tedavi
-													Seçiniz..</option>
-
-												<c:forEach
-													items="${hastaListesi[0].hastaSelectedDoktorOperasyonList}"
-													var="islem">
-													<option label="${islem.islemTip.ad}"
-														value="${islem.islemTip.id}">
-														${islem.islemTip.ad}</option>
-												</c:forEach>
-
-											</select>
-
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<div class="form-group">
-										<label for="inputName" class="control-label">Tarih </label>
-										<div class="input-icon">
-											 <input
-												class="form-control" name="tedaviTarih" placeholder="Tarih"
-												id="tedaviTarih" readonly="readonly">
-
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<div class="form-group">
-										<label for="inputName" class="control-label">Ücret </label>
-										<div class="input-icon">
-											 <input
-												class="form-control" name="tedaviUcret" placeholder="Ücret"
-												id="tedaviUcret" readonly="readonly">
-
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<div class="form-group">
-										<label for="inputName" class="control-label">Diþ No </label>
-										<div class="input-icon">
-											<input
-												class="form-control" name="tedaviDisNo" placeholder="Diþ No"
-												id="tedaviDisNo" readonly="readonly">
-
-										</div>
-									</div>
-								</div>
-						
-							</div>
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="form-group">
-										<label for="inputName" class="control-label">Açýklama</label>
-										<div class="input-icon">
-											 <input
-												class="form-control" name="tedaviAciklama"
-												placeholder="Açýklama" id="tedaviAciklama"
-												readonly="readonly">
-
-										</div>
-									</div>
-								</div>
-							</div>
-						
-						
-						
-						</div>
-						
-						
-						</div>
-
-						<div class="modal-footer">
-							<input id="bntKaydet" class="btn btn-default" type="submit"
-								value="Kaydet" />
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Vazgeç</button>
-						</div>
-
-					</form>
-
-				</div>
+			<div class="col-lg-12">
+				<h4 id="hastaInfo"
+					style="color: black; font-size: 14px; font-style: italic;"></h4>
 			</div>
 
-		</div>
-
-
-
-		<div class="col-lg-12">
-			<h4 id="hastaInfo" style="color: black"></h4>
 		</div>
 		<div class="col-lg-12">
 			<div id="calendar"></div>
 		</div>
-
-
-
-		<!-- hasta sec modal -->
-
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel"  style="color: black; font-size: 11px;">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-
-						<h4 class="modal-title" id="exampleModalLabel">HASTA LÝSTESÝ</h4>
-					</div>
-
-					<div class="modal-body">
-						<div class="panel-body">
-							<form action="hastaBasicSorgula.do" method="post"
-								id="hastaSorgulaForm"
-								onsubmit="return validateFormHastaSorgulama()">
-								
-									<input type="hidden" class="form-control " name="randevuAktif" 
-										 />
-
-
-
-
-								<div class="form-group col-lg-3">
-									<input class="form-control " name="protokolNo" id="hstProtokol"
-										placeholder="Protokol No" /> <input type="hidden"
-										name="islem" value="randevu" /> <input type="hidden"
-										name="doktorId" value="${selectedDoctor.dId}"> <input
-										type="hidden" id="randevuBasTarHastaSec" name="randevuBasTar"
-										value="${randevuBasTar }"> <input type="hidden"
-										id="randevuBitTarHastaSec" name="randevuBitTar"
-										value="${randevuBitTar }">
-								</div>
-
-
-								<div class="form-group col-lg-4">
-									<input class="form-control " name="ad" id="hstAd"
-										placeholder="Ad" />
-								
-								</div>
-
-								<div class="form-group col-lg-3">
-									<input class="form-control " name="soyad" id="hstSoyad"
-										placeholder="Soyad" />
-
-
-
-								</div>
-								<div class="form-group col-lg-2">
-									<input type="submit" class="btn btn-default" value="Sorgula"
-										name="bnt_gonder" />
-
-								</div>
-
-							</form>
-
-							<div id="hastaTable">
-
-								<table id="example" class="table" style="font-size: 11px;">
-									<thead>
-										<tr>
-											<th>Protokol No</th>
-											<th>Ad</th>
-											<th>Soyad</th>
-											<th>Telefon</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="hasta" items="${hastaList}">
-											<tr>
-												<td>${hasta.protokolNo}</td>
-												<td>${hasta.ad}</td>
-												<td>${hasta.soyad}</td>
-												<td>${hasta.tel}</td>
-												<td hidden="true">${hasta.id }</td>
-											</tr>
-										</c:forEach>
-
-									</tbody>
-								</table>
-
-							</div>
-
-
-						</div>
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							id="buttonSec">Seç</button>
-					</div>
-
-				</div>
-			</div>
-		</div>
 	</div>
-
-
 
 	<div id="eventContent" title="Event Details" style="display: none;">
 
@@ -1472,7 +886,7 @@ body {
 
 								Telefon : <span id="hastaTel"></span> <br> Protokol No :<span
 									id="hastaProtokolNo"></span> <br> Tedavi :<span
-									id="tedavi"></span> <br>	
+									id="tedavi"></span> <br>
 
 							</div>
 
@@ -1484,8 +898,7 @@ body {
 					<div class="col-lg-12">
 						<div class="form-group">
 							<div class="input-icon">
-								 <input
-									class="form-control" name="randevuTarihiBaslangic"
+								<input class="form-control" name="randevuTarihiBaslangic"
 									id="startTime">
 
 							</div>
@@ -1554,8 +967,8 @@ body {
 		</form>
 
 	</div>
-	
-	
+
+
 	<form id="send" action="hastaSorgulaForRandevu.do" method="post">
 		<input type="hidden" name="hastaId" id="hasta_id"> <input
 			type="hidden" name="islem" id="pageAction"> <input
@@ -1566,5 +979,218 @@ body {
 	</form>
 
 
+	<div class="modal fade " id="hastaEkleDialog" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel"
+		style="color: black;">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-success">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="exampleModalLabel">RANDEVU EKLE</h4>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="row">
+
+						<div class="col-lg-5">
+							<fieldset>
+								<legend style=" font-weight: bold; font-size: 13px;">Hasta
+									Ara</legend>
+
+
+								<div>
+									<form action="hastaBasicSorgula.do" method="post"
+										id="hastaSorgulaForm"
+										onsubmit="return validateFormHastaSorgulama()">
+										<input type="hidden" class="form-control " name="randevuAktif" />
+
+											<div class="col-lg-5">
+												<input class="form-control input-sm" name="protokolNo"
+													id="hstProtokol" placeholder="Protokol No" /> <input
+													type="hidden" name="islem" value="randevu" /> <input
+													type="hidden" name="doktorId" value="${selectedDoctor.dId}"
+													id="randevuDoktorId"> <input type="hidden"
+													id="randevuBasTarHastaSec" name="randevuBasTar"
+													value="${randevuBasTar }"> <input type="hidden"
+													id="randevuBitTarHastaSec" name="randevuBitTar"
+													value="${randevuBitTar }">
+											</div>
+
+											<div class=" col-lg-5">
+												<input class="form-control input-sm" name="ad" id="hstAd"
+													placeholder="Ad" />
+											</div>
+											
+											<div class="col-lg-2 ">
+												<input type="submit" class="btn btn-sm btn-info" value="Sorgula"
+													name="bnt_gonder" />
+											</div>
+									</form>
+								</div>
+
+
+								<div id="hastaTable">
+
+									<table id="example" class="table table-striped" style="font-size: 11px;">
+										<thead>
+											<tr>
+												<th>Protokol No</th>
+												<th>Ad</th>
+												<th>Soyad</th>
+												<th>Telefon</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="hasta" items="${hastaList}">
+												<tr>
+													<td>${hasta.protokolNo}</td>
+													<td>${hasta.ad}</td>
+													<td>${hasta.soyad}</td>
+													<td>${hasta.tel}</td>
+													<td hidden="true">${hasta.id }</td>
+												</tr>
+											</c:forEach>
+
+										</tbody>
+									</table>
+
+
+
+									<button type="button" class="btn btn-sm btn-info" id="buttonSec">Seç</button>
+								</div>
+							</fieldset>
+						</div>
+
+						<div class="col-lg-7">
+							<fieldset>
+								<legend style=" font-weight: bold; font-size: 13px;">Randevu
+									Bilgileri</legend>
+
+								<form action="HastaRandevuEkle.do" method="post"
+									onsubmit="return validate()">
+									
+
+									<input name="hastaId" id="hastaId" hidden="true"> <input
+										name="islemId" id="islemId" hidden="true"> <input
+										name="hastaId" id="hastaId" hidden="true"> <input
+										name="islemId" id="islemId" hidden="true"> <input
+										type="hidden" name="doktorId" id="doktorId"
+										value="${selectedDoctor.dId}">
+
+									<div class="col-lg-12" id="hastaBilgileri">
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<div class="input-icon">
+													<input class="form-control" name="hastaAd" type="text"
+														placeholder="Hasta Ad" id="hastaad" data-validation="required" data-validation-error-msg="Hasta Seçiniz..">
+
+												</div>
+
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<div class="input-icon">
+													<input class="form-control" name="hastaSoyad"
+														placeholder="Hasta Soyad" id="hastasoyad" data-validation="required" data-validation-error-msg="Hasta Seçiniz..">
+
+												</div>
+											</div>
+										</div>
+
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<div class="input-icon">
+													<input class="form-control" name="telefon"
+														placeholder="Tel" id="telefon" >
+
+												</div>
+											</div>
+										</div>
+
+
+										<div class="col-lg-6">
+											<div class="form-group">
+												<div class="input-icon">
+													<input class="form-control bg-info" type="text"
+														name="randevuTarihiBaslangic" placeholder="Baþlangýç "
+														id="start" data-validation="required"
+														style="color: black;">
+												</div>
+											</div>
+										</div>
+
+
+
+										<div class="col-lg-6">
+											<div class="form-group">
+												<div class="input-icon">
+													<input class="form-control bg-info" type="text"
+														name="randevuTarihiBitis" placeholder="Bitiþ" id="end"
+														data-validation="required" style="color: black;">
+												</div>
+											</div>
+										</div>
+
+										<div class="col-lg-12">
+											<div class="form-group">
+
+												<textarea class="form-control" name="aciklama"
+													placeholder="Açýklama Giriniz" rows="1" id="title"
+													cols="20" data-validation="required"
+													data-validation-error-msg="Lütfen Açýklama Giriniz."></textarea>
+
+											</div>
+										</div>
+
+										<div class="col-lg-12">
+											<div class="form-group">
+
+												<input class="form-control" name="beklenenOdeme"
+													placeholder="Beklenen Ödeme Miktarý (TL)"
+													id="beklenenOdeme" />
+
+											</div>
+										</div>
+
+									</div>
+									<div class="pull-right">
+										<label> <input type="checkbox" id="randevuBosSaat"
+											name="randevuBosSaatAktif" /> &nbsp; Reserve
+										</label>
+									</div>
+									<div class="clearfix"></div>
+
+									<div class="pull-right">
+										<input id="bntKaydet" class="btn btn-sm btn-info" type="submit"
+											value="Randevu Ekle" />
+										<button type="button" class="btn btn-sm btn-default"
+											data-dismiss="modal">Vazgeç</button>
+
+									</div>
+
+								</form>
+							</fieldset>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	
+	</div>
+
 </body>
-</html>

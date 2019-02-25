@@ -128,7 +128,7 @@
 					<td>
 				
 				<c:choose>
-				 <c:when test="${(odeme_tarih_degistir eq 'off') and (sessionScope.sessionMember[0].kuTur eq '4') }">
+				 <c:when test="${(odeme_tarih_degistir eq 'off') and (sessionScope.sessionMember[0].kuTur ne '3') }">
 				 	
 				 	<input name="bas_tar" id="bas_tar" disabled="disabled"> / 
 					<input	name="bit_tar" id="bit_tar" disabled="disabled">

@@ -128,59 +128,7 @@ $(document).ready(function() {
 	
 
 	<script type="text/javascript">
-	
-		$('#islemTipi').on('change', function() {
 
-			var value = this.value;
-
-			'<c:forEach items="${islemTurListesi}" var="islem">'
-
-			if (value == '${islem.id}') {
-
-				var fiyat = '${islem.subeTip.fiyat}';
-
-				$('#operasyonUcret').val(fiyat);
-
-			}
-
-			'</c:forEach>'
-
-		});
-
-		
-		/* $('#subeId').on('change', function() {
-
-			var subeId = this.value;
-
-			alert(subeId)
-			$('#subeIdGuncelle').val(subeId);
-
-			alert()
-
-
-		});
- */
-		
-		var islemId=-1;
-
-		$('#guncelleButton').click(function() {
-
-			
-			
-			'<c:forEach items="${islemTurListesi}" var="islem">'
-			
-			if (islemId == '${islem.id}') {
-
-				var fiyat=	$('#fiyat').val();
-
-				
-
-			}
-
-			'</c:forEach>'
-			
-			
-		});
 
 	
 

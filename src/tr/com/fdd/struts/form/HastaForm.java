@@ -30,6 +30,7 @@ public class HastaForm extends ActionForm {
 	private Date eklenmeTarihi;
 	private String basTar;
 	private String bitTar;
+	private String adres;
 	private Date guncellenmeTarihi;
 	private int subeId;
 	private int doktorId;
@@ -158,6 +159,12 @@ public class HastaForm extends ActionForm {
 	}
 	public void setDoktorId(int doktorId) {
 		this.doktorId = doktorId;
+	}
+	public String getAdres() {
+		return adres;
+	}
+	public void setAdres(String adres) {
+		this.adres = adres;
 	}
 	
 }

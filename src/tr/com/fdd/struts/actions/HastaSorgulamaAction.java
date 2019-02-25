@@ -108,6 +108,7 @@ public class HastaSorgulamaAction extends Action {
 			hastaListesi.add(hasta);
 			
 			request.setAttribute("hastaListesi", hastaListesi);
+			request.setAttribute("lastHasta", hasta);
 			
 			if (GenelDegiskenler.RANDEVU_EKLE.equals(islemTip))
 				return mapping.findForward("randevuEkle");

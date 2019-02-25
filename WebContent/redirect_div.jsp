@@ -15,25 +15,34 @@
 
 <!-- Bootstrap Core CSS -->
 <link href="sitil/bootstrap.min.css" rel="stylesheet">
-<link type="text/css" rel="stylesheet"
-	href="styles/font-awesome.min.css">
-
+<link type="text/css" rel="stylesheet"	href="styles/font-awesome.min.css">
 <!-- jQuery -->
 <script src="scriptt/jquery.js"></script>
 <script src="scriptt/bootstrap.min.js"></script>
 
 
 <style type="text/css">
-.nav a {
-	font-size: 1.0em !important;
+body {
+    margin: 0;            /* Reset default margin */
 }
 
-.nav li {
-	padding-right: 1px;
+iframe {
+    display: block;       /* iframes are inline by default */
+    background: white;
+    border: none;         /* Reset default border */
+    height: 100vh;        /* Viewport-relative units */
+    width: 100vw;
 }
 </style>
 
 <script type="text/javascript">
+
+		function autoResizeDiv()
+		{
+		    document.getElementById('myframe').style.height = window.innerHeight +'px';
+		}
+		
+		autoResizeDiv();
 
 	function validateSifreForm(){
 	
@@ -48,7 +57,6 @@
 				return false;		
 			};
 		
-			
 			if(eskiSifre != ${sessionScope.sessionMember[0].kuSifre})
 				{
 				alert("Eski þifre yanlýþ girildi.");
@@ -62,11 +70,13 @@
 <body>
 
 	<div>
-
-		<nav class="navbar navbar ">
-			<ul class="nav navbar-nav">
-				<li class="active"><a target="" href="redirect_div.jsp"> <i
-						class="fa fa-home" aria-hidden="true"></i>
+		<nav class="navbar navbar-inverse" >
+		
+			<ul class="nav navbar-nav" >
+				<li class="active"><a target="" href="redirect_div.jsp">
+				
+				 <i
+						class="fa fa-home" aria-hidden="true"> </i>
 				</a></li>
 				<c:forEach items="${kullaniciMenuList}" var="menu">
 					<c:choose>
@@ -136,13 +146,14 @@
 			
 		</nav>
 		
+		
 
-		<div>
+		<iframe id="myframe" src="MainRedirect.jsp" name="frame" scrolling="yes" width="%100"></iframe>
 
-			<iframe src="MainRedirect.jsp" name="frame" width="100%" height="720"
-				frameborder="0" scrolling="auto"></iframe>
-		</div>
+		
 
+		
+		
 
 
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"

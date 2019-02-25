@@ -1,8 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-9"
 	pageEncoding="ISO-8859-9"%>
-	
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -11,11 +11,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DentalNet</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <!-- CSS Files -->
-<link href="backyard/css/bootstrap.min.css" rel="stylesheet"	media="screen">
+<link href="backyard/css/bootstrap.min.css" rel="stylesheet"
+	media="screen">
 <link href="backyard/css/font-awesome.min.css" rel="stylesheet">
 <link href="backyard/css/animate.css" rel="stylesheet" media="screen">
 
@@ -23,8 +23,7 @@
 <link href="backyard/css/css-index.css" rel="stylesheet" media="screen">
 
 <!-- Google Fonts -->
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" />
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" />
 
 </head>
 
@@ -71,7 +70,7 @@
 								role="form">
 								<input type="hidden" name="u" value="503bdae81fde8612ff4944435">
 								<input type="hidden" name="id" value="bfdba52708">
-								
+
 								<div class="form-group">
 									<input class="form-control input-lg" name="userName" id="name"
 										type="text" placeholder="Ad" required>
@@ -84,11 +83,11 @@
 									<input type="submit" class="btn btn-warning btn-block btn-lg"
 										value="Sisteme Giris">
 								</div>
-								
-								<c:if test="${!requestScope.failure} "> 
-									<p class="bg-danger">  ${requestScope.failure} </p> 
+
+								<c:if test="${!requestScope.failure} ">
+									<p class="bg-danger">${requestScope.failure}</p>
 								</c:if>
-								 
+
 								<p class="privacy text-center"></p>
 							</form>
 						</div>
@@ -116,7 +115,9 @@
 				<div id="navbar-scroll"
 					class="collapse navbar-collapse navbar-backyard navbar-right">
 					<ul class="nav navbar-nav">
-						<li> <p>Copyright &copy; Dental Net 2014</p> </li>
+						<li>
+							<p>Copyright &copy; Dental Net 2014</p>
+						</li>
 
 					</ul>
 				</div>
